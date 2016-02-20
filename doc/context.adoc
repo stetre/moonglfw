@@ -1,0 +1,25 @@
+
+=== Context handling
+
+[[glfw.make_context_current]]
+* *glfw.make_context_current* (_window_)
+
+[[glfw.get_context_current]]
+* *glfw.get_context_current* (_window_) +
+-> _window_ +
+[small]#Returns _nil_ if there is no current window.#
+
+[[glfw.swap_interval]]
+* *glfw.swap_interval* (_interval_)
+
+[[glfw.extension_supported]]
+* *glfw.extension_supported* (_extension_) +
+-> _boolean_ +
+[small]#_extension_: a string.#
+
+////
+GLFWglproc 	glfwGetProcAddress (const char *procname) @@
+ 	Returns the address of the specified function for the current context. More...
+////
+
+<<<

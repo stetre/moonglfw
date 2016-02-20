@@ -1,0 +1,47 @@
+
+=== Monitor handling
+
+[[glfw.get_monitors]]
+* *glfw.get_monitors* ( ) +
+-> _monitor1_, _monitor2_, _..._
+
+[[glfw.get_primary_monitor]]
+* *glfw.get_primary_monitor* ( ) +
+-> _monitor_
+
+[[glfw.get_monitor_pos]]
+* *glfw.get_monitor_pos* (_monitor_) +
+-> _xpos_, _ypos_
+
+[[glfw.get_monitor_physical_size]]
+* *glfw.get_monitor_physical_size* (_monitor_) +
+-> _widthmm_, _heightmm_
+
+[[glfw.get_monitor_name]]
+* *glfw.get_monitor_name* (_monitor_) +
+-> _name_
+
+[[glfw.set_monitor_callback]]
+* *glfw.set_monitor_callback* (_monitor_ [, _func_]) +
+[small]#The _func_ callback is executed as *_func(monitor, event)_*, where _event_ (a string)
+may be '_connected_' or '_disconnected_'. +
+If _func_ = _nil_, unregisters the current callback (if any).#
+
+[[glfw.get_video_mode]]
+* *glfw.get_video_mode* (_monitor_) +
+-> _videomode_ +
+*glfw.get_video_modes* (_monitor_) +
+-> _videomode1_, _videomode2_, _..._ +
+[small]#_videomode_: a table with the following fields, all having an integer value: 
+_width_, _height_, _red_bits_, _blue_bits_, _green_bits_, _refresh_rate_.#
+
+[[glfw.set_gamma]]
+* *glfw.set_gamma* (_monitor_, _gamma_)
+
+[[glfw.set_gamma_ramp]]
+* *glfw.set_gamma_ramp* (_monitor_, _red_, _green_, _blue_) +
+*glfw.get_gamma_ramp* (_monitor_) +
+-> _red_, _green_, _blue_ +
+[small]#_red_, _green_ and _blue_: equally sized arrays (tables) of integers.#
+
+<<<

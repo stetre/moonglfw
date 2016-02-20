@@ -1,0 +1,131 @@
+
+=== Input handling
+
+[[glfw.set_input_mode]]
+* *glfw.set_input_mode* (_window_, _mode_, _value_) +
+*glfw.get_input_mode* (_window_, _mode_) +
+-> _value_ +
+[small]#_mode_: '_cursor_', '_sticky keys_' or '_sticky mouse buttons_'. +
+_value_: one of the following, depending on _mode_: +
+if _mode_ is '_sticky ..._': _value_ = _true_ or _false_ (Lua boolean). +
+if _mode_ is '_cursor_': _value_ = '_normal_', '_hidden_', or '_disabled_'.#
+
+'''
+[[glfw.get_key]]
+* *glfw.get_key* (_window_, _key_) +
+-> _state_ +
+[small]#_key_: '_xxx_' for GLFW_KEY_XXX (e.g. '_left bracket_' for GLFW_LEFT_BRACKET).
+See: http://www.glfw.org/docs/latest/group__keys.html[keyboard keys]. +
+_state_: '_press_' or '_release_'.#
+
+'''
+[[glfw.get_mouse_button]]
+* *glfw.get_mouse_button* (_window_, _button_) +
+-> _state_ +
+[small]#_button_: '_left_', '_right_', '_middle_', or '_button 4_' to '_button 8_'. +
+_state_: '_press_' or '_release_'.#
+
+
+[[glfw.set_cursor_pos]]
+* *glfw.set_cursor_pos* (_window_, _xpos_, _ypos_) +
+*glfw.get_cursor_pos* (_window_) +
+-> _xpos_, _ypos_ +
+[small]#_xpos_, _ypos_: Lua numbers.#
+
+'''
+[[glfw.create_cursor]]
+* *glfw.create_cursor* (_width_, _height_, _pixels_, _xhot_, _yhot_) +
+*glfw.create_cursor* (_shape_) +
+-> _cursor_ +
+[small]#_width_, _height_, _pixels_: the image (2 integers and a binary string). +
+_shape_: '_arrow_', '_ibeam_', '_crosshair_', '_hand_', '_hresize', '_vresize_'. +
+Return a _cursor_ handle to the newly created cursor.#
+
+[[glfw.destroy_cursor]]
+* *glfw.destroy_cursor* (_cursor_)
+
+[[glfw.set_cursor]]
+* *glfw.set_cursor* (_window_, _cursor_)
+
+'''
+[[glfw.joystick_present]]
+* *glfw.joystick_present* (_joy_) +
+-> _boolean_ +
+[small]#_joy_: 1 .. 16.#
+
+[[glfw.joystick_axes]]
+* *glfw.joystick_axes* (_joy_) +
+-> _xpos_, _..._ 
+
+[[glfw.get_joystick_buttons]]
+* *glfw.get_joystick_buttons* (_joy_) +
+-> _state1_, _..._ +
+[small]#_state_: '_press_' or '_release_'.#
+
+[[glfw.get_joystick_name]]
+* *glfw.get_joystick_name* (_joy_) +
+-> _name_
+
+'''
+[[glfw.set_clipboard_string]]
+* *glfw.set_clipboard_string* (_window_, _string_) +
+*glfw.get_clipboard_string* (_window_) +
+-> _string_
+
+'''
+[[glfw.set_time]]
+* *glfw.set_time* (_time_) +
+*glfw.get_time* (_time_) +
+-> _time_
+
+'''
+All the following functions unregister the corresponding current callback when invoked with 
+_func_ = _nil_.
+
+[[glfw.set_key_callback]]
+* *glfw.set_key_callback* (_window_ [, _func_]) +
+[small]#The _func_ callback is executed as 
+*_func(window, key, scancode, action, shift, control, alt, super)_*, where: +
+_key_: see <<glfw.get_key,glfw.get_key>>( ). +
+_action_: '_press_', '_release_' or '_repeat_'. +
+_shift_, _control_, _alt_, _super_ (modifiers): _true_ or _false_ (Lua booleans).#
+
+[[glfw.set_char_callback]]
+* *glfw.set_char_callback* (_window_ [, _func_]) +
+[small]#The _func_ callback is executed as *_func(window, codepoint)_*.#
+
+[[glfw.set_char_mods_callback]]
+* *glfw.set_char_mods_callback* (_window_ [, _func_]) +
+[small]#The _func_ callback is executed as 
+*_func(window, codepoint, shift, control, alt, super)_*, where: +
+_shift_, _control_, _alt_, _super_ (modifiers): _true_ or _false_ (Lua booleans).#
+
+[[glfw.set_mouse_callback]]
+* *glfw.set_mouse_callback* (_window_ [, _func_]) +
+[small]#The _func_ callback is executed as
+*_func(window, button, action, shift, control, alt, super)_*, where: +
+_button_: '_left_', '_right_', '_middle_', or '_button 4_' to '_button 8_'. +
+_action_: '_press_' or '_release_'. +
+_shift_, _control_, _alt_, _super_ (modifiers): _true_ or _false_ (Lua booleans).#
+
+[[glfw.set_cursor_pos_callback]]
+* *glfw.set_cursor_pos_callback* (_window_ [, _func_]) +
+[small]#The _func_ callback is executed as *_func(window, xpos, ypos)_*, where _xpos_
+and _ypos_ are Lua numbers (i.e. floating point).#
+
+[[glfw.set_cursor_enter_callback]]
+* *glfw.set_cursor_enter_callback* (_window_ [, _func_]) +
+[small]#The _func_ callback is executed as *_func(window, entered)_*, where 
+_entered_ is a boolean.#
+
+[[glfw.set_scroll_callback]]
+* *glfw.set_scroll_callback* (_window_ [, _func_]) +
+[small]#The _func_ callback is executed as *_func(window, xoffset, yoffset)_*, where 
+_xoffset_ and _yoffset_ are Lua numbers (i.e. floating point).#
+
+[[glfw.set_drop_callback]]
+* *glfw.set_drop_callback* (_window_ [, _func_]) +
+[small]#The _func_ callback is executed as *_func(window, path, ...)_*, where
+_path_ (an any subsequent argument) is a string.#
+
+<<<

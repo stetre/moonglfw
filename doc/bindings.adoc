@@ -1,0 +1,19 @@
+
+== Bindings
+
+The structure of this section purposedly replicates the structure of the 
+http://www.glfw.org/docs/latest/modules.html[GLFW Reference documentation].
+
+include::context.adoc[]
+
+include::initialization.adoc[]
+
+include::input.adoc[]
+
+include::monitor.adoc[]
+
+include::native.adoc[]
+
+include::window.adoc[]
+
+<<<
