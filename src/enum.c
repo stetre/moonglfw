@@ -65,7 +65,7 @@ int enumOrUint(lua_State *L, int arg, int *dst, enum_t *e, int def)
  * 'def' is returned. In the second case the integer value is returned.
  */
 	{
-	if(lua_isstring(L, arg))
+	if(lua_type(L, arg) == LUA_TSTRING)
 		{
 		*dst = enumCheck(L, arg, e);
 		return def;

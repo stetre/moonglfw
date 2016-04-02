@@ -194,7 +194,7 @@ static int Integer(lua_State *L, int target)
 	{
 	int hint = GLFW_DONT_CARE;
 	const char *s;
-	if(lua_isstring(L, 2))
+	if(lua_type(L, 2) == LUA_TSTRING)
 		{
 		s = lua_tostring(L, 2);
 		if(strncmp(s, "don't care", strlen(s)) != 0)
