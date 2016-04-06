@@ -903,6 +903,9 @@ of the <a href="https://github.com/stetre/moonglfw">official repository</a> on G
 </div>
 <div class="sect2">
 <h3 id="_context_handling">Context handling</h3>
+<div class="paragraph">
+<p><span class="small">Rfr: <a href="http://www.glfw.org/docs/latest/group__context.html">Context handling</a>.</span></p>
+</div>
 <div id="glfw.make_context_current" class="ulist">
 <ul>
 <li>
@@ -939,6 +942,9 @@ of the <a href="https://github.com/stetre/moonglfw">official repository</a> on G
 </div>
 <div class="sect2">
 <h3 id="_initialization_version_and_errors">Initialization, version and errors</h3>
+<div class="paragraph">
+<p><span class="small">Rfr: <a href="http://www.glfw.org/docs/latest/group__init.html">Initialization, version and errors</a>.</span></p>
+</div>
 <div class="paragraph">
 <p>The <strong>glfwInit</strong>( ) and <strong>glfwTerminate</strong>( ) functions are handled internally by MoonGLFW
 and thus not exposed to the script code.</p>
@@ -990,6 +996,9 @@ If <em>func</em> is <em>nil</em>, unregisters the current error callback (if any
 </div>
 <div class="sect2">
 <h3 id="_input_handling">Input handling</h3>
+<div class="paragraph">
+<p><span class="small">Rfr: <a href="http://www.glfw.org/docs/latest/group__input.html">Input handling</a>.</span></p>
+</div>
 <div id="glfw.set_input_mode" class="ulist">
 <ul>
 <li>
@@ -1153,10 +1162,10 @@ Return a <em>cursor</em> handle to the newly created cursor.</span></p>
 </li>
 </ul>
 </div>
-<div id="glfw.set_mouse_callback" class="ulist">
+<div id="glfw.set_mouse_button_callback" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.set_mouse_callback</strong> (<em>window</em> [, <em>func</em>])<br>
+<p><strong>glfw.set_mouse_button_callback</strong> (<em>window</em> [, <em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as
 <strong><em>func(window, button, action, shift, control, alt, super)</em></strong>, where:<br>
 <em>button</em>: '<em>left</em>', '<em>right</em>', '<em>middle</em>', or '<em>button 4</em>' to '<em>button 8</em>'.<br>
@@ -1205,6 +1214,9 @@ and <em>ypos</em> are Lua numbers (i.e. floating point).</span></p>
 </div>
 <div class="sect2">
 <h3 id="_monitor_handling">Monitor handling</h3>
+<div class="paragraph">
+<p><span class="small">Rfr: <a href="http://www.glfw.org/docs/latest/group__monitor.html">Monitor handling</a>.</span></p>
+</div>
 <div id="glfw.get_monitors" class="ulist">
 <ul>
 <li>
@@ -1289,16 +1301,23 @@ If <em>func</em> = <em>nil</em>, unregisters the current callback (if any).</spa
 <div class="sect2">
 <h3 id="_native_access">Native access</h3>
 <div class="paragraph">
+<p><span class="small">Rfr: <a href="http://www.glfw.org/docs/latest/group__native.html">Native access</a>.</span></p>
+</div>
+<div class="paragraph">
 <p>Not supported.</p>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
 <div class="sect2">
 <h3 id="_window_handling">Window handling</h3>
+<div class="paragraph">
+<p><span class="small">Rfr: <a href="http://www.glfw.org/docs/latest/group__window.html">Window handling</a>.</span></p>
+</div>
 <div id="glfw.default_window_hints" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.default_window_hints</strong> ( )</p>
+<p><strong>glfw.default_window_hints</strong> ( )<br>
+<span class="small">See <a href="http://www.glfw.org/docs/latest/window.html#window_hints">Window creation hints</a>.</span></p>
 </li>
 </ul>
 </div>
@@ -1306,8 +1325,9 @@ If <em>func</em> = <em>nil</em>, unregisters the current callback (if any).</spa
 <ul>
 <li>
 <p><strong>glfw.window_hint</strong> (<em>target</em>, <em>hint</em>)<br>
-<span class="small"><em>target</em>: '<em>resizable</em>' for GLFW_RESIZABLE, '<em>opengl api</em>' for GLFW_OPENGL_API, etc.<br>
-<em>hint</em>: one of the following, depending on the <em>target</em>:<br>
+<span class="small"><em>target</em>: '<em>resizable</em>' for GLFW_RESIZABLE, '<em>opengl api</em>' for GLFW_OPENGL_API, etc
+(see <a href="http://www.glfw.org/docs/latest/window.html#window_hints">Window creation hints</a>).<br>
+<em>hint</em>: one of the following, depending on the <em>target</em>:
 if <em>target</em> expects GL_TRUE or GL_FALSE: <em>hint</em> = <em>true</em> or <em>false</em> (Lua boolean);<br>
 if <em>target</em> expects an integer value: <em>hint</em> = integer or the string '<em>don&#8217;t care</em>';<br>
 if <em>target</em> is '<em>opengl api</em>': <em>hint</em> = '<em>opengl</em>' or '<em>open es</em>';<br>

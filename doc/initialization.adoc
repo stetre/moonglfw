@@ -1,6 +1,8 @@
 
 === Initialization, version and errors
 
+[small]#Rfr: link:http://www.glfw.org/docs/latest/group__init.html[Initialization, version and errors].#
+
 The *glfwInit*( ) and *glfwTerminate*( ) functions are handled internally by MoonGLFW
 and thus not exposed to the script code.
 

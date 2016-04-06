@@ -1,6 +1,8 @@
 
 === Input handling
 
+[small]#Rfr: link:http://www.glfw.org/docs/latest/group__input.html[Input handling].#
+
 [[glfw.set_input_mode]]
 * *glfw.set_input_mode* (_window_, _mode_, _value_) +
 *glfw.get_input_mode* (_window_, _mode_) +
@@ -100,8 +102,8 @@ _shift_, _control_, _alt_, _super_ (modifiers): _true_ or _false_ (Lua booleans)
 *_func(window, codepoint, shift, control, alt, super)_*, where: +
 _shift_, _control_, _alt_, _super_ (modifiers): _true_ or _false_ (Lua booleans).#
 
-[[glfw.set_mouse_callback]]
-* *glfw.set_mouse_callback* (_window_ [, _func_]) +
+[[glfw.set_mouse_button_callback]]
+* *glfw.set_mouse_button_callback* (_window_ [, _func_]) +
 [small]#The _func_ callback is executed as
 *_func(window, button, action, shift, control, alt, super)_*, where: +
 _button_: '_left_', '_right_', '_middle_', or '_button 4_' to '_button 8_'. +

@@ -1,6 +1,8 @@
 
 === Context handling
 
+[small]#Rfr: link:http://www.glfw.org/docs/latest/group__context.html[Context handling].#
+
 [[glfw.make_context_current]]
 * *glfw.make_context_current* (_window_)
 

@@ -1,6 +1,8 @@
 
 === Monitor handling
 
+[small]#Rfr: link:http://www.glfw.org/docs/latest/group__monitor.html[Monitor handling].#
+
 [[glfw.get_monitors]]
 * *glfw.get_monitors* ( ) +
 -> _monitor1_, _monitor2_, _..._
