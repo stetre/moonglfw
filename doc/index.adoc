@@ -1,6 +1,6 @@
 = MoonGLFW Reference Manual
 Stefano Trettel
-v0.2, 2016-04-06
+v0.3, 2016-05-15
 :toc: left
 :stylesdir: ./
 :stylesheet: colony.css
