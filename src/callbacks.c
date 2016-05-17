@@ -29,25 +29,25 @@
 #include "internal.h"
 
 static int PushMods(lua_State *L, int mods)
-	{
-	lua_pushboolean(L, mods & GLFW_MOD_SHIFT);
-	lua_pushboolean(L, mods & GLFW_MOD_CONTROL);
-	lua_pushboolean(L, mods & GLFW_MOD_ALT);
-	lua_pushboolean(L, mods & GLFW_MOD_SUPER);
-	return 4;
-	}
+    {
+    lua_pushboolean(L, mods & GLFW_MOD_SHIFT);
+    lua_pushboolean(L, mods & GLFW_MOD_CONTROL);
+    lua_pushboolean(L, mods & GLFW_MOD_ALT);
+    lua_pushboolean(L, mods & GLFW_MOD_SUPER);
+    return 4;
+    }
 
 static int MonitorId(GLFWmonitor *monitor)
-	{
-	mon_t *mon = mon_first(0);
-	while(mon)
-		{
-		if(mon->monitor == monitor)
-			return mon->id;
-		mon = mon_next(mon);
-		}
-	return -1; /* should not happen */
-	}
+    {
+    mon_t *mon = mon_first(0);
+    while(mon)
+        {
+        if(mon->monitor == monitor)
+            return mon->id;
+        mon = mon_next(mon);
+        }
+    return -1; /* should not happen */
+    }
 
 
 /*--------------------------------------------------------------------------*
@@ -56,11 +56,11 @@ static int MonitorId(GLFWmonitor *monitor)
 
 #define L moonglfw_L
 
-#define BEGIN(cb)  /* retrieve the callback */                      	\
-    int top = lua_gettop(L);                                        	\
-do {                                                                	\
-    if(lua_rawgeti(L, LUA_REGISTRYINDEX, cb) != LUA_TFUNCTION)      	\
-        { luaL_error(L, UNEXPECTED_ERROR); return; }                	\
+#define BEGIN(cb)  /* retrieve the callback */                          \
+    int top = lua_gettop(L);                                            \
+do {                                                                    \
+    if(lua_rawgeti(L, LUA_REGISTRYINDEX, cb) != LUA_TFUNCTION)          \
+        { luaL_error(L, UNEXPECTED_ERROR); return; }                    \
 } while(0)
 
 #define EXEC(nargs)  do {                                               \
@@ -72,7 +72,7 @@ static int Error = LUA_NOREF;
 static void ErrorCallback(int ec, const char* descr)
     {
     BEGIN(Error);
-	lua_pushinteger(L, ec); /* @@ farne un enum? */	
+    lua_pushinteger(L, ec); /* @@ farne un enum? */ 
     lua_pushstring(L, descr);
     EXEC(2);
     }
@@ -83,11 +83,11 @@ static int Monitor = LUA_NOREF;
 static void MonitorCallback(GLFWmonitor *monitor, int event)
     {
     BEGIN(Monitor);
-	lua_pushinteger(L, MonitorId(monitor));
-	lua_pushstring(L, event==GLFW_CONNECTED ? "connected" : "disconnected");
+    lua_pushinteger(L, MonitorId(monitor));
+    lua_pushstring(L, event==GLFW_CONNECTED ? "connected" : "disconnected");
     EXEC(2);
-	/* always call the default callback: */
-	monitorCallback(monitor, event);
+    /* always call the default callback: */
+    monitorCallback(monitor, event);
     }
 
 #undef BEGIN
@@ -98,20 +98,20 @@ static void MonitorCallback(GLFWmonitor *monitor, int event)
  | Global callbacks registration                                            |
  *--------------------------------------------------------------------------*/
 
-#define REGISTER_FUNC(cb, func_index, defaultcb)   					\
-static int Set##cb##Callback(lua_State *L)							\
-    {																\
-    if(cb != LUA_NOREF)                             				\
-		{ luaL_unref(L, LUA_REGISTRYINDEX, cb); cb = LUA_NOREF; }   \
-	if(lua_isnoneornil(L, func_index))								\
-		{ glfwSet##cb##Callback(defaultcb); return 0; }   			\
-    if(!lua_isfunction(L, func_index))              				\
-        return luaL_argerror(L, func_index, "function expected");	\
-    lua_pushvalue(L, func_index);                   				\
-    cb = luaL_ref(L, LUA_REGISTRYINDEX);            				\
-	glfwSet##cb##Callback(cb##Callback);							\
-	return 0;														\
-	}
+#define REGISTER_FUNC(cb, func_index, defaultcb)                    \
+static int Set##cb##Callback(lua_State *L)                          \
+    {                                                               \
+    if(cb != LUA_NOREF)                                             \
+        { luaL_unref(L, LUA_REGISTRYINDEX, cb); cb = LUA_NOREF; }   \
+    if(lua_isnoneornil(L, func_index))                              \
+        { glfwSet##cb##Callback(defaultcb); return 0; }             \
+    if(!lua_isfunction(L, func_index))                              \
+        return luaL_argerror(L, func_index, "function expected");   \
+    lua_pushvalue(L, func_index);                                   \
+    cb = luaL_ref(L, LUA_REGISTRYINDEX);                            \
+    glfwSet##cb##Callback(cb##Callback);                            \
+    return 0;                                                       \
+    }
 
 REGISTER_FUNC(Error, 1, errorCallback)
 REGISTER_FUNC(Monitor, 1, monitorCallback)
@@ -127,10 +127,10 @@ REGISTER_FUNC(Monitor, 1, monitorCallback)
 #define BEGIN(cb)  /* retrieve the callback */                      \
     int top = lua_gettop(L);                                        \
 do {                                                                \
-    int id = (intptr_t)glfwGetWindowUserPointer(window);			\
+    int id = (intptr_t)glfwGetWindowUserPointer(window);            \
     win_t *win = win_search(id);                                    \
     if((!win) || (lua_rawgeti(L, LUA_REGISTRYINDEX, win->cb) != LUA_TFUNCTION)) \
-        { unexpected(L); return; }                					\
+        { unexpected(L); return; }                                  \
     lua_pushinteger(L, id);                                         \
 } while(0)
 
@@ -146,16 +146,16 @@ do {                                                                \
 static void WindowPosCallback(GLFWwindow *window, int xpos, int ypos)
     {
     BEGIN(WindowPos);
-	lua_pushinteger(L, xpos);
-	lua_pushinteger(L, ypos);
+    lua_pushinteger(L, xpos);
+    lua_pushinteger(L, ypos);
     EXEC(2);
     }
 
 static void WindowSizeCallback(GLFWwindow *window, int width, int height)
     {
     BEGIN(WindowSize);
-	lua_pushinteger(L, width);
-	lua_pushinteger(L, height);
+    lua_pushinteger(L, width);
+    lua_pushinteger(L, height);
     EXEC(2);
     }
 
@@ -174,14 +174,14 @@ static void WindowRefreshCallback(GLFWwindow *window)
 static void WindowFocusCallback(GLFWwindow *window, int focused)
     {
     BEGIN(WindowFocus);
-	lua_pushboolean(L, focused);
+    lua_pushboolean(L, focused);
     EXEC(1);
     }
 
 static void WindowIconifyCallback(GLFWwindow *window, int iconified)
     {
     BEGIN(WindowIconify);
-	lua_pushboolean(L, iconified);
+    lua_pushboolean(L, iconified);
     EXEC(1);
     }
 
@@ -189,8 +189,8 @@ static void WindowIconifyCallback(GLFWwindow *window, int iconified)
 static void FramebufferSizeCallback(GLFWwindow *window, int width, int height)
     {
     BEGIN(FramebufferSize);
-	lua_pushinteger(L, width);
-	lua_pushinteger(L, height);
+    lua_pushinteger(L, width);
+    lua_pushinteger(L, height);
     EXEC(2);
     }
 
@@ -198,12 +198,12 @@ static void FramebufferSizeCallback(GLFWwindow *window, int width, int height)
 //GLFWkeyfun glfwSetKeyCallback(GLFWwindow* window, GLFWkeyfun cbfun);
 static void KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mods)
     {
-	int n = 3;
+    int n = 3;
     BEGIN(Key);
-	enumPush(L, key, enumKey());
-	lua_pushinteger(L, scancode);
-	enumPush(L, action, enumAction());
-	n += PushMods(L, mods);
+    enumPush(L, key, enumKey());
+    lua_pushinteger(L, scancode);
+    enumPush(L, action, enumAction());
+    n += PushMods(L, mods);
     EXEC(n);
     }
 
@@ -213,7 +213,7 @@ static void KeyCallback(GLFWwindow *window, int key, int scancode, int action, i
 static void CharCallback(GLFWwindow *window, unsigned int codepoint)
     {
     BEGIN(Char);
-	lua_pushinteger(L, codepoint);
+    lua_pushinteger(L, codepoint);
     EXEC(1);
     }
 
@@ -222,10 +222,10 @@ static void CharCallback(GLFWwindow *window, unsigned int codepoint)
 //GLFWcharmodsfun glfwSetCharModsCallback(GLFWwindow* window, GLFWcharmodsfun cbfun);
 static void CharModsCallback(GLFWwindow *window, unsigned int codepoint, int mods)
     {
-	int n = 1;
+    int n = 1;
     BEGIN(CharMods);
-	lua_pushinteger(L, codepoint);
-	n += PushMods(L, mods);
+    lua_pushinteger(L, codepoint);
+    n += PushMods(L, mods);
     EXEC(n);
     }
 
@@ -234,11 +234,11 @@ static void CharModsCallback(GLFWwindow *window, unsigned int codepoint, int mod
 //GLFWmousebuttonfun glfwSetMouseButtonCallback(GLFWwindow* window, GLFWmousebuttonfun cbfun);
 static void MouseButtonCallback(GLFWwindow *window, int button, int action, int mods)
     {
-	int n = 2;
+    int n = 2;
     BEGIN(MouseButton);
-	enumPush(L, button, enumButton());
-	enumPush(L, action, enumAction());
-	n += PushMods(L, mods);
+    enumPush(L, button, enumButton());
+    enumPush(L, action, enumAction());
+    n += PushMods(L, mods);
     EXEC(n);
     }
 
@@ -248,8 +248,8 @@ static void MouseButtonCallback(GLFWwindow *window, int button, int action, int 
 static void CursorPosCallback(GLFWwindow *window, double xpos, double ypos)
     {
     BEGIN(CursorPos);
-	lua_pushnumber(L, xpos);
-	lua_pushnumber(L, ypos);
+    lua_pushnumber(L, xpos);
+    lua_pushnumber(L, ypos);
     EXEC(2);
     }
 
@@ -259,7 +259,7 @@ static void CursorPosCallback(GLFWwindow *window, double xpos, double ypos)
 static void CursorEnterCallback(GLFWwindow *window, int entered)
     {
     BEGIN(CursorEnter);
-	lua_pushboolean(L, entered);
+    lua_pushboolean(L, entered);
     EXEC(1);
     }
 
@@ -269,8 +269,8 @@ static void CursorEnterCallback(GLFWwindow *window, int entered)
 static void ScrollCallback(GLFWwindow *window, double xoffset, double yoffset)
     {
     BEGIN(Scroll);
-	lua_pushnumber(L, xoffset);
-	lua_pushnumber(L, yoffset);
+    lua_pushnumber(L, xoffset);
+    lua_pushnumber(L, yoffset);
     EXEC(2);
     }
 
@@ -279,10 +279,10 @@ static void ScrollCallback(GLFWwindow *window, double xoffset, double yoffset)
 //GLFWdropfun glfwSetDropCallback(GLFWwindow* window, GLFWdropfun cbfun);
 static void DropCallback(GLFWwindow *window, int count, const char** paths)
     {
-	int i;
+    int i;
     BEGIN(Drop);
-	for(i = 0; i<count; i++)
-		lua_pushstring(L, paths[i]);
+    for(i = 0; i<count; i++)
+        lua_pushstring(L, paths[i]);
     EXEC(count);
     }
 
@@ -295,15 +295,15 @@ static void DropCallback(GLFWwindow *window, int count, const char** paths)
  | Window-specific callbacks registration                                   |
  *--------------------------------------------------------------------------*/
 
-#define REGISTER_FUNC(cb)      		\
+#define REGISTER_FUNC(cb)           \
 static int Set##cb##Callback(lua_State *L)                       \
     {                                                   \
     win_t *win = checkwindow(L, 1);                     \
-    if(0) 								       			\
+    if(0)                                               \
         { /* unregister callback */                     \
         if(win->cb == LUA_NOREF) return 0; /* nothing to do */  \
         CALLBACK_UNREF(win->cb);                        \
-		glfwSet##cb##Callback(win->window, NULL);       \
+        glfwSet##cb##Callback(win->window, NULL);       \
         return 0;                                       \
         }                                               \
     if(!lua_isfunction(L, 2))                           \

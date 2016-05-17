@@ -27,75 +27,75 @@
 
 
 ENUM_STRINGS(TargetStrings) = {
-	"resizable",
-	"visible",
-	"decorated",
-	"focused",
-	"auto iconify",
-	"floating",
-	"red bits",
-	"green bits",
-	"blue bits",
-	"alpha bits",
-	"depth bits",
-	"stencil bits",
-	"accum red bits",
-	"accum green bits",
-	"accum blue bits",
-	"accum alpha bits",
-	"aux buffers",
-	"samples",
-	"refresh rate",
-	"stereo",
-	"srgb capable",
-	"doublebuffer",
-	"client api",
-	"context version major",
-	"context version minor",
-	"context robustness",
-	"context release behavior",
-	"opengl forward compat",
-	"opengl debug context",
-	"opengl profile",
-	/* attribute only */
-	"iconified",
-	"context revision",
-	NULL
+    "resizable",
+    "visible",
+    "decorated",
+    "focused",
+    "auto iconify",
+    "floating",
+    "red bits",
+    "green bits",
+    "blue bits",
+    "alpha bits",
+    "depth bits",
+    "stencil bits",
+    "accum red bits",
+    "accum green bits",
+    "accum blue bits",
+    "accum alpha bits",
+    "aux buffers",
+    "samples",
+    "refresh rate",
+    "stereo",
+    "srgb capable",
+    "doublebuffer",
+    "client api",
+    "context version major",
+    "context version minor",
+    "context robustness",
+    "context release behavior",
+    "opengl forward compat",
+    "opengl debug context",
+    "opengl profile",
+    /* attribute only */
+    "iconified",
+    "context revision",
+    NULL
 };
 ENUM_CODES(TargetCodes) = {
-	GLFW_RESIZABLE,
-	GLFW_VISIBLE,
-	GLFW_DECORATED,
-	GLFW_FOCUSED,
-	GLFW_AUTO_ICONIFY,
-	GLFW_FLOATING,
-	GLFW_RED_BITS,
-	GLFW_GREEN_BITS,
-	GLFW_BLUE_BITS,
-	GLFW_ALPHA_BITS,
-	GLFW_DEPTH_BITS,
-	GLFW_STENCIL_BITS,
-	GLFW_ACCUM_RED_BITS,
-	GLFW_ACCUM_GREEN_BITS,
-	GLFW_ACCUM_BLUE_BITS,
-	GLFW_ACCUM_ALPHA_BITS,
-	GLFW_AUX_BUFFERS,
-	GLFW_SAMPLES,
-	GLFW_REFRESH_RATE,
-	GLFW_STEREO,
-	GLFW_SRGB_CAPABLE,
-	GLFW_DOUBLEBUFFER,
-	GLFW_CLIENT_API,
-	GLFW_CONTEXT_VERSION_MAJOR,
-	GLFW_CONTEXT_VERSION_MINOR,
-	GLFW_CONTEXT_ROBUSTNESS,
-	GLFW_CONTEXT_RELEASE_BEHAVIOR,
-	GLFW_OPENGL_FORWARD_COMPAT,
-	GLFW_OPENGL_DEBUG_CONTEXT,
-	GLFW_OPENGL_PROFILE,
-	/* attribute only */
-	GLFW_ICONIFIED,
-	GLFW_CONTEXT_REVISION,
+    GLFW_RESIZABLE,
+    GLFW_VISIBLE,
+    GLFW_DECORATED,
+    GLFW_FOCUSED,
+    GLFW_AUTO_ICONIFY,
+    GLFW_FLOATING,
+    GLFW_RED_BITS,
+    GLFW_GREEN_BITS,
+    GLFW_BLUE_BITS,
+    GLFW_ALPHA_BITS,
+    GLFW_DEPTH_BITS,
+    GLFW_STENCIL_BITS,
+    GLFW_ACCUM_RED_BITS,
+    GLFW_ACCUM_GREEN_BITS,
+    GLFW_ACCUM_BLUE_BITS,
+    GLFW_ACCUM_ALPHA_BITS,
+    GLFW_AUX_BUFFERS,
+    GLFW_SAMPLES,
+    GLFW_REFRESH_RATE,
+    GLFW_STEREO,
+    GLFW_SRGB_CAPABLE,
+    GLFW_DOUBLEBUFFER,
+    GLFW_CLIENT_API,
+    GLFW_CONTEXT_VERSION_MAJOR,
+    GLFW_CONTEXT_VERSION_MINOR,
+    GLFW_CONTEXT_ROBUSTNESS,
+    GLFW_CONTEXT_RELEASE_BEHAVIOR,
+    GLFW_OPENGL_FORWARD_COMPAT,
+    GLFW_OPENGL_DEBUG_CONTEXT,
+    GLFW_OPENGL_PROFILE,
+    /* attribute only */
+    GLFW_ICONIFIED,
+    GLFW_CONTEXT_REVISION,
 };
 ENUM_T(TargetEnum, TargetStrings, TargetCodes)
 #define CheckTarget(L, arg) enumCheck((L), (arg), &TargetEnum)
@@ -104,13 +104,13 @@ ENUM_T(TargetEnum, TargetStrings, TargetCodes)
 
 
 ENUM_STRINGS(ApiStrings) = {
-	"opengl",
-	"opengl es",
-	NULL
+    "opengl",
+    "opengl es",
+    NULL
 };
 ENUM_CODES(ApiCodes) = {
-	GLFW_OPENGL_API,
-	GLFW_OPENGL_ES_API,
+    GLFW_OPENGL_API,
+    GLFW_OPENGL_ES_API,
 };
 ENUM_T(ApiEnum, ApiStrings, ApiCodes)
 #define CheckApi(L, arg) enumCheck((L), (arg), &ApiEnum)
@@ -118,15 +118,15 @@ ENUM_T(ApiEnum, ApiStrings, ApiCodes)
 
 
 ENUM_STRINGS(RobustnessStrings) = {
-	"no robustness",
-	"no reset notification",
-	"lose context on reset",
-	NULL
+    "no robustness",
+    "no reset notification",
+    "lose context on reset",
+    NULL
 };
 ENUM_CODES(RobustnessCodes) = {
-	GLFW_NO_ROBUSTNESS,
-	GLFW_NO_RESET_NOTIFICATION,
-	GLFW_LOSE_CONTEXT_ON_RESET,
+    GLFW_NO_ROBUSTNESS,
+    GLFW_NO_RESET_NOTIFICATION,
+    GLFW_LOSE_CONTEXT_ON_RESET,
 };
 ENUM_T(RobustnessEnum, RobustnessStrings, RobustnessCodes)
 #define CheckRobustness(L, arg) enumCheck((L), (arg), &RobustnessEnum)
@@ -134,30 +134,30 @@ ENUM_T(RobustnessEnum, RobustnessStrings, RobustnessCodes)
 
 
 ENUM_STRINGS(ReleaseBehaviorStrings) = {
-	"any",
-	"flush",
-	"none",
-	NULL
+    "any",
+    "flush",
+    "none",
+    NULL
 };
 ENUM_CODES(ReleaseBehaviorCodes) = {
-	GLFW_ANY_RELEASE_BEHAVIOR,
-	GLFW_RELEASE_BEHAVIOR_FLUSH,
-	GLFW_RELEASE_BEHAVIOR_NONE,
+    GLFW_ANY_RELEASE_BEHAVIOR,
+    GLFW_RELEASE_BEHAVIOR_FLUSH,
+    GLFW_RELEASE_BEHAVIOR_NONE,
 };
 ENUM_T(ReleaseBehaviorEnum, ReleaseBehaviorStrings, ReleaseBehaviorCodes)
 #define CheckReleaseBehavior(L, arg) enumCheck((L), (arg), &ReleaseBehaviorEnum)
 #define PushReleaseBehavior(L, code) enumPush((L), (code), &ReleaseBehaviorEnum)
 
 ENUM_STRINGS(ProfileStrings) = {
-	"any",
-	"core",
-	"compat",
-	NULL
+    "any",
+    "core",
+    "compat",
+    NULL
 };
 ENUM_CODES(ProfileCodes) = {
-	GLFW_OPENGL_ANY_PROFILE,
-	GLFW_OPENGL_CORE_PROFILE,
-	GLFW_OPENGL_COMPAT_PROFILE,
+    GLFW_OPENGL_ANY_PROFILE,
+    GLFW_OPENGL_CORE_PROFILE,
+    GLFW_OPENGL_COMPAT_PROFILE,
 };
 ENUM_T(ProfileEnum, ProfileStrings, ProfileCodes)
 #define CheckProfile(L, arg) enumCheck((L), (arg), &ProfileEnum)
@@ -165,165 +165,165 @@ ENUM_T(ProfileEnum, ProfileStrings, ProfileCodes)
 
 
 /*------------------------------------------------------------------------------*
- | Hints       																	|
+ | Hints                                                                        |
  *------------------------------------------------------------------------------*/
 
 static int DefaultWindowHints(lua_State *L)
     {
-	(void)L;
-	glfwDefaultWindowHints();
+    (void)L;
+    glfwDefaultWindowHints();
     return 0;
     }
 
 static int Boolean(lua_State *L, int target)
-	{
-	int hint = checkboolean(L, 2);
-	glfwWindowHint( target, hint);
-	return 0;
-	}
+    {
+    int hint = checkboolean(L, 2);
+    glfwWindowHint( target, hint);
+    return 0;
+    }
 
 static int Enum(lua_State *L, int target, enum_t *e)
-	{
-	int hint = enumCheck(L, 2, e);
-	glfwWindowHint( target, hint);
-	return 0;
-	}
+    {
+    int hint = enumCheck(L, 2, e);
+    glfwWindowHint( target, hint);
+    return 0;
+    }
 
 
 static int Integer(lua_State *L, int target)
-	{
-	int hint = GLFW_DONT_CARE;
-	const char *s;
-	if(lua_type(L, 2) == LUA_TSTRING)
-		{
-		s = lua_tostring(L, 2);
-		if(strncmp(s, "don't care", strlen(s)) != 0)
-			return luaL_argerror(L, 2, "expected integer or \"don't care\"");
-		}
-	else
-		{
-		hint = luaL_checkinteger(L, 2);
+    {
+    int hint = GLFW_DONT_CARE;
+    const char *s;
+    if(lua_type(L, 2) == LUA_TSTRING)
+        {
+        s = lua_tostring(L, 2);
+        if(strncmp(s, "don't care", strlen(s)) != 0)
+            return luaL_argerror(L, 2, "expected integer or \"don't care\"");
+        }
+    else
+        {
+        hint = luaL_checkinteger(L, 2);
 #if 0
-		if(hint < -1)
-			return luaL_argerror(L, 2, "invalid value");
+        if(hint < -1)
+            return luaL_argerror(L, 2, "invalid value");
 #endif
-		}
-	glfwWindowHint( target, hint);
-	return 0;
-	}
+        }
+    glfwWindowHint( target, hint);
+    return 0;
+    }
 
 
 static int WindowHint(lua_State *L)
     {
-	int target = CheckTarget(L, 1);
-	switch(target)
-		{
-		case GLFW_RESIZABLE:
-		case GLFW_VISIBLE:
-		case GLFW_DECORATED:
-		case GLFW_FOCUSED:
-		case GLFW_AUTO_ICONIFY:
-		case GLFW_FLOATING: return Boolean(L, target);
-		case GLFW_RED_BITS:
-		case GLFW_GREEN_BITS:
-		case GLFW_BLUE_BITS:
-		case GLFW_ALPHA_BITS:
-		case GLFW_DEPTH_BITS:
-		case GLFW_STENCIL_BITS:
-		case GLFW_ACCUM_RED_BITS:
-		case GLFW_ACCUM_GREEN_BITS:
-		case GLFW_ACCUM_BLUE_BITS:
-		case GLFW_ACCUM_ALPHA_BITS:
-		case GLFW_AUX_BUFFERS:
-		case GLFW_SAMPLES:
-		case GLFW_REFRESH_RATE: return Integer(L, target);
-		case GLFW_STEREO:
-		case GLFW_SRGB_CAPABLE:
-		case GLFW_DOUBLEBUFFER: return Boolean(L, target);
-		case GLFW_CLIENT_API: return Enum(L, target, &ApiEnum);
-		case GLFW_CONTEXT_VERSION_MAJOR:
-		case GLFW_CONTEXT_VERSION_MINOR: return Integer(L, target);
-		case GLFW_CONTEXT_ROBUSTNESS: return Enum(L, target, &RobustnessEnum);
-		case GLFW_CONTEXT_RELEASE_BEHAVIOR: return Enum(L, target, &ReleaseBehaviorEnum);
-		case GLFW_OPENGL_FORWARD_COMPAT:
-		case GLFW_OPENGL_DEBUG_CONTEXT:	return Boolean(L, target);
-		case GLFW_OPENGL_PROFILE: return Enum(L, target, &ProfileEnum);
-		default:
-			return luaL_error(L, "invalid target '%s'", lua_tostring(L, 1));
-		}
+    int target = CheckTarget(L, 1);
+    switch(target)
+        {
+        case GLFW_RESIZABLE:
+        case GLFW_VISIBLE:
+        case GLFW_DECORATED:
+        case GLFW_FOCUSED:
+        case GLFW_AUTO_ICONIFY:
+        case GLFW_FLOATING: return Boolean(L, target);
+        case GLFW_RED_BITS:
+        case GLFW_GREEN_BITS:
+        case GLFW_BLUE_BITS:
+        case GLFW_ALPHA_BITS:
+        case GLFW_DEPTH_BITS:
+        case GLFW_STENCIL_BITS:
+        case GLFW_ACCUM_RED_BITS:
+        case GLFW_ACCUM_GREEN_BITS:
+        case GLFW_ACCUM_BLUE_BITS:
+        case GLFW_ACCUM_ALPHA_BITS:
+        case GLFW_AUX_BUFFERS:
+        case GLFW_SAMPLES:
+        case GLFW_REFRESH_RATE: return Integer(L, target);
+        case GLFW_STEREO:
+        case GLFW_SRGB_CAPABLE:
+        case GLFW_DOUBLEBUFFER: return Boolean(L, target);
+        case GLFW_CLIENT_API: return Enum(L, target, &ApiEnum);
+        case GLFW_CONTEXT_VERSION_MAJOR:
+        case GLFW_CONTEXT_VERSION_MINOR: return Integer(L, target);
+        case GLFW_CONTEXT_ROBUSTNESS: return Enum(L, target, &RobustnessEnum);
+        case GLFW_CONTEXT_RELEASE_BEHAVIOR: return Enum(L, target, &ReleaseBehaviorEnum);
+        case GLFW_OPENGL_FORWARD_COMPAT:
+        case GLFW_OPENGL_DEBUG_CONTEXT: return Boolean(L, target);
+        case GLFW_OPENGL_PROFILE: return Enum(L, target, &ProfileEnum);
+        default:
+            return luaL_error(L, "invalid target '%s'", lua_tostring(L, 1));
+        }
     return 0;
     }
 
 
 /*------------------------------------------------------------------------------*
- | Get window attributes														|
+ | Get window attributes                                                        |
  *------------------------------------------------------------------------------*/
 
 static int GetInt_(lua_State *L, GLFWwindow* window, int attrib, int boolean)
 #define GetInteger(L, w, a) GetInt_((L), (w), (a), 0)
 #define GetBoolean(L, w, a) GetInt_((L), (w), (a), 1)
-	{
-	int val = glfwGetWindowAttrib(window, attrib);
-	if(boolean)
-		lua_pushboolean(L, val);
-	else
-		lua_pushinteger(L, val);
-	return 1;
-	}
+    {
+    int val = glfwGetWindowAttrib(window, attrib);
+    if(boolean)
+        lua_pushboolean(L, val);
+    else
+        lua_pushinteger(L, val);
+    return 1;
+    }
 
 static int GetEnum(lua_State *L, GLFWwindow* window, int attrib, enum_t *e)
-	{
-	int val = glfwGetWindowAttrib(window, attrib);
-	enumPush(L, val, e);
-	return 1;
-	}
+    {
+    int val = glfwGetWindowAttrib(window, attrib);
+    enumPush(L, val, e);
+    return 1;
+    }
 
 
 static int GetWindowAttrib(lua_State *L)
     {
-	win_t *win = checkwindow(L, 1);
-	int attrib = CheckAttrib(L, 2);
-	
-	switch(attrib)
-		{
-		case GLFW_FOCUSED:
-		case GLFW_ICONIFIED:
-		case GLFW_VISIBLE:
-		case GLFW_RESIZABLE:
-		case GLFW_DECORATED:
-		case GLFW_FLOATING:
-			return GetBoolean(L, win->window, attrib);
-		case GLFW_CLIENT_API:
-			return GetEnum(L, win->window, attrib, &ApiEnum);
-		case GLFW_CONTEXT_VERSION_MAJOR:
-		case GLFW_CONTEXT_VERSION_MINOR:
-		case GLFW_CONTEXT_REVISION:
-			return GetInteger(L, win->window, attrib);
-		case GLFW_OPENGL_FORWARD_COMPAT:
-		case GLFW_OPENGL_DEBUG_CONTEXT:
-			return GetBoolean(L, win->window, attrib);
-		case GLFW_OPENGL_PROFILE:
-			return GetEnum(L, win->window, attrib, &ProfileEnum);
-		case GLFW_CONTEXT_ROBUSTNESS:
-			return GetEnum(L, win->window, attrib, &RobustnessEnum);
-		case GLFW_CONTEXT_RELEASE_BEHAVIOR:
-			return GetEnum(L, win->window, attrib, &ReleaseBehaviorEnum);
-		default:
-			return luaL_error(L, "invalid attribute '%s'", lua_tostring(L, 2));
-		}
+    win_t *win = checkwindow(L, 1);
+    int attrib = CheckAttrib(L, 2);
+    
+    switch(attrib)
+        {
+        case GLFW_FOCUSED:
+        case GLFW_ICONIFIED:
+        case GLFW_VISIBLE:
+        case GLFW_RESIZABLE:
+        case GLFW_DECORATED:
+        case GLFW_FLOATING:
+            return GetBoolean(L, win->window, attrib);
+        case GLFW_CLIENT_API:
+            return GetEnum(L, win->window, attrib, &ApiEnum);
+        case GLFW_CONTEXT_VERSION_MAJOR:
+        case GLFW_CONTEXT_VERSION_MINOR:
+        case GLFW_CONTEXT_REVISION:
+            return GetInteger(L, win->window, attrib);
+        case GLFW_OPENGL_FORWARD_COMPAT:
+        case GLFW_OPENGL_DEBUG_CONTEXT:
+            return GetBoolean(L, win->window, attrib);
+        case GLFW_OPENGL_PROFILE:
+            return GetEnum(L, win->window, attrib, &ProfileEnum);
+        case GLFW_CONTEXT_ROBUSTNESS:
+            return GetEnum(L, win->window, attrib, &RobustnessEnum);
+        case GLFW_CONTEXT_RELEASE_BEHAVIOR:
+            return GetEnum(L, win->window, attrib, &ReleaseBehaviorEnum);
+        default:
+            return luaL_error(L, "invalid attribute '%s'", lua_tostring(L, 2));
+        }
     return 0;
     }
 
 
 /*------------------------------------------------------------------------------*
- | Registration																	|
+ | Registration                                                                 |
  *------------------------------------------------------------------------------*/
 
 static const struct luaL_Reg Functions[] = 
     {
-		{ "default_window_hints", DefaultWindowHints },
-		{ "window_hint", WindowHint },
-		{ "get_window_attrib", GetWindowAttrib },
+        { "default_window_hints", DefaultWindowHints },
+        { "window_hint", WindowHint },
+        { "get_window_attrib", GetWindowAttrib },
         { NULL, NULL } /* sentinel */
     };
 

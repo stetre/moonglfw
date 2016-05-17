@@ -50,8 +50,8 @@ struct moonglfw_id_s {
 struct moonglfw_win_s {
     RB_ENTRY(moonglfw_win_s) entry;
     int id;         /* window id (search key) */
-	GLFWwindow 	*window; /* self */
-	int share_id; /* share window id */
+    GLFWwindow  *window; /* self */
+    int share_id; /* share window id */
     /* references for callbacks on the Lua registry */
     int WindowPos;
     int WindowSize;
@@ -74,7 +74,7 @@ struct moonglfw_win_s {
 struct moonglfw_mon_s {
     RB_ENTRY(moonglfw_mon_s) entry;
     int id;         /* monitor id (search key) */
-	GLFWmonitor 	*monitor; /* self */
+    GLFWmonitor     *monitor; /* self */
     /* references for callbacks on the Lua registry */
     //int Monitor;
 };
@@ -83,7 +83,7 @@ struct moonglfw_mon_s {
 struct moonglfw_cur_s {
     RB_ENTRY(moonglfw_cur_s) entry;
     int id;         /* cursor id (search key) */
-	GLFWcursor 	*cursor; /* self */
+    GLFWcursor  *cursor; /* self */
 };
 
 #endif /* structsDEFINED */

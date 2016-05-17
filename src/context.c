@@ -28,54 +28,54 @@
 
 static int MakeContextCurrent(lua_State *L)
     {
-	win_t * win = checkwindow(L, 1);
-	glfwMakeContextCurrent(win->window);
+    win_t * win = checkwindow(L, 1);
+    glfwMakeContextCurrent(win->window);
     return 0;
     }
 
 static int GetCurrentContext(lua_State *L)
     {
-	GLFWwindow* window = glfwGetCurrentContext();
-	lua_pushinteger(L, (intptr_t)glfwGetWindowUserPointer(window));
+    GLFWwindow* window = glfwGetCurrentContext();
+    lua_pushinteger(L, (intptr_t)glfwGetWindowUserPointer(window));
     return 1;
     }
 
 static int SwapInterval(lua_State *L)
     {
-	int interval = luaL_checkinteger(L, 1);
-	glfwSwapInterval(interval);
+    int interval = luaL_checkinteger(L, 1);
+    glfwSwapInterval(interval);
     return 0;
     }
 
 static int ExtensionSupported(lua_State *L)
     {
-	const char* extension = luaL_checkstring(L, 1);
-	lua_pushboolean(L, glfwExtensionSupported(extension));
+    const char* extension = luaL_checkstring(L, 1);
+    lua_pushboolean(L, glfwExtensionSupported(extension));
     return 1;
     }
 
 #if 0
-		{ "get_proc_address", GetProcAddress },
+        { "get_proc_address", GetProcAddress },
 static int GetProcAddress(lua_State *L) //@@ 
     {
 //GLFWglproc glfwGetProcAddress(const char* procname);
-	(void)L;
+    (void)L;
     return 0;
     }
 #endif
 
 
 /*------------------------------------------------------------------------------*
- | Registration																	|
+ | Registration                                                                 |
  *------------------------------------------------------------------------------*/
 
 
 static const struct luaL_Reg Functions[] = 
     {
-		{ "make_context_current", MakeContextCurrent },
-		{ "get_current_context", GetCurrentContext },
-		{ "swap_interval", SwapInterval },
-		{ "extension_supported", ExtensionSupported },
+        { "make_context_current", MakeContextCurrent },
+        { "get_current_context", GetCurrentContext },
+        { "swap_interval", SwapInterval },
+        { "extension_supported", ExtensionSupported },
         { NULL, NULL } /* sentinel */
     };
 

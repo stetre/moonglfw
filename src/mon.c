@@ -56,11 +56,11 @@ mon_t *mon_root(void)
 mon_t *mon_new(void)
     {
     mon_t *mon;
-	int id = id_new();
-	if(id == -1)
-		return NULL;
+    int id = id_new();
+    if(id == -1)
+        return NULL;
     if((mon = (mon_t*)malloc(sizeof(mon_t))) == NULL) 
-		{ id_free(id); return NULL; }
+        { id_free(id); return NULL; }
     memset(mon, 0, sizeof(mon_t));
     mon->id = id;
     if(mon_search(mon->id))
@@ -78,7 +78,7 @@ void mon_free(mon_t* mon)
         //CALLBACK_UNREF(mon->Monitor);
         mon_remove(mon);
         }
-	id_free(mon->id);
+    id_free(mon->id);
     free(mon);
     }
 

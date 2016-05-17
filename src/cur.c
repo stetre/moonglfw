@@ -56,11 +56,11 @@ cur_t *cur_root(void)
 cur_t *cur_new(void)
     {
     cur_t *cur;
-	int id = id_new();
-	if(id == -1)
-		return NULL;
+    int id = id_new();
+    if(id == -1)
+        return NULL;
     if((cur = (cur_t*)malloc(sizeof(cur_t))) == NULL) 
-		{ id_free(id); return NULL; }
+        { id_free(id); return NULL; }
     memset(cur, 0, sizeof(cur_t));
     cur->id = id;
     if(cur_search(cur->id))
@@ -78,7 +78,7 @@ void cur_free(cur_t* cur)
         //CALLBACK_UNREF(cur->Zzz);
         cur_remove(cur);
         }
-	id_free(cur->id);
+    id_free(cur->id);
     free(cur);
     }
 

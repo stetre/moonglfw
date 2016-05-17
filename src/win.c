@@ -61,11 +61,11 @@ win_t *win_root(void)
 win_t *win_new(void)
     {
     win_t *win;
-	int id = id_new();
-	if(id == -1)
-		return NULL;
+    int id = id_new();
+    if(id == -1)
+        return NULL;
     if((win = (win_t*)malloc(sizeof(win_t))) == NULL) 
-		{ id_free(id); return NULL; }
+        { id_free(id); return NULL; }
     memset(win, 0, sizeof(win_t));
     win->id = id;
     if(win_search(win->id))
@@ -111,7 +111,7 @@ void win_free(win_t* win)
         CALLBACK_UNREF(win->Drop);
         win_remove(win);
         }
-	id_free(win->id);
+    id_free(win->id);
     free(win);
     }
 

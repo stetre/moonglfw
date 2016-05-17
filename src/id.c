@@ -93,22 +93,22 @@ int id_new(void)
     }
 
 void id_free(int key)
-	{
-	id_t* id = id_search(key);
-	if(id)
-		{
-		id_remove(id);
-		free(id);
-		}
+    {
+    id_t* id = id_search(key);
+    if(id)
+        {
+        id_remove(id);
+        free(id);
+        }
     }
 
 void id_free_all(void)
     {
     id_t *id;
     while((id = id_first(0)))
-		{
+        {
         id_remove(id);
-	    free(id);
-		}
+        free(id);
+        }
     }
 
