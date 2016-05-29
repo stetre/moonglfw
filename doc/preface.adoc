@@ -20,6 +20,11 @@ http://www.glfw.org/documentation.html[GLFW documentation].
 
 === Getting and installing
 
+For installation intructions, refer to the README file in the 
+https://github.com/stetre/moonglfw[*MoonGLFW official repository*]
+on GitHub.
+
+////
 The *official repository* of MoonGLFW is on GitHub at the following link:
 *https://github.com/stetre/moonglfw* .
 
@@ -53,6 +58,7 @@ in `/home/joe/local`:
 [moonglfw-0.1]$ make
 [moonglfw-0.1]$ make install PREFIX=/home/joe/local
 ----
+////
 
 === Module organization
 

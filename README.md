@@ -2,7 +2,8 @@
 
 MoonGLFW is a Lua binding library for [GLFW](http://www.glfw.org/).
 
-It runs on GNU/Linux and requires [Lua](http://www.lua.org/) (>=5.3)
+It runs on GNU/Linux and on Windows (MSYS2/MinGW) and requires 
+[Lua](http://www.lua.org/) (>=5.3)
 and [GLFW](http://www.glfw.org/download.html) (>=3.1).
 
 _Authored by:_ _[Stefano Trettel](https://www.linkedin.com/in/stetre)_
@@ -13,9 +14,13 @@ _Authored by:_ _[Stefano Trettel](https://www.linkedin.com/in/stetre)_
 
 MIT/X11 license (same as Lua). See [LICENSE](./LICENSE).
 
-#### Documentation, Getting and installing, etc.
+#### Documentation
 
 See the [Reference Manual](https://stetre.github.io/moonglfw/doc/index.html).
+
+#### Getting and installing
+
+See [INSTALL](./INSTALL.md).
 
 #### Example
 
