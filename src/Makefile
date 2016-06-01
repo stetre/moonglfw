@@ -33,7 +33,7 @@ LIBDIR = -L/usr/lib
 LIBS = -lglfw
 endif
 ifdef MINGW
-LIBS = -lglfw3
+LIBS = -lglfw3 -llua
 endif
 
 Tgt	:= moonglfw
