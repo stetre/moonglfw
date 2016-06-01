@@ -20,7 +20,14 @@ See the [Reference Manual](https://stetre.github.io/moonglfw/doc/index.html).
 
 #### Getting and installing
 
-See [INSTALL](./INSTALL.md).
+Setup the build environment as described [here](./SETUP.md), then:
+
+```sh
+$ git clone https://github.com/stetre/moonglfw
+$ cd moonglfw
+moonglfw$ make
+moonglfw$ make install # or 'sudo make install' (Ubuntu)
+```
 
 #### Example
 
