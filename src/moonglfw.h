@@ -35,7 +35,7 @@
 #include "lauxlib.h"
 #include <GLFW/glfw3.h>
 
-#define MOONGLFW_VERSION        "0.5"
+#define MOONGLFW_VERSION        "0.6"
 
 #endif /* moonglfwDEFINED */
 
