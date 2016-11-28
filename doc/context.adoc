@@ -3,20 +3,18 @@
 
 [small]#Rfr: link:http://www.glfw.org/docs/latest/group__context.html[Context handling].#
 
-[[glfw.make_context_current]]
-* *glfw.make_context_current* (_window_)
+[[make_context_current]]
+* *make_context_current*(_window_)
 
-[[glfw.get_context_current]]
-* *glfw.get_context_current* (_window_) +
--> _window_ +
+[[get_context_current]]
+* _window_ = *get_context_current*(_window_) +
 [small]#Returns _nil_ if there is no current window.#
 
-[[glfw.swap_interval]]
-* *glfw.swap_interval* (_interval_)
+[[swap_interval]]
+* *swap_interval*(_interval_)
 
-[[glfw.extension_supported]]
-* *glfw.extension_supported* (_extension_) +
--> _boolean_ +
+[[extension_supported]]
+* _boolean_ = *extension_supported*(_extension_) +
 [small]#_extension_: a string.#
 
 ////

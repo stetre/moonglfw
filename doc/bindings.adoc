@@ -4,6 +4,8 @@
 The structure of this section purposedly replicates the structure of the 
 http://www.glfw.org/docs/latest/modules.html[GLFW Reference documentation].
 
+All the functions listed in the following sections are members of the *glfw* table.
+
 include::context.adoc[]
 
 include::initialization.adoc[]

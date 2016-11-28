@@ -868,39 +868,40 @@ of the <a href="https://github.com/stetre/moonglfw">official repository</a> on G
 <p>The structure of this section purposedly replicates the structure of the
 <a href="http://www.glfw.org/docs/latest/modules.html">GLFW Reference documentation</a>.</p>
 </div>
+<div class="paragraph">
+<p>All the functions listed in the following sections are members of the <strong>glfw</strong> table.</p>
+</div>
 <div class="sect2">
 <h3 id="_context_handling">Context handling</h3>
 <div class="paragraph">
 <p><span class="small">Rfr: <a href="http://www.glfw.org/docs/latest/group__context.html">Context handling</a>.</span></p>
 </div>
-<div id="glfw.make_context_current" class="ulist">
+<div id="make_context_current" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.make_context_current</strong> (<em>window</em>)</p>
+<p><strong>make_context_current</strong>(<em>window</em>)</p>
 </li>
 </ul>
 </div>
-<div id="glfw.get_context_current" class="ulist">
+<div id="get_context_current" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.get_context_current</strong> (<em>window</em>)<br>
-&#8594; <em>window</em><br>
+<p><em>window</em> = <strong>get_context_current</strong>(<em>window</em>)<br>
 <span class="small">Returns <em>nil</em> if there is no current window.</span></p>
 </li>
 </ul>
 </div>
-<div id="glfw.swap_interval" class="ulist">
+<div id="swap_interval" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.swap_interval</strong> (<em>interval</em>)</p>
+<p><strong>swap_interval</strong>(<em>interval</em>)</p>
 </li>
 </ul>
 </div>
-<div id="glfw.extension_supported" class="ulist">
+<div id="extension_supported" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.extension_supported</strong> (<em>extension</em>)<br>
-&#8594; <em>boolean</em><br>
+<p><em>boolean</em> = <strong>extension_supported</strong>(<em>extension</em>)<br>
 <span class="small"><em>extension</em>: a string.</span></p>
 </li>
 </ul>
@@ -933,26 +934,24 @@ and thus not exposed to the script code.</p>
 </li>
 </ul>
 </div>
-<div id="glfw.get_version" class="ulist">
+<div id="get_version" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.get_version</strong> ( )<br>
-&#8594; <em>major</em>, <em>minor</em>, <em>rev</em></p>
+<p><em>major</em>, <em>minor</em>, <em>rev</em> = <strong>get_version</strong>( )</p>
 </li>
 </ul>
 </div>
-<div id="glfw.get_version_string" class="ulist">
+<div id="get_version_string" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.get_version_string</strong> ( )<br>
-&#8594; <em>string</em></p>
+<p><em>string</em>= <strong>get_version_string</strong>( )</p>
 </li>
 </ul>
 </div>
-<div id="glfw.set_error_callback" class="ulist">
+<div id="set_error_callback" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.set_error_callback</strong> ([<em>func</em>])<br>
+<p><strong>set_error_callback</strong>([<em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as <strong><em>func(ec, descr)</em></strong> where <em>ec</em> (a number) is the
 error code and <em>descr</em> (a string) is the description of the occurred error.<br>
 If <em>func</em> is <em>nil</em>, unregisters the current error callback (if any).</span></p>
@@ -966,12 +965,11 @@ If <em>func</em> is <em>nil</em>, unregisters the current error callback (if any
 <div class="paragraph">
 <p><span class="small">Rfr: <a href="http://www.glfw.org/docs/latest/group__input.html">Input handling</a>.</span></p>
 </div>
-<div id="glfw.set_input_mode" class="ulist">
+<div id="set_input_mode" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.set_input_mode</strong> (<em>window</em>, <em>mode</em>, <em>value</em>)<br>
-<strong>glfw.get_input_mode</strong> (<em>window</em>, <em>mode</em>)<br>
-&#8594; <em>value</em><br>
+<p><strong>set_input_mode</strong>(<em>window</em>, <em>mode</em>, <em>value</em>)<br>
+<em>value</em> = <strong>get_input_mode</strong>(<em>window</em>, <em>mode</em>)<br>
 <span class="small"><em>mode</em>: '<em>cursor</em>', '<em>sticky keys</em>' or '<em>sticky mouse buttons</em>'.<br>
 <em>value</em>: one of the following, depending on <em>mode</em>:<br>
 if <em>mode</em> is '<em>sticky &#8230;&#8203;</em>': <em>value</em> = <em>true</em> or <em>false</em> (Lua boolean).<br>
@@ -980,11 +978,10 @@ if <em>mode</em> is '<em>cursor</em>': <em>value</em> = '<em>normal</em>', '<em>
 </ul>
 </div>
 <hr>
-<div id="glfw.get_key" class="ulist">
+<div id="get_key" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.get_key</strong> (<em>window</em>, <em>key</em>)<br>
-&#8594; <em>state</em><br>
+<p><em>state</em> = <strong>get_key</strong>(<em>window</em>, <em>key</em>)<br>
 <span class="small"><em>key</em>: '<em>xxx</em>' for GLFW_KEY_XXX (e.g. '<em>left bracket</em>' for GLFW_LEFT_BRACKET).
 See: <a href="http://www.glfw.org/docs/latest/group__keys.html">keyboard keys</a>.<br>
 <em>state</em>: '<em>press</em>' or '<em>release</em>'.</span></p>
@@ -992,105 +989,96 @@ See: <a href="http://www.glfw.org/docs/latest/group__keys.html">keyboard keys</a
 </ul>
 </div>
 <hr>
-<div id="glfw.get_mouse_button" class="ulist">
+<div id="get_mouse_button" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.get_mouse_button</strong> (<em>window</em>, <em>button</em>)<br>
-&#8594; <em>state</em><br>
+<p><em>state</em> = <strong>get_mouse_button</strong>(<em>window</em>, <em>button</em>)<br>
 <span class="small"><em>button</em>: '<em>left</em>', '<em>right</em>', '<em>middle</em>', or '<em>button 4</em>' to '<em>button 8</em>'.<br>
 <em>state</em>: '<em>press</em>' or '<em>release</em>'.</span></p>
 </li>
 </ul>
 </div>
-<div id="glfw.set_cursor_pos" class="ulist">
+<div id="set_cursor_pos" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.set_cursor_pos</strong> (<em>window</em>, <em>xpos</em>, <em>ypos</em>)<br>
-<strong>glfw.get_cursor_pos</strong> (<em>window</em>)<br>
-&#8594; <em>xpos</em>, <em>ypos</em><br>
+<p><strong>set_cursor_pos</strong>(<em>window</em>, <em>xpos</em>, <em>ypos</em>)<br>
+<em>xpos</em>, <em>ypos</em> = <strong>get_cursor_pos</strong>(<em>window</em>)<br>
 <span class="small"><em>xpos</em>, <em>ypos</em>: Lua numbers.</span></p>
 </li>
 </ul>
 </div>
 <hr>
-<div id="glfw.create_cursor" class="ulist">
+<div id="create_cursor" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.create_cursor</strong> (<em>width</em>, <em>height</em>, <em>pixels</em>, <em>xhot</em>, <em>yhot</em>)<br>
-<strong>glfw.create_cursor</strong> (<em>shape</em>)<br>
-&#8594; <em>cursor</em><br>
+<p><em>cursor</em> = <strong>create_cursor</strong>(<em>width</em>, <em>height</em>, <em>pixels</em>, <em>xhot</em>, <em>yhot</em>)<br>
+<em>cursor</em> = <strong>create_cursor</strong>(<em>shape</em>)<br>
 <span class="small"><em>width</em>, <em>height</em>, <em>pixels</em>: the image (2 integers and a binary string).<br>
 <em>shape</em>: '<em>arrow</em>', '<em>ibeam</em>', '<em>crosshair</em>', '<em>hand</em>', '<em>hresize', '_vresize</em>'.<br>
 Return a <em>cursor</em> handle to the newly created cursor.</span></p>
 </li>
 </ul>
 </div>
-<div id="glfw.destroy_cursor" class="ulist">
+<div id="destroy_cursor" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.destroy_cursor</strong> (<em>cursor</em>)</p>
+<p><strong>destroy_cursor</strong>(<em>cursor</em>)</p>
 </li>
 </ul>
 </div>
-<div id="glfw.set_cursor" class="ulist">
+<div id="set_cursor" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.set_cursor</strong> (<em>window</em>, <em>cursor</em>)</p>
+<p><strong>set_cursor</strong>(<em>window</em>, <em>cursor</em>)</p>
 </li>
 </ul>
 </div>
 <hr>
-<div id="glfw.joystick_present" class="ulist">
+<div id="joystick_present" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.joystick_present</strong> (<em>joy</em>)<br>
-&#8594; <em>boolean</em><br>
+<p><em>boolean</em> = <strong>joystick_present</strong>(<em>joy</em>)<br>
 <span class="small"><em>joy</em>: 1 .. 16.</span></p>
 </li>
 </ul>
 </div>
-<div id="glfw.joystick_axes" class="ulist">
+<div id="joystick_axes" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.joystick_axes</strong> (<em>joy</em>)<br>
-&#8594; <em>xpos</em>, <em>&#8230;&#8203;</em></p>
+<p><em>xpos</em>, <em>&#8230;&#8203;</em>  = <strong>joystick_axes</strong>(<em>joy</em>)</p>
 </li>
 </ul>
 </div>
-<div id="glfw.get_joystick_buttons" class="ulist">
+<div id="get_joystick_buttons" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.get_joystick_buttons</strong> (<em>joy</em>)<br>
-&#8594; <em>state1</em>, <em>&#8230;&#8203;</em><br>
+<p><em>state1</em>, <em>&#8230;&#8203;</em> = <strong>get_joystick_buttons</strong>(<em>joy</em>)<br>
 <span class="small"><em>state</em>: '<em>press</em>' or '<em>release</em>'.</span></p>
 </li>
 </ul>
 </div>
-<div id="glfw.get_joystick_name" class="ulist">
+<div id="get_joystick_name" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.get_joystick_name</strong> (<em>joy</em>)<br>
-&#8594; <em>name</em></p>
+<p><em>name</em>= <strong>get_joystick_name</strong>(<em>joy</em>)</p>
 </li>
 </ul>
 </div>
 <hr>
-<div id="glfw.set_clipboard_string" class="ulist">
+<div id="set_clipboard_string" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.set_clipboard_string</strong> (<em>window</em>, <em>string</em>)<br>
-<strong>glfw.get_clipboard_string</strong> (<em>window</em>)<br>
-&#8594; <em>string</em></p>
+<p><strong>set_clipboard_string</strong>(<em>window</em>, <em>string</em>)<br>
+<em>string</em> = <strong>get_clipboard_string</strong>(<em>window</em>)</p>
 </li>
 </ul>
 </div>
 <hr>
-<div id="glfw.set_time" class="ulist">
+<div id="set_time" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.set_time</strong> (<em>time</em>)<br>
-<strong>glfw.get_time</strong> (<em>time</em>)<br>
-&#8594; <em>time</em></p>
+<p><strong>set_time</strong>(<em>time</em>)<br>
+<em>time</em> = <strong>get_time</strong>(<em>time</em>)</p>
 </li>
 </ul>
 </div>
@@ -1099,40 +1087,40 @@ Return a <em>cursor</em> handle to the newly created cursor.</span></p>
 <p>All the following functions unregister the corresponding current callback when invoked with
 <em>func</em> = <em>nil</em>.</p>
 </div>
-<div id="glfw.set_key_callback" class="ulist">
+<div id="set_key_callback" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.set_key_callback</strong> (<em>window</em> [, <em>func</em>])<br>
+<p><strong>set_key_callback</strong>(<em>window</em> [, <em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as
 <strong><em>func(window, key, scancode, action, shift, control, alt, super)</em></strong>, where:<br>
-<em>key</em>: see <a href="#glfw.get_key">glfw.get_key</a>( ).<br>
+<em>key</em>: see <a href="#get_key">get_key</a>( ).<br>
 <em>action</em>: '<em>press</em>', '<em>release</em>' or '<em>repeat</em>'.<br>
 <em>shift</em>, <em>control</em>, <em>alt</em>, <em>super</em> (modifiers): <em>true</em> or <em>false</em> (Lua booleans).</span></p>
 </li>
 </ul>
 </div>
-<div id="glfw.set_char_callback" class="ulist">
+<div id="set_char_callback" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.set_char_callback</strong> (<em>window</em> [, <em>func</em>])<br>
+<p><strong>set_char_callback</strong>(<em>window</em> [, <em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as <strong><em>func(window, codepoint)</em></strong>.</span></p>
 </li>
 </ul>
 </div>
-<div id="glfw.set_char_mods_callback" class="ulist">
+<div id="set_char_mods_callback" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.set_char_mods_callback</strong> (<em>window</em> [, <em>func</em>])<br>
+<p><strong>set_char_mods_callback</strong>(<em>window</em> [, <em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as
 <strong><em>func(window, codepoint, shift, control, alt, super)</em></strong>, where:<br>
 <em>shift</em>, <em>control</em>, <em>alt</em>, <em>super</em> (modifiers): <em>true</em> or <em>false</em> (Lua booleans).</span></p>
 </li>
 </ul>
 </div>
-<div id="glfw.set_mouse_button_callback" class="ulist">
+<div id="set_mouse_button_callback" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.set_mouse_button_callback</strong> (<em>window</em> [, <em>func</em>])<br>
+<p><strong>set_mouse_button_callback</strong>(<em>window</em> [, <em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as
 <strong><em>func(window, button, action, shift, control, alt, super)</em></strong>, where:<br>
 <em>button</em>: '<em>left</em>', '<em>right</em>', '<em>middle</em>', or '<em>button 4</em>' to '<em>button 8</em>'.<br>
@@ -1141,37 +1129,37 @@ Return a <em>cursor</em> handle to the newly created cursor.</span></p>
 </li>
 </ul>
 </div>
-<div id="glfw.set_cursor_pos_callback" class="ulist">
+<div id="set_cursor_pos_callback" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.set_cursor_pos_callback</strong> (<em>window</em> [, <em>func</em>])<br>
+<p><strong>set_cursor_pos_callback</strong>(<em>window</em> [, <em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as <strong><em>func(window, xpos, ypos)</em></strong>, where <em>xpos</em>
 and <em>ypos</em> are Lua numbers (i.e. floating point).</span></p>
 </li>
 </ul>
 </div>
-<div id="glfw.set_cursor_enter_callback" class="ulist">
+<div id="set_cursor_enter_callback" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.set_cursor_enter_callback</strong> (<em>window</em> [, <em>func</em>])<br>
+<p><strong>set_cursor_enter_callback</strong>(<em>window</em> [, <em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as <strong><em>func(window, entered)</em></strong>, where
 <em>entered</em> is a boolean.</span></p>
 </li>
 </ul>
 </div>
-<div id="glfw.set_scroll_callback" class="ulist">
+<div id="set_scroll_callback" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.set_scroll_callback</strong> (<em>window</em> [, <em>func</em>])<br>
+<p><strong>set_scroll_callback</strong>(<em>window</em> [, <em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as <strong><em>func(window, xoffset, yoffset)</em></strong>, where
 <em>xoffset</em> and <em>yoffset</em> are Lua numbers (i.e. floating point).</span></p>
 </li>
 </ul>
 </div>
-<div id="glfw.set_drop_callback" class="ulist">
+<div id="set_drop_callback" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.set_drop_callback</strong> (<em>window</em> [, <em>func</em>])<br>
+<p><strong>set_drop_callback</strong>(<em>window</em> [, <em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as <strong><em>func(window, path, &#8230;&#8203;)</em></strong>, where
 <em>path</em> (an any subsequent argument) is a string.</span></p>
 </li>
@@ -1184,84 +1172,80 @@ and <em>ypos</em> are Lua numbers (i.e. floating point).</span></p>
 <div class="paragraph">
 <p><span class="small">Rfr: <a href="http://www.glfw.org/docs/latest/group__monitor.html">Monitor handling</a>.</span></p>
 </div>
-<div id="glfw.get_monitors" class="ulist">
+<div id="get_monitors" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.get_monitors</strong> ( )<br>
-&#8594; <em>monitor1</em>, <em>monitor2</em>, <em>&#8230;&#8203;</em></p>
+<p><em>monitor1</em>, <em>monitor2</em>, <em>&#8230;&#8203;</em> = <strong>get_monitors</strong>( )</p>
 </li>
 </ul>
 </div>
-<div id="glfw.get_primary_monitor" class="ulist">
+<div id="get_primary_monitor" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.get_primary_monitor</strong> ( )<br>
-&#8594; <em>monitor</em></p>
+<p><em>monitor</em> = <strong>get_primary_monitor</strong>( )</p>
 </li>
 </ul>
 </div>
-<div id="glfw.get_monitor_pos" class="ulist">
+<div id="get_monitor_pos" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.get_monitor_pos</strong> (<em>monitor</em>)<br>
-&#8594; <em>xpos</em>, <em>ypos</em></p>
+<p><em>xpos</em>, <em>ypos</em> = <strong>get_monitor_pos</strong>(<em>monitor</em>)</p>
 </li>
 </ul>
 </div>
-<div id="glfw.get_monitor_physical_size" class="ulist">
+<div id="get_monitor_physical_size" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.get_monitor_physical_size</strong> (<em>monitor</em>)<br>
-&#8594; <em>widthmm</em>, <em>heightmm</em></p>
+<p><em>widthmm</em>, <em>heightmm</em> = <strong>get_monitor_physical_size</strong>(<em>monitor</em>)</p>
 </li>
 </ul>
 </div>
-<div id="glfw.get_monitor_name" class="ulist">
+<div id="get_monitor_name" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.get_monitor_name</strong> (<em>monitor</em>)<br>
-&#8594; <em>name</em></p>
+<p><em>name</em> = <strong>get_monitor_name</strong>(<em>monitor</em>)</p>
 </li>
 </ul>
 </div>
-<div id="glfw.set_monitor_callback" class="ulist">
+<div id="set_monitor_callback" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.set_monitor_callback</strong> (<em>monitor</em> [, <em>func</em>])<br>
+<p><strong>set_monitor_callback</strong>(<em>monitor</em> [, <em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as <strong><em>func(monitor, event)</em></strong>, where <em>event</em> (a string)
 may be '<em>connected</em>' or '<em>disconnected</em>'.<br>
 If <em>func</em> = <em>nil</em>, unregisters the current callback (if any).</span></p>
 </li>
 </ul>
 </div>
-<div id="glfw.get_video_mode" class="ulist">
+<div id="get_video_mode" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.get_video_mode</strong> (<em>monitor</em>)<br>
-&#8594; <em>videomode</em><br>
-<strong>glfw.get_video_modes</strong> (<em>monitor</em>)<br>
-&#8594; <em>videomode1</em>, <em>videomode2</em>, <em>&#8230;&#8203;</em><br>
-<span class="small"><em>videomode</em>: a table with the following fields, all having an integer value:
+<p><em>videomode</em> = <strong>get_video_mode</strong>(<em>monitor</em>)<br>
+<em>videomode1</em>, <em>videomode2</em>, <em>&#8230;&#8203;</em> = <strong>get_video_modes</strong>(<em>monitor</em>)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><span class="small"><em>videomode</em>: a table with the following fields, all having an integer value:
 <em>width</em>, <em>height</em>, <em>red_bits</em>, <em>blue_bits</em>, <em>green_bits</em>, <em>refresh_rate</em>.</span></p>
+</div>
+<div id="set_gamma" class="ulist">
+<ul>
+<li>
+<p><strong>set_gamma</strong>(<em>monitor</em>, <em>gamma</em>)</p>
 </li>
 </ul>
 </div>
-<div id="glfw.set_gamma" class="ulist">
+<div id="set_gamma_ramp" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.set_gamma</strong> (<em>monitor</em>, <em>gamma</em>)</p>
+<p><strong>set_gamma_ramp</strong>(<em>monitor</em>, <em>red</em>, <em>green</em>, <em>blue</em>)<br>
+<em>red</em>, <em>green</em>, <em>blue</em> = <strong>get_gamma_ramp</strong>(<em>monitor</em>)</p>
 </li>
 </ul>
 </div>
-<div id="glfw.set_gamma_ramp" class="ulist">
-<ul>
-<li>
-<p><strong>glfw.set_gamma_ramp</strong> (<em>monitor</em>, <em>red</em>, <em>green</em>, <em>blue</em>)<br>
-<strong>glfw.get_gamma_ramp</strong> (<em>monitor</em>)<br>
-&#8594; <em>red</em>, <em>green</em>, <em>blue</em><br>
-<span class="small"><em>red</em>, <em>green</em> and <em>blue</em>: equally sized arrays (tables) of integers.</span></p>
-</li>
-</ul>
+<div class="paragraph">
+<p><span class="small"><em>red</em>, <em>green</em> and <em>blue</em>: equally sized arrays (tables) of integers.</span></p>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
@@ -1280,18 +1264,18 @@ If <em>func</em> = <em>nil</em>, unregisters the current callback (if any).</spa
 <div class="paragraph">
 <p><span class="small">Rfr: <a href="http://www.glfw.org/docs/latest/group__window.html">Window handling</a>.</span></p>
 </div>
-<div id="glfw.default_window_hints" class="ulist">
+<div id="default_window_hints" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.default_window_hints</strong> ( )<br>
+<p><strong>default_window_hints</strong>( )<br>
 <span class="small">See <a href="http://www.glfw.org/docs/latest/window.html#window_hints">Window creation hints</a>.</span></p>
 </li>
 </ul>
 </div>
-<div id="glfw.window_hint" class="ulist">
+<div id="window_hint" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.window_hint</strong> (<em>target</em>, <em>hint</em>)<br>
+<p><strong>window_hint</strong>(<em>target</em>, <em>hint</em>)<br>
 <span class="small"><em>target</em>: '<em>resizable</em>' for GLFW_RESIZABLE, '<em>opengl api</em>' for GLFW_OPENGL_API, etc
 (see <a href="http://www.glfw.org/docs/latest/window.html#window_hints">Window creation hints</a>).<br>
 <em>hint</em>: one of the following, depending on the <em>target</em>:
@@ -1304,130 +1288,122 @@ if <em>target</em> is '<em>context release behavior</em>': <em>hint</em> = '<em>
 </li>
 </ul>
 </div>
-<div id="glfw.create_window" class="ulist">
+<div id="create_window" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.create_window</strong> (<em>width</em>, <em>height</em> [, <em>title</em> [, <em>monitor</em> [, <em>sharewindow</em>]]])<br>
-&#8594; <em>window</em><br>
+<p><em>window</em> = <strong>create_window</strong>(<em>width</em>, <em>height</em> [, <em>title</em> [, <em>monitor</em> [, <em>sharewindow</em>]]])<br>
 <span class="small">Returns a <em>window</em> handle to the newly created window.</span></p>
 </li>
 </ul>
 </div>
-<div id="glfw.destroy_window" class="ulist">
+<div id="destroy_window" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.destroy_window</strong> (<em>window</em>)</p>
+<p><strong>destroy_window</strong>(<em>window</em>)</p>
 </li>
 </ul>
 </div>
-<div id="glfw.window_should_close" class="ulist">
+<div id="window_should_close" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.set_window_should_close</strong> (<em>window</em>, <em>boolean</em>)<br>
-<strong>glfw.window_should_close</strong> (<em>window</em>)<br>
-&#8594; <em>boolean</em></p>
+<p><strong>set_window_should_close</strong>(<em>window</em>, <em>boolean</em>)<br>
+<em>boolean</em> = <strong>window_should_close</strong>(<em>window</em>)</p>
 </li>
 </ul>
 </div>
-<div id="glfw.set_window_title" class="ulist">
+<div id="set_window_title" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.set_window_title</strong> (<em>window</em>, <em>title</em>)</p>
+<p><strong>set_window_title</strong>(<em>window</em>, <em>title</em>)</p>
 </li>
 </ul>
 </div>
-<div id="glfw.get_window_pos" class="ulist">
+<div id="get_window_pos" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.set_window_pos</strong> (<em>window</em>, <em>xpos</em>, <em>ypos</em>)<br>
-<strong>glfw.get_window_pos</strong> (<em>window</em>)<br>
-&#8594; <em>xpos</em>, <em>ypos</em></p>
+<p><strong>set_window_pos</strong>(<em>window</em>, <em>xpos</em>, <em>ypos</em>)<br>
+<em>xpos</em>, <em>ypos</em> = <strong>get_window_pos</strong>(<em>window</em>)</p>
 </li>
 </ul>
 </div>
-<div id="glfw.get_window_size" class="ulist">
+<div id="get_window_size" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.set_window_size</strong> (<em>window</em>, <em>width</em>, <em>height</em>)<br>
-<strong>glfw.get_window_size</strong> (<em>window</em>)<br>
-&#8594; <em>width</em>, <em>height</em></p>
+<p><strong>set_window_size</strong>(<em>window</em>, <em>width</em>, <em>height</em>)<br>
+<em>width</em>, <em>height</em> = <strong>get_window_size</strong>(<em>window</em>)</p>
 </li>
 </ul>
 </div>
-<div id="glfw.get_framebuffer_size" class="ulist">
+<div id="get_framebuffer_size" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.get_framebuffer_size</strong> (<em>window</em>)<br>
-&#8594; <em>width</em>, <em>height</em></p>
+<p><em>width</em>, <em>height</em> = <strong>get_framebuffer_size</strong>(<em>window</em>)</p>
 </li>
 </ul>
 </div>
-<div id="glfw.get_window_frame_size" class="ulist">
+<div id="get_window_frame_size" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.get_window_frame_size</strong> (<em>window</em>)<br>
-&#8594; <em>left</em>, <em>top</em>, <em>right</em>, <em>bottom</em></p>
+<p><em>left</em>, <em>top</em>, <em>right</em>, <em>bottom</em> = <strong>get_window_frame_size</strong>(<em>window</em>)</p>
 </li>
 </ul>
 </div>
-<div id="glfw.iconify_window" class="ulist">
+<div id="iconify_window" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.iconify_window</strong> (<em>window</em>)<br>
-<strong>glfw.restore_window</strong> (<em>window</em>)</p>
+<p><strong>iconify_window</strong>(<em>window</em>)<br>
+<strong>restore_window</strong>(<em>window</em>)</p>
 </li>
 </ul>
 </div>
-<div id="glfw.show_window" class="ulist">
+<div id="show_window" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.show_window</strong> (<em>window</em>)<br>
-<strong>glfw.hide_window</strong> (<em>window</em>)</p>
+<p><strong>show_window</strong>(<em>window</em>)<br>
+<strong>hide_window</strong>(<em>window</em>)</p>
 </li>
 </ul>
 </div>
-<div id="glfw.get_window_monitor" class="ulist">
+<div id="get_window_monitor" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.get_window_monitor</strong> (<em>window</em>)<br>
-&#8594; <em>monitor</em> (or <em>nil</em>)</p>
+<p><em>monitor</em> = <strong>get_window_monitor</strong>(<em>window</em>)</p>
 </li>
 </ul>
 </div>
-<div id="glfw.get_window_attribute" class="ulist">
+<div id="get_window_attribute" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.get_window_attribute</strong> (<em>window</em>, <em>attrib</em>)<br>
-&#8594; <em>value</em><br>
-<span class="small"><em>attrib</em>, <em>value</em>: see <em>target</em> and <em>hint</em> for the <a href="#glfw.window_hint">glfw.window_hint</a>( ) function.</span></p>
+<p><em>value</em> = <strong>get_window_attribute</strong>(<em>window</em>, <em>attrib</em>)<br>
+<span class="small"><em>attrib</em>, <em>value</em>: see <em>target</em> and <em>hint</em> for the <a href="#window_hint">window_hint</a>( ) function.</span></p>
 </li>
 </ul>
 </div>
-<div id="glfw.poll_events" class="ulist">
+<div id="poll_events" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.poll_events</strong> ( )</p>
+<p><strong>poll_events</strong>( )</p>
 </li>
 </ul>
 </div>
-<div id="glfw.wait_events" class="ulist">
+<div id="wait_events" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.wait_events</strong> ( )</p>
+<p><strong>wait_events</strong>( )</p>
 </li>
 </ul>
 </div>
-<div id="glfw.post_empty_event" class="ulist">
+<div id="post_empty_event" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.post_empty_event</strong> ( )</p>
+<p><strong>post_empty_event</strong>( )</p>
 </li>
 </ul>
 </div>
-<div id="glfw.swap_buffers" class="ulist">
+<div id="swap_buffers" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.swap_buffers</strong> (<em>window</em>)</p>
+<p><strong>swap_buffers</strong>(<em>window</em>)</p>
 </li>
 </ul>
 </div>
@@ -1435,58 +1411,58 @@ if <em>target</em> is '<em>context release behavior</em>': <em>hint</em> = '<em>
 <p>All the following functions unregister the corresponding current callback when invoked with
 <em>func</em> = <em>nil</em>.</p>
 </div>
-<div id="glfw.set_window_pos_callback" class="ulist">
+<div id="set_window_pos_callback" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.set_window_pos_callback</strong> (<em>window</em> [, <em>func</em>])<br>
+<p><strong>set_window_pos_callback</strong>(<em>window</em> [, <em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as <strong><em>func(window, xpos, ypos)</em></strong>.</span></p>
 </li>
 </ul>
 </div>
-<div id="glfw.set_window_size_callback" class="ulist">
+<div id="set_window_size_callback" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.set_window_size_callback</strong> (<em>window</em> [, <em>func</em>])<br>
+<p><strong>set_window_size_callback</strong>(<em>window</em> [, <em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as <strong><em>func(window, width, height)</em></strong>.</span></p>
 </li>
 </ul>
 </div>
-<div id="glfw.set_window_close_callback" class="ulist">
+<div id="set_window_close_callback" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.set_window_close_callback</strong> (<em>window</em> [, <em>func</em>])<br>
+<p><strong>set_window_close_callback</strong>(<em>window</em> [, <em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as <strong><em>func(window)</em></strong>.</span></p>
 </li>
 </ul>
 </div>
-<div id="glfw.set_window_refresh_callback" class="ulist">
+<div id="set_window_refresh_callback" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.set_window_refresh_callback</strong> (<em>window</em> [, <em>func</em>])<br>
+<p><strong>set_window_refresh_callback</strong>(<em>window</em> [, <em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as <strong><em>func(window)</em></strong>.</span></p>
 </li>
 </ul>
 </div>
-<div id="glfw.set_window_focus_callback" class="ulist">
+<div id="set_window_focus_callback" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.set_window_focus_callback</strong> (<em>window</em> [, <em>func</em>])<br>
+<p><strong>set_window_focus_callback</strong>(<em>window</em> [, <em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as <strong><em>func(window, focused)</em></strong>, where <em>focused</em> is a boolean.</span></p>
 </li>
 </ul>
 </div>
-<div id="glfw.set_window_iconify_callback" class="ulist">
+<div id="set_window_iconify_callback" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.set_window_iconify_callback</strong> (<em>window</em> [, <em>func</em>])<br>
+<p><strong>set_window_iconify_callback</strong>(<em>window</em> [, <em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as <strong><em>func(window, iconified)</em></strong>, where <em>iconified</em> is a boolean.</span></p>
 </li>
 </ul>
 </div>
-<div id="glfw.set_framebuffer_size_callback" class="ulist">
+<div id="set_framebuffer_size_callback" class="ulist">
 <ul>
 <li>
-<p><strong>glfw.set_framebuffer_size_callback</strong> (<em>window</em> [, <em>func</em>])<br>
+<p><strong>set_framebuffer_size_callback</strong>(<em>window</em> [, <em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as <strong><em>func(window, width, height)</em></strong>.</span></p>
 </li>
 </ul>

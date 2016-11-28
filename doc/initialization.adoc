@@ -10,16 +10,15 @@ and thus not exposed to the script code.
 ** *_VERSION*: a string describing the MoonGLFW version, and +
 ** *_GLFW_VERSION*: a string describing the GLFW version.
 
-[[glfw.get_version]]
-* *glfw.get_version* ( ) +
--> _major_, _minor_, _rev_
+[[get_version]]
+* _major_, _minor_, _rev_ = *get_version*( )
 
-[[glfw.get_version_string]]
-* *glfw.get_version_string* ( ) +
--> _string_
+[[get_version_string]]
+* _string_= *get_version_string*( )
 
-[[glfw.set_error_callback]]
-* *glfw.set_error_callback* ([_func_]) +
+
+[[set_error_callback]]
+* *set_error_callback*([_func_]) +
 [small]#The _func_ callback is executed as *_func(ec, descr)_* where _ec_ (a number) is the 
 error code and _descr_ (a string) is the description of the occurred error. +
 If _func_ is _nil_, unregisters the current error callback (if any).#

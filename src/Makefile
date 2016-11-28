@@ -47,7 +47,7 @@ COPT	+= -O2
 #COPT	+= -O0 -g
 COPT	+= -Wall -Wextra -Wpedantic
 COPT    += -std=gnu99
-OPT += -DLUAVER=$(LUAVER)
+COPT 	+= -DLUAVER=$(LUAVER)
 ifdef LINUX
 COPT    += -fpic
 COPT	+= -DLINUX
@@ -88,7 +88,6 @@ install:
 	@-cp -fpvr ../$(Tgt) $(L_DIR)
 ifdef LINUX
 	@-cp -fpv $(Tgt).so $(C_DIR)
-	@-ln -fsv $(C_DIR)/$(Tgt).so $(S_DIR)/lib$(Tgt).so
 endif
 ifdef MINGW
 	@-cp -fpv $(Tgt).dll $(C_DIR)
@@ -97,7 +96,6 @@ endif
 uninstall:
 	@-rm -f $(H_DIR)/$(Tgt).h
 	@-rm -f $(C_DIR)/$(Tgt).so
-	@-rm -f $(S_DIR)/lib$(Tgt).so
 	@-rm -fr $(L_DIR)/$(Tgt)
 	@-rm -f $(C_DIR)/$(Tgt).dll
 

@@ -35,9 +35,6 @@
 #include "moonglfw.h"
 #include "tree.h"
 
-#define TOSTR_(x) #x
-#define TOSTR(x) TOSTR_(x)
-
 /* Note: all the dynamic symbols of this library (should) start with 'moonglfw_' .
  * The only exception is the luaopen_moonglfw() function, which is searched for
  * with that name by Lua.
@@ -46,6 +43,21 @@
 
 #include "structs.h"
 #include "enum.h"
+
+#define TOSTR_(x) #x
+#define TOSTR(x) TOSTR_(x)
+
+/* GLFW version for conditional compilations (e.g. v 2.05.13 -> 20513) */
+#define GLFWVER ((GLFW_VERSION_MAJOR*10000)+(GLFW_VERSION_MINOR*100)+GLFW_VERSION_REVISION)
+
+#if GLFWVER < 30100
+#error "MoonGLFW needs GLFW version >= 3.1"
+#endif
+
+#if 0 //@@
+#pragma message ("GLFWVER="TOSTR(GLFWVER))
+#error ""
+#endif
 
 extern lua_State *moonglfw_L; /* the global Lua state */
 

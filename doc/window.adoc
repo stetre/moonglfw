@@ -3,12 +3,12 @@
 
 [small]#Rfr: link:http://www.glfw.org/docs/latest/group__window.html[Window handling].#
 
-[[glfw.default_window_hints]]
-* *glfw.default_window_hints* ( ) +
+[[default_window_hints]]
+* *default_window_hints*( ) +
 [small]#See link:http://www.glfw.org/docs/latest/window.html#window_hints[Window creation hints].#
 
-[[glfw.window_hint]]
-* *glfw.window_hint* (_target_, _hint_) +
+[[window_hint]]
+* *window_hint*(_target_, _hint_) +
 [small]#_target_: '_resizable_' for GLFW_RESIZABLE, '_opengl api_' for GLFW_OPENGL_API, etc 
 (see link:http://www.glfw.org/docs/latest/window.html#window_hints[Window creation hints]). +
 _hint_: one of the following, depending on the _target_:
@@ -20,99 +20,97 @@ if _target_ is '_context robustness_': _hint_ = '_no robustness_', '_no reset no
 if _target_ is '_context release behavior_': _hint_ = '_any_', '_flush_' or '_none_'.#
 
 
-[[glfw.create_window]]
-* *glfw.create_window* (_width_, _height_ [, _title_ [, _monitor_ [, _sharewindow_]]]) +
--> _window_ +
+[[create_window]]
+* _window_ = *create_window*(_width_, _height_ [, _title_ [, _monitor_ [, _sharewindow_]]]) +
 [small]#Returns a _window_ handle to the newly created window.#
 
-[[glfw.destroy_window]]
-* *glfw.destroy_window* (_window_)
+[[destroy_window]]
+* *destroy_window*(_window_)
 
-[[glfw.window_should_close]]
-* *glfw.set_window_should_close* (_window_, _boolean_) +
-*glfw.window_should_close* (_window_) +
--> _boolean_
-
-[[glfw.set_window_title]]
-* *glfw.set_window_title* (_window_, _title_)
-
-[[glfw.get_window_pos]]
-* *glfw.set_window_pos* (_window_, _xpos_, _ypos_) +
-*glfw.get_window_pos* (_window_) +
--> _xpos_, _ypos_
-
-[[glfw.get_window_size]]
-* *glfw.set_window_size* (_window_, _width_, _height_) +
-*glfw.get_window_size* (_window_) +
--> _width_, _height_
-
-[[glfw.get_framebuffer_size]]
-* *glfw.get_framebuffer_size* (_window_) +
--> _width_, _height_
-
-[[glfw.get_window_frame_size]]
-* *glfw.get_window_frame_size* (_window_) +
--> _left_, _top_, _right_, _bottom_
+[[window_should_close]]
+* *set_window_should_close*(_window_, _boolean_) +
+_boolean_ = *window_should_close*(_window_)
 
 
-[[glfw.iconify_window]]
-* *glfw.iconify_window* (_window_) +
-*glfw.restore_window* (_window_)
+[[set_window_title]]
+* *set_window_title*(_window_, _title_)
 
-[[glfw.show_window]]
-* *glfw.show_window* (_window_) +
-*glfw.hide_window* (_window_)
+[[get_window_pos]]
+* *set_window_pos*(_window_, _xpos_, _ypos_) +
+_xpos_, _ypos_ = *get_window_pos*(_window_)
 
-[[glfw.get_window_monitor]]
-* *glfw.get_window_monitor* (_window_) +
--> _monitor_ (or _nil_)
 
-[[glfw.get_window_attribute]]
-* *glfw.get_window_attribute* (_window_, _attrib_) +
--> _value_ +
-[small]#_attrib_, _value_: see _target_ and _hint_ for the <<glfw.window_hint, glfw.window_hint>>( ) function.#
+[[get_window_size]]
+* *set_window_size*(_window_, _width_, _height_) +
+_width_, _height_ = *get_window_size*(_window_)
 
-[[glfw.poll_events]]
-* *glfw.poll_events* ( )
 
-[[glfw.wait_events]]
-* *glfw.wait_events* ( )
+[[get_framebuffer_size]]
+* _width_, _height_ = *get_framebuffer_size*(_window_)
 
-[[glfw.post_empty_event]]
-* *glfw.post_empty_event* ( )
 
-[[glfw.swap_buffers]]
-* *glfw.swap_buffers* (_window_)
+[[get_window_frame_size]]
+* _left_, _top_, _right_, _bottom_ = *get_window_frame_size*(_window_)
+
+
+
+[[iconify_window]]
+* *iconify_window*(_window_) +
+*restore_window*(_window_)
+
+[[show_window]]
+* *show_window*(_window_) +
+*hide_window*(_window_)
+
+[[get_window_monitor]]
+* _monitor_ = *get_window_monitor*(_window_)
+
+
+[[get_window_attribute]]
+* _value_ = *get_window_attribute*(_window_, _attrib_) +
+[small]#_attrib_, _value_: see _target_ and _hint_ for the <<window_hint, window_hint>>( ) function.#
+
+[[poll_events]]
+* *poll_events*( )
+
+[[wait_events]]
+* *wait_events*( )
+
+[[post_empty_event]]
+* *post_empty_event*( )
+
+[[swap_buffers]]
+* *swap_buffers*(_window_)
 
 All the following functions unregister the corresponding current callback when invoked with 
 _func_ = _nil_.
 
-[[glfw.set_window_pos_callback]]
-* *glfw.set_window_pos_callback* (_window_ [, _func_]) +
+[[set_window_pos_callback]]
+* *set_window_pos_callback*(_window_ [, _func_]) +
 [small]#The _func_ callback is executed as *_func(window, xpos, ypos)_*.#
 
-[[glfw.set_window_size_callback]]
-* *glfw.set_window_size_callback* (_window_ [, _func_]) +
+[[set_window_size_callback]]
+* *set_window_size_callback*(_window_ [, _func_]) +
 [small]#The _func_ callback is executed as *_func(window, width, height)_*.#
 
-[[glfw.set_window_close_callback]]
-* *glfw.set_window_close_callback* (_window_ [, _func_]) +
+[[set_window_close_callback]]
+* *set_window_close_callback*(_window_ [, _func_]) +
 [small]#The _func_ callback is executed as *_func(window)_*.#
 
-[[glfw.set_window_refresh_callback]]
-* *glfw.set_window_refresh_callback* (_window_ [, _func_]) +
+[[set_window_refresh_callback]]
+* *set_window_refresh_callback*(_window_ [, _func_]) +
 [small]#The _func_ callback is executed as *_func(window)_*.#
 
-[[glfw.set_window_focus_callback]]
-* *glfw.set_window_focus_callback* (_window_ [, _func_]) +
+[[set_window_focus_callback]]
+* *set_window_focus_callback*(_window_ [, _func_]) +
 [small]#The _func_ callback is executed as *_func(window, focused)_*, where _focused_ is a boolean.#
 
-[[glfw.set_window_iconify_callback]]
-* *glfw.set_window_iconify_callback* (_window_ [, _func_]) +
+[[set_window_iconify_callback]]
+* *set_window_iconify_callback*(_window_ [, _func_]) +
 [small]#The _func_ callback is executed as *_func(window, iconified)_*, where _iconified_ is a boolean.#
 
-[[glfw.set_framebuffer_size_callback]]
-* *glfw.set_framebuffer_size_callback* (_window_ [, _func_]) +
+[[set_framebuffer_size_callback]]
+* *set_framebuffer_size_callback*(_window_ [, _func_]) +
 [small]#The _func_ callback is executed as *_func(window, width, height)_*.#
 
 <<<
