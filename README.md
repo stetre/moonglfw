@@ -77,6 +77,9 @@ Other examples can be found in the **examples/** directory contained in the rele
 [MoonAssimp](https://github.com/stetre/moonassimp),
 [MoonSOIL](https://github.com/stetre/moonsoil).
 
+* Font rendering:
+[MoonFreeType](https://github.com/stetre/moonfreetype).
+
 * Audio:
 [LuaJACK](https://github.com/stetre/luajack).
 
