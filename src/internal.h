@@ -95,9 +95,9 @@ int pushgammaramp(lua_State *L, const GLFWgammaramp *ramp);
 int checkgammaramp(lua_State *L, int arg, GLFWgammaramp *ramp);
 
 /* id.c */
-#define id_free_all moonglfw_id_free_all
+#define id_new moonglfw_id_new
 int id_new(void);
-#define id_free_all moonglfw_id_free_all
+#define id_free moonglfw_id_free
 void id_free(int key);
 #define id_free_all moonglfw_id_free_all
 void id_free_all(void);
