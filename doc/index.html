@@ -871,6 +871,9 @@ of the <a href="https://github.com/stetre/moonglfw">official repository</a> on G
 <div class="paragraph">
 <p>All the functions listed in the following sections are members of the <strong>glfw</strong> table.</p>
 </div>
+<div class="paragraph">
+<p>Functions tagged with <em>NONGLFW</em> are MoonGLFW additions that do not map directly to GLFW functions.</p>
+</div>
 <div class="sect2">
 <h3 id="_context_handling">Context handling</h3>
 <div class="paragraph">
@@ -1285,6 +1288,15 @@ if <em>target</em> is '<em>opengl api</em>': <em>hint</em> = '<em>opengl</em>' o
 if <em>target</em> is '<em>opengl profile</em>': <em>hint</em> = '<em>any</em>', '<em>core</em>' or '<em>compat</em>';<br>
 if <em>target</em> is '<em>context robustness</em>': <em>hint</em> = '<em>no robustness</em>', '<em>no reset notification</em>', or '<em>lose context on reset</em>';<br>
 if <em>target</em> is '<em>context release behavior</em>': <em>hint</em> = '<em>any</em>', '<em>flush</em>' or '<em>none</em>'.</span></p>
+</li>
+</ul>
+</div>
+<div id="version_hint" class="ulist">
+<ul>
+<li>
+<p><strong>version_hint</strong>(<em>major</em>, <em>minor</em>, <em>profile</em>) <em>NONGLFW</em><br>
+<span class="small">Combined <a href="#window_hint">window_hint</a> for the following targets: '<em>context version major</em>',
+'<em>context version minor</em>', and '<em>opengl version</em>'.</span></p>
 </li>
 </ul>
 </div>

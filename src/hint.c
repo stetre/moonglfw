@@ -178,14 +178,14 @@ static int DefaultWindowHints(lua_State *L)
 static int Boolean(lua_State *L, int target)
     {
     int hint = checkboolean(L, 2);
-    glfwWindowHint( target, hint);
+    glfwWindowHint(target, hint);
     return 0;
     }
 
 static int Enum(lua_State *L, int target, enum_t *e)
     {
     int hint = enumCheck(L, 2, e);
-    glfwWindowHint( target, hint);
+    glfwWindowHint(target, hint);
     return 0;
     }
 
@@ -254,6 +254,16 @@ static int WindowHint(lua_State *L)
     return 0;
     }
 
+static int VersionHint(lua_State *L) /* NONGLFW */
+    {
+    int major = luaL_checkinteger(L, 1);
+    int minor = luaL_checkinteger(L, 2);
+    int profile = enumCheck(L, 3, &ProfileEnum);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, major);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, minor);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, profile);
+    return 0;
+    }
 
 /*------------------------------------------------------------------------------*
  | Get window attributes                                                        |
@@ -323,6 +333,7 @@ static const struct luaL_Reg Functions[] =
     {
         { "default_window_hints", DefaultWindowHints },
         { "window_hint", WindowHint },
+        { "version_hint", VersionHint }, 
         { "get_window_attrib", GetWindowAttrib },
         { NULL, NULL } /* sentinel */
     };

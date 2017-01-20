@@ -19,6 +19,10 @@ if _target_ is '_opengl profile_': _hint_ = '_any_', '_core_' or '_compat_'; +
 if _target_ is '_context robustness_': _hint_ = '_no robustness_', '_no reset notification_', or '_lose context on reset_'; +
 if _target_ is '_context release behavior_': _hint_ = '_any_', '_flush_' or '_none_'.#
 
+[[version_hint]]
+* *version_hint*(_major_, _minor_, _profile_) _NONGLFW_ +
+[small]#Combined <<window_hint, window_hint>> for the following targets: '_context version major_', 
+'_context version minor_', and '_opengl version_'.#
 
 [[create_window]]
 * _window_ = *create_window*(_width_, _height_ [, _title_ [, _monitor_ [, _sharewindow_]]]) +
