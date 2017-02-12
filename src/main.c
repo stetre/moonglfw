@@ -117,6 +117,7 @@ int luaopen_moonglfw(lua_State *L)
     moonglfw_open_callbacks(L);
     moonglfw_open_input(L);
     moonglfw_open_context(L);
+    moonglfw_open_vulkan(L);
 
     return 1;
     }

@@ -20,4 +20,6 @@ include::native.adoc[]
 
 include::window.adoc[]
 
+include::vulkan.adoc[]
+
 <<<

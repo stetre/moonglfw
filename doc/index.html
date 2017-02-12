@@ -762,8 +762,8 @@ p.tableblock.header { color: #6d6e71; }
 <h1>MoonGLFW Reference Manual</h1>
 <div class="details">
 <span id="author" class="author">Stefano Trettel</span><br>
-<span id="revnumber">version 0.6,</span>
-<span id="revdate">2016-06-01</span>
+<span id="revnumber">version 0.7,</span>
+<span id="revdate">2017-02-12</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -784,6 +784,7 @@ p.tableblock.header { color: #6d6e71; }
 <li><a href="#_monitor_handling">Monitor handling</a></li>
 <li><a href="#_native_access">Native access</a></li>
 <li><a href="#_window_handling">Window handling</a></li>
+<li><a href="#_vulkan_support">Vulkan support</a></li>
 </ul>
 </li>
 </ul>
@@ -1284,7 +1285,7 @@ If <em>func</em> = <em>nil</em>, unregisters the current callback (if any).</spa
 <em>hint</em>: one of the following, depending on the <em>target</em>:
 if <em>target</em> expects GL_TRUE or GL_FALSE: <em>hint</em> = <em>true</em> or <em>false</em> (Lua boolean);<br>
 if <em>target</em> expects an integer value: <em>hint</em> = integer or the string '<em>don&#8217;t care</em>';<br>
-if <em>target</em> is '<em>opengl api</em>': <em>hint</em> = '<em>opengl</em>' or '<em>open es</em>';<br>
+if <em>target</em> is '<em>client api</em>': <em>hint</em> = '<em>no api</em>', '<em>opengl</em>' or '<em>open es</em>';<br>
 if <em>target</em> is '<em>opengl profile</em>': <em>hint</em> = '<em>any</em>', '<em>core</em>' or '<em>compat</em>';<br>
 if <em>target</em> is '<em>context robustness</em>': <em>hint</em> = '<em>no robustness</em>', '<em>no reset notification</em>', or '<em>lose context on reset</em>';<br>
 if <em>target</em> is '<em>context release behavior</em>': <em>hint</em> = '<em>any</em>', '<em>flush</em>' or '<em>none</em>'.</span></p>
@@ -1480,6 +1481,74 @@ if <em>target</em> is '<em>context release behavior</em>': <em>hint</em> = '<em>
 </ul>
 </div>
 <div style="page-break-after: always;"></div>
+</div>
+<div class="sect2">
+<h3 id="_vulkan_support">Vulkan support</h3>
+<div class="paragraph">
+<p><span class="small">Rfr: <a href="http://www.glfw.org/docs/latest/group__vulkan.html">Vulkan reference</a>.</span></p>
+</div>
+<div id="vulkan_supported" class="ulist">
+<ul>
+<li>
+<p><em>boolean</em> = <strong>vulkan_supported</strong>( )<br>
+<span class="small">Returns <em>true</em> if MoonGLFW was built with Vulkan support, false otherwise.</span></p>
+</li>
+</ul>
+</div>
+<div id="get_required_instance_extensions" class="ulist">
+<ul>
+<li>
+<p><em>extensions</em> = <strong>get_required_instance_extensions</strong>( )<br>
+<span class="small">Returns a containing the names (strings) of the extensions needed to create Vulkan surfaces
+for GLFW windows.<br>
+The returned extensions must be enabled for the affected Vulkan instance before creating a surface
+with <a href="#create_window_surface">create_window_surface</a>(&nbsp;).</span></p>
+</li>
+</ul>
+</div>
+<div id="get_physical_device_presentation_support" class="ulist">
+<ul>
+<li>
+<p><em>boolean</em> = <strong>get_physical_device_presentation_support</strong>(<em>instanceLUD</em>, <em>physdevLUD</em>, <em>queuefamily</em>)<br>
+<span class="small">Returns <em>true</em> if the specified queue family for the specified physical device supports
+presentation to the platform GLFW was built for.<br>
+The <em>instanceLUD</em> parameter (light userdata) must be a valid VkInstance handle.<br>
+The <em>physdevLUD</em> parameter (light userdata) must be a valid VkPhysicalDevice handle.</span></p>
+</li>
+</ul>
+</div>
+<div id="create_window_surface" class="ulist">
+<ul>
+<li>
+<p><em>surfaceLUD</em> = <strong>create_window_surface</strong>(<em>window</em>, <em>instanceLUD</em> [, <em>allocatorLUD</em>])<br>
+<span class="small">Creates a surface for the specified <em>window</em>, and returns its VkSurfaceKHR handle as a light userdata.<br>
+The <em>instanceLUD</em> parameter (light userdata) must be a valid VkInstance handle.<br>
+The <em>allocatorLUD</em> optional parameter (light userdata), is the VkAllocationCallbacks* allocator to be used when creating the surface. If not given, <em>NULL</em> will be used.</span></p>
+</li>
+</ul>
+</div>
+<div id="destroy_surface" class="ulist">
+<ul>
+<li>
+<p><strong>destroy_surface</strong>(<em>instanceLUD</em>, <em>surfaceLUD</em> [, <em>allocatorLUD</em>])<br>
+<span class="small">Binding to the vkDestroySurface(&nbsp;) function of the Vulkan API.</span></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+MoonGLFW assumes that the light userdata (LUD) passed as parameters to its functions
+actually are what they are meant to be, and has no means to verify it. How these parameters
+are obtained, is outside of the scope of MoonGLFW itself.
+</td>
+</tr>
+</table>
+</div>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -1493,8 +1562,8 @@ if <em>target</em> is '<em>context release behavior</em>': <em>hint</em> = '<em>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 0.6<br>
-Last updated 2016-12-21 10:24:56 CET
+Version 0.7<br>
+Last updated 2017-02-12 15:32:49 CET
 </div>
 </div>
 </body>

@@ -33,9 +33,12 @@
 #include <lua.h>
 #include "lualib.h"
 #include "lauxlib.h"
+#ifdef VULKAN
+#include <vulkan/vulkan.h>
+#endif
 #include <GLFW/glfw3.h>
 
-#define MOONGLFW_VERSION        "0.6"
+#define MOONGLFW_VERSION        "0.7"
 
 #endif /* moonglfwDEFINED */
 

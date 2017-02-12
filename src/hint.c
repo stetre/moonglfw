@@ -104,11 +104,17 @@ ENUM_T(TargetEnum, TargetStrings, TargetCodes)
 
 
 ENUM_STRINGS(ApiStrings) = {
+#if GLFWVER >= 30200
+    "no api",
+#endif
     "opengl",
     "opengl es",
     NULL
 };
 ENUM_CODES(ApiCodes) = {
+#if GLFWVER >= 30200
+    GLFW_NO_API,
+#endif
     GLFW_OPENGL_API,
     GLFW_OPENGL_ES_API,
 };

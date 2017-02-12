@@ -54,6 +54,10 @@
 #error "MoonGLFW needs GLFW version >= 3.1"
 #endif
 
+#if defined(VULKAN) && (GLFWVER < 30200)
+#error "Vulkan needs GLFW version >= 3.2"
+#endif
+
 #if 0 //@@
 #pragma message ("GLFWVER="TOSTR(GLFWVER))
 #error ""
@@ -71,6 +75,10 @@ extern lua_State *moonglfw_L; /* the global Lua state */
 int noprintf(const char *fmt, ...);
 #define notavailable moonglfw_notavailable
 int notavailable(lua_State *L, ...);
+#define checklightuserdata moonglfw_checklightuserdata
+void *checklightuserdata(lua_State *L, int arg);
+#define optlightuserdata moonglfw_optlightuserdata
+void *optlightuserdata(lua_State *L, int arg);
 #define checkoption_hint moonglfw_checkoption_hint 
 int checkoption_hint(lua_State *L, int arg, const char *def, const char *const lst[]);
 #define checkboolean moonglfw_checkboolean
@@ -169,6 +177,7 @@ void moonglfw_open_monitor(lua_State *L);
 void moonglfw_open_callbacks(lua_State *L);
 void moonglfw_open_input(lua_State *L);
 void moonglfw_open_context(lua_State *L);
+void moonglfw_open_vulkan(lua_State *L);
 
 /*------------------------------------------------------------------------------*
  | Debug and other utilities                                                    |
