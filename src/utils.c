@@ -45,10 +45,11 @@ void *checklightuserdata(lua_State *L, int arg)
     
 void *optlightuserdata(lua_State *L, int arg)
     {
-    if(lua_type(L, arg) == LUA_TLIGHTUSERDATA)
-        return lua_touserdata(L, arg);
-    return NULL;
+    if(lua_isnoneornil(L, arg))
+        return NULL;
+    return checklightuserdata(L, arg);
     }
+
 
 int checkoption_hint(lua_State *L, int arg, const char *def, const char *const lst[])
 /* Variant of luaL_checkoption(), with an added hint in the error message */

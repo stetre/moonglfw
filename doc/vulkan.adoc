@@ -9,7 +9,7 @@
 
 [[get_required_instance_extensions]]
 * _extensions_ = *get_required_instance_extensions*( ) +
-[small]#Returns a containing the names (strings) of the extensions needed to create Vulkan surfaces
+[small]#Returns a table containing the names (strings) of the extensions needed to create Vulkan surfaces
 for GLFW windows. +
 The returned extensions must be enabled for the affected Vulkan instance before creating a surface
 with <<create_window_surface, create_window_surface>>(&nbsp;).#
