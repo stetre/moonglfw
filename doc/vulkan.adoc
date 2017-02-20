@@ -15,27 +15,26 @@ The returned extensions must be enabled for the affected Vulkan instance before 
 with <<create_window_surface, create_window_surface>>(&nbsp;).#
 
 [[get_physical_device_presentation_support]]
-* _boolean_ = *get_physical_device_presentation_support*(_instanceLUD_, _physdevLUD_, _queuefamily_) +
+* _boolean_ = *get_physical_device_presentation_support*(_instanceRAW_, _physdevRAW_, _queuefamily_) +
 [small]#Returns _true_ if the specified queue family for the specified physical device supports
 presentation to the platform GLFW was built for. +
-The _instanceLUD_ parameter (light userdata) must be a valid VkInstance handle. +
-The _physdevLUD_ parameter (light userdata) must be a valid VkPhysicalDevice handle.#
+The _instanceRAW_ parameter (integer) must be a valid VkInstance handle. +
+The _physdevRAW_ parameter (integer) must be a valid VkPhysicalDevice handle.#
 
 
 [[create_window_surface]]
-* _surfaceLUD_ = *create_window_surface*(_window_, _instanceLUD_ [, _allocatorLUD_]) +
-[small]#Creates a surface for the specified _window_, and returns its VkSurfaceKHR handle as a light userdata. +
-The _instanceLUD_ parameter (light userdata) must be a valid VkInstance handle. +
+* _surfaceRAW_ = *create_window_surface*(_window_, _instanceRAW_ [, _allocatorLUD_]) +
+[small]#Creates a surface for the specified _window_, and returns its VkSurfaceKHR handle as an integer. +
+The _instanceRAW_ parameter (integer) must be a valid VkInstance handle. +
 The _allocatorLUD_ optional parameter (light userdata), is the pass:[VkAllocationCallbacks*] allocator to be used when creating the surface. If not given, _NULL_ will be used.#
 
 
 [[destroy_surface]]
-* *destroy_surface*(_instanceLUD_, _surfaceLUD_ [, _allocatorLUD_]) +
+* *destroy_surface*(_instanceRAW_, _surfaceRAW_ [, _allocatorLUD_]) +
 [small]#Binding to the vkDestroySurface(&nbsp;) function of the Vulkan API.#
 
-IMPORTANT: MoonGLFW assumes that the light userdata (LUD) passed as parameters to its functions
-actually are what they are meant to be, and has no means to verify it. How these parameters
-are obtained, is outside of the scope of MoonGLFW itself.
+IMPORTANT: MoonGLFW assumes that the raw Vulkan handles (RAW) and light userdata (LUD) passed as 
+parameters to its functions actually are what they are meant to be, and has no means to verify it.
 
 
 

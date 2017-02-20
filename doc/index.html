@@ -1509,20 +1509,20 @@ with <a href="#create_window_surface">create_window_surface</a>(&nbsp;).</span><
 <div id="get_physical_device_presentation_support" class="ulist">
 <ul>
 <li>
-<p><em>boolean</em> = <strong>get_physical_device_presentation_support</strong>(<em>instanceLUD</em>, <em>physdevLUD</em>, <em>queuefamily</em>)<br>
+<p><em>boolean</em> = <strong>get_physical_device_presentation_support</strong>(<em>instanceRAW</em>, <em>physdevRAW</em>, <em>queuefamily</em>)<br>
 <span class="small">Returns <em>true</em> if the specified queue family for the specified physical device supports
 presentation to the platform GLFW was built for.<br>
-The <em>instanceLUD</em> parameter (light userdata) must be a valid VkInstance handle.<br>
-The <em>physdevLUD</em> parameter (light userdata) must be a valid VkPhysicalDevice handle.</span></p>
+The <em>instanceRAW</em> parameter (integer) must be a valid VkInstance handle.<br>
+The <em>physdevRAW</em> parameter (integer) must be a valid VkPhysicalDevice handle.</span></p>
 </li>
 </ul>
 </div>
 <div id="create_window_surface" class="ulist">
 <ul>
 <li>
-<p><em>surfaceLUD</em> = <strong>create_window_surface</strong>(<em>window</em>, <em>instanceLUD</em> [, <em>allocatorLUD</em>])<br>
-<span class="small">Creates a surface for the specified <em>window</em>, and returns its VkSurfaceKHR handle as a light userdata.<br>
-The <em>instanceLUD</em> parameter (light userdata) must be a valid VkInstance handle.<br>
+<p><em>surfaceRAW</em> = <strong>create_window_surface</strong>(<em>window</em>, <em>instanceRAW</em> [, <em>allocatorLUD</em>])<br>
+<span class="small">Creates a surface for the specified <em>window</em>, and returns its VkSurfaceKHR handle as an integer.<br>
+The <em>instanceRAW</em> parameter (integer) must be a valid VkInstance handle.<br>
 The <em>allocatorLUD</em> optional parameter (light userdata), is the VkAllocationCallbacks* allocator to be used when creating the surface. If not given, <em>NULL</em> will be used.</span></p>
 </li>
 </ul>
@@ -1530,7 +1530,7 @@ The <em>allocatorLUD</em> optional parameter (light userdata), is the VkAllocati
 <div id="destroy_surface" class="ulist">
 <ul>
 <li>
-<p><strong>destroy_surface</strong>(<em>instanceLUD</em>, <em>surfaceLUD</em> [, <em>allocatorLUD</em>])<br>
+<p><strong>destroy_surface</strong>(<em>instanceRAW</em>, <em>surfaceRAW</em> [, <em>allocatorLUD</em>])<br>
 <span class="small">Binding to the vkDestroySurface(&nbsp;) function of the Vulkan API.</span></p>
 </li>
 </ul>
@@ -1542,9 +1542,8 @@ The <em>allocatorLUD</em> optional parameter (light userdata), is the VkAllocati
 <div class="title">Important</div>
 </td>
 <td class="content">
-MoonGLFW assumes that the light userdata (LUD) passed as parameters to its functions
-actually are what they are meant to be, and has no means to verify it. How these parameters
-are obtained, is outside of the scope of MoonGLFW itself.
+MoonGLFW assumes that the raw Vulkan handles (RAW) and light userdata (LUD) passed as
+parameters to its functions actually are what they are meant to be, and has no means to verify it.
 </td>
 </tr>
 </table>
