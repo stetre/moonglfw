@@ -67,9 +67,9 @@ endif
 #
 ifdef VULKAN
 COPT	+= -DVULKAN
-LIBS	+= -lvulkan
+#LIBS	+= -lvulkan
 INCDIR	+= -I$(VULKAN)/include
-LIBDIR	+= -I$(VULKAN)/lib
+#LIBDIR	+= -I$(VULKAN)/lib
 endif
 
 endif

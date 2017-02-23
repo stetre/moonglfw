@@ -34,6 +34,7 @@
  *       So we pass them as lua_Integer, which is hopefully large enough.
  */
 
+#ifdef VULKAN
 static uint64_t checkhandle(lua_State *L, int arg)
     {
     return (uint64_t)luaL_checkinteger(L, arg);
@@ -52,6 +53,7 @@ static int pushhandle(lua_State *L, uint64_t handle)
     lua_pushinteger(L, handle);
     return 1;
     }
+#endif
 
 
 #ifdef VULKAN
@@ -159,6 +161,7 @@ static int CreateWindowSurface(lua_State *L)
 #endif
     }
 
+#if 0
 static int DestroySurface(lua_State *L)
     {
 #ifdef VULKAN
@@ -171,7 +174,7 @@ static int DestroySurface(lua_State *L)
     VULKAN_NOT_AVAILABLE;
 #endif
     }
-
+#endif
 
 /*------------------------------------------------------------------------------*
  | Registration                                                                 |
@@ -183,7 +186,9 @@ static const struct luaL_Reg Functions[] =
         { "get_required_instance_extensions", GetRequiredInstanceExtensions },
         { "get_physical_device_presentation_support", GetPhysicalDevicePresentationSupport },
         { "create_window_surface", CreateWindowSurface },
+#if 0
         { "destroy_surface", DestroySurface },
+#endif
         { NULL, NULL } /* sentinel */
     };
 
