@@ -52,6 +52,7 @@ COPT 	+= -DLUAVER=$(LUAVER)
 ifdef LINUX
 COPT    += -fpic
 COPT	+= -DLINUX
+endif
 ifdef MINGW
 COPT	+= -DMINGW
 endif
@@ -72,7 +73,6 @@ INCDIR	+= -I$(VULKAN)/include
 #LIBDIR	+= -I$(VULKAN)/lib
 endif
 
-endif
 ifdef DEBUG
 COPT	+= -DDEBUG
 COPT 	+= -Wshadow -Wsign-compare -Wundef -Wwrite-strings
