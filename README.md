@@ -1,4 +1,4 @@
-##MoonGLFW: Lua bindings for GLFW
+## MoonGLFW: Lua bindings for GLFW
 
 MoonGLFW is a Lua binding library for [GLFW](http://www.glfw.org/).
 
