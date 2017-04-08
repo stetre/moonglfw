@@ -57,22 +57,6 @@ ifdef MINGW
 COPT	+= -DMINGW
 endif
 
-# To enable Vulkan support, assuming headers and libraries are located in:
-#   path-to-vulkan/include/vulkan/vulkan.h
-#   path-to-vulkan/lib/libvulkan.so
-# set the VULKAN environment variable like so:
-# $ export VULKAN=path-to-vulkan
-#
-# If the VULKAN environment variable is not set, then MoonGLFW is built
-# without Vulkan support.
-#
-ifdef VULKAN
-COPT	+= -DVULKAN
-#LIBS	+= -lvulkan
-INCDIR	+= -I$(VULKAN)/include
-#LIBDIR	+= -I$(VULKAN)/lib
-endif
-
 ifdef DEBUG
 COPT	+= -DDEBUG
 COPT 	+= -Wshadow -Wsign-compare -Wundef -Wwrite-strings

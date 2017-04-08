@@ -54,8 +54,8 @@
 #error "MoonGLFW needs GLFW version >= 3.1"
 #endif
 
-#if defined(VULKAN) && (GLFWVER < 30200)
-#error "Vulkan needs GLFW version >= 3.2"
+#if GLFWVER >= 30200
+#define VULKAN /* Vulkan needs GLFW version >= 3.2 */
 #endif
 
 #if 0 //@@

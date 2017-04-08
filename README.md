@@ -29,26 +29,10 @@ moonglfw$ make
 moonglfw$ make install # or 'sudo make install' (Ubuntu)
 ```
 
-#### Building with Vulkan support
-
-Vulkan support requires GLFW version >= 3.2.
-
-To build MoonGLFW with Vulkan support, set the VULKAN environment variable
-to the base path to Vulkan header files and libraries before building.
-
-That is, assuming headers and libraries are located in:
-```sh 
-path-to-vulkan/include/vulkan/vulkan.h
-path-to-vulkan/lib/libvulkan.so
-```
-set the VULKAN environment variable and build MoonGLFW like so:
-```sh 
-moonglfw$ export VULKAN=path-to-vulkan
-moonglfw$ make
-moonglfw$ make install # or 'sudo make install' (Ubuntu)
-```
-
-If the VULKAN environment variable is not set, then MoonGLFW is built without Vulkan support.
+NOTE: Vulkan support requires GLFW version >= 3.2, and the Vulkan loader (libvulkan.so)
+to be in the linker's search path at runtime
+(see [MoonVulkan](https://github.com/stetre/moonvulkan#getting-and-installing)'s installation 
+instructions for more details).
 
 #### Example
 
