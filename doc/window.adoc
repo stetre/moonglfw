@@ -46,6 +46,9 @@ _boolean_ = *window_should_close*(_window_)
 [small]#_width_, _height_, _pixels_: the image (2 integers and a binary string). +
 Other images (up to 32) can be added in the variadic part in the same way.#
 
+[[set_window_monitor]]
+* *set_window_monitor*(_window_ [, _monitor_], _xpos_, _ypos_, _width_, _height_ [, _refresh_rate_])
+
 [[get_window_pos]]
 * *set_window_pos*(_window_, _xpos_, _ypos_) +
 _xpos_, _ypos_ = *get_window_pos*(_window_)

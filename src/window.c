@@ -112,6 +112,25 @@ static int SetWindowIcon(lua_State *L)
 #endif
     }
 
+static int SetWindowMonitor(lua_State *L)
+    {
+#if GLFWVER >= 30200
+    mon_t *mon;
+    win_t *win = checkwindow(L, 1);
+    GLFWmonitor* monitor = testmonitor(L, 2, &mon) ? mon->monitor : NULL;
+    int xpos = luaL_checkinteger(L, 3);
+    int ypos = luaL_checkinteger(L, 4);
+    int width = luaL_checkinteger(L, 5);
+    int height = luaL_checkinteger(L, 6);
+    int refreshRate = luaL_optinteger(L, 7, GLFW_DONT_CARE);
+    glfwSetWindowMonitor(win->window, monitor, xpos, ypos, width, height, refreshRate);
+    return 0;
+#else
+    requires_version(L, "3.2");
+#endif
+    }
+
+
 
 static int PollEvents(lua_State *L)
     {
@@ -289,6 +308,7 @@ static const struct luaL_Reg Functions[] =
         { "focus_window", FocusWindow },
         { "set_window_aspect_ratio", SetWindowAspectRatio },
         { "set_window_icon", SetWindowIcon },
+        { "set_window_monitor", SetWindowMonitor },
         { "poll_events", PollEvents },
         { "wait_events", WaitEvents },
         { "wait_events_timeout", WaitEventsTimeout },
