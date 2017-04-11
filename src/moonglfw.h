@@ -36,7 +36,7 @@
 #include "vulkan/vulkan.h"
 #include <GLFW/glfw3.h>
 
-#define MOONGLFW_VERSION        "0.8"
+#define MOONGLFW_VERSION        "0.9"
 
 #endif /* moonglfwDEFINED */
 
