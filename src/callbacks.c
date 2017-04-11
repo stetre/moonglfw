@@ -90,6 +90,29 @@ static void MonitorCallback(GLFWmonitor *monitor, int event)
     monitorCallback(monitor, event);
     }
 
+
+#if GLFWVER >= 30200
+static void joystickCallback(int joy, int event)
+    {
+    (void)joy;
+    (void)event;
+    }
+
+//typedef void (* GLFWjoystickfun)(int joy, int event);
+//GLFWjoystickfun glfwSetJoystickCallback(GLFWjoystickfun cbfun);
+static int Joystick = LUA_NOREF;
+static void JoystickCallback(int joy, int event)
+    {
+    BEGIN(Joystick);
+    PushJoystick(L, joy);
+    lua_pushstring(L, event==GLFW_CONNECTED ? "connected" : "disconnected");
+    EXEC(2);
+   /* always call the default callback: */
+    joystickCallback(joy, event);
+    }
+#endif
+
+
 #undef BEGIN
 #undef EXEC
 #undef L
@@ -115,6 +138,12 @@ static int Set##cb##Callback(lua_State *L)                          \
 
 REGISTER_FUNC(Error, 1, errorCallback)
 REGISTER_FUNC(Monitor, 1, monitorCallback)
+
+#if GLFWVER >= 30200
+REGISTER_FUNC(Joystick, 1, joystickCallback)
+#else
+static int SetJoystickCallback(lua_State *L) { requires_version(L, "3.2"); }
+#endif
 
 #undef REGISTER_FUNC
 
@@ -359,6 +388,7 @@ static const struct luaL_Reg Functions[] =
         { "set_scroll_callback", SetScrollCallback },
         { "set_drop_callback", SetDropCallback },
         { "set_monitor_callback", SetMonitorCallback },
+        { "set_joystick_callback", SetJoystickCallback },
         { NULL, NULL } /* sentinel */
     };
 

@@ -127,4 +127,9 @@ _xoffset_ and _yoffset_ are Lua numbers (i.e. floating point).#
 [small]#The _func_ callback is executed as *_func(window, path, ...)_*, where
 _path_ (an any subsequent argument) is a string.#
 
+[[set_joystick_callback]]
+* *set_joystick_callback*([_func_]) +
+[small]#The _func_ callback is executed as *_func(joy, event)_*, where 
+_joy_ is an integer (1..16) and _event_ (a string) may be '_connected_' or '_disconnected_'.#
+
 <<<

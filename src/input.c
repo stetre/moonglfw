@@ -228,7 +228,6 @@ static int SetCursor(lua_State *L)
  | Joystick                                                                     |
  *------------------------------------------------------------------------------*/
 
-#define CheckJoystick(L, arg) luaL_checkinteger((L), (arg)) - 1 /* 1,2, ..., 16 */
 
 static int JoystickPresent(lua_State *L)
     {
