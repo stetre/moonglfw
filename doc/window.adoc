@@ -31,6 +31,9 @@ if _target_ is '_context release behavior_': _hint_ = '_any_', '_flush_' or '_no
 [[destroy_window]]
 * *destroy_window*(_window_)
 
+[[focus_window]]
+* *focus_window*(_window_)
+
 [[window_should_close]]
 * *set_window_should_close*(_window_, _boolean_) +
 _boolean_ = *window_should_close*(_window_)

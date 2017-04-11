@@ -62,6 +62,19 @@ static int DestroyWindow(lua_State *L)
     return 0;
     }
 
+
+static int FocusWindow(lua_State *L)
+    {
+#if GLFWVER >= 30200
+    win_t *win = checkwindow(L, 1);
+    glfwFocusWindow(win->window);
+    return 0;
+#else
+    requires_version(L, "3.2");
+#endif
+    }
+
+
 static int PollEvents(lua_State *L)
     {
     (void)L;
@@ -83,7 +96,7 @@ static int WaitEventsTimeout(lua_State *L) //@@DOC
     glfwWaitEventsTimeout(timeout);
     return 0;
 #else
-    NOT_AVAILABLE;
+    requires_version(L, "3.2");
 #endif
     }
 
@@ -235,6 +248,7 @@ static const struct luaL_Reg Functions[] =
     {
         { "create_window", CreateWindow },
         { "destroy_window", DestroyWindow },
+        { "focus_window", FocusWindow },
         { "poll_events", PollEvents },
         { "wait_events", WaitEvents },
         { "wait_events_timeout", WaitEventsTimeout },

@@ -187,6 +187,8 @@ void moonglfw_open_vulkan(lua_State *L);
 #define UNEXPECTED_ERROR "unexpected error (%s, %d)", __FILE__, __LINE__
 #define unexpected(L) luaL_error((L), UNEXPECTED_ERROR)
 #define NOT_AVAILABLE do { return luaL_error(L, "function not available"); } while(0)
+#define requires_version(L, minver) \
+    do { return luaL_error(L, "requires GLFW version >= "minver); } while(0)
 
 #define NOT_IMPLEMENTED(func)               \
 static int func(lua_State *L)               \
