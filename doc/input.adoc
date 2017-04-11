@@ -70,6 +70,9 @@ _string_ = *get_clipboard_string*(_window_)
 * *set_time*(_time_) +
 _time_ = *get_time*(_time_)
 
+[[get_timer_frequency]]
+* _hz_ = *get_timer_frequency*( )
+
 '''
 All the following functions unregister the corresponding current callback when invoked with 
 _func_ = _nil_.

@@ -309,6 +309,17 @@ static int SetTime(lua_State *L)
     return 0;
     }
 
+static int GetTimerFrequency(lua_State *L)
+    {
+#if GLFWVER >= 30200
+    uint64_t hz = glfwGetTimerFrequency();
+    lua_pushinteger(L, hz);
+    return 1;
+#else
+    requires_version(L, "3.2");
+#endif
+    }
+
 
 /*------------------------------------------------------------------------------*
  | Registration                                                                 |
@@ -334,6 +345,7 @@ static const struct luaL_Reg Functions[] =
         { "get_clipboard_string", GetClipboardString },
         { "get_time", GetTime },
         { "set_time", SetTime },
+        { "get_timer_frequency", GetTimerFrequency },
         { NULL, NULL } /* sentinel */
     };
 
