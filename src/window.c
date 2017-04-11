@@ -87,6 +87,21 @@ static int SetWindowAspectRatio(lua_State *L)
 #endif
     }
 
+static int SetWindowSizeLimits(lua_State *L)
+    {
+#if GLFWVER >= 30200
+    win_t *win = checkwindow(L, 1);
+    int minwidth = luaL_optinteger(L, 2, GLFW_DONT_CARE);
+    int minheight = luaL_optinteger(L, 3, GLFW_DONT_CARE);
+    int maxwidth = luaL_optinteger(L, 4, GLFW_DONT_CARE);
+    int maxheight = luaL_optinteger(L, 5, GLFW_DONT_CARE);
+    glfwSetWindowSizeLimits(win->window, minwidth, minheight, maxwidth, maxheight);
+    return 0;
+#else
+    requires_version(L, "3.2");
+#endif
+    }
+
 static int SetWindowIcon(lua_State *L)
     {
 #if GLFWVER >= 30200
@@ -307,6 +322,7 @@ static const struct luaL_Reg Functions[] =
         { "destroy_window", DestroyWindow },
         { "focus_window", FocusWindow },
         { "set_window_aspect_ratio", SetWindowAspectRatio },
+        { "set_window_size_limits", SetWindowSizeLimits },
         { "set_window_icon", SetWindowIcon },
         { "set_window_monitor", SetWindowMonitor },
         { "poll_events", PollEvents },

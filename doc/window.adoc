@@ -61,6 +61,10 @@ _width_, _height_ = *get_window_size*(_window_)
 * *set_window_aspect_ratio*(_window_, _numer_, _denom_) +
 [small]#A _nil_ value for _numer_ or _denom_ means "_don\'t care_".#
 
+[[set_window_size_limits]]
+* *set_window_size_limits*(_window_, _minwidth_, _minheight_, _maxwidth_, _maxheight_) +
+[small]#A _nil_ value for _minwidth_, _minheight_, _maxwidth_, or _maxheight_ means "_don\'t care_".#
+
 [[get_framebuffer_size]]
 * _width_, _height_ = *get_framebuffer_size*(_window_)
 
