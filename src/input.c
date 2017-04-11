@@ -126,6 +126,32 @@ static int GetKey(lua_State *L)
     return 1;
     }
 
+static int GetKeyName(lua_State *L)
+    {
+#if GLFWVER >= 30200
+    int key, scancode;
+    const char *name = NULL;
+    if(lua_type(L, 1) == LUA_TSTRING)
+        {
+        key = CheckKey(L, 1);
+        name = glfwGetKeyName(key, 0);
+        }
+    else if(lua_isinteger(L, 1))
+        {
+        scancode = lua_tointeger(L, 1);
+        name = glfwGetKeyName(GLFW_KEY_UNKNOWN, scancode);
+        }
+    else
+        return luaL_argerror(L, 1, "expected key (a string) or scancode (an integer)");
+
+    if(!name)
+        return 0;
+    lua_pushstring(L, name);
+    return 1;
+#else
+    requires_version(L, "3.2");
+#endif
+    }
 
 /*------------------------------------------------------------------------------*
  | Mouse                                                                        |
@@ -350,7 +376,8 @@ static const struct luaL_Reg Functions[] =
     {
         { "get_input_mode", GetInputMode },
         { "set_input_mode", SetInputMode },
-        { "get_key", GetKey},
+        { "get_key", GetKey },
+        { "get_key_name", GetKeyName },
         { "get_mouse_button", GetMouseButton },
         { "get_cursor_pos", GetCursorPos },
         { "set_cursor_pos", SetCursorPos },

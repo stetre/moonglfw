@@ -12,11 +12,16 @@ if _mode_ is '_sticky ..._': _value_ = _true_ or _false_ (Lua boolean). +
 if _mode_ is '_cursor_': _value_ = '_normal_', '_hidden_', or '_disabled_'.#
 
 '''
+
 [[get_key]]
 * _state_ = *get_key*(_window_, _key_) +
 [small]#_key_: '_xxx_' for GLFW_KEY_XXX (e.g. '_left bracket_' for GLFW_LEFT_BRACKET).
 See: http://www.glfw.org/docs/latest/group__keys.html[keyboard keys]. +
 _state_: '_press_' or '_release_'.#
+
+[[get_key_name]]
+* _name_ = *get_key_name*(_key_ | _scancode_) +
+[small]#_key_, _scancode_: see <<set_key_callback, set_key_callback>>(&nbsp;).#
 
 '''
 [[get_mouse_button]]
