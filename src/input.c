@@ -320,6 +320,28 @@ static int GetTimerFrequency(lua_State *L)
 #endif
     }
 
+static int GetTimerValue(lua_State *L)
+    {
+#if GLFWVER >= 30200
+    uint64_t tics = glfwGetTimerValue();
+    lua_pushinteger(L, tics);
+    return 1;
+#else
+    requires_version(L, "3.2");
+#endif
+    }
+
+static int GetTimerSeconds(lua_State *L) /* NONGLFW */
+    {
+#if GLFWVER >= 30200
+    double seconds = (double)glfwGetTimerValue()/(double)glfwGetTimerFrequency();
+    lua_pushnumber(L, seconds);
+    return 1;
+#else
+    requires_version(L, "3.2");
+#endif
+    }
+
 
 /*------------------------------------------------------------------------------*
  | Registration                                                                 |
@@ -346,6 +368,8 @@ static const struct luaL_Reg Functions[] =
         { "get_time", GetTime },
         { "set_time", SetTime },
         { "get_timer_frequency", GetTimerFrequency },
+        { "get_timer_seconds", GetTimerSeconds },
+        { "get_timer_value", GetTimerValue },
         { NULL, NULL } /* sentinel */
     };
 

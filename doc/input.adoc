@@ -71,7 +71,11 @@ _string_ = *get_clipboard_string*(_window_)
 _time_ = *get_time*(_time_)
 
 [[get_timer_frequency]]
-* _hz_ = *get_timer_frequency*( )
+[[get_timer_value]]
+* _hz_ = *get_timer_frequency*( ) +
+* _tics_ = *get_timer_value*( ) +
+_seconds_ = *get_timer_seconds*( ) _NONGLFW_ +
+[small]#_seconds_ = _tics * 1/hz_.#
 
 '''
 All the following functions unregister the corresponding current callback when invoked with 

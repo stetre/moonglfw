@@ -1086,10 +1086,15 @@ Return a <em>cursor</em> handle to the newly created cursor.</span></p>
 </li>
 </ul>
 </div>
-<div id="get_timer_frequency" class="ulist">
+<div id="get_timer_value" class="ulist">
 <ul>
 <li>
-<p><em>hz</em> = <strong>get_timer_frequency</strong>( )</p>
+<p><em>hz</em> = <strong>get_timer_frequency</strong>( )<br></p>
+</li>
+<li>
+<p><em>tics</em> = <strong>get_timer_value</strong>( )<br>
+<em>seconds</em> = <strong>get_timer_seconds</strong>( ) <em>NONGLFW</em><br>
+<span class="small"><em>seconds</em> = <em>tics * 1/hz</em>.</span></p>
 </li>
 </ul>
 </div>
