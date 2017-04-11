@@ -188,7 +188,6 @@ void moonglfw_open_vulkan(lua_State *L);
 #define unexpected(L) luaL_error((L), UNEXPECTED_ERROR)
 #define NOT_AVAILABLE do { return luaL_error(L, "function not available"); } while(0)
 
-
 #define NOT_IMPLEMENTED(func)               \
 static int func(lua_State *L)               \
     {                                       \

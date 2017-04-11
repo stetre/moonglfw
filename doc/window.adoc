@@ -80,6 +80,9 @@ _width_, _height_ = *get_window_size*(_window_)
 [[wait_events]]
 * *wait_events*( )
 
+[[wait_events_timeout]]
+* *wait_events_timeout*(_seconds_)
+
 [[post_empty_event]]
 * *post_empty_event*( )
 

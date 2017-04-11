@@ -76,6 +76,17 @@ static int WaitEvents(lua_State *L)
     return 0;
     }
 
+static int WaitEventsTimeout(lua_State *L) //@@DOC
+    {
+#if GLFWVER >= 30200
+    double timeout = luaL_checknumber(L, 1);
+    glfwWaitEventsTimeout(timeout);
+    return 0;
+#else
+    NOT_AVAILABLE;
+#endif
+    }
+
 static int PostEmptyEvent(lua_State *L)
     {
     (void)L;
@@ -226,6 +237,7 @@ static const struct luaL_Reg Functions[] =
         { "destroy_window", DestroyWindow },
         { "poll_events", PollEvents },
         { "wait_events", WaitEvents },
+        { "wait_events_timeout", WaitEventsTimeout },
         { "post_empty_event", PostEmptyEvent },
         { "swap_buffers", SwapBuffers },
         { "window_should_close", WindowShouldClose },

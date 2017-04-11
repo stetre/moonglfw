@@ -28,9 +28,9 @@
 int noprintf(const char *fmt, ...) 
     { (void)fmt; return 0; }
 
+
 int notavailable(lua_State *L, ...) 
     { NOT_AVAILABLE; }
-
 
 /*------------------------------------------------------------------------------*
  | Custom luaL_checkxxx() style functions                                       |
