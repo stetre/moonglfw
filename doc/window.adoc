@@ -38,7 +38,6 @@ if _target_ is '_context release behavior_': _hint_ = '_any_', '_flush_' or '_no
 * *set_window_should_close*(_window_, _boolean_) +
 _boolean_ = *window_should_close*(_window_)
 
-
 [[set_window_title]]
 * *set_window_title*(_window_, _title_)
 
@@ -46,11 +45,13 @@ _boolean_ = *window_should_close*(_window_)
 * *set_window_pos*(_window_, _xpos_, _ypos_) +
 _xpos_, _ypos_ = *get_window_pos*(_window_)
 
-
 [[get_window_size]]
 * *set_window_size*(_window_, _width_, _height_) +
 _width_, _height_ = *get_window_size*(_window_)
 
+[[set_window_aspect_ratio]]
+* *set_window_aspect_ratio*(_window_, _numer_, _denom_) +
+[small]#A _nil_ value for _numer_ or _denom_ means "_don\'t care_".#
 
 [[get_framebuffer_size]]
 * _width_, _height_ = *get_framebuffer_size*(_window_)

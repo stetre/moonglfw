@@ -74,6 +74,18 @@ static int FocusWindow(lua_State *L)
 #endif
     }
 
+static int SetWindowAspectRatio(lua_State *L)
+    {
+#if GLFWVER >= 30200
+    win_t *win = checkwindow(L, 1);
+    int numer = luaL_optinteger(L, 2, GLFW_DONT_CARE);
+    int denom = luaL_optinteger(L, 3, GLFW_DONT_CARE);
+    glfwSetWindowAspectRatio(win->window, numer, denom);
+    return 0;
+#else
+    requires_version(L, "3.2");
+#endif
+    }
 
 static int PollEvents(lua_State *L)
     {
@@ -89,7 +101,7 @@ static int WaitEvents(lua_State *L)
     return 0;
     }
 
-static int WaitEventsTimeout(lua_State *L) //@@DOC
+static int WaitEventsTimeout(lua_State *L)
     {
 #if GLFWVER >= 30200
     double timeout = luaL_checknumber(L, 1);
@@ -249,6 +261,7 @@ static const struct luaL_Reg Functions[] =
         { "create_window", CreateWindow },
         { "destroy_window", DestroyWindow },
         { "focus_window", FocusWindow },
+        { "set_window_aspect_ratio", SetWindowAspectRatio },
         { "poll_events", PollEvents },
         { "wait_events", WaitEvents },
         { "wait_events_timeout", WaitEventsTimeout },
