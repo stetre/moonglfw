@@ -22,4 +22,3 @@ GLFWglproc 	glfwGetProcAddress (const char *procname) @@
  	Returns the address of the specified function for the current context. More...
 ////
 
-<<<

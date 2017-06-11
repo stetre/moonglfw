@@ -12,7 +12,7 @@
 [small]#_target_: '_resizable_' for GLFW_RESIZABLE, '_opengl api_' for GLFW_OPENGL_API, etc 
 (see link:http://www.glfw.org/docs/latest/window.html#window_hints[Window creation hints]). +
 _hint_: one of the following, depending on the _target_:
-if _target_ expects GL_TRUE or GL_FALSE: _hint_ = _true_ or _false_ (Lua boolean); +
+if _target_ expects GL_TRUE or GL_FALSE: _hint_ = boolean; +
 if _target_ expects an integer value: _hint_ = integer or the string '_don't care_'; +
 if _target_ is '_client api_': _hint_ = '_no api_', '_opengl_' or '_open es_'; +
 if _target_ is '_opengl profile_': _hint_ = '_any_', '_core_' or '_compat_'; +
@@ -25,7 +25,7 @@ if _target_ is '_context release behavior_': _hint_ = '_any_', '_flush_' or '_no
 '_context version minor_', and '_opengl version_'.#
 
 [[create_window]]
-* _window_ = *create_window*(_width_, _height_ [, _title_ [, _monitor_ [, _sharewindow_]]]) +
+* _window_ = *create_window*(_width_, _height_, [_title_], [_monitor_], [_sharewindow_]) +
 [small]#Returns a _window_ handle to the newly created window.#
 
 [[destroy_window]]
@@ -42,12 +42,12 @@ _boolean_ = *window_should_close*(_window_)
 * *set_window_title*(_window_, _title_)
 
 [[set_window_icon]]
-* *set_window_icon*(_window_, _width_, _height_, _pixels_ [, _..._]) +
+* *set_window_icon*(_window_, _width_, _height_, _pixels_, [_..._]) +
 [small]#_width_, _height_, _pixels_: the image (2 integers and a binary string). +
 Other images (up to 32) can be added in the variadic part in the same way.#
 
 [[set_window_monitor]]
-* *set_window_monitor*(_window_ [, _monitor_], _xpos_, _ypos_, _width_, _height_ [, _refresh_rate_])
+* *set_window_monitor*(_window_, [_monitor_], _xpos_, _ypos_, _width_, _height_, [_refresh_rate_])
 
 [[get_window_pos]]
 * *set_window_pos*(_window_, _xpos_, _ypos_) +
@@ -105,35 +105,37 @@ _width_, _height_ = *get_window_size*(_window_)
 [[swap_buffers]]
 * *swap_buffers*(_window_)
 
-All the following functions unregister the corresponding current callback when invoked with 
-_func_ = _nil_.
+==== Window callbacks
+
+[small]#Rfr: link:http://www.glfw.org/docs/latest/group__window.html[Window handling].#
+
+All the following functions, when invoked with _func_ = _nil_, unregister the corresponding current callback.
 
 [[set_window_pos_callback]]
-* *set_window_pos_callback*(_window_ [, _func_]) +
+* *set_window_pos_callback*(_window_, [_func_]) +
 [small]#The _func_ callback is executed as *_func(window, xpos, ypos)_*.#
 
 [[set_window_size_callback]]
-* *set_window_size_callback*(_window_ [, _func_]) +
+* *set_window_size_callback*(_window_, [_func_]) +
 [small]#The _func_ callback is executed as *_func(window, width, height)_*.#
 
 [[set_window_close_callback]]
-* *set_window_close_callback*(_window_ [, _func_]) +
+* *set_window_close_callback*(_window_, [_func_]) +
 [small]#The _func_ callback is executed as *_func(window)_*.#
 
 [[set_window_refresh_callback]]
-* *set_window_refresh_callback*(_window_ [, _func_]) +
+* *set_window_refresh_callback*(_window_, [_func_]) +
 [small]#The _func_ callback is executed as *_func(window)_*.#
 
 [[set_window_focus_callback]]
-* *set_window_focus_callback*(_window_ [, _func_]) +
+* *set_window_focus_callback*(_window_, [_func_]) +
 [small]#The _func_ callback is executed as *_func(window, focused)_*, where _focused_ is a boolean.#
 
 [[set_window_iconify_callback]]
-* *set_window_iconify_callback*(_window_ [, _func_]) +
+* *set_window_iconify_callback*(_window_, [_func_]) +
 [small]#The _func_ callback is executed as *_func(window, iconified)_*, where _iconified_ is a boolean.#
 
 [[set_framebuffer_size_callback]]
-* *set_framebuffer_size_callback*(_window_ [, _func_]) +
+* *set_framebuffer_size_callback*(_window_, [_func_]) +
 [small]#The _func_ callback is executed as *_func(window, width, height)_*.#
 
-<<<

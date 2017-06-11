@@ -23,20 +23,18 @@ The _physdevRAW_ parameter (integer) must be a valid VkPhysicalDevice handle.#
 
 
 [[create_window_surface]]
-* _surfaceRAW_ = *create_window_surface*(_window_, _instanceRAW_ [, _allocatorLUD_]) +
+* _surfaceRAW_ = *create_window_surface*(_window_, _instanceRAW_, [_allocatorLUD_]) +
 [small]#Creates a surface for the specified _window_, and returns its VkSurfaceKHR handle as an integer. +
 The _instanceRAW_ parameter (integer) must be a valid VkInstance handle. +
-The _allocatorLUD_ optional parameter (light userdata), is the pass:[VkAllocationCallbacks*] allocator to be used when creating the surface. If not given, _NULL_ will be used.#
+The _allocatorLUD_ optional parameter (lightuserdata), is the pass:[VkAllocationCallbacks*] allocator to be used when creating the surface. If not given, _NULL_ will be used.#
 
 ////
 [[destroy_surface]]
-* *destroy_surface*(_instanceRAW_, _surfaceRAW_ [, _allocatorLUD_]) +
+* *destroy_surface*(_instanceRAW_, _surfaceRAW_, [_allocatorLUD_]) +
 [small]#Binding to the vkDestroySurface(&nbsp;) function of the Vulkan API.#
 ////
 
-IMPORTANT: MoonGLFW assumes that the raw Vulkan handles (RAW) and light userdata (LUD) passed as 
+IMPORTANT: MoonGLFW assumes that the raw Vulkan handles (RAW) and lightuserdata (LUD) passed as 
 parameters to its functions actually are what they are meant to be, and has no means to verify it.
-
-
 
 

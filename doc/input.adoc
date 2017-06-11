@@ -8,7 +8,7 @@
 _value_ = *get_input_mode*(_window_, _mode_) +
 [small]#_mode_: '_cursor_', '_sticky keys_' or '_sticky mouse buttons_'. +
 _value_: one of the following, depending on _mode_: +
-if _mode_ is '_sticky ..._': _value_ = _true_ or _false_ (Lua boolean). +
+if _mode_ is '_sticky ..._': _value_ = boolean. +
 if _mode_ is '_cursor_': _value_ = '_normal_', '_hidden_', or '_disabled_'.#
 
 '''
@@ -82,53 +82,55 @@ _time_ = *get_time*(_time_)
 _seconds_ = *get_timer_seconds*( ) _NONGLFW_ +
 [small]#_seconds_ = _tics * 1/hz_.#
 
-'''
-All the following functions unregister the corresponding current callback when invoked with 
-_func_ = _nil_.
+==== Input callbacks
+
+[small]#Rfr: link:http://www.glfw.org/docs/latest/group__input.html[Input handling].#
+
+All the following functions, when invoked with _func_ = _nil_, unregister the corresponding current callback.
 
 [[set_key_callback]]
-* *set_key_callback*(_window_ [, _func_]) +
+* *set_key_callback*(_window_, [_func_]) +
 [small]#The _func_ callback is executed as 
 *_func(window, key, scancode, action, shift, control, alt, super)_*, where: +
 _key_: see <<get_key,get_key>>( ). +
 _action_: '_press_', '_release_' or '_repeat_'. +
-_shift_, _control_, _alt_, _super_ (modifiers): _true_ or _false_ (Lua booleans).#
+_shift_, _control_, _alt_, _super_ (modifiers): boolean.#
 
 [[set_char_callback]]
-* *set_char_callback*(_window_ [, _func_]) +
+* *set_char_callback*(_window_, [_func_]) +
 [small]#The _func_ callback is executed as *_func(window, codepoint)_*.#
 
 [[set_char_mods_callback]]
-* *set_char_mods_callback*(_window_ [, _func_]) +
+* *set_char_mods_callback*(_window_, [_func_]) +
 [small]#The _func_ callback is executed as 
 *_func(window, codepoint, shift, control, alt, super)_*, where: +
-_shift_, _control_, _alt_, _super_ (modifiers): _true_ or _false_ (Lua booleans).#
+_shift_, _control_, _alt_, _super_ (modifiers): boolean.#
 
 [[set_mouse_button_callback]]
-* *set_mouse_button_callback*(_window_ [, _func_]) +
+* *set_mouse_button_callback*(_window_, [_func_]) +
 [small]#The _func_ callback is executed as
 *_func(window, button, action, shift, control, alt, super)_*, where: +
 _button_: '_left_', '_right_', '_middle_', or '_button 4_' to '_button 8_'. +
 _action_: '_press_' or '_release_'. +
-_shift_, _control_, _alt_, _super_ (modifiers): _true_ or _false_ (Lua booleans).#
+_shift_, _control_, _alt_, _super_ (modifiers): boolean.#
 
 [[set_cursor_pos_callback]]
-* *set_cursor_pos_callback*(_window_ [, _func_]) +
+* *set_cursor_pos_callback*(_window_, [_func_]) +
 [small]#The _func_ callback is executed as *_func(window, xpos, ypos)_*, where _xpos_
 and _ypos_ are Lua numbers (i.e. floating point).#
 
 [[set_cursor_enter_callback]]
-* *set_cursor_enter_callback*(_window_ [, _func_]) +
+* *set_cursor_enter_callback*(_window_, [_func_]) +
 [small]#The _func_ callback is executed as *_func(window, entered)_*, where 
 _entered_ is a boolean.#
 
 [[set_scroll_callback]]
-* *set_scroll_callback*(_window_ [, _func_]) +
+* *set_scroll_callback*(_window_, [_func_]) +
 [small]#The _func_ callback is executed as *_func(window, xoffset, yoffset)_*, where 
 _xoffset_ and _yoffset_ are Lua numbers (i.e. floating point).#
 
 [[set_drop_callback]]
-* *set_drop_callback*(_window_ [, _func_]) +
+* *set_drop_callback*(_window_, [_func_]) +
 [small]#The _func_ callback is executed as *_func(window, path, ...)_*, where
 _path_ (an any subsequent argument) is a string.#
 
@@ -137,4 +139,3 @@ _path_ (an any subsequent argument) is a string.#
 [small]#The _func_ callback is executed as *_func(joy, event)_*, where 
 _joy_ is an integer (1..16) and _event_ (a string) may be '_connected_' or '_disconnected_'.#
 
-<<<

@@ -774,16 +774,29 @@ p.tableblock.header { color: #6d6e71; }
 <li><a href="#_module_organization">Module organization</a></li>
 <li><a href="#_examples">Examples</a></li>
 <li><a href="#_license">License</a></li>
+<li><a href="#see-also">See also</a></li>
 </ul>
 </li>
 <li><a href="#_bindings">Bindings</a>
 <ul class="sectlevel2">
 <li><a href="#_context_handling">Context handling</a></li>
 <li><a href="#_initialization_version_and_errors">Initialization, version and errors</a></li>
-<li><a href="#_input_handling">Input handling</a></li>
-<li><a href="#_monitor_handling">Monitor handling</a></li>
+<li><a href="#_input_handling">Input handling</a>
+<ul class="sectlevel3">
+<li><a href="#_input_callbacks">Input callbacks</a></li>
+</ul>
+</li>
+<li><a href="#_monitor_handling">Monitor handling</a>
+<ul class="sectlevel3">
+<li><a href="#_monitor_callbacks">Monitor callbacks</a></li>
+</ul>
+</li>
 <li><a href="#_native_access">Native access</a></li>
-<li><a href="#_window_handling">Window handling</a></li>
+<li><a href="#_window_handling">Window handling</a>
+<ul class="sectlevel3">
+<li><a href="#_window_callbacks">Window callbacks</a></li>
+</ul>
+</li>
 <li><a href="#_vulkan_support">Vulkan support</a></li>
 </ul>
 </li>
@@ -858,7 +871,13 @@ credits to the original author).
 The copyright notice is in the LICENSE file in the base directory
 of the <a href="https://github.com/stetre/moonglfw">official repository</a> on GitHub.</p>
 </div>
-<div style="page-break-after: always;"></div>
+</div>
+<div class="sect2">
+<h3 id="see-also">See also</h3>
+<div class="paragraph">
+<p>MoonGLFW is part of <a href="https://github.com/stetre/moonlibs">MoonLibs</a>, a collection of
+Lua libraries for graphics and audio programming.</p>
+</div>
 </div>
 </div>
 </div>
@@ -910,7 +929,6 @@ of the <a href="https://github.com/stetre/moonglfw">official repository</a> on G
 </li>
 </ul>
 </div>
-<div style="page-break-after: always;"></div>
 </div>
 <div class="sect2">
 <h3 id="_initialization_version_and_errors">Initialization, version and errors</h3>
@@ -962,7 +980,6 @@ If <em>func</em> is <em>nil</em>, unregisters the current error callback (if any
 </li>
 </ul>
 </div>
-<div style="page-break-after: always;"></div>
 </div>
 <div class="sect2">
 <h3 id="_input_handling">Input handling</h3>
@@ -976,7 +993,7 @@ If <em>func</em> is <em>nil</em>, unregisters the current error callback (if any
 <em>value</em> = <strong>get_input_mode</strong>(<em>window</em>, <em>mode</em>)<br>
 <span class="small"><em>mode</em>: '<em>cursor</em>', '<em>sticky keys</em>' or '<em>sticky mouse buttons</em>'.<br>
 <em>value</em>: one of the following, depending on <em>mode</em>:<br>
-if <em>mode</em> is '<em>sticky &#8230;&#8203;</em>': <em>value</em> = <em>true</em> or <em>false</em> (Lua boolean).<br>
+if <em>mode</em> is '<em>sticky &#8230;&#8203;</em>': <em>value</em> = boolean.<br>
 if <em>mode</em> is '<em>cursor</em>': <em>value</em> = '<em>normal</em>', '<em>hidden</em>', or '<em>disabled</em>'.</span></p>
 </li>
 </ul>
@@ -1106,27 +1123,30 @@ Return a <em>cursor</em> handle to the newly created cursor.</span></p>
 </li>
 </ul>
 </div>
-<hr>
+<div class="sect3">
+<h4 id="_input_callbacks">Input callbacks</h4>
 <div class="paragraph">
-<p>All the following functions unregister the corresponding current callback when invoked with
-<em>func</em> = <em>nil</em>.</p>
+<p><span class="small">Rfr: <a href="http://www.glfw.org/docs/latest/group__input.html">Input handling</a>.</span></p>
+</div>
+<div class="paragraph">
+<p>All the following functions, when invoked with <em>func</em> = <em>nil</em>, unregister the corresponding current callback.</p>
 </div>
 <div id="set_key_callback" class="ulist">
 <ul>
 <li>
-<p><strong>set_key_callback</strong>(<em>window</em> [, <em>func</em>])<br>
+<p><strong>set_key_callback</strong>(<em>window</em>, [<em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as
 <strong><em>func(window, key, scancode, action, shift, control, alt, super)</em></strong>, where:<br>
 <em>key</em>: see <a href="#get_key">get_key</a>( ).<br>
 <em>action</em>: '<em>press</em>', '<em>release</em>' or '<em>repeat</em>'.<br>
-<em>shift</em>, <em>control</em>, <em>alt</em>, <em>super</em> (modifiers): <em>true</em> or <em>false</em> (Lua booleans).</span></p>
+<em>shift</em>, <em>control</em>, <em>alt</em>, <em>super</em> (modifiers): boolean.</span></p>
 </li>
 </ul>
 </div>
 <div id="set_char_callback" class="ulist">
 <ul>
 <li>
-<p><strong>set_char_callback</strong>(<em>window</em> [, <em>func</em>])<br>
+<p><strong>set_char_callback</strong>(<em>window</em>, [<em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as <strong><em>func(window, codepoint)</em></strong>.</span></p>
 </li>
 </ul>
@@ -1134,29 +1154,29 @@ Return a <em>cursor</em> handle to the newly created cursor.</span></p>
 <div id="set_char_mods_callback" class="ulist">
 <ul>
 <li>
-<p><strong>set_char_mods_callback</strong>(<em>window</em> [, <em>func</em>])<br>
+<p><strong>set_char_mods_callback</strong>(<em>window</em>, [<em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as
 <strong><em>func(window, codepoint, shift, control, alt, super)</em></strong>, where:<br>
-<em>shift</em>, <em>control</em>, <em>alt</em>, <em>super</em> (modifiers): <em>true</em> or <em>false</em> (Lua booleans).</span></p>
+<em>shift</em>, <em>control</em>, <em>alt</em>, <em>super</em> (modifiers): boolean.</span></p>
 </li>
 </ul>
 </div>
 <div id="set_mouse_button_callback" class="ulist">
 <ul>
 <li>
-<p><strong>set_mouse_button_callback</strong>(<em>window</em> [, <em>func</em>])<br>
+<p><strong>set_mouse_button_callback</strong>(<em>window</em>, [<em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as
 <strong><em>func(window, button, action, shift, control, alt, super)</em></strong>, where:<br>
 <em>button</em>: '<em>left</em>', '<em>right</em>', '<em>middle</em>', or '<em>button 4</em>' to '<em>button 8</em>'.<br>
 <em>action</em>: '<em>press</em>' or '<em>release</em>'.<br>
-<em>shift</em>, <em>control</em>, <em>alt</em>, <em>super</em> (modifiers): <em>true</em> or <em>false</em> (Lua booleans).</span></p>
+<em>shift</em>, <em>control</em>, <em>alt</em>, <em>super</em> (modifiers): boolean.</span></p>
 </li>
 </ul>
 </div>
 <div id="set_cursor_pos_callback" class="ulist">
 <ul>
 <li>
-<p><strong>set_cursor_pos_callback</strong>(<em>window</em> [, <em>func</em>])<br>
+<p><strong>set_cursor_pos_callback</strong>(<em>window</em>, [<em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as <strong><em>func(window, xpos, ypos)</em></strong>, where <em>xpos</em>
 and <em>ypos</em> are Lua numbers (i.e. floating point).</span></p>
 </li>
@@ -1165,7 +1185,7 @@ and <em>ypos</em> are Lua numbers (i.e. floating point).</span></p>
 <div id="set_cursor_enter_callback" class="ulist">
 <ul>
 <li>
-<p><strong>set_cursor_enter_callback</strong>(<em>window</em> [, <em>func</em>])<br>
+<p><strong>set_cursor_enter_callback</strong>(<em>window</em>, [<em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as <strong><em>func(window, entered)</em></strong>, where
 <em>entered</em> is a boolean.</span></p>
 </li>
@@ -1174,7 +1194,7 @@ and <em>ypos</em> are Lua numbers (i.e. floating point).</span></p>
 <div id="set_scroll_callback" class="ulist">
 <ul>
 <li>
-<p><strong>set_scroll_callback</strong>(<em>window</em> [, <em>func</em>])<br>
+<p><strong>set_scroll_callback</strong>(<em>window</em>, [<em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as <strong><em>func(window, xoffset, yoffset)</em></strong>, where
 <em>xoffset</em> and <em>yoffset</em> are Lua numbers (i.e. floating point).</span></p>
 </li>
@@ -1183,7 +1203,7 @@ and <em>ypos</em> are Lua numbers (i.e. floating point).</span></p>
 <div id="set_drop_callback" class="ulist">
 <ul>
 <li>
-<p><strong>set_drop_callback</strong>(<em>window</em> [, <em>func</em>])<br>
+<p><strong>set_drop_callback</strong>(<em>window</em>, [<em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as <strong><em>func(window, path, &#8230;&#8203;)</em></strong>, where
 <em>path</em> (an any subsequent argument) is a string.</span></p>
 </li>
@@ -1198,7 +1218,7 @@ and <em>ypos</em> are Lua numbers (i.e. floating point).</span></p>
 </li>
 </ul>
 </div>
-<div style="page-break-after: always;"></div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_monitor_handling">Monitor handling</h3>
@@ -1240,27 +1260,15 @@ and <em>ypos</em> are Lua numbers (i.e. floating point).</span></p>
 </li>
 </ul>
 </div>
-<div id="set_monitor_callback" class="ulist">
-<ul>
-<li>
-<p><strong>set_monitor_callback</strong>(<em>monitor</em> [, <em>func</em>])<br>
-<span class="small">The <em>func</em> callback is executed as <strong><em>func(monitor, event)</em></strong>, where <em>event</em> (a string)
-may be '<em>connected</em>' or '<em>disconnected</em>'.<br>
-If <em>func</em> = <em>nil</em>, unregisters the current callback (if any).</span></p>
-</li>
-</ul>
-</div>
 <div id="get_video_mode" class="ulist">
 <ul>
 <li>
 <p><em>videomode</em> = <strong>get_video_mode</strong>(<em>monitor</em>)<br>
-<em>videomode1</em>, <em>videomode2</em>, <em>&#8230;&#8203;</em> = <strong>get_video_modes</strong>(<em>monitor</em>)</p>
+<em>videomode1</em>, <em>videomode2</em>, <em>&#8230;&#8203;</em> = <strong>get_video_modes</strong>(<em>monitor</em>)<br>
+<span class="small"><em>videomode</em>: a table with the following fields, all having an integer value:
+<em>width</em>, <em>height</em>, <em>red_bits</em>, <em>blue_bits</em>, <em>green_bits</em>, <em>refresh_rate</em>.</span></p>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p><span class="small"><em>videomode</em>: a table with the following fields, all having an integer value:
-<em>width</em>, <em>height</em>, <em>red_bits</em>, <em>blue_bits</em>, <em>green_bits</em>, <em>refresh_rate</em>.</span></p>
 </div>
 <div id="set_gamma" class="ulist">
 <ul>
@@ -1273,14 +1281,27 @@ If <em>func</em> = <em>nil</em>, unregisters the current callback (if any).</spa
 <ul>
 <li>
 <p><strong>set_gamma_ramp</strong>(<em>monitor</em>, <em>red</em>, <em>green</em>, <em>blue</em>)<br>
-<em>red</em>, <em>green</em>, <em>blue</em> = <strong>get_gamma_ramp</strong>(<em>monitor</em>)</p>
+<em>red</em>, <em>green</em>, <em>blue</em> = <strong>get_gamma_ramp</strong>(<em>monitor</em>)<br>
+<span class="small"><em>red</em>, <em>green</em> and <em>blue</em>: equally sized arrays (tables) of integers.</span></p>
 </li>
 </ul>
 </div>
+<div class="sect3">
+<h4 id="_monitor_callbacks">Monitor callbacks</h4>
 <div class="paragraph">
-<p><span class="small"><em>red</em>, <em>green</em> and <em>blue</em>: equally sized arrays (tables) of integers.</span></p>
+<p><span class="small">Rfr: <a href="http://www.glfw.org/docs/latest/group__monitor.html">Monitor handling</a>.</span></p>
 </div>
-<div style="page-break-after: always;"></div>
+<div id="set_monitor_callback" class="ulist">
+<ul>
+<li>
+<p><strong>set_monitor_callback</strong>(<em>monitor</em>, [<em>func</em>])<br>
+<span class="small">The <em>func</em> callback is executed as <strong><em>func(monitor, event)</em></strong>, where <em>event</em> (a string)
+may be '<em>connected</em>' or '<em>disconnected</em>'.<br>
+If <em>func</em> = <em>nil</em>, unregisters the current callback (if any).</span></p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_native_access">Native access</h3>
@@ -1290,7 +1311,6 @@ If <em>func</em> = <em>nil</em>, unregisters the current callback (if any).</spa
 <div class="paragraph">
 <p>Not supported.</p>
 </div>
-<div style="page-break-after: always;"></div>
 </div>
 <div class="sect2">
 <h3 id="_window_handling">Window handling</h3>
@@ -1312,7 +1332,7 @@ If <em>func</em> = <em>nil</em>, unregisters the current callback (if any).</spa
 <span class="small"><em>target</em>: '<em>resizable</em>' for GLFW_RESIZABLE, '<em>opengl api</em>' for GLFW_OPENGL_API, etc
 (see <a href="http://www.glfw.org/docs/latest/window.html#window_hints">Window creation hints</a>).<br>
 <em>hint</em>: one of the following, depending on the <em>target</em>:
-if <em>target</em> expects GL_TRUE or GL_FALSE: <em>hint</em> = <em>true</em> or <em>false</em> (Lua boolean);<br>
+if <em>target</em> expects GL_TRUE or GL_FALSE: <em>hint</em> = boolean;<br>
 if <em>target</em> expects an integer value: <em>hint</em> = integer or the string '<em>don&#8217;t care</em>';<br>
 if <em>target</em> is '<em>client api</em>': <em>hint</em> = '<em>no api</em>', '<em>opengl</em>' or '<em>open es</em>';<br>
 if <em>target</em> is '<em>opengl profile</em>': <em>hint</em> = '<em>any</em>', '<em>core</em>' or '<em>compat</em>';<br>
@@ -1333,7 +1353,7 @@ if <em>target</em> is '<em>context release behavior</em>': <em>hint</em> = '<em>
 <div id="create_window" class="ulist">
 <ul>
 <li>
-<p><em>window</em> = <strong>create_window</strong>(<em>width</em>, <em>height</em> [, <em>title</em> [, <em>monitor</em> [, <em>sharewindow</em>]]])<br>
+<p><em>window</em> = <strong>create_window</strong>(<em>width</em>, <em>height</em>, [<em>title</em>], [<em>monitor</em>], [<em>sharewindow</em>])<br>
 <span class="small">Returns a <em>window</em> handle to the newly created window.</span></p>
 </li>
 </ul>
@@ -1370,7 +1390,7 @@ if <em>target</em> is '<em>context release behavior</em>': <em>hint</em> = '<em>
 <div id="set_window_icon" class="ulist">
 <ul>
 <li>
-<p><strong>set_window_icon</strong>(<em>window</em>, <em>width</em>, <em>height</em>, <em>pixels</em> [, <em>&#8230;&#8203;</em>])<br>
+<p><strong>set_window_icon</strong>(<em>window</em>, <em>width</em>, <em>height</em>, <em>pixels</em>, [<em>&#8230;&#8203;</em>])<br>
 <span class="small"><em>width</em>, <em>height</em>, <em>pixels</em>: the image (2 integers and a binary string).<br>
 Other images (up to 32) can be added in the variadic part in the same way.</span></p>
 </li>
@@ -1379,7 +1399,7 @@ Other images (up to 32) can be added in the variadic part in the same way.</span
 <div id="set_window_monitor" class="ulist">
 <ul>
 <li>
-<p><strong>set_window_monitor</strong>(<em>window</em> [, <em>monitor</em>], <em>xpos</em>, <em>ypos</em>, <em>width</em>, <em>height</em> [, <em>refresh_rate</em>])</p>
+<p><strong>set_window_monitor</strong>(<em>window</em>, [<em>monitor</em>], <em>xpos</em>, <em>ypos</em>, <em>width</em>, <em>height</em>, [<em>refresh_rate</em>])</p>
 </li>
 </ul>
 </div>
@@ -1495,14 +1515,18 @@ Other images (up to 32) can be added in the variadic part in the same way.</span
 </li>
 </ul>
 </div>
+<div class="sect3">
+<h4 id="_window_callbacks">Window callbacks</h4>
 <div class="paragraph">
-<p>All the following functions unregister the corresponding current callback when invoked with
-<em>func</em> = <em>nil</em>.</p>
+<p><span class="small">Rfr: <a href="http://www.glfw.org/docs/latest/group__window.html">Window handling</a>.</span></p>
+</div>
+<div class="paragraph">
+<p>All the following functions, when invoked with <em>func</em> = <em>nil</em>, unregister the corresponding current callback.</p>
 </div>
 <div id="set_window_pos_callback" class="ulist">
 <ul>
 <li>
-<p><strong>set_window_pos_callback</strong>(<em>window</em> [, <em>func</em>])<br>
+<p><strong>set_window_pos_callback</strong>(<em>window</em>, [<em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as <strong><em>func(window, xpos, ypos)</em></strong>.</span></p>
 </li>
 </ul>
@@ -1510,7 +1534,7 @@ Other images (up to 32) can be added in the variadic part in the same way.</span
 <div id="set_window_size_callback" class="ulist">
 <ul>
 <li>
-<p><strong>set_window_size_callback</strong>(<em>window</em> [, <em>func</em>])<br>
+<p><strong>set_window_size_callback</strong>(<em>window</em>, [<em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as <strong><em>func(window, width, height)</em></strong>.</span></p>
 </li>
 </ul>
@@ -1518,7 +1542,7 @@ Other images (up to 32) can be added in the variadic part in the same way.</span
 <div id="set_window_close_callback" class="ulist">
 <ul>
 <li>
-<p><strong>set_window_close_callback</strong>(<em>window</em> [, <em>func</em>])<br>
+<p><strong>set_window_close_callback</strong>(<em>window</em>, [<em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as <strong><em>func(window)</em></strong>.</span></p>
 </li>
 </ul>
@@ -1526,7 +1550,7 @@ Other images (up to 32) can be added in the variadic part in the same way.</span
 <div id="set_window_refresh_callback" class="ulist">
 <ul>
 <li>
-<p><strong>set_window_refresh_callback</strong>(<em>window</em> [, <em>func</em>])<br>
+<p><strong>set_window_refresh_callback</strong>(<em>window</em>, [<em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as <strong><em>func(window)</em></strong>.</span></p>
 </li>
 </ul>
@@ -1534,7 +1558,7 @@ Other images (up to 32) can be added in the variadic part in the same way.</span
 <div id="set_window_focus_callback" class="ulist">
 <ul>
 <li>
-<p><strong>set_window_focus_callback</strong>(<em>window</em> [, <em>func</em>])<br>
+<p><strong>set_window_focus_callback</strong>(<em>window</em>, [<em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as <strong><em>func(window, focused)</em></strong>, where <em>focused</em> is a boolean.</span></p>
 </li>
 </ul>
@@ -1542,7 +1566,7 @@ Other images (up to 32) can be added in the variadic part in the same way.</span
 <div id="set_window_iconify_callback" class="ulist">
 <ul>
 <li>
-<p><strong>set_window_iconify_callback</strong>(<em>window</em> [, <em>func</em>])<br>
+<p><strong>set_window_iconify_callback</strong>(<em>window</em>, [<em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as <strong><em>func(window, iconified)</em></strong>, where <em>iconified</em> is a boolean.</span></p>
 </li>
 </ul>
@@ -1550,12 +1574,12 @@ Other images (up to 32) can be added in the variadic part in the same way.</span
 <div id="set_framebuffer_size_callback" class="ulist">
 <ul>
 <li>
-<p><strong>set_framebuffer_size_callback</strong>(<em>window</em> [, <em>func</em>])<br>
+<p><strong>set_framebuffer_size_callback</strong>(<em>window</em>, [<em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as <strong><em>func(window, width, height)</em></strong>.</span></p>
 </li>
 </ul>
 </div>
-<div style="page-break-after: always;"></div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_vulkan_support">Vulkan support</h3>
@@ -1595,10 +1619,10 @@ The <em>physdevRAW</em> parameter (integer) must be a valid VkPhysicalDevice han
 <div id="create_window_surface" class="ulist">
 <ul>
 <li>
-<p><em>surfaceRAW</em> = <strong>create_window_surface</strong>(<em>window</em>, <em>instanceRAW</em> [, <em>allocatorLUD</em>])<br>
+<p><em>surfaceRAW</em> = <strong>create_window_surface</strong>(<em>window</em>, <em>instanceRAW</em>, [<em>allocatorLUD</em>])<br>
 <span class="small">Creates a surface for the specified <em>window</em>, and returns its VkSurfaceKHR handle as an integer.<br>
 The <em>instanceRAW</em> parameter (integer) must be a valid VkInstance handle.<br>
-The <em>allocatorLUD</em> optional parameter (light userdata), is the VkAllocationCallbacks* allocator to be used when creating the surface. If not given, <em>NULL</em> will be used.</span></p>
+The <em>allocatorLUD</em> optional parameter (lightuserdata), is the VkAllocationCallbacks* allocator to be used when creating the surface. If not given, <em>NULL</em> will be used.</span></p>
 </li>
 </ul>
 </div>
@@ -1609,13 +1633,12 @@ The <em>allocatorLUD</em> optional parameter (light userdata), is the VkAllocati
 <div class="title">Important</div>
 </td>
 <td class="content">
-MoonGLFW assumes that the raw Vulkan handles (RAW) and light userdata (LUD) passed as
+MoonGLFW assumes that the raw Vulkan handles (RAW) and lightuserdata (LUD) passed as
 parameters to its functions actually are what they are meant to be, and has no means to verify it.
 </td>
 </tr>
 </table>
 </div>
-<div style="page-break-after: always;"></div>
 </div>
 </div>
 </div>
@@ -1629,7 +1652,7 @@ parameters to its functions actually are what they are meant to be, and has no m
 <div id="footer">
 <div id="footer-text">
 Version 0.9<br>
-Last updated 2017-04-11 15:32:32 CEST
+Last updated 2017-06-11 19:36:57 CEST
 </div>
 </div>
 </body>

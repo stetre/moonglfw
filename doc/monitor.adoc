@@ -21,17 +21,9 @@
 [[get_monitor_name]]
 * _name_ = *get_monitor_name*(_monitor_)
 
-
-[[set_monitor_callback]]
-* *set_monitor_callback*(_monitor_ [, _func_]) +
-[small]#The _func_ callback is executed as *_func(monitor, event)_*, where _event_ (a string)
-may be '_connected_' or '_disconnected_'. +
-If _func_ = _nil_, unregisters the current callback (if any).#
-
 [[get_video_mode]]
 * _videomode_ = *get_video_mode*(_monitor_) +
-_videomode1_, _videomode2_, _..._ = *get_video_modes*(_monitor_)
-
+_videomode1_, _videomode2_, _..._ = *get_video_modes*(_monitor_) +
 [small]#_videomode_: a table with the following fields, all having an integer value: 
 _width_, _height_, _red_bits_, _blue_bits_, _green_bits_, _refresh_rate_.#
 
@@ -40,8 +32,16 @@ _width_, _height_, _red_bits_, _blue_bits_, _green_bits_, _refresh_rate_.#
 
 [[set_gamma_ramp]]
 * *set_gamma_ramp*(_monitor_, _red_, _green_, _blue_) +
-_red_, _green_, _blue_ = *get_gamma_ramp*(_monitor_)
-
+_red_, _green_, _blue_ = *get_gamma_ramp*(_monitor_) +
 [small]#_red_, _green_ and _blue_: equally sized arrays (tables) of integers.#
 
-<<<
+==== Monitor callbacks
+
+[small]#Rfr: link:http://www.glfw.org/docs/latest/group__monitor.html[Monitor handling].#
+
+[[set_monitor_callback]]
+* *set_monitor_callback*(_monitor_, [_func_]) +
+[small]#The _func_ callback is executed as *_func(monitor, event)_*, where _event_ (a string)
+may be '_connected_' or '_disconnected_'. +
+If _func_ = _nil_, unregisters the current callback (if any).#
+

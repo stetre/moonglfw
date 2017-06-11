@@ -87,4 +87,9 @@ credits to the original author).
 The copyright notice is in the LICENSE file in the base directory
 of the https://github.com/stetre/moonglfw[official repository] on GitHub.
 
-<<<
+[[see-also]]
+=== See also
+
+MoonGLFW is part of https://github.com/stetre/moonlibs[MoonLibs], a collection of 
+Lua libraries for graphics and audio programming.
+

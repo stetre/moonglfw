@@ -23,4 +23,3 @@ and thus not exposed to the script code.
 error code and _descr_ (a string) is the description of the occurred error. +
 If _func_ is _nil_, unregisters the current error callback (if any).#
 
-<<<
