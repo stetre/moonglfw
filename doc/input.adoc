@@ -132,7 +132,7 @@ _xoffset_ and _yoffset_ are Lua numbers (i.e. floating point).#
 [[set_drop_callback]]
 * *set_drop_callback*(_window_, [_func_]) +
 [small]#The _func_ callback is executed as *_func(window, path, ...)_*, where
-_path_ (an any subsequent argument) is a string.#
+_path_ (and any subsequent argument) is a string.#
 
 [[set_joystick_callback]]
 * *set_joystick_callback*([_func_]) +

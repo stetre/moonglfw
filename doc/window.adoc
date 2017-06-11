@@ -42,9 +42,9 @@ _boolean_ = *window_should_close*(_window_)
 * *set_window_title*(_window_, _title_)
 
 [[set_window_icon]]
-* *set_window_icon*(_window_, _width_, _height_, _pixels_, [_..._]) +
-[small]#_width_, _height_, _pixels_: the image (2 integers and a binary string). +
-Other images (up to 32) can be added in the variadic part in the same way.#
+* *set_window_icon*(_window_, _width_, _height_, _pixels_, [_width~2~_, _height~2~_, _pixels~2~_, _..._]) +
+[small]#_width_, _height_ (integers), and _pixels_ (binary string) specify the image. +
+Other images (up to 32 total) can be added in the optional part in the same way.#
 
 [[set_window_monitor]]
 * *set_window_monitor*(_window_, [_monitor_], _xpos_, _ypos_, _width_, _height_, [_refresh_rate_])

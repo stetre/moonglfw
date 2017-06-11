@@ -1205,7 +1205,7 @@ and <em>ypos</em> are Lua numbers (i.e. floating point).</span></p>
 <li>
 <p><strong>set_drop_callback</strong>(<em>window</em>, [<em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as <strong><em>func(window, path, &#8230;&#8203;)</em></strong>, where
-<em>path</em> (an any subsequent argument) is a string.</span></p>
+<em>path</em> (and any subsequent argument) is a string.</span></p>
 </li>
 </ul>
 </div>
@@ -1228,7 +1228,7 @@ and <em>ypos</em> are Lua numbers (i.e. floating point).</span></p>
 <div id="get_monitors" class="ulist">
 <ul>
 <li>
-<p><em>monitor1</em>, <em>monitor2</em>, <em>&#8230;&#8203;</em> = <strong>get_monitors</strong>( )</p>
+<p><em>monitor<sub>1</sub></em>, <em>monitor<sub>2</sub></em>, <em>&#8230;&#8203;</em> = <strong>get_monitors</strong>( )</p>
 </li>
 </ul>
 </div>
@@ -1264,7 +1264,7 @@ and <em>ypos</em> are Lua numbers (i.e. floating point).</span></p>
 <ul>
 <li>
 <p><em>videomode</em> = <strong>get_video_mode</strong>(<em>monitor</em>)<br>
-<em>videomode1</em>, <em>videomode2</em>, <em>&#8230;&#8203;</em> = <strong>get_video_modes</strong>(<em>monitor</em>)<br>
+<em>videomode<sub>1</sub></em>, <em>videomode<sub>2</sub></em>, <em>&#8230;&#8203;</em> = <strong>get_video_modes</strong>(<em>monitor</em>)<br>
 <span class="small"><em>videomode</em>: a table with the following fields, all having an integer value:
 <em>width</em>, <em>height</em>, <em>red_bits</em>, <em>blue_bits</em>, <em>green_bits</em>, <em>refresh_rate</em>.</span></p>
 </li>
@@ -1390,9 +1390,9 @@ if <em>target</em> is '<em>context release behavior</em>': <em>hint</em> = '<em>
 <div id="set_window_icon" class="ulist">
 <ul>
 <li>
-<p><strong>set_window_icon</strong>(<em>window</em>, <em>width</em>, <em>height</em>, <em>pixels</em>, [<em>&#8230;&#8203;</em>])<br>
-<span class="small"><em>width</em>, <em>height</em>, <em>pixels</em>: the image (2 integers and a binary string).<br>
-Other images (up to 32) can be added in the variadic part in the same way.</span></p>
+<p><strong>set_window_icon</strong>(<em>window</em>, <em>width</em>, <em>height</em>, <em>pixels</em>, [<em>width<sub>2</sub></em>, <em>height<sub>2</sub></em>, <em>pixels<sub>2</sub></em>, <em>&#8230;&#8203;</em>])<br>
+<span class="small"><em>width</em>, <em>height</em> (integers), and <em>pixels</em> (binary string) specify the image.<br>
+Other images (up to 32 total) can be added in the optional part in the same way.</span></p>
 </li>
 </ul>
 </div>

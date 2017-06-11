@@ -4,7 +4,7 @@
 [small]#Rfr: link:http://www.glfw.org/docs/latest/group__monitor.html[Monitor handling].#
 
 [[get_monitors]]
-* _monitor1_, _monitor2_, _..._ = *get_monitors*( )
+* _monitor~1~_, _monitor~2~_, _..._ = *get_monitors*( )
 
 [[get_primary_monitor]]
 * _monitor_ = *get_primary_monitor*( )
@@ -23,7 +23,7 @@
 
 [[get_video_mode]]
 * _videomode_ = *get_video_mode*(_monitor_) +
-_videomode1_, _videomode2_, _..._ = *get_video_modes*(_monitor_) +
+_videomode~1~_, _videomode~2~_, _..._ = *get_video_modes*(_monitor_) +
 [small]#_videomode_: a table with the following fields, all having an integer value: 
 _width_, _height_, _red_bits_, _blue_bits_, _green_bits_, _refresh_rate_.#
 
