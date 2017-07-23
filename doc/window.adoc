@@ -4,20 +4,10 @@
 [small]#Rfr: link:http://www.glfw.org/docs/latest/group__window.html[Window handling].#
 
 [[default_window_hints]]
-* *default_window_hints*( ) +
-[small]#See link:http://www.glfw.org/docs/latest/window.html#window_hints[Window creation hints].#
+* *default_window_hints*( )
 
 [[window_hint]]
-* *window_hint*(_target_, _hint_) +
-[small]#_target_: '_resizable_' for GLFW_RESIZABLE, '_opengl api_' for GLFW_OPENGL_API, etc 
-(see link:http://www.glfw.org/docs/latest/window.html#window_hints[Window creation hints]). +
-_hint_: one of the following, depending on the _target_:
-if _target_ expects GL_TRUE or GL_FALSE: _hint_ = boolean; +
-if _target_ expects an integer value: _hint_ = integer or the string '_don't care_'; +
-if _target_ is '_client api_': _hint_ = '_no api_', '_opengl_' or '_open es_'; +
-if _target_ is '_opengl profile_': _hint_ = '_any_', '_core_' or '_compat_'; +
-if _target_ is '_context robustness_': _hint_ = '_no robustness_', '_no reset notification_', or '_lose context on reset_'; +
-if _target_ is '_context release behavior_': _hint_ = '_any_', '_flush_' or '_none_'.#
+* *window_hint*(<<enums_window_hint, _target_>>, _hint_)
 
 [[version_hint]]
 * *version_hint*(_major_, _minor_, _profile_) _NONGLFW_ +

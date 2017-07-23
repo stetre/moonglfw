@@ -6,42 +6,40 @@
 [[set_input_mode]]
 * *set_input_mode*(_window_, _mode_, _value_) +
 _value_ = *get_input_mode*(_window_, _mode_) +
-[small]#_mode_: '_cursor_', '_sticky keys_' or '_sticky mouse buttons_'. +
+[small]#_mode_: '_cursor_' | '_sticky keys_' | '_sticky mouse buttons_'. +
 _value_: one of the following, depending on _mode_: +
-if _mode_ is '_sticky ..._': _value_ = boolean. +
-if _mode_ is '_cursor_': _value_ = '_normal_', '_hidden_', or '_disabled_'.#
+pass:[-] if _mode_ is '_sticky keys_' or '_sticky mouse buttons_': _value_ = boolean. +
+pass:[-] if _mode_ is '_cursor_': _value_ = '_normal_' | '_hidden_' | '_disabled_'.#
 
 '''
 
 [[get_key]]
-* _state_ = *get_key*(_window_, _key_) +
-[small]#_key_: '_xxx_' for GLFW_KEY_XXX (e.g. '_left bracket_' for GLFW_LEFT_BRACKET).
-See: http://www.glfw.org/docs/latest/group__keys.html[keyboard keys]. +
-_state_: '_press_' or '_release_'.#
+* _state_ = *get_key*(_window_, <<enums_key, _key_>>) +
+[small]#_state_: '_press_' | '_release_'.#
 
 [[get_key_name]]
-* _name_ = *get_key_name*(_key_ | _scancode_) +
-[small]#_key_, _scancode_: see <<set_key_callback, set_key_callback>>(&nbsp;).#
+* _name_ = *get_key_name*(<<enums_key, _key_>> | _scancode_) +
+[small]#See <<set_key_callback, set_key_callback>>(&nbsp;).#
 
 '''
 [[get_mouse_button]]
 * _state_ = *get_mouse_button*(_window_, _button_) +
-[small]#_button_: '_left_', '_right_', '_middle_', or '_button 4_' to '_button 8_'. +
-_state_: '_press_' or '_release_'.#
+[small]#_button_: '_left_' | '_middle_' | '_right_' | '_button 4_' | .. | '_button 8_'. +
+_state_: '_press_' | '_release_'.#
 
 
 [[set_cursor_pos]]
 * *set_cursor_pos*(_window_, _xpos_, _ypos_) +
 _xpos_, _ypos_ = *get_cursor_pos*(_window_) +
-[small]#_xpos_, _ypos_: Lua numbers.#
+[small]#_xpos_, _ypos_: numbers.#
 
 '''
 [[create_cursor]]
 * _cursor_ = *create_cursor*(_width_, _height_, _pixels_, _xhot_, _yhot_) +
 _cursor_ = *create_cursor*(_shape_) +
-[small]#_width_, _height_, _pixels_: the image (2 integers and a binary string). +
-_shape_: '_arrow_', '_ibeam_', '_crosshair_', '_hand_', '_hresize', '_vresize_'. +
-Return a _cursor_ handle to the newly created cursor.#
+[small]#_width_, _height_ (integers) and _pixels_ (binary string) specify the image. +
+_shape_: '_arrow_' | '_ibeam_' | '_crosshair_' | '_hand_' | '_hresize' | '_vresize_'. +
+Both functions return a _cursor_ handle to the newly created cursor.#
 
 [[destroy_cursor]]
 * *destroy_cursor*(_cursor_)
@@ -59,13 +57,13 @@ Return a _cursor_ handle to the newly created cursor.#
 
 [[get_joystick_buttons]]
 * _state1_, _..._ = *get_joystick_buttons*(_joy_) +
-[small]#_state_: '_press_' or '_release_'.#
+[small]#_state_: '_press_' | '_release_'.#
 
 [[get_joystick_name]]
 * _name_= *get_joystick_name*(_joy_)
 
-
 '''
+
 [[set_clipboard_string]]
 * *set_clipboard_string*(_window_, _string_) +
 _string_ = *get_clipboard_string*(_window_)
@@ -92,9 +90,9 @@ All the following functions, when invoked with _func_ = _nil_, unregister the co
 * *set_key_callback*(_window_, [_func_]) +
 [small]#The _func_ callback is executed as 
 *_func(window, key, scancode, action, shift, control, alt, super)_*, where: +
-_key_: see <<get_key,get_key>>( ). +
-_action_: '_press_', '_release_' or '_repeat_'. +
-_shift_, _control_, _alt_, _super_ (modifiers): boolean.#
+_key_: see <<enums_key, key>>. +
+_action_: '_press_' | '_release_' | '_repeat_'. +
+_shift_, _control_, _alt_, _super_: boolean (modifiers).#
 
 [[set_char_callback]]
 * *set_char_callback*(_window_, [_func_]) +
@@ -104,20 +102,20 @@ _shift_, _control_, _alt_, _super_ (modifiers): boolean.#
 * *set_char_mods_callback*(_window_, [_func_]) +
 [small]#The _func_ callback is executed as 
 *_func(window, codepoint, shift, control, alt, super)_*, where: +
-_shift_, _control_, _alt_, _super_ (modifiers): boolean.#
+_shift_, _control_, _alt_, _super_: boolean (modifiers).#
 
 [[set_mouse_button_callback]]
 * *set_mouse_button_callback*(_window_, [_func_]) +
 [small]#The _func_ callback is executed as
 *_func(window, button, action, shift, control, alt, super)_*, where: +
-_button_: '_left_', '_right_', '_middle_', or '_button 4_' to '_button 8_'. +
-_action_: '_press_' or '_release_'. +
-_shift_, _control_, _alt_, _super_ (modifiers): boolean.#
+_button_: '_left_' | '_right_' | '_middle_' | '_button 4_' | .. | '_button 8_'. +
+_action_: '_press_' | '_release_'. +
+_shift_, _control_, _alt_, _super_: boolean (modifiers).#
 
 [[set_cursor_pos_callback]]
 * *set_cursor_pos_callback*(_window_, [_func_]) +
 [small]#The _func_ callback is executed as *_func(window, xpos, ypos)_*, where _xpos_
-and _ypos_ are Lua numbers (i.e. floating point).#
+and _ypos_ are numbers.#
 
 [[set_cursor_enter_callback]]
 * *set_cursor_enter_callback*(_window_, [_func_]) +
@@ -127,15 +125,16 @@ _entered_ is a boolean.#
 [[set_scroll_callback]]
 * *set_scroll_callback*(_window_, [_func_]) +
 [small]#The _func_ callback is executed as *_func(window, xoffset, yoffset)_*, where 
-_xoffset_ and _yoffset_ are Lua numbers (i.e. floating point).#
+_xoffset_ and _yoffset_ are numbers.#
 
 [[set_drop_callback]]
 * *set_drop_callback*(_window_, [_func_]) +
 [small]#The _func_ callback is executed as *_func(window, path, ...)_*, where
-_path_ (and any subsequent argument) is a string.#
+_path_ is a string (and any subsequent argument too).#
 
 [[set_joystick_callback]]
 * *set_joystick_callback*([_func_]) +
-[small]#The _func_ callback is executed as *_func(joy, event)_*, where 
-_joy_ is an integer (1..16) and _event_ (a string) may be '_connected_' or '_disconnected_'.#
+[small]#The _func_ callback is executed as *_func(joy, event)_*, where: +
+_joy_: integer (1..16), +
+_event_: '_connected_' | '_disconnected_'.#
 

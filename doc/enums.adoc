@@ -1,0 +1,53 @@
+
+== Enums and structs
+
+[[enums_window_hint]]
+* [small]#*Window creation hints* +
+_target_: '_resizable_' for GLFW_RESIZABLE, '_opengl api_' for GLFW_OPENGL_API, etc. +
+The following list shows the admitted _hint_ values for each _target_ (_target_: _hint_ values): +
+'_resizable_': boolean +
+'_visible_': boolean +
+'_decorated_': boolean +
+'_focused_': boolean +
+'_auto iconify_': boolean +
+'_floating_': boolean +
+'_red bits_': integer | '_don't care_' +
+'_green bits_': integer | '_don't care_' +
+'_blue bits_': integer | '_don't care_' +
+'_alpha bits_': integer | '_don't care_' +
+'_depth bits_': integer | '_don't care_' +
+'_stencil bits_': integer | '_don't care_' +
+'_accum red bits_': integer | '_don't care_' +
+'_accum green bits_': integer | '_don't care_' +
+'_accum blue bits_': integer | '_don't care_' +
+'_accum alpha bits_': integer | '_don't care_' +
+'_aux buffers_': integer | '_don't care_' +
+'_samples_': integer | '_don't care_' +
+'_refresh rate_': integer | '_don't care_' +
+'_stereo_': boolean +
+'_srgb capable_': boolean +
+'_doublebuffer_': boolean +
+'_client api_': '_no api_' | '_opengl_' | '_opengl es_' +
+'_context version major_': integer | '_don't care_' +
+'_context version minor_': integer | '_don't care_' +
+'_context robustness_': '_no robustness_' | '_no reset notification_' | '_lose context on reset_' +
+'_context release behavior_': '_any_' | '_flush_' | '_none_' +
+'_opengl forward compat_': boolean +
+'_opengl debug context_': boolean +
+'_opengl profile_': '_any_' | '_core_' | '_compat_' +
+(Rfr: link:http://www.glfw.org/docs/latest/window.html#window_hints[Window creation hints]).#
+
+[[enums_key]]
+* [small]#*key*: '_xxx_' for GLFW_KEY_XXX (e.g. '_left bracket_' for GLFW_LEFT_BRACKET). +
+Values: '_unknown_', '_space_', '_apostrophe_', '_comma_', '_minus_', '_period_', '_slash_', '_0_' .. '_9_', '_semicolon_', '_equal_', '_a_' .. '_z_', '_left bracket_', '_backslash_', '_right bracket_', '_grave accent_', '_world 1_', '_world 2_', '_escape_', '_enter_', '_tab_', '_backspace_', '_insert_', '_delete_', '_right_', '_left_', '_down_', '_up_', '_page up_', '_page down_', '_home_', '_end_', '_caps lock_', '_scroll lock_', '_num lock_', '_print screen_', '_pause_', '_f1_' .. '_f25_', '_kp 0_' .. '_kp 9_', '_kp decimal_', '_kp divide_', '_kp multiply_', '_kp subtract_', '_kp add_', '_kp enter_', '_kp equal_', '_left shift_', '_left control_', '_left alt_', '_left super_', '_right shift_', '_right control_', '_right alt_', '_right super_', '_menu_'. +
+(Rfr: http://www.glfw.org/docs/latest/group__keys.html[keyboard keys])#
+
+[[videomode]]
+* [small]#*videomode* = { +
+_width_: integer, +
+_height_: integer, +
+_red_bits_: integer, +
+_blue_bits_: integer, +
+_green_bits_: integer, +
+_refresh_rate_: integer, +
+} (rfr: link:http://www.glfw.org/docs/latest/group__monitor.html[Monitor handling]).#

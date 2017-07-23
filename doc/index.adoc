@@ -15,4 +15,5 @@ image::powered-by-lua.gif[Lua logo, link=http://www.lua.org]
 include::preface.adoc[]
 
 include::bindings.adoc[]
+include::enums.adoc[]
 

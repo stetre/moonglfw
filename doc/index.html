@@ -800,6 +800,7 @@ p.tableblock.header { color: #6d6e71; }
 <li><a href="#_vulkan_support">Vulkan support</a></li>
 </ul>
 </li>
+<li><a href="#_enums_and_structs">Enums and structs</a></li>
 </ul>
 </div>
 </div>
@@ -991,10 +992,10 @@ If <em>func</em> is <em>nil</em>, unregisters the current error callback (if any
 <li>
 <p><strong>set_input_mode</strong>(<em>window</em>, <em>mode</em>, <em>value</em>)<br>
 <em>value</em> = <strong>get_input_mode</strong>(<em>window</em>, <em>mode</em>)<br>
-<span class="small"><em>mode</em>: '<em>cursor</em>', '<em>sticky keys</em>' or '<em>sticky mouse buttons</em>'.<br>
+<span class="small"><em>mode</em>: '<em>cursor</em>' | '<em>sticky keys</em>' | '<em>sticky mouse buttons</em>'.<br>
 <em>value</em>: one of the following, depending on <em>mode</em>:<br>
-if <em>mode</em> is '<em>sticky &#8230;&#8203;</em>': <em>value</em> = boolean.<br>
-if <em>mode</em> is '<em>cursor</em>': <em>value</em> = '<em>normal</em>', '<em>hidden</em>', or '<em>disabled</em>'.</span></p>
+- if <em>mode</em> is '<em>sticky keys</em>' or '<em>sticky mouse buttons</em>': <em>value</em> = boolean.<br>
+- if <em>mode</em> is '<em>cursor</em>': <em>value</em> = '<em>normal</em>' | '<em>hidden</em>' | '<em>disabled</em>'.</span></p>
 </li>
 </ul>
 </div>
@@ -1002,18 +1003,16 @@ if <em>mode</em> is '<em>cursor</em>': <em>value</em> = '<em>normal</em>', '<em>
 <div id="get_key" class="ulist">
 <ul>
 <li>
-<p><em>state</em> = <strong>get_key</strong>(<em>window</em>, <em>key</em>)<br>
-<span class="small"><em>key</em>: '<em>xxx</em>' for GLFW_KEY_XXX (e.g. '<em>left bracket</em>' for GLFW_LEFT_BRACKET).
-See: <a href="http://www.glfw.org/docs/latest/group__keys.html">keyboard keys</a>.<br>
-<em>state</em>: '<em>press</em>' or '<em>release</em>'.</span></p>
+<p><em>state</em> = <strong>get_key</strong>(<em>window</em>, <a href="#enums_key"><em>key</em></a>)<br>
+<span class="small"><em>state</em>: '<em>press</em>' | '<em>release</em>'.</span></p>
 </li>
 </ul>
 </div>
 <div id="get_key_name" class="ulist">
 <ul>
 <li>
-<p><em>name</em> = <strong>get_key_name</strong>(<em>key</em> | <em>scancode</em>)<br>
-<span class="small"><em>key</em>, <em>scancode</em>: see <a href="#set_key_callback">set_key_callback</a>(&nbsp;).</span></p>
+<p><em>name</em> = <strong>get_key_name</strong>(<a href="#enums_key"><em>key</em></a> | <em>scancode</em>)<br>
+<span class="small">See <a href="#set_key_callback">set_key_callback</a>(&nbsp;).</span></p>
 </li>
 </ul>
 </div>
@@ -1022,8 +1021,8 @@ See: <a href="http://www.glfw.org/docs/latest/group__keys.html">keyboard keys</a
 <ul>
 <li>
 <p><em>state</em> = <strong>get_mouse_button</strong>(<em>window</em>, <em>button</em>)<br>
-<span class="small"><em>button</em>: '<em>left</em>', '<em>right</em>', '<em>middle</em>', or '<em>button 4</em>' to '<em>button 8</em>'.<br>
-<em>state</em>: '<em>press</em>' or '<em>release</em>'.</span></p>
+<span class="small"><em>button</em>: '<em>left</em>' | '<em>middle</em>' | '<em>right</em>' | '<em>button 4</em>' | .. | '<em>button 8</em>'.<br>
+<em>state</em>: '<em>press</em>' | '<em>release</em>'.</span></p>
 </li>
 </ul>
 </div>
@@ -1032,7 +1031,7 @@ See: <a href="http://www.glfw.org/docs/latest/group__keys.html">keyboard keys</a
 <li>
 <p><strong>set_cursor_pos</strong>(<em>window</em>, <em>xpos</em>, <em>ypos</em>)<br>
 <em>xpos</em>, <em>ypos</em> = <strong>get_cursor_pos</strong>(<em>window</em>)<br>
-<span class="small"><em>xpos</em>, <em>ypos</em>: Lua numbers.</span></p>
+<span class="small"><em>xpos</em>, <em>ypos</em>: numbers.</span></p>
 </li>
 </ul>
 </div>
@@ -1042,9 +1041,9 @@ See: <a href="http://www.glfw.org/docs/latest/group__keys.html">keyboard keys</a
 <li>
 <p><em>cursor</em> = <strong>create_cursor</strong>(<em>width</em>, <em>height</em>, <em>pixels</em>, <em>xhot</em>, <em>yhot</em>)<br>
 <em>cursor</em> = <strong>create_cursor</strong>(<em>shape</em>)<br>
-<span class="small"><em>width</em>, <em>height</em>, <em>pixels</em>: the image (2 integers and a binary string).<br>
-<em>shape</em>: '<em>arrow</em>', '<em>ibeam</em>', '<em>crosshair</em>', '<em>hand</em>', '<em>hresize', '_vresize</em>'.<br>
-Return a <em>cursor</em> handle to the newly created cursor.</span></p>
+<span class="small"><em>width</em>, <em>height</em> (integers) and <em>pixels</em> (binary string) specify the image.<br>
+<em>shape</em>: '<em>arrow</em>' | '<em>ibeam</em>' | '<em>crosshair</em>' | '<em>hand</em>' | '<em>hresize' | '_vresize</em>'.<br>
+Both functions return a <em>cursor</em> handle to the newly created cursor.</span></p>
 </li>
 </ul>
 </div>
@@ -1082,7 +1081,7 @@ Return a <em>cursor</em> handle to the newly created cursor.</span></p>
 <ul>
 <li>
 <p><em>state1</em>, <em>&#8230;&#8203;</em> = <strong>get_joystick_buttons</strong>(<em>joy</em>)<br>
-<span class="small"><em>state</em>: '<em>press</em>' or '<em>release</em>'.</span></p>
+<span class="small"><em>state</em>: '<em>press</em>' | '<em>release</em>'.</span></p>
 </li>
 </ul>
 </div>
@@ -1137,9 +1136,9 @@ Return a <em>cursor</em> handle to the newly created cursor.</span></p>
 <p><strong>set_key_callback</strong>(<em>window</em>, [<em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as
 <strong><em>func(window, key, scancode, action, shift, control, alt, super)</em></strong>, where:<br>
-<em>key</em>: see <a href="#get_key">get_key</a>( ).<br>
-<em>action</em>: '<em>press</em>', '<em>release</em>' or '<em>repeat</em>'.<br>
-<em>shift</em>, <em>control</em>, <em>alt</em>, <em>super</em> (modifiers): boolean.</span></p>
+<em>key</em>: see <a href="#enums_key">key</a>.<br>
+<em>action</em>: '<em>press</em>' | '<em>release</em>' | '<em>repeat</em>'.<br>
+<em>shift</em>, <em>control</em>, <em>alt</em>, <em>super</em>: boolean (modifiers).</span></p>
 </li>
 </ul>
 </div>
@@ -1157,7 +1156,7 @@ Return a <em>cursor</em> handle to the newly created cursor.</span></p>
 <p><strong>set_char_mods_callback</strong>(<em>window</em>, [<em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as
 <strong><em>func(window, codepoint, shift, control, alt, super)</em></strong>, where:<br>
-<em>shift</em>, <em>control</em>, <em>alt</em>, <em>super</em> (modifiers): boolean.</span></p>
+<em>shift</em>, <em>control</em>, <em>alt</em>, <em>super</em>: boolean (modifiers).</span></p>
 </li>
 </ul>
 </div>
@@ -1167,9 +1166,9 @@ Return a <em>cursor</em> handle to the newly created cursor.</span></p>
 <p><strong>set_mouse_button_callback</strong>(<em>window</em>, [<em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as
 <strong><em>func(window, button, action, shift, control, alt, super)</em></strong>, where:<br>
-<em>button</em>: '<em>left</em>', '<em>right</em>', '<em>middle</em>', or '<em>button 4</em>' to '<em>button 8</em>'.<br>
-<em>action</em>: '<em>press</em>' or '<em>release</em>'.<br>
-<em>shift</em>, <em>control</em>, <em>alt</em>, <em>super</em> (modifiers): boolean.</span></p>
+<em>button</em>: '<em>left</em>' | '<em>right</em>' | '<em>middle</em>' | '<em>button 4</em>' | .. | '<em>button 8</em>'.<br>
+<em>action</em>: '<em>press</em>' | '<em>release</em>'.<br>
+<em>shift</em>, <em>control</em>, <em>alt</em>, <em>super</em>: boolean (modifiers).</span></p>
 </li>
 </ul>
 </div>
@@ -1178,7 +1177,7 @@ Return a <em>cursor</em> handle to the newly created cursor.</span></p>
 <li>
 <p><strong>set_cursor_pos_callback</strong>(<em>window</em>, [<em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as <strong><em>func(window, xpos, ypos)</em></strong>, where <em>xpos</em>
-and <em>ypos</em> are Lua numbers (i.e. floating point).</span></p>
+and <em>ypos</em> are numbers.</span></p>
 </li>
 </ul>
 </div>
@@ -1196,7 +1195,7 @@ and <em>ypos</em> are Lua numbers (i.e. floating point).</span></p>
 <li>
 <p><strong>set_scroll_callback</strong>(<em>window</em>, [<em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as <strong><em>func(window, xoffset, yoffset)</em></strong>, where
-<em>xoffset</em> and <em>yoffset</em> are Lua numbers (i.e. floating point).</span></p>
+<em>xoffset</em> and <em>yoffset</em> are numbers.</span></p>
 </li>
 </ul>
 </div>
@@ -1205,7 +1204,7 @@ and <em>ypos</em> are Lua numbers (i.e. floating point).</span></p>
 <li>
 <p><strong>set_drop_callback</strong>(<em>window</em>, [<em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as <strong><em>func(window, path, &#8230;&#8203;)</em></strong>, where
-<em>path</em> (and any subsequent argument) is a string.</span></p>
+<em>path</em> is a string (and any subsequent argument too).</span></p>
 </li>
 </ul>
 </div>
@@ -1213,8 +1212,9 @@ and <em>ypos</em> are Lua numbers (i.e. floating point).</span></p>
 <ul>
 <li>
 <p><strong>set_joystick_callback</strong>([<em>func</em>])<br>
-<span class="small">The <em>func</em> callback is executed as <strong><em>func(joy, event)</em></strong>, where
-<em>joy</em> is an integer (1..16) and <em>event</em> (a string) may be '<em>connected</em>' or '<em>disconnected</em>'.</span></p>
+<span class="small">The <em>func</em> callback is executed as <strong><em>func(joy, event)</em></strong>, where:<br>
+<em>joy</em>: integer (1..16),<br>
+<em>event</em>: '<em>connected</em>' | '<em>disconnected</em>'.</span></p>
 </li>
 </ul>
 </div>
@@ -1263,10 +1263,8 @@ and <em>ypos</em> are Lua numbers (i.e. floating point).</span></p>
 <div id="get_video_mode" class="ulist">
 <ul>
 <li>
-<p><em>videomode</em> = <strong>get_video_mode</strong>(<em>monitor</em>)<br>
-<em>videomode<sub>1</sub></em>, <em>videomode<sub>2</sub></em>, <em>&#8230;&#8203;</em> = <strong>get_video_modes</strong>(<em>monitor</em>)<br>
-<span class="small"><em>videomode</em>: a table with the following fields, all having an integer value:
-<em>width</em>, <em>height</em>, <em>red_bits</em>, <em>blue_bits</em>, <em>green_bits</em>, <em>refresh_rate</em>.</span></p>
+<p><a href="#videomode"><em>videomode</em></a> = <strong>get_video_mode</strong>(<em>monitor</em>)<br>
+<em>videomode<sub>1</sub></em>, <em>videomode<sub>2</sub></em>, <em>&#8230;&#8203;</em> = <strong>get_video_modes</strong>(<em>monitor</em>)</p>
 </li>
 </ul>
 </div>
@@ -1320,24 +1318,14 @@ If <em>func</em> = <em>nil</em>, unregisters the current callback (if any).</spa
 <div id="default_window_hints" class="ulist">
 <ul>
 <li>
-<p><strong>default_window_hints</strong>( )<br>
-<span class="small">See <a href="http://www.glfw.org/docs/latest/window.html#window_hints">Window creation hints</a>.</span></p>
+<p><strong>default_window_hints</strong>( )</p>
 </li>
 </ul>
 </div>
 <div id="window_hint" class="ulist">
 <ul>
 <li>
-<p><strong>window_hint</strong>(<em>target</em>, <em>hint</em>)<br>
-<span class="small"><em>target</em>: '<em>resizable</em>' for GLFW_RESIZABLE, '<em>opengl api</em>' for GLFW_OPENGL_API, etc
-(see <a href="http://www.glfw.org/docs/latest/window.html#window_hints">Window creation hints</a>).<br>
-<em>hint</em>: one of the following, depending on the <em>target</em>:
-if <em>target</em> expects GL_TRUE or GL_FALSE: <em>hint</em> = boolean;<br>
-if <em>target</em> expects an integer value: <em>hint</em> = integer or the string '<em>don&#8217;t care</em>';<br>
-if <em>target</em> is '<em>client api</em>': <em>hint</em> = '<em>no api</em>', '<em>opengl</em>' or '<em>open es</em>';<br>
-if <em>target</em> is '<em>opengl profile</em>': <em>hint</em> = '<em>any</em>', '<em>core</em>' or '<em>compat</em>';<br>
-if <em>target</em> is '<em>context robustness</em>': <em>hint</em> = '<em>no robustness</em>', '<em>no reset notification</em>', or '<em>lose context on reset</em>';<br>
-if <em>target</em> is '<em>context release behavior</em>': <em>hint</em> = '<em>any</em>', '<em>flush</em>' or '<em>none</em>'.</span></p>
+<p><strong>window_hint</strong>(<a href="#enums_window_hint"><em>target</em></a>, <em>hint</em>)</p>
 </li>
 </ul>
 </div>
@@ -1642,6 +1630,74 @@ parameters to its functions actually are what they are meant to be, and has no m
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_enums_and_structs">Enums and structs</h2>
+<div class="sectionbody">
+<div id="enums_window_hint" class="ulist">
+<ul>
+<li>
+<p><span class="small"><strong>Window creation hints</strong><br>
+<em>target</em>: '<em>resizable</em>' for GLFW_RESIZABLE, '<em>opengl api</em>' for GLFW_OPENGL_API, etc.<br>
+The following list shows the admitted <em>hint</em> values for each <em>target</em> (<em>target</em>: <em>hint</em> values):<br>
+'<em>resizable</em>': boolean<br>
+'<em>visible</em>': boolean<br>
+'<em>decorated</em>': boolean<br>
+'<em>focused</em>': boolean<br>
+'<em>auto iconify</em>': boolean<br>
+'<em>floating</em>': boolean<br>
+'<em>red bits</em>': integer | '<em>don&#8217;t care</em>'<br>
+'<em>green bits</em>': integer | '<em>don&#8217;t care</em>'<br>
+'<em>blue bits</em>': integer | '<em>don&#8217;t care</em>'<br>
+'<em>alpha bits</em>': integer | '<em>don&#8217;t care</em>'<br>
+'<em>depth bits</em>': integer | '<em>don&#8217;t care</em>'<br>
+'<em>stencil bits</em>': integer | '<em>don&#8217;t care</em>'<br>
+'<em>accum red bits</em>': integer | '<em>don&#8217;t care</em>'<br>
+'<em>accum green bits</em>': integer | '<em>don&#8217;t care</em>'<br>
+'<em>accum blue bits</em>': integer | '<em>don&#8217;t care</em>'<br>
+'<em>accum alpha bits</em>': integer | '<em>don&#8217;t care</em>'<br>
+'<em>aux buffers</em>': integer | '<em>don&#8217;t care</em>'<br>
+'<em>samples</em>': integer | '<em>don&#8217;t care</em>'<br>
+'<em>refresh rate</em>': integer | '<em>don&#8217;t care</em>'<br>
+'<em>stereo</em>': boolean<br>
+'<em>srgb capable</em>': boolean<br>
+'<em>doublebuffer</em>': boolean<br>
+'<em>client api</em>': '<em>no api</em>' | '<em>opengl</em>' | '<em>opengl es</em>'<br>
+'<em>context version major</em>': integer | '<em>don&#8217;t care</em>'<br>
+'<em>context version minor</em>': integer | '<em>don&#8217;t care</em>'<br>
+'<em>context robustness</em>': '<em>no robustness</em>' | '<em>no reset notification</em>' | '<em>lose context on reset</em>'<br>
+'<em>context release behavior</em>': '<em>any</em>' | '<em>flush</em>' | '<em>none</em>'<br>
+'<em>opengl forward compat</em>': boolean<br>
+'<em>opengl debug context</em>': boolean<br>
+'<em>opengl profile</em>': '<em>any</em>' | '<em>core</em>' | '<em>compat</em>'<br>
+(Rfr: <a href="http://www.glfw.org/docs/latest/window.html#window_hints">Window creation hints</a>).</span></p>
+</li>
+</ul>
+</div>
+<div id="enums_key" class="ulist">
+<ul>
+<li>
+<p><span class="small"><strong>key</strong>: '<em>xxx</em>' for GLFW_KEY_XXX (e.g. '<em>left bracket</em>' for GLFW_LEFT_BRACKET).<br>
+Values: '<em>unknown</em>', '<em>space</em>', '<em>apostrophe</em>', '<em>comma</em>', '<em>minus</em>', '<em>period</em>', '<em>slash</em>', '<em>0</em>' .. '<em>9</em>', '<em>semicolon</em>', '<em>equal</em>', '<em>a</em>' .. '<em>z</em>', '<em>left bracket</em>', '<em>backslash</em>', '<em>right bracket</em>', '<em>grave accent</em>', '<em>world 1</em>', '<em>world 2</em>', '<em>escape</em>', '<em>enter</em>', '<em>tab</em>', '<em>backspace</em>', '<em>insert</em>', '<em>delete</em>', '<em>right</em>', '<em>left</em>', '<em>down</em>', '<em>up</em>', '<em>page up</em>', '<em>page down</em>', '<em>home</em>', '<em>end</em>', '<em>caps lock</em>', '<em>scroll lock</em>', '<em>num lock</em>', '<em>print screen</em>', '<em>pause</em>', '<em>f1</em>' .. '<em>f25</em>', '<em>kp 0</em>' .. '<em>kp 9</em>', '<em>kp decimal</em>', '<em>kp divide</em>', '<em>kp multiply</em>', '<em>kp subtract</em>', '<em>kp add</em>', '<em>kp enter</em>', '<em>kp equal</em>', '<em>left shift</em>', '<em>left control</em>', '<em>left alt</em>', '<em>left super</em>', '<em>right shift</em>', '<em>right control</em>', '<em>right alt</em>', '<em>right super</em>', '<em>menu</em>'.<br>
+(Rfr: <a href="http://www.glfw.org/docs/latest/group__keys.html">keyboard keys</a>)</span></p>
+</li>
+</ul>
+</div>
+<div id="videomode" class="ulist">
+<ul>
+<li>
+<p><span class="small"><strong>videomode</strong> = {<br>
+<em>width</em>: integer,<br>
+<em>height</em>: integer,<br>
+<em>red_bits</em>: integer,<br>
+<em>blue_bits</em>: integer,<br>
+<em>green_bits</em>: integer,<br>
+<em>refresh_rate</em>: integer,<br>
+} (rfr: <a href="http://www.glfw.org/docs/latest/group__monitor.html">Monitor handling</a>).</span></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
 </div>
 <div id="footnotes">
 <hr>
@@ -1652,7 +1708,7 @@ parameters to its functions actually are what they are meant to be, and has no m
 <div id="footer">
 <div id="footer-text">
 Version 0.9<br>
-Last updated 2017-06-11 19:36:57 CEST
+Last updated 2017-07-23 20:37:44 CEST
 </div>
 </div>
 </body>

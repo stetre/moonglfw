@@ -9,23 +9,18 @@
 [[get_primary_monitor]]
 * _monitor_ = *get_primary_monitor*( )
 
-
 [[get_monitor_pos]]
 * _xpos_, _ypos_ = *get_monitor_pos*(_monitor_)
 
-
 [[get_monitor_physical_size]]
 * _widthmm_, _heightmm_ = *get_monitor_physical_size*(_monitor_)
-
 
 [[get_monitor_name]]
 * _name_ = *get_monitor_name*(_monitor_)
 
 [[get_video_mode]]
-* _videomode_ = *get_video_mode*(_monitor_) +
-_videomode~1~_, _videomode~2~_, _..._ = *get_video_modes*(_monitor_) +
-[small]#_videomode_: a table with the following fields, all having an integer value: 
-_width_, _height_, _red_bits_, _blue_bits_, _green_bits_, _refresh_rate_.#
+* <<videomode, _videomode_>> = *get_video_mode*(_monitor_) +
+_videomode~1~_, _videomode~2~_, _..._ = *get_video_modes*(_monitor_)
 
 [[set_gamma]]
 * *set_gamma*(_monitor_, _gamma_)

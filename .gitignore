@@ -2,5 +2,8 @@
 *.so
 *.dll
 *.o
+*.swp
 core.*
 local/
+src/DIFF
+src/TODO
