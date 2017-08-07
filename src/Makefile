@@ -32,7 +32,7 @@ endif
 ifdef LINUX
 #INCDIR = -I/usr/include
 #LIBDIR = -L/usr/lib
-LIBS = -lglfw
+#LIBS = -lglfw
 endif
 ifdef MINGW
 LIBS = -lglfw3 -llua

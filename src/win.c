@@ -136,7 +136,7 @@ win_t *win_current(lua_State *L)
     {
     win_t *win;
     int id;
-    if((id = glfwGetWindow()) < 1)
+    if((id = glfw.GetWindow()) < 1)
         luaL_error(L, "no current window");
     if((win = win_search(id)) == NULL)
         luaL_error(L, "unknown current window");

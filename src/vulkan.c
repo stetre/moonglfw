@@ -25,8 +25,6 @@
 
 #include "internal.h"
 
-#define VULKAN_NOT_AVAILABLE do { return luaL_error(L, "Vulkan is not available"); } while(0)
-
 /* NOTE: we cannot use lightuserdata to pass Vulkan handles between C and Lua,
  *       because handles are not (in general) pointers.
  *       In particular, handles of non-dispatchable objects are defined as uint64_t
@@ -34,7 +32,6 @@
  *       So we pass them as lua_Integer, which is hopefully large enough.
  */
 
-#ifdef VULKAN
 static uint64_t checkhandle(lua_State *L, int arg)
     {
     return (uint64_t)luaL_checkinteger(L, arg);
@@ -53,10 +50,8 @@ static int pushhandle(lua_State *L, uint64_t handle)
     lua_pushinteger(L, handle);
     return 1;
     }
-#endif
 
 
-#ifdef VULKAN
 static const char* ResultString(VkResult rc)
     {
     switch(rc)
@@ -93,25 +88,24 @@ static const char* ResultString(VkResult rc)
         }
     return NULL; /* unreachable */
     }
-#endif
 
     
 static int VulkanSupported(lua_State *L)
     {
-#ifdef VULKAN
-    lua_pushboolean(L, glfwVulkanSupported());
-#else
-    lua_pushboolean(L, 0);
-#endif
+    if(glfw.VulkanSupported)
+        lua_pushboolean(L, glfw.VulkanSupported());
+    else
+        lua_pushboolean(L, 0);
     return 1;
     }
 
 
 static int GetRequiredInstanceExtensions(lua_State *L)
     {
-#ifdef VULKAN
     uint32_t count, i;
-    const char **names = glfwGetRequiredInstanceExtensions(&count);
+    const char **names;
+    CheckVulkanPfn(L, GetRequiredInstanceExtensions);
+    names = glfw.GetRequiredInstanceExtensions(&count);
     lua_newtable(L);
     if((count == 0) || names==NULL)
         return 1;
@@ -121,58 +115,47 @@ static int GetRequiredInstanceExtensions(lua_State *L)
         lua_rawseti(L, -2, i+1);
         }
     return 1;
-#else
-    VULKAN_NOT_AVAILABLE;
-#endif
     }
 
 
 static int GetPhysicalDevicePresentationSupport(lua_State *L)
     {
-#ifdef VULKAN
+    int result;
     VkInstance instance = (VkInstance)checkhandle(L, 1);
     VkPhysicalDevice device = (VkPhysicalDevice)checkhandle(L, 2);
     uint32_t queuefamily = luaL_checkinteger(L, 3);
-    int result = glfwGetPhysicalDevicePresentationSupport(instance, device, queuefamily);
+    CheckVulkanPfn(L, GetPhysicalDevicePresentationSupport);
+    result = glfw.GetPhysicalDevicePresentationSupport(instance, device, queuefamily);
     lua_pushboolean(L, result);
     return 1;
-#else
-    VULKAN_NOT_AVAILABLE;
-#endif
     }
 
 
 static int CreateWindowSurface(lua_State *L)
     {
-#ifdef VULKAN
+    VkResult ec;
     VkSurfaceKHR surface;
     win_t *win = checkwindow(L, 1);
     VkInstance instance = (VkInstance)checkhandle(L, 2);
     VkAllocationCallbacks* allocator = (VkAllocationCallbacks*)optlightuserdata(L, 3);
 
-    VkResult ec = glfwCreateWindowSurface(instance, win->window, allocator, &surface);
+    CheckVulkanPfn(L, CreateWindowSurface);
+    ec = glfw.CreateWindowSurface(instance, win->window, allocator, &surface);
 
     if(ec != VK_SUCCESS)
         return luaL_error(L, ResultString(ec));
     pushhandle(L, (uint64_t)surface);
     return 1;
-#else
-    VULKAN_NOT_AVAILABLE;
-#endif
     }
 
 #if 0
 static int DestroySurface(lua_State *L)
     {
-#ifdef VULKAN
     VkInstance instance = (VkInstance)checkhandle(L, 1);
     VkSurfaceKHR surface = (VkSurfaceKHR)checkhandle(L, 2);
     VkAllocationCallbacks* allocator = (VkAllocationCallbacks*)optlightuserdata(L, 3);
     vkDestroySurfaceKHR(instance, surface, allocator);
     return 0;
-#else
-    VULKAN_NOT_AVAILABLE;
-#endif
     }
 #endif
 
@@ -195,9 +178,7 @@ static const struct luaL_Reg Functions[] =
 void moonglfw_open_vulkan(lua_State *L)
     {
     luaL_setfuncs(L, Functions, 0);
-#ifdef VULKAN
-    if(sizeof(lua_Integer) < sizeof(uint64_t))
+    if(glfw.VulkanSupported && (sizeof(lua_Integer) < sizeof(uint64_t)))
         luaL_error(L, "Vulkan support requires sizeof(lua_Integer) >= sizeof(uint64_t)");
-#endif
     }
 

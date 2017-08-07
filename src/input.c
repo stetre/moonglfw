@@ -86,7 +86,7 @@ static int GetInputMode(lua_State *L)
     int val;
     win_t *win = checkwindow(L, 1);
     int mode = CheckInputMode(L, 2);
-    val = glfwGetInputMode(win->window,mode);
+    val = glfw.GetInputMode(win->window,mode);
     switch(mode)
         {
         case GLFW_CURSOR:   PushCursorMode(L, val); return 1;
@@ -111,7 +111,7 @@ static int SetInputMode(lua_State *L)
         default:
             return unexpected(L);
         }
-    glfwSetInputMode(win->window, mode, value);
+    glfw.SetInputMode(win->window, mode, value);
     return 0;
     }
 
@@ -121,25 +121,25 @@ static int GetKey(lua_State *L)
     {
     win_t *win = checkwindow(L, 1);
     int key = CheckKey(L, 2);
-    int state = glfwGetKey(win->window, key);
+    int state = glfw.GetKey(win->window, key);
     lua_pushstring(L, state==GLFW_PRESS ? "press" : "release");
     return 1;
     }
 
 static int GetKeyName(lua_State *L)
     {
-#if GLFWVER >= 30200
     int key, scancode;
     const char *name = NULL;
+    CheckPfn(L, GetKeyName, 3, 2, 0);
     if(lua_type(L, 1) == LUA_TSTRING)
         {
         key = CheckKey(L, 1);
-        name = glfwGetKeyName(key, 0);
+        name = glfw.GetKeyName(key, 0);
         }
     else if(lua_isinteger(L, 1))
         {
         scancode = lua_tointeger(L, 1);
-        name = glfwGetKeyName(GLFW_KEY_UNKNOWN, scancode);
+        name = glfw.GetKeyName(GLFW_KEY_UNKNOWN, scancode);
         }
     else
         return luaL_argerror(L, 1, "expected key (a string) or scancode (an integer)");
@@ -148,9 +148,6 @@ static int GetKeyName(lua_State *L)
         return 0;
     lua_pushstring(L, name);
     return 1;
-#else
-    requires_version(L, "3.2");
-#endif
     }
 
 /*------------------------------------------------------------------------------*
@@ -163,7 +160,7 @@ static int GetMouseButton(lua_State *L)
     {
     win_t *win = checkwindow(L, 1);
     int button = CheckButton(L, 2);
-    int state = glfwGetMouseButton(win->window, button);
+    int state = glfw.GetMouseButton(win->window, button);
     lua_pushstring(L, state==GLFW_PRESS ? "press" : "release");
     return 1;
     }
@@ -172,7 +169,7 @@ static int GetCursorPos(lua_State *L)
     {
     double xpos, ypos;
     win_t *win = checkwindow(L, 1);
-    glfwGetCursorPos(win->window, &xpos, &ypos);
+    glfw.GetCursorPos(win->window, &xpos, &ypos);
     lua_pushnumber(L, xpos);
     lua_pushnumber(L, ypos);
     return 2;
@@ -183,7 +180,7 @@ static int SetCursorPos(lua_State *L)
     win_t *win = checkwindow(L, 1);
     double xpos = luaL_checknumber(L, 2);
     double ypos = luaL_checknumber(L, 3);
-    glfwSetCursorPos(win->window, xpos, ypos);
+    glfw.SetCursorPos(win->window, xpos, ypos);
     return 0;
     }
 
@@ -206,7 +203,7 @@ static int CreateCursor(lua_State *L)
     if(!cur)
         return luaL_error(L, "cannot create cursor");
     
-    cur->cursor = glfwCreateCursor(&image, xhot, yhot);
+    cur->cursor = glfw.CreateCursor(&image, xhot, yhot);
     if(!cur->cursor)
         {
         cur_free(cur);
@@ -223,7 +220,7 @@ static int CreateStandardCursor(lua_State *L)
     if(!cur)
         return luaL_error(L, "cannot create cursor");
     
-    cur->cursor = glfwCreateStandardCursor(shape);
+    cur->cursor = glfw.CreateStandardCursor(shape);
     if(!cur->cursor)
         {
         cur_free(cur);
@@ -236,7 +233,7 @@ static int CreateStandardCursor(lua_State *L)
 static int DestroyCursor(lua_State *L)
     {
     cur_t *cur = checkcursor(L, 1);
-    glfwDestroyCursor(cur->cursor);
+    glfw.DestroyCursor(cur->cursor);
     cur_free(cur);
     return 0;
     }
@@ -245,7 +242,7 @@ static int SetCursor(lua_State *L)
     {
     win_t *win = checkwindow(L, 1);
     cur_t *cur = checkcursor(L, 2);
-    glfwSetCursor(win->window, cur->cursor);
+    glfw.SetCursor(win->window, cur->cursor);
     return 0;
     }
 
@@ -258,7 +255,7 @@ static int SetCursor(lua_State *L)
 static int JoystickPresent(lua_State *L)
     {
     int joy = CheckJoystick(L, 1);
-    int val = glfwJoystickPresent(joy);
+    int val = glfw.JoystickPresent(joy);
     lua_pushboolean(L, val);
     return 1;
     }
@@ -267,7 +264,7 @@ static int GetJoystickAxes(lua_State *L)
     {
     int i, count;
     int joy = CheckJoystick(L, 1);
-    const float *axis = glfwGetJoystickAxes(joy, &count);
+    const float *axis = glfw.GetJoystickAxes(joy, &count);
     if(!axis)
         return 0;
     for(i=0; i< count; i++)
@@ -279,7 +276,7 @@ static int GetJoystickButtons(lua_State *L)
     {
     int i, count;
     int joy = CheckJoystick(L, 1);
-    const unsigned char *state = glfwGetJoystickButtons(joy, &count);
+    const unsigned char *state = glfw.GetJoystickButtons(joy, &count);
     if(!state)
         return 0;
     for(i=0; i< count; i++)
@@ -290,7 +287,7 @@ static int GetJoystickButtons(lua_State *L)
 static int GetJoystickName(lua_State *L)
     {
     int joy = CheckJoystick(L, 1);
-    const char *name = glfwGetJoystickName(joy);
+    const char *name = glfw.GetJoystickName(joy);
     lua_pushstring(L, name ? name : "???");
     return 1;
     }
@@ -304,14 +301,14 @@ static int SetClipboardString(lua_State *L)
     {
     win_t *win = checkwindow(L, 1);
     const char* string = luaL_checkstring(L, 2);
-    glfwSetClipboardString(win->window, string);
+    glfw.SetClipboardString(win->window, string);
     return 0;
     }
 
 static int GetClipboardString(lua_State *L)
     {
     win_t *win = checkwindow(L, 1);
-    const char* string = glfwGetClipboardString(win->window);
+    const char* string = glfw.GetClipboardString(win->window);
     lua_pushstring(L, string);
     return 1;
     }
@@ -323,48 +320,42 @@ static int GetClipboardString(lua_State *L)
 
 static int GetTime(lua_State *L)
     {
-    lua_pushnumber(L, glfwGetTime());
+    lua_pushnumber(L, glfw.GetTime());
     return 1;
     }
 
 static int SetTime(lua_State *L)
     {
     double time = luaL_checknumber(L, 1);
-    glfwSetTime(time);
+    glfw.SetTime(time);
     return 0;
     }
 
 static int GetTimerFrequency(lua_State *L)
     {
-#if GLFWVER >= 30200
-    uint64_t hz = glfwGetTimerFrequency();
+    uint64_t hz;
+    CheckPfn(L, GetTimerFrequency, 3, 2, 0);
+    hz = glfw.GetTimerFrequency();
     lua_pushinteger(L, hz);
     return 1;
-#else
-    requires_version(L, "3.2");
-#endif
     }
 
 static int GetTimerValue(lua_State *L)
     {
-#if GLFWVER >= 30200
-    uint64_t tics = glfwGetTimerValue();
+    uint64_t tics;
+    CheckPfn(L, GetTimerValue, 3, 2, 0);
+    tics = glfw.GetTimerValue();
     lua_pushinteger(L, tics);
     return 1;
-#else
-    requires_version(L, "3.2");
-#endif
     }
 
 static int GetTimerSeconds(lua_State *L) /* NONGLFW */
     {
-#if GLFWVER >= 30200
-    double seconds = (double)glfwGetTimerValue()/(double)glfwGetTimerFrequency();
+    double seconds;
+    CheckPfn(L, GetTimerValue, 3, 2, 0);
+    seconds = (double)glfw.GetTimerValue()/(double)glfw.GetTimerFrequency();
     lua_pushnumber(L, seconds);
     return 1;
-#else
-    requires_version(L, "3.2");
-#endif
     }
 
 

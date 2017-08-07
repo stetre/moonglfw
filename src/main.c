@@ -25,6 +25,14 @@
 
 #include "internal.h"
 
+#define MAKE_VERSION(major, minor, rev) (((major) << 22) | ((minor) << 12) | (rev))
+static int Version ;
+
+int checkminversion(int major, int minor, int rev)
+/* Checks that libglfw.so Version is at least major.minor.ver */
+    {
+    return (Version >= MAKE_VERSION(major, minor, rev));
+    }
 
 static void AddVersions(lua_State *L)
 /* Add version strings to the glfw table */
@@ -35,19 +43,27 @@ static void AddVersions(lua_State *L)
     lua_settable(L, -3);
 
     lua_pushstring(L, "_GLFW_VERSION");
-    glfwGetVersion(&major, &minor, &rev);
+    glfw.GetVersion(&major, &minor, &rev);
     lua_pushfstring(L, "GLFW %d.%d.%d", major, minor, rev);
 #if 0
     lua_pushfstring(L, "GLFW %d.%d.%d release %d",
             GLFW_VERSION_MAJOR, GLFW_VERSION_MINOR, GLFW_VERSION_REVISION, GLFW_RELEASE);
 #endif
     lua_settable(L, -3);
+
+    Version = MAKE_VERSION(major, minor, rev);
+    if(!checkminversion(3, 1, 0))
+        {
+        lua_pushfstring(L, "MoonGLFW requires GLFW version >= 3.1 (found version %d.%d.%d)",
+                            major, minor, rev);
+        lua_error(L);
+        }
     }
 
 static int GetVersion(lua_State *L) 
     {
     int major, minor, rev;
-    glfwGetVersion(&major, &minor, &rev);
+    glfw.GetVersion(&major, &minor, &rev);
     lua_pushinteger(L, major);
     lua_pushinteger(L, minor);
     lua_pushinteger(L, rev);
@@ -56,7 +72,7 @@ static int GetVersion(lua_State *L)
 
 static int GetVersionString(lua_State *L) 
     {
-    lua_pushstring(L, glfwGetVersionString());
+    lua_pushstring(L, glfw.GetVersionString());
     return 1;
     }
 
@@ -71,7 +87,7 @@ static void AtExit(void)
         mon_free_all();
         win_free_all();
         id_free_all();
-        glfwTerminate();
+        glfw.Terminate();
         moonglfw_L = NULL;
         }
     }
@@ -102,12 +118,14 @@ int luaopen_moonglfw(lua_State *L)
     moonglfw_L = L;
 
     lua_newtable(L); /* the glfw table */
+    moonglfw_open_getproc(L);
     AddVersions(L);
 
-    if(glfwInit() != GL_TRUE)
+
+    if(glfw.Init() != GL_TRUE)
         return luaL_error(L, "glfwInit() failed");
     atexit(AtExit);
-    glfwSetErrorCallback(errorCallback);
+    glfw.SetErrorCallback(errorCallback);
 
     /* add glfw functions: */
     luaL_setfuncs(L, Functions, 0);

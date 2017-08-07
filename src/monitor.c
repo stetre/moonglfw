@@ -71,7 +71,7 @@ void monitorCallback(GLFWmonitor *monitor, int event)
 static int GetPrimaryMonitor(lua_State *L)
     {
     int id;
-    GLFWmonitor* monitor = glfwGetPrimaryMonitor();
+    GLFWmonitor* monitor = glfw.GetPrimaryMonitor();
     if(!monitor)
         return 0;
     id = monitorAdd(L, monitor);
@@ -84,7 +84,7 @@ static int GetMonitors(lua_State *L)
     int i, id, count;
     GLFWmonitor** monitor;
     /* no mon_free_all(); */
-    monitor = glfwGetMonitors(&count);
+    monitor = glfw.GetMonitors(&count);
     if(!monitor)
         return 0;
     for(i=0; i<count; i++)
@@ -100,7 +100,7 @@ static int GetMonitorPos(lua_State *L)
     {
     int xpos, ypos;
     mon_t *mon = checkmonitor(L, 1);
-    glfwGetMonitorPos(mon->monitor, &xpos, &ypos);
+    glfw.GetMonitorPos(mon->monitor, &xpos, &ypos);
     lua_pushinteger(L, xpos);
     lua_pushinteger(L, ypos);
     return 2;
@@ -110,7 +110,7 @@ static int GetMonitorPhysicalSize(lua_State *L)
     {
     int widthmm, heightmm;
     mon_t *mon = checkmonitor(L, 1);
-    glfwGetMonitorPhysicalSize(mon->monitor, &widthmm, &heightmm);
+    glfw.GetMonitorPhysicalSize(mon->monitor, &widthmm, &heightmm);
     lua_pushinteger(L, widthmm);
     lua_pushinteger(L, heightmm);
     return 2;
@@ -119,7 +119,7 @@ static int GetMonitorPhysicalSize(lua_State *L)
 static int GetMonitorName(lua_State *L)
     {
     mon_t *mon = checkmonitor(L, 1);
-    const char* name = glfwGetMonitorName(mon->monitor);
+    const char* name = glfw.GetMonitorName(mon->monitor);
     lua_pushstring(L, name ? name : "???");
     return 1;
     }
@@ -128,7 +128,7 @@ static int GetVideoModes(lua_State *L)
     {
     int i, count;
     mon_t *mon = checkmonitor(L, 1);
-    const GLFWvidmode *mode = glfwGetVideoModes(mon->monitor, &count);
+    const GLFWvidmode *mode = glfw.GetVideoModes(mon->monitor, &count);
     if(!mode) 
         return 0;
     for(i=0; i<count; i++)
@@ -139,7 +139,7 @@ static int GetVideoModes(lua_State *L)
 static int GetVideoMode(lua_State *L)
     {
     mon_t *mon = checkmonitor(L, 1);
-    const GLFWvidmode *mode = glfwGetVideoMode(mon->monitor);
+    const GLFWvidmode *mode = glfw.GetVideoMode(mon->monitor);
     if(!mode) 
         return 0;
     pushvidmode(L, mode);
@@ -150,14 +150,14 @@ static int SetGamma(lua_State *L)
     {
     mon_t *mon = checkmonitor(L, 1);
     float gamma = luaL_checknumber(L, 2);
-    glfwSetGamma(mon->monitor, gamma);
+    glfw.SetGamma(mon->monitor, gamma);
     return 0;
     }
 
 static int GetGammaRamp(lua_State *L)
     {
     mon_t *mon = checkmonitor(L, 1);
-    const GLFWgammaramp *ramp = glfwGetGammaRamp(mon->monitor);
+    const GLFWgammaramp *ramp = glfw.GetGammaRamp(mon->monitor);
     if(!ramp) 
         return 0;
     return pushgammaramp(L, ramp);
@@ -168,7 +168,7 @@ static int SetGammaRamp(lua_State *L)
     GLFWgammaramp ramp;
     mon_t *mon = checkmonitor(L, 1);
     checkgammaramp(L, 2, &ramp);
-    glfwSetGammaRamp(mon->monitor, &ramp);
+    glfw.SetGammaRamp(mon->monitor, &ramp);
     free(ramp.red);
     free(ramp.green);
     free(ramp.blue);
@@ -197,6 +197,6 @@ static const struct luaL_Reg Functions[] =
 void moonglfw_open_monitor(lua_State *L)
     {
     luaL_setfuncs(L, Functions, 0);
-    glfwSetMonitorCallback(monitorCallback);
+    glfw.SetMonitorCallback(monitorCallback);
     }
 

@@ -78,7 +78,7 @@ static void ErrorCallback(int ec, const char* descr)
     }
 
 //typedef void (* GLFWmonitorfun)(GLFWmonitor*,int);
-//GLFWmonitorfun glfwSetMonitorCallback(GLFWmonitorfun cbfun);
+//GLFWmonitorfun glfw.SetMonitorCallback(GLFWmonitorfun cbfun);
 static int Monitor = LUA_NOREF;
 static void MonitorCallback(GLFWmonitor *monitor, int event)
     {
@@ -91,7 +91,6 @@ static void MonitorCallback(GLFWmonitor *monitor, int event)
     }
 
 
-#if GLFWVER >= 30200
 static void joystickCallback(int joy, int event)
     {
     (void)joy;
@@ -99,7 +98,7 @@ static void joystickCallback(int joy, int event)
     }
 
 //typedef void (* GLFWjoystickfun)(int joy, int event);
-//GLFWjoystickfun glfwSetJoystickCallback(GLFWjoystickfun cbfun);
+//GLFWjoystickfun glfw.SetJoystickCallback(GLFWjoystickfun cbfun);
 static int Joystick = LUA_NOREF;
 static void JoystickCallback(int joy, int event)
     {
@@ -110,7 +109,6 @@ static void JoystickCallback(int joy, int event)
    /* always call the default callback: */
     joystickCallback(joy, event);
     }
-#endif
 
 
 #undef BEGIN
@@ -121,29 +119,25 @@ static void JoystickCallback(int joy, int event)
  | Global callbacks registration                                            |
  *--------------------------------------------------------------------------*/
 
-#define REGISTER_FUNC(cb, func_index, defaultcb)                    \
+#define REGISTER_FUNC(cb, func_index, defaultcb, major, minor, rev) \
 static int Set##cb##Callback(lua_State *L)                          \
     {                                                               \
+    CheckPfn(L, Set##cb##Callback, major, minor, rev);              \
     if(cb != LUA_NOREF)                                             \
         { luaL_unref(L, LUA_REGISTRYINDEX, cb); cb = LUA_NOREF; }   \
     if(lua_isnoneornil(L, func_index))                              \
-        { glfwSet##cb##Callback(defaultcb); return 0; }             \
+        { glfw.Set##cb##Callback(defaultcb); return 0; }            \
     if(!lua_isfunction(L, func_index))                              \
         return luaL_argerror(L, func_index, "function expected");   \
     lua_pushvalue(L, func_index);                                   \
     cb = luaL_ref(L, LUA_REGISTRYINDEX);                            \
-    glfwSet##cb##Callback(cb##Callback);                            \
+    glfw.Set##cb##Callback(cb##Callback);                           \
     return 0;                                                       \
     }
 
-REGISTER_FUNC(Error, 1, errorCallback)
-REGISTER_FUNC(Monitor, 1, monitorCallback)
-
-#if GLFWVER >= 30200
-REGISTER_FUNC(Joystick, 1, joystickCallback)
-#else
-static int SetJoystickCallback(lua_State *L) { requires_version(L, "3.2"); }
-#endif
+REGISTER_FUNC(Error, 1, errorCallback, 3, 1, 0)
+REGISTER_FUNC(Monitor, 1, monitorCallback, 3, 1, 0)
+REGISTER_FUNC(Joystick, 1, joystickCallback, 3, 2, 0)
 
 #undef REGISTER_FUNC
 
@@ -156,7 +150,7 @@ static int SetJoystickCallback(lua_State *L) { requires_version(L, "3.2"); }
 #define BEGIN(cb)  /* retrieve the callback */                      \
     int top = lua_gettop(L);                                        \
 do {                                                                \
-    int id = (intptr_t)glfwGetWindowUserPointer(window);            \
+    int id = (intptr_t)glfw.GetWindowUserPointer(window);            \
     win_t *win = win_search(id);                                    \
     if((!win) || (lua_rawgeti(L, LUA_REGISTRYINDEX, win->cb) != LUA_TFUNCTION)) \
         { unexpected(L); return; }                                  \
@@ -224,7 +218,7 @@ static void FramebufferSizeCallback(GLFWwindow *window, int width, int height)
     }
 
 //typedef void (* GLFWkeyfun)(GLFWwindow*,int,int,int,int);
-//GLFWkeyfun glfwSetKeyCallback(GLFWwindow* window, GLFWkeyfun cbfun);
+//GLFWkeyfun glfw.SetKeyCallback(GLFWwindow* window, GLFWkeyfun cbfun);
 static void KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mods)
     {
     int n = 3;
@@ -238,7 +232,7 @@ static void KeyCallback(GLFWwindow *window, int key, int scancode, int action, i
 
 
 //typedef void (* GLFWcharfun)(GLFWwindow*,unsigned int);
-//GLFWcharfun glfwSetCharCallback(GLFWwindow* window, GLFWcharfun cbfun);
+//GLFWcharfun glfw.SetCharCallback(GLFWwindow* window, GLFWcharfun cbfun);
 static void CharCallback(GLFWwindow *window, unsigned int codepoint)
     {
     BEGIN(Char);
@@ -248,7 +242,7 @@ static void CharCallback(GLFWwindow *window, unsigned int codepoint)
 
 
 //typedef void (* GLFWcharmodsfun)(GLFWwindow*,unsigned int,int);
-//GLFWcharmodsfun glfwSetCharModsCallback(GLFWwindow* window, GLFWcharmodsfun cbfun);
+//GLFWcharmodsfun glfw.SetCharModsCallback(GLFWwindow* window, GLFWcharmodsfun cbfun);
 static void CharModsCallback(GLFWwindow *window, unsigned int codepoint, int mods)
     {
     int n = 1;
@@ -260,7 +254,7 @@ static void CharModsCallback(GLFWwindow *window, unsigned int codepoint, int mod
 
 
 //typedef void (* GLFWmousebuttonfun)(GLFWwindow*,int,int,int);
-//GLFWmousebuttonfun glfwSetMouseButtonCallback(GLFWwindow* window, GLFWmousebuttonfun cbfun);
+//GLFWmousebuttonfun glfw.SetMouseButtonCallback(GLFWwindow* window, GLFWmousebuttonfun cbfun);
 static void MouseButtonCallback(GLFWwindow *window, int button, int action, int mods)
     {
     int n = 2;
@@ -273,7 +267,7 @@ static void MouseButtonCallback(GLFWwindow *window, int button, int action, int 
 
 
 //typedef void (* GLFWcursorposfun)(GLFWwindow*,double,double);
-//GLFWcursorposfun glfwSetCursorPosCallback(GLFWwindow* window, GLFWcursorposfun cbfun);
+//GLFWcursorposfun glfw.SetCursorPosCallback(GLFWwindow* window, GLFWcursorposfun cbfun);
 static void CursorPosCallback(GLFWwindow *window, double xpos, double ypos)
     {
     BEGIN(CursorPos);
@@ -284,7 +278,7 @@ static void CursorPosCallback(GLFWwindow *window, double xpos, double ypos)
 
 
 //typedef void (* GLFWcursorenterfun)(GLFWwindow*,int);
-//GLFWcursorenterfun glfwSetCursorEnterCallback(GLFWwindow* window, GLFWcursorenterfun cbfun);
+//GLFWcursorenterfun glfw.SetCursorEnterCallback(GLFWwindow* window, GLFWcursorenterfun cbfun);
 static void CursorEnterCallback(GLFWwindow *window, int entered)
     {
     BEGIN(CursorEnter);
@@ -294,7 +288,7 @@ static void CursorEnterCallback(GLFWwindow *window, int entered)
 
 
 //typedef void (* GLFWscrollfun)(GLFWwindow*,double,double);
-//GLFWscrollfun glfwSetScrollCallback(GLFWwindow* window, GLFWscrollfun cbfun);
+//GLFWscrollfun glfw.SetScrollCallback(GLFWwindow* window, GLFWscrollfun cbfun);
 static void ScrollCallback(GLFWwindow *window, double xoffset, double yoffset)
     {
     BEGIN(Scroll);
@@ -305,7 +299,7 @@ static void ScrollCallback(GLFWwindow *window, double xoffset, double yoffset)
 
 
 //typedef void (* GLFWdropfun)(GLFWwindow*,int,const char**);
-//GLFWdropfun glfwSetDropCallback(GLFWwindow* window, GLFWdropfun cbfun);
+//GLFWdropfun glfw.SetDropCallback(GLFWwindow* window, GLFWdropfun cbfun);
 static void DropCallback(GLFWwindow *window, int count, const char** paths)
     {
     int i;
@@ -332,7 +326,7 @@ static int Set##cb##Callback(lua_State *L)                       \
         { /* unregister callback */                     \
         if(win->cb == LUA_NOREF) return 0; /* nothing to do */  \
         CALLBACK_UNREF(win->cb);                        \
-        glfwSet##cb##Callback(win->window, NULL);       \
+        glfw.Set##cb##Callback(win->window, NULL);       \
         return 0;                                       \
         }                                               \
     if(!lua_isfunction(L, 2))                           \
@@ -341,7 +335,7 @@ static int Set##cb##Callback(lua_State *L)                       \
         luaL_unref(L, LUA_REGISTRYINDEX, win->cb);      \
     lua_pushvalue(L, 2);                                \
     win->cb = luaL_ref(L, LUA_REGISTRYINDEX);           \
-    glfwSet##cb##Callback(win->window, cb##Callback);   \
+    glfw.Set##cb##Callback(win->window, cb##Callback);   \
     return 0;                                           \
     }
 

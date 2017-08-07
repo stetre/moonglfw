@@ -104,17 +104,13 @@ ENUM_T(TargetEnum, TargetStrings, TargetCodes)
 
 
 ENUM_STRINGS(ApiStrings) = {
-#if GLFWVER >= 30200
     "no api",
-#endif
     "opengl",
     "opengl es",
     NULL
 };
 ENUM_CODES(ApiCodes) = {
-#if GLFWVER >= 30200
     GLFW_NO_API,
-#endif
     GLFW_OPENGL_API,
     GLFW_OPENGL_ES_API,
 };
@@ -177,21 +173,21 @@ ENUM_T(ProfileEnum, ProfileStrings, ProfileCodes)
 static int DefaultWindowHints(lua_State *L)
     {
     (void)L;
-    glfwDefaultWindowHints();
+    glfw.DefaultWindowHints();
     return 0;
     }
 
 static int Boolean(lua_State *L, int target)
     {
     int hint = checkboolean(L, 2);
-    glfwWindowHint(target, hint);
+    glfw.WindowHint(target, hint);
     return 0;
     }
 
 static int Enum(lua_State *L, int target, enum_t *e)
     {
     int hint = enumCheck(L, 2, e);
-    glfwWindowHint(target, hint);
+    glfw.WindowHint(target, hint);
     return 0;
     }
 
@@ -214,7 +210,7 @@ static int Integer(lua_State *L, int target)
             return luaL_argerror(L, 2, "invalid value");
 #endif
         }
-    glfwWindowHint( target, hint);
+    glfw.WindowHint( target, hint);
     return 0;
     }
 
@@ -265,9 +261,9 @@ static int VersionHint(lua_State *L) /* NONGLFW */
     int major = luaL_checkinteger(L, 1);
     int minor = luaL_checkinteger(L, 2);
     int profile = enumCheck(L, 3, &ProfileEnum);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, major);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, minor);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, profile);
+    glfw.WindowHint(GLFW_CONTEXT_VERSION_MAJOR, major);
+    glfw.WindowHint(GLFW_CONTEXT_VERSION_MINOR, minor);
+    glfw.WindowHint(GLFW_OPENGL_PROFILE, profile);
     return 0;
     }
 
@@ -279,7 +275,7 @@ static int GetInt_(lua_State *L, GLFWwindow* window, int attrib, int boolean)
 #define GetInteger(L, w, a) GetInt_((L), (w), (a), 0)
 #define GetBoolean(L, w, a) GetInt_((L), (w), (a), 1)
     {
-    int val = glfwGetWindowAttrib(window, attrib);
+    int val = glfw.GetWindowAttrib(window, attrib);
     if(boolean)
         lua_pushboolean(L, val);
     else
@@ -289,7 +285,7 @@ static int GetInt_(lua_State *L, GLFWwindow* window, int attrib, int boolean)
 
 static int GetEnum(lua_State *L, GLFWwindow* window, int attrib, enum_t *e)
     {
-    int val = glfwGetWindowAttrib(window, attrib);
+    int val = glfw.GetWindowAttrib(window, attrib);
     enumPush(L, val, e);
     return 1;
     }

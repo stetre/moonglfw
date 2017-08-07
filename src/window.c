@@ -40,7 +40,7 @@ static int CreateWindow(lua_State *L)
     if(!win)
         return luaL_error(L, "cannot create window");
     
-    win->window = glfwCreateWindow(width, height, title, monitor, share);
+    win->window = glfw.CreateWindow(width, height, title, monitor, share);
     if(win->window == NULL)
         {
         win_free(win);
@@ -49,7 +49,7 @@ static int CreateWindow(lua_State *L)
     /* this will allow us to retrieve the win_t* from the GLFWwindow*: */
     id = win->id;
     win->share_id =  share_win ? share_win->id : -1;
-    glfwSetWindowUserPointer(win->window, (void*)id);
+    glfw.SetWindowUserPointer(win->window, (void*)id);
     lua_pushinteger(L, win->id);
     return 1;
     }
@@ -57,7 +57,7 @@ static int CreateWindow(lua_State *L)
 static int DestroyWindow(lua_State *L)
     {
     win_t *win = checkwindow(L, 1);
-    glfwDestroyWindow(win->window);
+    glfw.DestroyWindow(win->window);
     win_free(win);
     return 0;
     }
@@ -65,50 +65,41 @@ static int DestroyWindow(lua_State *L)
 
 static int FocusWindow(lua_State *L)
     {
-#if GLFWVER >= 30200
     win_t *win = checkwindow(L, 1);
-    glfwFocusWindow(win->window);
+    CheckPfn(L, FocusWindow, 3, 2, 0);
+    glfw.FocusWindow(win->window);
     return 0;
-#else
-    requires_version(L, "3.2");
-#endif
     }
 
 static int SetWindowAspectRatio(lua_State *L)
     {
-#if GLFWVER >= 30200
     win_t *win = checkwindow(L, 1);
     int numer = luaL_optinteger(L, 2, GLFW_DONT_CARE);
     int denom = luaL_optinteger(L, 3, GLFW_DONT_CARE);
-    glfwSetWindowAspectRatio(win->window, numer, denom);
+    CheckPfn(L, SetWindowAspectRatio, 3, 2, 0);
+    glfw.SetWindowAspectRatio(win->window, numer, denom);
     return 0;
-#else
-    requires_version(L, "3.2");
-#endif
     }
 
 static int SetWindowSizeLimits(lua_State *L)
     {
-#if GLFWVER >= 30200
     win_t *win = checkwindow(L, 1);
     int minwidth = luaL_optinteger(L, 2, GLFW_DONT_CARE);
     int minheight = luaL_optinteger(L, 3, GLFW_DONT_CARE);
     int maxwidth = luaL_optinteger(L, 4, GLFW_DONT_CARE);
     int maxheight = luaL_optinteger(L, 5, GLFW_DONT_CARE);
-    glfwSetWindowSizeLimits(win->window, minwidth, minheight, maxwidth, maxheight);
+    CheckPfn(L, SetWindowSizeLimits, 3, 2, 0);
+    glfw.SetWindowSizeLimits(win->window, minwidth, minheight, maxwidth, maxheight);
     return 0;
-#else
-    requires_version(L, "3.2");
-#endif
     }
 
 static int SetWindowIcon(lua_State *L)
     {
-#if GLFWVER >= 30200
     size_t len;
     int count, arg;
     GLFWimage images[32];
     win_t *win = checkwindow(L, 1);
+    CheckPfn(L, SetWindowIcon, 3, 2, 0);
     count = 0;
     arg = 2;
     while(!lua_isnoneornil(L, arg))
@@ -120,16 +111,12 @@ static int SetWindowIcon(lua_State *L)
         }
     if(count==0)
         luaL_checkinteger(L, arg); /* raises an error */
-    glfwSetWindowIcon(win->window, count, images);
+    glfw.SetWindowIcon(win->window, count, images);
     return 0;
-#else
-    requires_version(L, "3.2");
-#endif
     }
 
 static int SetWindowMonitor(lua_State *L)
     {
-#if GLFWVER >= 30200
     mon_t *mon;
     win_t *win = checkwindow(L, 1);
     GLFWmonitor* monitor = testmonitor(L, 2, &mon) ? mon->monitor : NULL;
@@ -138,11 +125,9 @@ static int SetWindowMonitor(lua_State *L)
     int width = luaL_checkinteger(L, 5);
     int height = luaL_checkinteger(L, 6);
     int refreshRate = luaL_optinteger(L, 7, GLFW_DONT_CARE);
-    glfwSetWindowMonitor(win->window, monitor, xpos, ypos, width, height, refreshRate);
+    CheckPfn(L, SetWindowMonitor, 3, 2, 0);
+    glfw.SetWindowMonitor(win->window, monitor, xpos, ypos, width, height, refreshRate);
     return 0;
-#else
-    requires_version(L, "3.2");
-#endif
     }
 
 
@@ -150,46 +135,43 @@ static int SetWindowMonitor(lua_State *L)
 static int PollEvents(lua_State *L)
     {
     (void)L;
-    glfwPollEvents();
+    glfw.PollEvents();
     return 0;
     }
 
 static int WaitEvents(lua_State *L)
     {
     (void)L;
-    glfwWaitEvents();
+    glfw.WaitEvents();
     return 0;
     }
 
 static int WaitEventsTimeout(lua_State *L)
     {
-#if GLFWVER >= 30200
     double timeout = luaL_checknumber(L, 1);
-    glfwWaitEventsTimeout(timeout);
+    CheckPfn(L, WaitEventsTimeout, 3, 2, 0);
+    glfw.WaitEventsTimeout(timeout);
     return 0;
-#else
-    requires_version(L, "3.2");
-#endif
     }
 
 static int PostEmptyEvent(lua_State *L)
     {
     (void)L;
-    glfwPostEmptyEvent();
+    glfw.PostEmptyEvent();
     return 0;
     }
 
 static int SwapBuffers(lua_State *L)
     {
     win_t *win = checkwindow(L, 1);
-    glfwSwapBuffers(win->window);
+    glfw.SwapBuffers(win->window);
     return 0;
     }
 
 static int WindowShouldClose(lua_State *L)
     {
     win_t *win = checkwindow(L, 1);
-    lua_pushboolean(L, glfwWindowShouldClose(win->window));
+    lua_pushboolean(L, glfw.WindowShouldClose(win->window));
     return 1;
     }
 
@@ -198,7 +180,7 @@ static int SetWindowShouldClose(lua_State *L)
     {
     win_t *win = checkwindow(L, 1);
     int value = checkboolean(L, 2);
-    glfwSetWindowShouldClose(win->window, value);
+    glfw.SetWindowShouldClose(win->window, value);
     return 0;
     }
 
@@ -206,7 +188,7 @@ static int SetWindowTitle(lua_State *L)
     {
     win_t *win = checkwindow(L, 1);
     const char *title = luaL_optstring(L, 2, "");
-    glfwSetWindowTitle(win->window, title);
+    glfw.SetWindowTitle(win->window, title);
     return 0;
     }
 
@@ -214,7 +196,7 @@ static int GetWindowPos(lua_State *L)
     {
     int xpos, ypos;
     win_t *win = checkwindow(L, 1);
-    glfwGetWindowPos(win->window, &xpos, &ypos);
+    glfw.GetWindowPos(win->window, &xpos, &ypos);
     lua_pushinteger(L, xpos);
     lua_pushinteger(L, ypos);
     return 2;
@@ -225,7 +207,7 @@ static int SetWindowPos(lua_State *L)
     win_t *win = checkwindow(L, 1);
     int xpos = luaL_checkinteger(L, 2);
     int ypos = luaL_checkinteger(L, 3);
-    glfwSetWindowPos(win->window, xpos, ypos);
+    glfw.SetWindowPos(win->window, xpos, ypos);
     return 0;
     }
 
@@ -233,7 +215,7 @@ static int GetWindowSize(lua_State *L)
     {
     int width, height;
     win_t *win = checkwindow(L, 1);
-    glfwGetWindowSize(win->window, &width, &height);
+    glfw.GetWindowSize(win->window, &width, &height);
     lua_pushinteger(L, width);
     lua_pushinteger(L, height);
     return 2;
@@ -244,7 +226,7 @@ static int SetWindowSize(lua_State *L)
     win_t *win = checkwindow(L, 1);
     int width = luaL_checkinteger(L, 2);
     int height = luaL_checkinteger(L, 3);
-    glfwSetWindowSize(win->window, width, height);
+    glfw.SetWindowSize(win->window, width, height);
     return 0;
     }
 
@@ -252,7 +234,7 @@ static int GetFramebufferSize(lua_State *L)
     {
     int width, height;
     win_t *win = checkwindow(L, 1);
-    glfwGetFramebufferSize(win->window, &width, &height);
+    glfw.GetFramebufferSize(win->window, &width, &height);
     lua_pushinteger(L, width);
     lua_pushinteger(L, height);
     return 2;
@@ -263,7 +245,7 @@ static int GetWindowFrameSize(lua_State *L)
     int left, top, right, bottom;
     win_t *win = checkwindow(L, 1);
     (void)L;
-    glfwGetWindowFrameSize(win->window, &left, &top, &right, &bottom);
+    glfw.GetWindowFrameSize(win->window, &left, &top, &right, &bottom);
     lua_pushinteger(L, left);
     lua_pushinteger(L, top);
     lua_pushinteger(L, right);
@@ -274,28 +256,28 @@ static int GetWindowFrameSize(lua_State *L)
 static int IconifyWindow(lua_State *L)
     {
     win_t *win = checkwindow(L, 1);
-    glfwIconifyWindow(win->window);
+    glfw.IconifyWindow(win->window);
     return 0;
     }
 
 static int RestoreWindow(lua_State *L)
     {
     win_t *win = checkwindow(L, 1);
-    glfwRestoreWindow(win->window);
+    glfw.RestoreWindow(win->window);
     return 0;
     }
 
 static int ShowWindow(lua_State *L)
     {
     win_t *win = checkwindow(L, 1);
-    glfwShowWindow(win->window);
+    glfw.ShowWindow(win->window);
     return 0;
     }
 
 static int HideWindow(lua_State *L)
     {
     win_t *win = checkwindow(L, 1);
-    glfwHideWindow(win->window);
+    glfw.HideWindow(win->window);
     return 0;
     }
 
@@ -303,7 +285,7 @@ static int GetWindowMonitor(lua_State *L)
     {
     int id;
     win_t *win = checkwindow(L, 1);
-    GLFWmonitor *monitor = glfwGetWindowMonitor(win->window);
+    GLFWmonitor *monitor = glfw.GetWindowMonitor(win->window);
     if(!monitor)
         return 0;
     id = monitorAdd(L, monitor);

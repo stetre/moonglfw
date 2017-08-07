@@ -29,28 +29,28 @@
 static int MakeContextCurrent(lua_State *L)
     {
     win_t * win = checkwindow(L, 1);
-    glfwMakeContextCurrent(win->window);
+    glfw.MakeContextCurrent(win->window);
     return 0;
     }
 
 static int GetCurrentContext(lua_State *L)
     {
-    GLFWwindow* window = glfwGetCurrentContext();
-    lua_pushinteger(L, (intptr_t)glfwGetWindowUserPointer(window));
+    GLFWwindow* window = glfw.GetCurrentContext();
+    lua_pushinteger(L, (intptr_t)glfw.GetWindowUserPointer(window));
     return 1;
     }
 
 static int SwapInterval(lua_State *L)
     {
     int interval = luaL_checkinteger(L, 1);
-    glfwSwapInterval(interval);
+    glfw.SwapInterval(interval);
     return 0;
     }
 
 static int ExtensionSupported(lua_State *L)
     {
     const char* extension = luaL_checkstring(L, 1);
-    lua_pushboolean(L, glfwExtensionSupported(extension));
+    lua_pushboolean(L, glfw.ExtensionSupported(extension));
     return 1;
     }
 
@@ -58,7 +58,7 @@ static int ExtensionSupported(lua_State *L)
         { "get_proc_address", GetProcAddress },
 static int GetProcAddress(lua_State *L) //@@ 
     {
-//GLFWglproc glfwGetProcAddress(const char* procname);
+//GLFWglproc glfw.GetProcAddress(const char* procname);
     (void)L;
     return 0;
     }

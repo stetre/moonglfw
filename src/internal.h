@@ -47,21 +47,7 @@
 #define TOSTR_(x) #x
 #define TOSTR(x) TOSTR_(x)
 
-/* GLFW version for conditional compilations (e.g. v 2.05.13 -> 20513) */
-#define GLFWVER ((GLFW_VERSION_MAJOR*10000)+(GLFW_VERSION_MINOR*100)+GLFW_VERSION_REVISION)
-
-#if GLFWVER < 30100
-#error "MoonGLFW needs GLFW version >= 3.1"
-#endif
-
-#if GLFWVER >= 30200
-#define VULKAN /* Vulkan needs GLFW version >= 3.2 */
-#endif
-
-#if 0 //@@
-#pragma message ("GLFWVER="TOSTR(GLFWVER))
-#error ""
-#endif
+#include "getproc.h"
 
 extern lua_State *moonglfw_L; /* the global Lua state */
 
@@ -168,9 +154,12 @@ void monitorCallback(GLFWmonitor *monitor, int event);
 
 
 /* main.c */
+#define checkminversion moonglfw_checkminversion
+int checkminversion(int major, int minor, int rev);
 #define errorCallback moonglfw_errorCallback
 void errorCallback(int ec, const char *descr);
 int luaopen_moonglfw(lua_State *L);
+int moonglfw_open_getproc(lua_State *L);
 void moonglfw_open_window(lua_State *L);
 void moonglfw_open_hint(lua_State *L);
 void moonglfw_open_monitor(lua_State *L);
@@ -190,8 +179,6 @@ void moonglfw_open_vulkan(lua_State *L);
 #define UNEXPECTED_ERROR "unexpected error (%s, %d)", __FILE__, __LINE__
 #define unexpected(L) luaL_error((L), UNEXPECTED_ERROR)
 #define NOT_AVAILABLE do { return luaL_error(L, "function not available"); } while(0)
-#define requires_version(L, minver) \
-    do { return luaL_error(L, "requires GLFW version >= "minver); } while(0)
 
 #define NOT_IMPLEMENTED(func)               \
 static int func(lua_State *L)               \
