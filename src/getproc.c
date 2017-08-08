@@ -32,32 +32,59 @@ moonglfw_dt_t glfw;   /* sndfile.h dispatch table */
  *("ISO C forbids conversion of function pointer to object pointer type")
  */
 
-#ifdef LINUX
-/*----------------------------------------------------------------------------------*
- | Linux                                                                            |
- *----------------------------------------------------------------------------------*/
-
-#define LIBNAME "libglfw.so"
-
+#if defined(LINUX)
 #include <dlfcn.h>
+#define LIBNAME "libglfw.so"
+static void *Handle = NULL;
+
+#elif defined(MINGW)
+#include <windows.h>
+#define LIBNAME "glfw3.dll"
+#define LLIBNAME L"glfw3.dll"
+static HMODULE Handle = NULL;
+#ifdef CreateWindow /* damn MS... */
+#undef CreateWindow
+#endif
+
+#else
+#error "Cannot determine platform"
+#endif
+
+
+
 static int Init(lua_State *L)
     {
+#if defined(LINUX)
     char *err;
-    void *handle = dlopen(LIBNAME, RTLD_LAZY | RTLD_LOCAL);
-    if(!handle)
+    Handle = dlopen(LIBNAME, RTLD_LAZY | RTLD_LOCAL);
+    if(!Handle)
         {
         err = dlerror();
         return luaL_error(L, err != NULL ? err : "cannot load "LIBNAME);
         }
-
-    /* Fill the global dispatch table */
 #define GET(fn) do {                                                \
-    FP(glfw.fn) = dlsym(handle, "glfw"#fn);                         \
+    FP(glfw.fn) = dlsym(Handle, "glfw"#fn);                         \
     if(!glfw.fn) return luaL_error(L, "cannot find glfw"#fn);       \
 } while(0)
 #define OPT(fn) do {    /* optional */                              \
-    FP(glfw.fn) = dlsym(handle, "glfw"#fn);                         \
+    FP(glfw.fn) = dlsym(Handle, "glfw"#fn);                         \
 } while(0)
+
+#elif defined(MINGW)
+    Handle = LoadLibraryW(LLIBNAME);
+    if(!Handle)
+        return luaL_error(L, "cannot load "LIBNAME);
+#define GET(fn) do {                                                \
+    glfw.fn = (PFN_glfw##fn)GetProcAddress(Handle, "glfw"#fn);      \
+    if(!glfw.fn) return luaL_error(L, "cannot find glfw"#fn);       \
+} while(0)
+#define OPT(fn) do {    /* optional */                              \
+    glfw.fn = (PFN_glfw##fn)GetProcAddress(Handle, "glfw"#fn);      \
+} while(0)
+#endif
+
+    /* Fill the global dispatch table */
+
     /* If MoonGLFW loads successfully, these function pointers are guaranteed
      * to be valid so they need not be checked before using them.
      */
@@ -92,7 +119,6 @@ static int Init(lua_State *L)
     GET(GetWindowFrameSize);
     GET(IconifyWindow);
     GET(RestoreWindow);
-    GET(MaximizeWindow);
     GET(ShowWindow);
     GET(HideWindow);
     GET(GetWindowMonitor);
@@ -154,6 +180,7 @@ static int Init(lua_State *L)
     OPT(SetWindowMonitor);
     OPT(WaitEventsTimeout);
     OPT(SetJoystickCallback);
+    OPT(MaximizeWindow);
 //#ifdef VULKAN requires GLFW version >= 3.20
     OPT(GetProcAddress);
     OPT(VulkanSupported);
@@ -167,17 +194,15 @@ static int Init(lua_State *L)
     return 0;
     }
 
-#else
-/*----------------------------------------------------------------------------------*
- | @@ Other platforms (MINGW, WIN32, ecc) 
- *----------------------------------------------------------------------------------*/
-static int Init(lua_State *L)
-    {
-    return luaL_error(L, "platform not supported");
-    return 0;
-    }
 
+void moonglfw_atexit_getproc(void)
+    {
+#if defined(LINUX)
+    if(Handle) dlclose(Handle);
+#elif defined(MINGW)
+    if(Handle) FreeLibrary(Handle);
 #endif
+    }
 
 /*---------------------------------------------------------------------------*/
 

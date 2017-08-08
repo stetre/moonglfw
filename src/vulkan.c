@@ -32,9 +32,9 @@
  *       So we pass them as lua_Integer, which is hopefully large enough.
  */
 
-static uint64_t checkhandle(lua_State *L, int arg)
+static uintptr_t checkhandle(lua_State *L, int arg)
     {
-    return (uint64_t)luaL_checkinteger(L, arg);
+    return (uintptr_t)luaL_checkinteger(L, arg);
     }
 
 #if 0

@@ -67,6 +67,7 @@ _width_, _height_ = *get_window_size*(_window_)
 [[iconify_window]]
 * *iconify_window*(_window_) +
 *restore_window*(_window_)
+*maximize_window*(_window_)
 
 [[show_window]]
 * *show_window*(_window_) +

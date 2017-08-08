@@ -160,6 +160,7 @@ int checkminversion(int major, int minor, int rev);
 void errorCallback(int ec, const char *descr);
 int luaopen_moonglfw(lua_State *L);
 int moonglfw_open_getproc(lua_State *L);
+void moonglfw_atexit_getproc(void);
 void moonglfw_open_window(lua_State *L);
 void moonglfw_open_hint(lua_State *L);
 void moonglfw_open_monitor(lua_State *L);

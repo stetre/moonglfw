@@ -88,6 +88,7 @@ static void AtExit(void)
         win_free_all();
         id_free_all();
         glfw.Terminate();
+        moonglfw_atexit_getproc();
         moonglfw_L = NULL;
         }
     }

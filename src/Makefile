@@ -35,7 +35,8 @@ ifdef LINUX
 #LIBS = -lglfw
 endif
 ifdef MINGW
-LIBS = -lglfw3 -llua
+#LIBS = -lglfw3 -llua
+LIBS = -llua
 endif
 
 Tgt	:= moonglfw

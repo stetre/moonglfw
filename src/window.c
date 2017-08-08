@@ -267,6 +267,14 @@ static int RestoreWindow(lua_State *L)
     return 0;
     }
 
+static int MaximizeWindow(lua_State *L)
+    {
+    win_t *win = checkwindow(L, 1);
+    CheckPfn(L, MaximizeWindow, 3, 2, 0);
+    glfw.MaximizeWindow(win->window);
+    return 0;
+    }
+
 static int ShowWindow(lua_State *L)
     {
     win_t *win = checkwindow(L, 1);
@@ -323,6 +331,7 @@ static const struct luaL_Reg Functions[] =
         { "get_window_frame_size", GetWindowFrameSize },
         { "iconify_window", IconifyWindow },
         { "restore_window", RestoreWindow },
+        { "maximize_window", MaximizeWindow },
         { "show_window", ShowWindow },
         { "hide_window", HideWindow },
         { "get_window_monitor", GetWindowMonitor },
