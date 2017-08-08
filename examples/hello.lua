@@ -1,3 +1,4 @@
+#!/usr/bin/env lua
 -- Script: hello.lua
 
 glfw = require("moonglfw")

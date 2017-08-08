@@ -1,10 +1,11 @@
+#!/usr/bin/env lua
 -- Script: callbacks.lua
 
 glfw = require("moonglfw")
 
 glfw.set_error_callback(function (ec, descr)
-	print("error", ec, descr)
-	os.exit()
+   print("error", ec, descr)
+   os.exit()
 end)
 
 w = glfw.create_window(640, 480, "Callbacks example")
@@ -25,5 +26,5 @@ glfw.set_scroll_callback(w, function(...) print("Scroll", table.unpack({...})) e
 glfw.set_drop_callback(w, function(...) print("Drop", table.unpack({...})) end)
 
 while not glfw.window_should_close(w) do
-	glfw.poll_events()
+   glfw.poll_events()
 end
