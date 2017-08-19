@@ -101,6 +101,27 @@ void errorCallback(int ec, const char *descr)
         printf("GLFW error: '%s' (code = %d)\n", descr, ec);
     }
 
+static int Now(lua_State *L)
+    {
+    lua_pushnumber(L, now());
+    return 1;
+    }
+
+static int Since(lua_State *L)
+    {
+    double t = luaL_checknumber(L, 1);
+    lua_pushnumber(L, since(t));
+    return 1;
+    }
+
+static int Sleep(lua_State *L)
+    {
+    double seconds = luaL_checknumber(L, 1);
+    sleeep(seconds);
+    return 0;
+    }
+
+
 /*------------------------------------------------------------------------------*
  | Registration                                                                 |
  *------------------------------------------------------------------------------*/
@@ -109,6 +130,9 @@ static const struct luaL_Reg Functions[] =
     {
         { "get_version", GetVersion },
         { "get_version_string", GetVersionString },
+        { "now", Now },
+        { "since", Since },
+        { "sleep", Sleep },
         { NULL, NULL } /* sentinel */
     };
 
@@ -117,6 +141,8 @@ int luaopen_moonglfw(lua_State *L)
 /* Lua calls this function to load the module */
     {
     moonglfw_L = L;
+
+    moonglfw_utils_init(L);
 
     lua_newtable(L); /* the glfw table */
     moonglfw_open_getproc(L);

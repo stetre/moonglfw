@@ -1128,6 +1128,38 @@ Both functions return a <em>cursor</em> handle to the newly created cursor.</spa
 </li>
 </ul>
 </div>
+<hr>
+<div class="paragraph">
+<p>The following <em>NONGLFW</em> time utilities are added for consistency
+with the time utilities that can be found in other libraries of the MoonLibs collection.</p>
+</div>
+<div id="now" class="ulist">
+<ul>
+<li>
+<p><em>t</em> = <strong>now</strong>(&nbsp;) <em>NONGLFW</em><br>
+<span class="small">Returns the current time in seconds (a Lua number).<br>
+This is implemented with monotonic <em>clock_gettime(3)</em>, if available, or
+with <em>gettimeofday(3)</em> otherwise.</span></p>
+</li>
+</ul>
+</div>
+<div id="since" class="ulist">
+<ul>
+<li>
+<p><em>dt</em> = <strong>since</strong>(<em>t</em>) <em>NONGLFW</em><br>
+<span class="small">Returns the time in seconds (a Lua number) elapsed since the time <em>t</em>,
+previously obtained with the <a href="#now">now</a>(&nbsp;) function.</span></p>
+</li>
+</ul>
+</div>
+<div id="sleep" class="ulist">
+<ul>
+<li>
+<p><strong>sleep</strong>(<em>seconds</em>) <em>NONGLFW</em><br>
+<span class="small">Sleeps for <em>seconds</em>.</span></p>
+</li>
+</ul>
+</div>
 <div class="sect3">
 <h4 id="_input_callbacks">Input callbacks</h4>
 <div class="paragraph">

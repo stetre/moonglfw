@@ -80,6 +80,26 @@ _time_ = *get_time*(_time_)
 _seconds_ = *get_timer_seconds*( ) _NONGLFW_ +
 [small]#_seconds_ = _tics * 1/hz_.#
 
+'''
+
+The following _NONGLFW_ time utilities are added for consistency
+with the time utilities that can be found in other libraries of the MoonLibs collection.
+
+[[now]]
+* _t_ = *now*(&nbsp;) _NONGLFW_ +
+[small]#Returns the current time in seconds (a Lua number). +
+This is implemented with monotonic _clock_gettime(3)_, if available, or
+with _gettimeofday(3)_ otherwise.#
+
+[[since]]
+* _dt_ = *since*(_t_) _NONGLFW_ +
+[small]#Returns the time in seconds (a Lua number) elapsed since the time _t_,
+previously obtained with the <<now, now>>(&nbsp;) function.#
+
+[[sleep]]
+* *sleep*(_seconds_) _NONGLFW_ +
+[small]#Sleeps for _seconds_.#
+
 ==== Input callbacks
 
 [small]#Rfr: link:http://www.glfw.org/docs/latest/group__input.html[Input handling].#

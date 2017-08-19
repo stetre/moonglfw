@@ -232,3 +232,97 @@ int checkgammaramp(lua_State *L, int arg, GLFWgammaramp *ramp)
 #undef B
     }
 
+
+/*------------------------------------------------------------------------------*
+ | Time utilities                                                               |
+ *------------------------------------------------------------------------------*/
+
+#if defined(LINUX)
+
+#if 0
+static double tstosec(const struct timespec *ts)
+    {
+    return ts->tv_sec*1.0+ts->tv_nsec*1.0e-9;
+    }
+#endif
+
+static void sectots(struct timespec *ts, double seconds)
+    {
+    ts->tv_sec=(time_t)seconds;
+    ts->tv_nsec=(long)((seconds-((double)ts->tv_sec))*1.0e9);
+    }
+
+double now(void)
+    {
+#if _POSIX_C_SOURCE >= 199309L
+    struct timespec ts;
+    if(clock_gettime(CLOCK_MONOTONIC,&ts)!=0)
+        { printf("clock_gettime error\n"); return -1; }
+    return ts.tv_sec + ts.tv_nsec*1.0e-9;
+#else
+    struct timeval tv;
+    if(gettimeofday(&tv, NULL) != 0)
+        { printf("gettimeofday error\n"); return -1; }
+    return tv.tv_sec + tv.tv_usec*1.0e-6;
+#endif
+    }
+
+void sleeep(double seconds)
+    {
+#if _POSIX_C_SOURCE >= 199309L
+    struct timespec ts, ts1;
+    struct timespec *req, *rem, *tmp;
+    sectots(&ts, seconds);
+    req = &ts;
+    rem = &ts1;
+    while(1)
+        {
+        if(nanosleep(req, rem) == 0)
+            return;
+        tmp = req;
+        req = rem;
+        rem = tmp;
+        }
+#else
+    usleep((useconds_t)(seconds*1.0e6));
+#endif
+    }
+
+#define time_init(L) do { (void)L; /* do nothing */ } while(0)
+
+#elif defined(MINGW)
+
+#include <windows.h>
+
+static LARGE_INTEGER Frequency;
+double now(void)
+    {
+    LARGE_INTEGER ts;
+    QueryPerformanceCounter(&ts);
+    return ((double)(ts.QuadPart))/Frequency.QuadPart;
+    }
+
+void sleeep(double seconds)
+    {
+    DWORD msec = (DWORD)seconds * 1000;
+    //if(msec < 0) return;  DWORD seems to be unsigned
+    Sleep(msec);
+    }
+
+static void time_init(lua_State *L)
+    {
+    (void)L;
+    QueryPerformanceFrequency(&Frequency);
+    }
+
+#endif
+
+/*------------------------------------------------------------------------------*
+ | Inits                                                                        |
+ *------------------------------------------------------------------------------*/
+
+void moonglfw_utils_init(lua_State *L)
+    {
+    time_init(L);
+    }
+

@@ -32,6 +32,7 @@
 
 #include <string.h>
 #include <stdlib.h>
+#include <time.h>
 #include "moonglfw.h"
 #include "tree.h"
 
@@ -61,6 +62,11 @@ extern lua_State *moonglfw_L; /* the global Lua state */
 int noprintf(const char *fmt, ...);
 #define notavailable moonglfw_notavailable
 int notavailable(lua_State *L, ...);
+#define now moonglfw_now
+double now(void);
+#define since(t) (now() - (t))
+#define sleeep moonglfw_sleeep
+void sleeep(double seconds);
 #define checklightuserdata moonglfw_checklightuserdata
 void *checklightuserdata(lua_State *L, int arg);
 #define optlightuserdata moonglfw_optlightuserdata
@@ -159,6 +165,7 @@ int checkminversion(int major, int minor, int rev);
 #define errorCallback moonglfw_errorCallback
 void errorCallback(int ec, const char *descr);
 int luaopen_moonglfw(lua_State *L);
+void moonglfw_utils_init(lua_State *L);
 int moonglfw_open_getproc(lua_State *L);
 void moonglfw_atexit_getproc(void);
 void moonglfw_open_window(lua_State *L);
