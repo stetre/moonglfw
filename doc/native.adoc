@@ -3,5 +3,30 @@
 
 [small]#Rfr: link:http://www.glfw.org/docs/latest/group__native.html[Native access].#
 
-Not supported.
+* _string_ = *get_win32_adapter*(_monitor_) +
+_string_ = *_get_win32_monitor*(_monitor_) +
+_lightuserdata_ = *get_win32_window*(_window_)
+
+* _lightuserdata_ = *get_wgl_context*(_window_)
+
+* _lightuserdata_ = *get_x11_display*( ) +
+_integer_ = *get_x11_adapter*(_monitor_) +
+_integer_ = *get_x11_monitor*(_monitor_) +
+_integer_ = *get_x11_window*(_window_)
+
+* _lightuserdata_ = *get_glx_context*(_window_) +
+_integer_ = *get_glx_window*(_window_)
+
+* _lightuserdata_ = *get_wayland_display*( ) +
+_lightuserdata_ = *get_wayland_monitor*(_monitor_) +
+_lightuserdata_ = *get_wayland_window*(_window_)
+
+* _lightuserdata_ = *get_mir_display*( ) +
+_integer_ = *get_mir_monitor*(_monitor_) +
+_lightuserdata_ = *get_mir_window*(_window_)
+
+* _lightuserdata_ = *get_egl_display*( ) +
+_lightuserdata_ = *get_egl_context*(_window_) +
+_lightuserdata_ = *get_egl_surface*(_window_)
+
 

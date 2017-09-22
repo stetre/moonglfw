@@ -41,6 +41,12 @@
 
 #define CheckVulkanPfn(L, pfn) CheckPfn(L, pfn, 3, 2, 0)
 
+#define CheckNativePfn(L, pfn) do {                             \
+    if(glfw.pfn==NULL)                                          \
+        return luaL_error((L), "glfw"#pfn" address not found"); \
+} while(0)
+
+
 /* Dispatch tables */
 
 /* Global functions */
@@ -142,6 +148,29 @@ typedef struct {
     PFN_glfwGetPhysicalDevicePresentationSupport GetPhysicalDevicePresentationSupport;
     PFN_glfwCreateWindowSurface CreateWindowSurface;
 //#endif
+//  Native access functions
+    PFN_glfwGetWin32Adapter GetWin32Adapter;
+    PFN_glfwGetWin32Monitor GetWin32Monitor;
+    PFN_glfwGetWin32Window GetWin32Window;
+    PFN_glfwGetWGLContext GetWGLContext;
+//  PFN_glfwGetCocoaMonitor GetCocoaMonitor;
+//  PFN_glfwGetCocoaWindow GetCocoaWindow;
+//  PFN_glfwGetNSGLContext GetNSGLContext;
+    PFN_glfwGetX11Display GetX11Display;
+    PFN_glfwGetX11Adapter GetX11Adapter;
+    PFN_glfwGetX11Monitor GetX11Monitor;
+    PFN_glfwGetX11Window GetX11Window;
+    PFN_glfwGetGLXContext GetGLXContext;
+    PFN_glfwGetGLXWindow GetGLXWindow;
+    PFN_glfwGetWaylandDisplay GetWaylandDisplay;
+    PFN_glfwGetWaylandMonitor GetWaylandMonitor;
+    PFN_glfwGetWaylandWindow GetWaylandWindow;
+    PFN_glfwGetMirDisplay GetMirDisplay;
+    PFN_glfwGetMirMonitor GetMirMonitor;
+    PFN_glfwGetMirWindow GetMirWindow;
+    PFN_glfwGetEGLDisplay GetEGLDisplay;
+    PFN_glfwGetEGLContext GetEGLContext;
+    PFN_glfwGetEGLSurface GetEGLSurface;
 } moonglfw_dt_t;
 
 #define glfw moonglfw_glfw

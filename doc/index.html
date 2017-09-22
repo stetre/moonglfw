@@ -1344,8 +1344,42 @@ If <em>func</em> = <em>nil</em>, unregisters the current callback (if any).</spa
 <div class="paragraph">
 <p><span class="small">Rfr: <a href="http://www.glfw.org/docs/latest/group__native.html">Native access</a>.</span></p>
 </div>
-<div class="paragraph">
-<p>Not supported.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><em>string</em> = <strong>get_win32_adapter</strong>(<em>monitor</em>)<br>
+<em>string</em> = <strong><em>get_win32_monitor</strong>(_monitor</em>)<br>
+<em>lightuserdata</em> = <strong>get_win32_window</strong>(<em>window</em>)</p>
+</li>
+<li>
+<p><em>lightuserdata</em> = <strong>get_wgl_context</strong>(<em>window</em>)</p>
+</li>
+<li>
+<p><em>lightuserdata</em> = <strong>get_x11_display</strong>( )<br>
+<em>integer</em> = <strong>get_x11_adapter</strong>(<em>monitor</em>)<br>
+<em>integer</em> = <strong>get_x11_monitor</strong>(<em>monitor</em>)<br>
+<em>integer</em> = <strong>get_x11_window</strong>(<em>window</em>)</p>
+</li>
+<li>
+<p><em>lightuserdata</em> = <strong>get_glx_context</strong>(<em>window</em>)<br>
+<em>integer</em> = <strong>get_glx_window</strong>(<em>window</em>)</p>
+</li>
+<li>
+<p><em>lightuserdata</em> = <strong>get_wayland_display</strong>( )<br>
+<em>lightuserdata</em> = <strong>get_wayland_monitor</strong>(<em>monitor</em>)<br>
+<em>lightuserdata</em> = <strong>get_wayland_window</strong>(<em>window</em>)</p>
+</li>
+<li>
+<p><em>lightuserdata</em> = <strong>get_mir_display</strong>( )<br>
+<em>integer</em> = <strong>get_mir_monitor</strong>(<em>monitor</em>)<br>
+<em>lightuserdata</em> = <strong>get_mir_window</strong>(<em>window</em>)</p>
+</li>
+<li>
+<p><em>lightuserdata</em> = <strong>get_egl_display</strong>( )<br>
+<em>lightuserdata</em> = <strong>get_egl_context</strong>(<em>window</em>)<br>
+<em>lightuserdata</em> = <strong>get_egl_surface</strong>(<em>window</em>)</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect2">

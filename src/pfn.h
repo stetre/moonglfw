@@ -126,4 +126,30 @@ typedef int (*PFN_glfwGetPhysicalDevicePresentationSupport)(VkInstance instance,
 typedef VkResult (*PFN_glfwCreateWindowSurface)(VkInstance instance, GLFWwindow* window, const VkAllocationCallbacks* allocator, VkSurfaceKHR* surface);
 //#endif
 
+
+/* Typedefs for glfw2native.h functions (to avoid including native headers)
+ */
+typedef const char* (*PFN_glfwGetWin32Adapter)(GLFWmonitor* monitor);
+typedef const char* (*PFN_glfwGetWin32Monitor)(GLFWmonitor* monitor);
+typedef void* /* HWND */ (*PFN_glfwGetWin32Window)(GLFWwindow* window);
+typedef void* /* HGLRC */ (*PFN_glfwGetWGLContext)(GLFWwindow* window);
+//typedef CGDirectDisplayID (*PFN_glfwGetCocoaMonitor)(GLFWmonitor* monitor);
+//typedef id (*PFN_glfwGetCocoaWindow)(GLFWwindow* window);
+//typedef id (*PFN_glfwGetNSGLContext)(GLFWwindow* window);
+typedef void* /* Display* */ (*PFN_glfwGetX11Display)(void);
+typedef unsigned long /* RRCrtc */ (*PFN_glfwGetX11Adapter)(GLFWmonitor* monitor);
+typedef unsigned long /* RROutput */ (*PFN_glfwGetX11Monitor)(GLFWmonitor* monitor);
+typedef unsigned long /* Window */ (*PFN_glfwGetX11Window)(GLFWwindow* window);
+typedef void* /* GLXContext */ (*PFN_glfwGetGLXContext)(GLFWwindow* window);
+typedef unsigned long /* GLXWindow */ (*PFN_glfwGetGLXWindow)(GLFWwindow* window);
+typedef void* /* struct wl_display* */ (*PFN_glfwGetWaylandDisplay)(void);
+typedef void* /* struct wl_output* */ (*PFN_glfwGetWaylandMonitor)(GLFWmonitor* monitor);
+typedef void* /* struct wl_surface* */ (*PFN_glfwGetWaylandWindow)(GLFWwindow* window);
+typedef void* /* MirConnection* */ (*PFN_glfwGetMirDisplay)(void);
+typedef int (*PFN_glfwGetMirMonitor)(GLFWmonitor* monitor);
+typedef void* /* MirSurface* */ (*PFN_glfwGetMirWindow)(GLFWwindow* window);
+typedef void* /* EGLDisplay */ (*PFN_glfwGetEGLDisplay)(void);
+typedef void* /* EGLContext */ (*PFN_glfwGetEGLContext)(GLFWwindow* window);
+typedef void* /* EGLSurface */ (*PFN_glfwGetEGLSurface)(GLFWwindow* window);
+
 #endif /* pfnDEFINED */

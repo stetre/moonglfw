@@ -189,6 +189,29 @@ static int Init(lua_State *L)
     OPT(GetPhysicalDevicePresentationSupport);
     OPT(CreateWindowSurface);
 //#endif
+    /*  Native access functions */
+    OPT(GetWin32Adapter);
+    OPT(GetWin32Monitor);
+    OPT(GetWin32Window);
+    OPT(GetWGLContext);
+//  OPT(GetCocoaMonitor);
+//  OPT(GetCocoaWindow);
+//  OPT(GetNSGLContext);
+    OPT(GetX11Display);
+    OPT(GetX11Adapter);
+    OPT(GetX11Monitor);
+    OPT(GetX11Window);
+    OPT(GetGLXContext);
+    OPT(GetGLXWindow);
+    OPT(GetWaylandDisplay);
+    OPT(GetWaylandMonitor);
+    OPT(GetWaylandWindow);
+    OPT(GetMirDisplay);
+    OPT(GetMirMonitor);
+    OPT(GetMirWindow);
+    OPT(GetEGLDisplay);
+    OPT(GetEGLContext);
+    OPT(GetEGLSurface);
 #undef GET
 #undef OPT
     return 0;
