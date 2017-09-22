@@ -33,7 +33,7 @@
         {                                                   \
         if(!checkminversion((major), (minor), (patch)))     \
             return luaL_error((L),                          \
-                "glfw"#pfn" requires libsndfile version >= %d.%d.%d", (major), (minor), (patch));\
+                "glfw"#pfn" requires GLFW version >= %d.%d.%d", (major), (minor), (patch));\
         else                                                \
             return luaL_error((L), "glfw"#pfn" address not found");  \
         }                                                   \

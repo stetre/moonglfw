@@ -25,7 +25,7 @@
 
 #include "internal.h"
 
-moonglfw_dt_t glfw;   /* sndfile.h dispatch table */
+moonglfw_dt_t glfw;   /* dispatch table */
 
 #define FP(f) *(void**)(&(f))
 /* Cast to silent compiler warnings without giving up the -Wpedantic flag.
