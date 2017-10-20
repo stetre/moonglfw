@@ -29,4 +29,10 @@ _lightuserdata_ = *get_mir_window*(_window_)
 _lightuserdata_ = *get_egl_context*(_window_) +
 _lightuserdata_ = *get_egl_surface*(_window_)
 
+* _context_, _system_ = *get_context*(_window_) _NONGLFW_ +
+[small]#Returns the GL context (lightuserdata) associated with _window_, followed by
+a string denoting the system ('_wgl_', '_glx_', or '_egl_'). +
+Returns _nil_ if the GL context can not be retrieved. +
+(This function can be used instead of _get_xxx_context(&nbsp;)_ when _xxx_ is unknown).#
+
 

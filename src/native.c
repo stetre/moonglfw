@@ -254,6 +254,44 @@ static int GetEGLSurface(lua_State *L)
     }
 
 
+static int GetContext(lua_State *L)
+    {
+    void *what = NULL;
+    win_t *win = checkwindow(L, 1);
+
+    if(glfw.GetWGLContext)
+        {
+        what = glfw.GetWGLContext(win->window);
+        if(what)
+            {
+            lua_pushlightuserdata(L, what);
+            lua_pushstring(L, "wgl");
+            }
+        }
+
+    if(!what && glfw.GetGLXContext)
+        {
+        what = glfw.GetGLXContext(win->window);
+        if(what)
+            {
+            lua_pushlightuserdata(L, what);
+            lua_pushstring(L, "glx");
+            }
+        }
+
+    if(!what && glfw.GetEGLContext)
+        {
+        what = glfw.GetEGLContext(win->window);
+        if(what)
+            {
+            lua_pushlightuserdata(L, what);
+            lua_pushstring(L, "egl");
+            }
+        }
+
+    if(!what) return 0;
+    return 2;
+    }
 
 /*------------------------------------------------------------------------------*
  | Registration                                                                 |
@@ -280,6 +318,7 @@ static const struct luaL_Reg Functions[] =
         { "get_egl_display", GetEGLDisplay },
         { "get_egl_context", GetEGLContext },
         { "get_egl_surface", GetEGLSurface },
+        { "get_context", GetContext },
         { NULL, NULL } /* sentinel */
     };
 

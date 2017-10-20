@@ -1379,6 +1379,13 @@ If <em>func</em> = <em>nil</em>, unregisters the current callback (if any).</spa
 <em>lightuserdata</em> = <strong>get_egl_context</strong>(<em>window</em>)<br>
 <em>lightuserdata</em> = <strong>get_egl_surface</strong>(<em>window</em>)</p>
 </li>
+<li>
+<p><em>context</em>, <em>system</em> = <strong>get_context</strong>(<em>window</em>) <em>NONGLFW</em><br>
+<span class="small">Returns the GL context (lightuserdata) associated with <em>window</em>, followed by
+a string denoting the system ('<em>wgl</em>', '<em>glx</em>', or '<em>egl</em>').<br>
+Returns <em>nil</em> if the GL context can not be retrieved.<br>
+(This function can be used instead of <em>get_xxx_context(&nbsp;)</em> when <em>xxx</em> is unknown).</span></p>
+</li>
 </ul>
 </div>
 </div>
