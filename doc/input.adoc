@@ -53,7 +53,7 @@ Both functions return a _cursor_ handle to the newly created cursor.#
 [small]#_joy_: 1 .. 16.#
 
 [[joystick_axes]]
-* _xpos_, _..._  = *joystick_axes*(_joy_)
+* _xpos_, _..._  = *get_joystick_axes*(_joy_)
 
 [[get_joystick_buttons]]
 * _state1_, _..._ = *get_joystick_buttons*(_joy_) +

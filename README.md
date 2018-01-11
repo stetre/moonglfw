@@ -6,7 +6,7 @@ It runs on GNU/Linux and on Windows (MSYS2/MinGW) and requires
 [Lua](http://www.lua.org/) (>=5.3)
 and [GLFW](http://www.glfw.org/download.html) (>=3.1).
 
-_Authored by:_ _[Stefano Trettel](https://www.linkedin.com/in/stetre)_
+_Author:_ _[Stefano Trettel](https://www.linkedin.com/in/stetre)_
 
 [![Lua logo](./doc/powered-by-lua.gif)](http://www.lua.org/)
 

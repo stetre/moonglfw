@@ -267,6 +267,7 @@ static int GetJoystickAxes(lua_State *L)
     const float *axis = glfw.GetJoystickAxes(joy, &count);
     if(!axis)
         return 0;
+	luaL_checkstack(L, count, NULL);
     for(i=0; i< count; i++)
         lua_pushnumber(L, axis[i]);
     return count;
@@ -279,6 +280,7 @@ static int GetJoystickButtons(lua_State *L)
     const unsigned char *state = glfw.GetJoystickButtons(joy, &count);
     if(!state)
         return 0;
+	luaL_checkstack(L, count, NULL);
     for(i=0; i< count; i++)
         lua_pushstring(L, state[i]==GLFW_PRESS ? "press" : "release");
     return count;
