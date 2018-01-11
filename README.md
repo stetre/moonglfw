@@ -6,6 +6,9 @@ It runs on GNU/Linux and on Windows (MSYS2/MinGW) and requires
 [Lua](http://www.lua.org/) (>=5.3)
 and [GLFW](http://www.glfw.org/download.html) (>=3.1).
 
+MoonGLFW is part of the [MoonLibs](https://github.com/stetre/moonlibs) collection
+of Lua libraries for graphics and audio programming.
+
 _Author:_ _[Stefano Trettel](https://www.linkedin.com/in/stetre)_
 
 [![Lua logo](./doc/powered-by-lua.gif)](http://www.lua.org/)
@@ -64,9 +67,7 @@ The script can be executed at the shell prompt with the standard Lua interpreter
 $ lua hello.lua
 ```
 
-Other examples can be found in the **examples/** directory contained in the release package.
+Other examples can be found in the **examples/** directory contained in the release package,
+and in the [MoonLibs](https://github.com/stetre/moonlibs) repository.
 
-#### See also
-
-* [MoonLibs - Graphics and Audio Lua Libraries](https://github.com/stetre/moonlibs).
 
