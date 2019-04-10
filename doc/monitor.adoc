@@ -38,5 +38,5 @@ _red_, _green_, _blue_ = *get_gamma_ramp*(_monitor_) +
 * *set_monitor_callback*(_monitor_, [_func_]) +
 [small]#The _func_ callback is executed as *_func(monitor, event)_*, where _event_ (a string)
 may be '_connected_' or '_disconnected_'. +
-If _func_ = _nil_, unregisters the current callback (if any).#
+If _func=nil_, unregisters the current callback (if any).#
 

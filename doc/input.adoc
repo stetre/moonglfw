@@ -38,7 +38,7 @@ _xpos_, _ypos_ = *get_cursor_pos*(_window_) +
 * _cursor_ = *create_cursor*(_width_, _height_, _pixels_, _xhot_, _yhot_) +
 _cursor_ = *create_cursor*(_shape_) +
 [small]#_width_, _height_ (integers) and _pixels_ (binary string) specify the image. +
-_shape_: '_arrow_' | '_ibeam_' | '_crosshair_' | '_hand_' | '_hresize' | '_vresize_'. +
+_shape_: '_arrow_' | '_ibeam_' | '_crosshair_' | '_hand_' | '_hresize_' | '_vresize_'. +
 Both functions return a _cursor_ handle to the newly created cursor.#
 
 [[destroy_cursor]]
@@ -49,18 +49,18 @@ Both functions return a _cursor_ handle to the newly created cursor.#
 
 '''
 [[joystick_present]]
-* _boolean_ = *joystick_present*(_joy_) +
-[small]#_joy_: 1 .. 16.#
+* _boolean_ = *joystick_present*(_jid_) +
+[small]#_jid_: integer (1..16).# +
 
 [[joystick_axes]]
-* _xpos_, _..._  = *get_joystick_axes*(_joy_)
+* _xpos_, _..._  = *get_joystick_axes*(_jid_)
 
 [[get_joystick_buttons]]
-* _state1_, _..._ = *get_joystick_buttons*(_joy_) +
+* _state~1~_, _..._ = *get_joystick_buttons*(_jid_) +
 [small]#_state_: '_press_' | '_release_'.#
 
 [[get_joystick_name]]
-* _name_= *get_joystick_name*(_joy_)
+* _name_ = *get_joystick_name*(_jid_)
 
 '''
 
@@ -83,7 +83,8 @@ _seconds_ = *get_timer_seconds*( ) _NONGLFW_ +
 '''
 
 The following _NONGLFW_ time utilities are added for consistency
-with the time utilities that can be found in other libraries of the MoonLibs collection.
+with the time utilities that can be found in other libraries of the
+https://github.com/stetre/moonlibs[MoonLibs collection].
 
 [[now]]
 * _t_ = *now*(&nbsp;) _NONGLFW_ +
@@ -104,7 +105,7 @@ previously obtained with the <<now, now>>(&nbsp;) function.#
 
 [small]#Rfr: link:http://www.glfw.org/docs/latest/group__input.html[Input handling].#
 
-All the following functions, when invoked with _func_ = _nil_, unregister the corresponding current callback.
+All the following functions, when invoked with _func=nil_, unregister the corresponding current callback.
 
 [[set_key_callback]]
 * *set_key_callback*(_window_, [_func_]) +
@@ -119,7 +120,7 @@ _shift_, _control_, _alt_, _super_: boolean (modifiers).#
 [small]#The _func_ callback is executed as *_func(window, codepoint)_*.#
 
 [[set_char_mods_callback]]
-* *set_char_mods_callback*(_window_, [_func_]) +
+* *set_char_mods_callback*(_window_, [_func_]) _DEPRECATED_ +
 [small]#The _func_ callback is executed as 
 *_func(window, codepoint, shift, control, alt, super)_*, where: +
 _shift_, _control_, _alt_, _super_: boolean (modifiers).#
@@ -154,7 +155,7 @@ _path_ is a string (and any subsequent argument too).#
 
 [[set_joystick_callback]]
 * *set_joystick_callback*([_func_]) +
-[small]#The _func_ callback is executed as *_func(joy, event)_*, where: +
-_joy_: integer (1..16), +
+[small]#The _func_ callback is executed as *_func(jid, event)_*, where: +
+_jid_: integer (1..16), +
 _event_: '_connected_' | '_disconnected_'.#
 

@@ -1048,7 +1048,7 @@ If <em>func</em> is <em>nil</em>, unregisters the current error callback (if any
 <p><em>cursor</em> = <strong>create_cursor</strong>(<em>width</em>, <em>height</em>, <em>pixels</em>, <em>xhot</em>, <em>yhot</em>)<br>
 <em>cursor</em> = <strong>create_cursor</strong>(<em>shape</em>)<br>
 <span class="small"><em>width</em>, <em>height</em> (integers) and <em>pixels</em> (binary string) specify the image.<br>
-<em>shape</em>: '<em>arrow</em>' | '<em>ibeam</em>' | '<em>crosshair</em>' | '<em>hand</em>' | '<em>hresize' | '_vresize</em>'.<br>
+<em>shape</em>: '<em>arrow</em>' | '<em>ibeam</em>' | '<em>crosshair</em>' | '<em>hand</em>' | '<em>hresize</em>' | '<em>vresize</em>'.<br>
 Both functions return a <em>cursor</em> handle to the newly created cursor.</span></p>
 </li>
 </ul>
@@ -1071,22 +1071,22 @@ Both functions return a <em>cursor</em> handle to the newly created cursor.</spa
 <div id="joystick_present" class="ulist">
 <ul>
 <li>
-<p><em>boolean</em> = <strong>joystick_present</strong>(<em>joy</em>)<br>
-<span class="small"><em>joy</em>: 1 .. 16.</span></p>
+<p><em>boolean</em> = <strong>joystick_present</strong>(<em>jid</em>)<br>
+<span class="small"><em>jid</em>: integer (1..16).</span><br></p>
 </li>
 </ul>
 </div>
 <div id="joystick_axes" class="ulist">
 <ul>
 <li>
-<p><em>xpos</em>, <em>&#8230;&#8203;</em>  = <strong>get_joystick_axes</strong>(<em>joy</em>)</p>
+<p><em>xpos</em>, <em>&#8230;&#8203;</em>  = <strong>get_joystick_axes</strong>(<em>jid</em>)</p>
 </li>
 </ul>
 </div>
 <div id="get_joystick_buttons" class="ulist">
 <ul>
 <li>
-<p><em>state1</em>, <em>&#8230;&#8203;</em> = <strong>get_joystick_buttons</strong>(<em>joy</em>)<br>
+<p><em>state<sub>1</sub></em>, <em>&#8230;&#8203;</em> = <strong>get_joystick_buttons</strong>(<em>jid</em>)<br>
 <span class="small"><em>state</em>: '<em>press</em>' | '<em>release</em>'.</span></p>
 </li>
 </ul>
@@ -1094,7 +1094,7 @@ Both functions return a <em>cursor</em> handle to the newly created cursor.</spa
 <div id="get_joystick_name" class="ulist">
 <ul>
 <li>
-<p><em>name</em>= <strong>get_joystick_name</strong>(<em>joy</em>)</p>
+<p><em>name</em> = <strong>get_joystick_name</strong>(<em>jid</em>)</p>
 </li>
 </ul>
 </div>
@@ -1131,7 +1131,8 @@ Both functions return a <em>cursor</em> handle to the newly created cursor.</spa
 <hr>
 <div class="paragraph">
 <p>The following <em>NONGLFW</em> time utilities are added for consistency
-with the time utilities that can be found in other libraries of the MoonLibs collection.</p>
+with the time utilities that can be found in other libraries of the
+<a href="https://github.com/stetre/moonlibs">MoonLibs collection</a>.</p>
 </div>
 <div id="now" class="ulist">
 <ul>
@@ -1166,7 +1167,7 @@ previously obtained with the <a href="#now">now</a>(&nbsp;) function.</span></p>
 <p><span class="small">Rfr: <a href="http://www.glfw.org/docs/latest/group__input.html">Input handling</a>.</span></p>
 </div>
 <div class="paragraph">
-<p>All the following functions, when invoked with <em>func</em> = <em>nil</em>, unregister the corresponding current callback.</p>
+<p>All the following functions, when invoked with <em>func=nil</em>, unregister the corresponding current callback.</p>
 </div>
 <div id="set_key_callback" class="ulist">
 <ul>
@@ -1191,7 +1192,7 @@ previously obtained with the <a href="#now">now</a>(&nbsp;) function.</span></p>
 <div id="set_char_mods_callback" class="ulist">
 <ul>
 <li>
-<p><strong>set_char_mods_callback</strong>(<em>window</em>, [<em>func</em>])<br>
+<p><strong>set_char_mods_callback</strong>(<em>window</em>, [<em>func</em>]) <em>DEPRECATED</em><br>
 <span class="small">The <em>func</em> callback is executed as
 <strong><em>func(window, codepoint, shift, control, alt, super)</em></strong>, where:<br>
 <em>shift</em>, <em>control</em>, <em>alt</em>, <em>super</em>: boolean (modifiers).</span></p>
@@ -1250,8 +1251,8 @@ and <em>ypos</em> are numbers.</span></p>
 <ul>
 <li>
 <p><strong>set_joystick_callback</strong>([<em>func</em>])<br>
-<span class="small">The <em>func</em> callback is executed as <strong><em>func(joy, event)</em></strong>, where:<br>
-<em>joy</em>: integer (1..16),<br>
+<span class="small">The <em>func</em> callback is executed as <strong><em>func(jid, event)</em></strong>, where:<br>
+<em>jid</em>: integer (1..16),<br>
 <em>event</em>: '<em>connected</em>' | '<em>disconnected</em>'.</span></p>
 </li>
 </ul>
@@ -1333,7 +1334,7 @@ and <em>ypos</em> are numbers.</span></p>
 <p><strong>set_monitor_callback</strong>(<em>monitor</em>, [<em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as <strong><em>func(monitor, event)</em></strong>, where <em>event</em> (a string)
 may be '<em>connected</em>' or '<em>disconnected</em>'.<br>
-If <em>func</em> = <em>nil</em>, unregisters the current callback (if any).</span></p>
+If <em>func=nil</em>, unregisters the current callback (if any).</span></p>
 </li>
 </ul>
 </div>
@@ -1384,7 +1385,7 @@ If <em>func</em> = <em>nil</em>, unregisters the current callback (if any).</spa
 <span class="small">Returns the GL context (lightuserdata) associated with <em>window</em>, followed by
 a string denoting the system ('<em>wgl</em>', '<em>glx</em>', or '<em>egl</em>').<br>
 Returns <em>nil</em> if the GL context can not be retrieved.<br>
-(This function can be used instead of <em>get_xxx_context(&nbsp;)</em> when <em>xxx</em> is unknown).</span></p>
+(This function can be used instead of <em>get_xxx_context(&nbsp;)</em> when <em>xxx</em> is unknown to the application).</span></p>
 </li>
 </ul>
 </div>
@@ -1589,7 +1590,7 @@ Other images (up to 32 total) can be added in the optional part in the same way.
 <p><span class="small">Rfr: <a href="http://www.glfw.org/docs/latest/group__window.html">Window handling</a>.</span></p>
 </div>
 <div class="paragraph">
-<p>All the following functions, when invoked with <em>func</em> = <em>nil</em>, unregister the corresponding current callback.</p>
+<p>All the following functions, when invoked with <em>func=nil</em>, unregister the corresponding current callback.</p>
 </div>
 <div id="set_window_pos_callback" class="ulist">
 <ul>

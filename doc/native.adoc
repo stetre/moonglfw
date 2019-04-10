@@ -33,6 +33,6 @@ _lightuserdata_ = *get_egl_surface*(_window_)
 [small]#Returns the GL context (lightuserdata) associated with _window_, followed by
 a string denoting the system ('_wgl_', '_glx_', or '_egl_'). +
 Returns _nil_ if the GL context can not be retrieved. +
-(This function can be used instead of _get_xxx_context(&nbsp;)_ when _xxx_ is unknown).#
+(This function can be used instead of _get_xxx_context(&nbsp;)_ when _xxx_ is unknown to the application).#
 
 

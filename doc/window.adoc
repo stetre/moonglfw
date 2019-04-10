@@ -100,7 +100,7 @@ _width_, _height_ = *get_window_size*(_window_)
 
 [small]#Rfr: link:http://www.glfw.org/docs/latest/group__window.html[Window handling].#
 
-All the following functions, when invoked with _func_ = _nil_, unregister the corresponding current callback.
+All the following functions, when invoked with _func=nil_, unregister the corresponding current callback.
 
 [[set_window_pos_callback]]
 * *set_window_pos_callback*(_window_, [_func_]) +
