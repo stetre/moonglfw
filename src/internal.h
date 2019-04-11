@@ -43,7 +43,7 @@
  */
 
 #include "structs.h"
-#include "enum.h"
+#include "enums.h"
 
 #define TOSTR_(x) #x
 #define TOSTR(x) TOSTR_(x)
@@ -62,6 +62,14 @@ extern lua_State *moonglfw_L; /* the global Lua state */
 int noprintf(const char *fmt, ...);
 #define notavailable moonglfw_notavailable
 int notavailable(lua_State *L, ...);
+#define Malloc moonglfw_Malloc
+void *Malloc(lua_State *L, size_t size);
+#define MallocNoErr moonglfw_MallocNoErr
+void *MallocNoErr(lua_State *L, size_t size);
+#define Strdup moonglfw_Strdup
+char *Strdup(lua_State *L, const char *s);
+#define Free moonglfw_Free
+void Free(lua_State *L, void *ptr);
 #define now moonglfw_now
 double now(void);
 #define since(t) (now() - (t))
@@ -166,6 +174,7 @@ int checkminversion(int major, int minor, int rev);
 void errorCallback(int ec, const char *descr);
 int luaopen_moonglfw(lua_State *L);
 void moonglfw_utils_init(lua_State *L);
+void moonglfw_open_enums(lua_State *L);
 int moonglfw_open_getproc(lua_State *L);
 void moonglfw_atexit_getproc(void);
 void moonglfw_open_window(lua_State *L);
@@ -179,6 +188,24 @@ void moonglfw_open_native(lua_State *L);
 
 #define CheckJoystick(L, arg) luaL_checkinteger((L), (arg)) - 1 /* 1,2, ..., 16 */
 #define PushJoystick(L, joy) lua_pushinteger((L), (joy) + 1)
+
+/* Internal error codes */
+#define ERR_NOTPRESENT       1
+#define ERR_SUCCESS          0
+#define ERR_GENERIC         -1
+#define ERR_TYPE            -2
+#define ERR_VALUE           -3
+#define ERR_TABLE           -4
+#define ERR_EMPTY           -5
+#define ERR_MEMORY          -6
+#define ERR_MALLOC_ZERO     -7
+#define ERR_LENGTH          -8
+#define ERR_POOL            -9
+#define ERR_BOUNDARIES      -10
+#define ERR_UNKNOWN         -11
+#define errstring moonglfw_errstring
+const char* errstring(int err);
+#define badvalue(L,s)   lua_pushfstring((L), "invalid value '%s'", (s))
 
 /*------------------------------------------------------------------------------*
  | Debug and other utilities                                                    |

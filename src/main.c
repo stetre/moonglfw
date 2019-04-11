@@ -88,6 +88,7 @@ static void AtExit(void)
         win_free_all();
         id_free_all();
         glfw.Terminate();
+        enums_free_all(moonglfw_L);
         moonglfw_atexit_getproc();
         moonglfw_L = NULL;
         }
@@ -145,6 +146,7 @@ int luaopen_moonglfw(lua_State *L)
     moonglfw_utils_init(L);
 
     lua_newtable(L); /* the glfw table */
+    moonglfw_open_enums(L);
     moonglfw_open_getproc(L);
     AddVersions(L);
 

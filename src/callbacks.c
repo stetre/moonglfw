@@ -223,9 +223,9 @@ static void KeyCallback(GLFWwindow *window, int key, int scancode, int action, i
     {
     int n = 3;
     BEGIN(Key);
-    enumPush(L, key, enumKey());
+    pushkey(L, key);
     lua_pushinteger(L, scancode);
-    enumPush(L, action, enumAction());
+    pushaction(L, action);
     n += PushMods(L, mods);
     EXEC(n);
     }
@@ -259,8 +259,8 @@ static void MouseButtonCallback(GLFWwindow *window, int button, int action, int 
     {
     int n = 2;
     BEGIN(MouseButton);
-    enumPush(L, button, enumButton());
-    enumPush(L, action, enumAction());
+    pushbutton(L, button);
+    pushaction(L, action);
     n += PushMods(L, mods);
     EXEC(n);
     }

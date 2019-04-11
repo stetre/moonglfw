@@ -33,6 +33,76 @@ int notavailable(lua_State *L, ...)
     { NOT_AVAILABLE; }
 
 /*------------------------------------------------------------------------------*
+ | Malloc                                                                       |
+ *------------------------------------------------------------------------------*/
+
+/* We do not use malloc(), free() etc directly. Instead, we inherit the memory
+ * allocator from the main Lua state instead (see lua_getallocf in the Lua manual)
+ * and use that.
+ *
+ * By doing so, we can use an alternative malloc() implementation without recompiling
+ * this library (we have needs to recompile lua only, or execute it with LD_PRELOAD
+ * set to the path to the malloc library we want to use).
+ */
+static lua_Alloc Alloc = NULL;
+static void* AllocUd = NULL;
+
+static void malloc_init(lua_State *L)
+    {
+    if(Alloc) unexpected(L);
+    Alloc = lua_getallocf(L, &AllocUd);
+    }
+
+static void* Malloc_(size_t size)
+    { return Alloc ? Alloc(AllocUd, NULL, 0, size) : NULL; }
+
+static void Free_(void *ptr)
+    { if(Alloc) Alloc(AllocUd, ptr, 0, 0); }
+
+void *Malloc(lua_State *L, size_t size)
+    {
+    void *ptr;
+    if(size == 0)
+        { luaL_error(L, errstring(ERR_MALLOC_ZERO)); return NULL; }
+    ptr = Malloc_(size);
+    if(ptr==NULL)
+        { luaL_error(L, errstring(ERR_MEMORY)); return NULL; }
+    memset(ptr, 0, size);
+    //DBG("Malloc %p\n", ptr);
+    return ptr;
+    }
+
+void *MallocNoErr(lua_State *L, size_t size) /* do not raise errors (check the retval) */
+    {
+    void *ptr = Malloc_(size);
+    (void)L;
+    if(ptr==NULL)
+        return NULL;
+    memset(ptr, 0, size);
+    //DBG("MallocNoErr %p\n", ptr);
+    return ptr;
+    }
+
+char *Strdup(lua_State *L, const char *s)
+    {
+    size_t len = strnlen(s, 256);
+    char *ptr = (char*)Malloc(L, len + 1);
+    if(len>0)
+        memcpy(ptr, s, len);
+    ptr[len]='\0';
+    return ptr;
+    }
+
+
+void Free(lua_State *L, void *ptr)
+    {
+    (void)L;
+    //DBG("Free %p\n", ptr);
+    if(ptr) Free_(ptr);
+    }
+
+
+/*------------------------------------------------------------------------------*
  | Custom luaL_checkxxx() style functions                                       |
  *------------------------------------------------------------------------------*/
 
@@ -233,6 +303,7 @@ int checkgammaramp(lua_State *L, int arg, GLFWgammaramp *ramp)
     }
 
 
+
 /*------------------------------------------------------------------------------*
  | Time utilities                                                               |
  *------------------------------------------------------------------------------*/
@@ -318,11 +389,38 @@ static void time_init(lua_State *L)
 #endif
 
 /*------------------------------------------------------------------------------*
+ | Internal error codes                                                         |
+ *------------------------------------------------------------------------------*/
+
+const char* errstring(int err)
+    {
+    switch(err)
+        {
+        case 0: return "success";
+        case ERR_GENERIC: return "generic error";
+        case ERR_TABLE: return "not a table";
+        case ERR_EMPTY: return "empty list";
+        case ERR_TYPE: return "invalid type";
+        case ERR_VALUE: return "invalid value";
+        case ERR_NOTPRESENT: return "missing";
+        case ERR_MEMORY: return "out of memory";
+        case ERR_MALLOC_ZERO: return "zero bytes malloc";
+        case ERR_LENGTH: return "invalid length";
+        case ERR_POOL: return "elements are not from the same pool";
+        case ERR_BOUNDARIES: return "invalid boundaries";
+        case ERR_UNKNOWN: return "unknown field name";
+        default:
+            return "???";
+        }
+    return NULL; /* unreachable */
+    }
+/*------------------------------------------------------------------------------*
  | Inits                                                                        |
  *------------------------------------------------------------------------------*/
 
 void moonglfw_utils_init(lua_State *L)
     {
+    malloc_init(L);
     time_init(L);
     }
 

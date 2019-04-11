@@ -25,57 +25,6 @@
 
 #include "internal.h"
 
-ENUM_STRINGS(InputModeStrings) = {
-    "cursor",
-    "sticky keys",
-    "sticky mouse buttons",
-    NULL
-};
-ENUM_CODES(InputModeCodes) = {
-    GLFW_CURSOR,
-    GLFW_STICKY_KEYS,
-    GLFW_STICKY_MOUSE_BUTTONS,
-};
-ENUM_T(InputModeEnum, InputModeStrings, InputModeCodes)
-#define CheckInputMode(L, arg) enumCheck((L), (arg), &InputModeEnum)
-#define PushInputMode(L, code) enumPush((L), (code), &InputModeEnum)
-
-ENUM_STRINGS(CursorModeStrings) = {
-    "normal",
-    "hidden",
-    "disabled",
-    NULL
-};
-ENUM_CODES(CursorModeCodes) = {
-    GLFW_CURSOR_NORMAL,
-    GLFW_CURSOR_HIDDEN,
-    GLFW_CURSOR_DISABLED,
-};
-ENUM_T(CursorModeEnum, CursorModeStrings, CursorModeCodes)
-#define CheckCursorMode(L, arg) enumCheck((L), (arg), &CursorModeEnum)
-#define PushCursorMode(L, code) enumPush((L), (code), &CursorModeEnum)
-
-ENUM_STRINGS(CursorShapeStrings) = {
-    "arrow",
-    "ibeam",
-    "crosshair",
-    "hand",
-    "hresize",
-    "vresize",
-    NULL
-};
-ENUM_CODES(CursorShapeCodes) = {
-    GLFW_ARROW_CURSOR,
-    GLFW_IBEAM_CURSOR,
-    GLFW_CROSSHAIR_CURSOR,
-    GLFW_HAND_CURSOR,
-    GLFW_HRESIZE_CURSOR,
-    GLFW_VRESIZE_CURSOR,
-};
-ENUM_T(CursorShapeEnum, CursorShapeStrings, CursorShapeCodes)
-#define CheckCursorShape(L, arg) enumCheck((L), (arg), &CursorShapeEnum)
-#define PushCursorShape(L, code) enumPush((L), (code), &CursorShapeEnum)
-
 /*------------------------------------------------------------------------------*
  |                                                                              |
  *------------------------------------------------------------------------------*/
@@ -85,11 +34,11 @@ static int GetInputMode(lua_State *L)
     {
     int val;
     win_t *win = checkwindow(L, 1);
-    int mode = CheckInputMode(L, 2);
+    int mode = checkinputmode(L, 2);
     val = glfw.GetInputMode(win->window,mode);
     switch(mode)
         {
-        case GLFW_CURSOR:   PushCursorMode(L, val); return 1;
+        case GLFW_CURSOR:   pushcursormode(L, val); return 1;
         case GLFW_STICKY_KEYS:
         case GLFW_STICKY_MOUSE_BUTTONS: lua_pushboolean(L, val); return 1;
         default:
@@ -102,10 +51,10 @@ static int SetInputMode(lua_State *L)
     {
     int value;
     win_t *win = checkwindow(L, 1);
-    int mode = CheckInputMode(L, 2);
+    int mode = checkinputmode(L, 2);
     switch(mode)
         {
-        case GLFW_CURSOR:   value = CheckCursorMode(L, 3); break;
+        case GLFW_CURSOR:   value = checkcursormode(L, 3); break;
         case GLFW_STICKY_KEYS:
         case GLFW_STICKY_MOUSE_BUTTONS: value = checkboolean(L, 3); break;
         default:
@@ -115,12 +64,10 @@ static int SetInputMode(lua_State *L)
     return 0;
     }
 
-#define CheckKey(L, arg) enumCheck((L), (arg), enumKey())
-
 static int GetKey(lua_State *L)
     {
     win_t *win = checkwindow(L, 1);
-    int key = CheckKey(L, 2);
+    int key = checkkey(L, 2);
     int state = glfw.GetKey(win->window, key);
     lua_pushstring(L, state==GLFW_PRESS ? "press" : "release");
     return 1;
@@ -133,7 +80,7 @@ static int GetKeyName(lua_State *L)
     CheckPfn(L, GetKeyName, 3, 2, 0);
     if(lua_type(L, 1) == LUA_TSTRING)
         {
-        key = CheckKey(L, 1);
+        key = checkkey(L, 1);
         name = glfw.GetKeyName(key, 0);
         }
     else if(lua_isinteger(L, 1))
@@ -154,12 +101,10 @@ static int GetKeyName(lua_State *L)
  | Mouse                                                                        |
  *------------------------------------------------------------------------------*/
 
-#define CheckButton(L, arg) enumCheck((L), (arg), enumButton())
-
 static int GetMouseButton(lua_State *L)
     {
     win_t *win = checkwindow(L, 1);
-    int button = CheckButton(L, 2);
+    int button = checkbutton(L, 2);
     int state = glfw.GetMouseButton(win->window, button);
     lua_pushstring(L, state==GLFW_PRESS ? "press" : "release");
     return 1;
@@ -215,7 +160,7 @@ static int CreateCursor(lua_State *L)
 
 static int CreateStandardCursor(lua_State *L)
     {
-    int shape = CheckCursorShape(L, 1);
+    int shape = checkcursorshape(L, 1);
     cur_t *cur = cur_new();
     if(!cur)
         return luaL_error(L, "cannot create cursor");
@@ -267,7 +212,7 @@ static int GetJoystickAxes(lua_State *L)
     const float *axis = glfw.GetJoystickAxes(joy, &count);
     if(!axis)
         return 0;
-	luaL_checkstack(L, count, NULL);
+    luaL_checkstack(L, count, NULL);
     for(i=0; i< count; i++)
         lua_pushnumber(L, axis[i]);
     return count;
@@ -280,7 +225,7 @@ static int GetJoystickButtons(lua_State *L)
     const unsigned char *state = glfw.GetJoystickButtons(joy, &count);
     if(!state)
         return 0;
-	luaL_checkstack(L, count, NULL);
+    luaL_checkstack(L, count, NULL);
     for(i=0; i< count; i++)
         lua_pushstring(L, state[i]==GLFW_PRESS ? "press" : "release");
     return count;
