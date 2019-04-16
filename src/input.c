@@ -26,9 +26,8 @@
 #include "internal.h"
 
 /*------------------------------------------------------------------------------*
- |                                                                              |
+ | Input mode                                                                   |
  *------------------------------------------------------------------------------*/
-
 
 static int GetInputMode(lua_State *L)
     {
@@ -69,6 +68,17 @@ static int SetInputMode(lua_State *L)
     glfw.SetInputMode(win->window, mode, value);
     return 0;
     }
+
+static int RawMouseMotionSupported(lua_State *L)
+    {
+    CheckPfn(L, RawMouseMotionSupported, 3, 3, 0);
+    lua_pushboolean(L, glfw.RawMouseMotionSupported());
+    return 1;
+    }
+
+/*------------------------------------------------------------------------------*
+ | Keyboard                                                                     |
+ *------------------------------------------------------------------------------*/
 
 static int GetKey(lua_State *L)
     {
@@ -196,7 +206,6 @@ static int SetCursor(lua_State *L)
     glfw.SetCursor(win->window, cur->cursor);
     return 0;
     }
-
 
 /*------------------------------------------------------------------------------*
  | Joystick                                                                     |
@@ -361,6 +370,7 @@ static const struct luaL_Reg Functions[] =
     {
         { "get_input_mode", GetInputMode },
         { "set_input_mode", SetInputMode },
+        { "raw_mouse_motion_supported", RawMouseMotionSupported },
         { "get_key", GetKey },
         { "get_key_name", GetKeyName },
         { "get_mouse_button", GetMouseButton },

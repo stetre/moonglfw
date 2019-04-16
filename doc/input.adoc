@@ -11,6 +11,9 @@ _value_: one of the following, depending on _mode_: +
 pass:[-] if _mode_ is '_cursor_': _value_ = '_normal_' | '_hidden_' | '_disabled_'. +
 pass:[-] otherwise: _value_ = boolean.#
 
+[[raw_mouse_motion_supported]]
+* _boolean_ = *raw_mouse_motion_supported*(&nbsp;)
+
 ==== Keyboard
 
 [[get_key]]
