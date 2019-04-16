@@ -239,6 +239,47 @@ static int GetJoystickName(lua_State *L)
     return 1;
     }
 
+static int JoystickIsGamepad(lua_State *L)
+    {
+    int jid = CheckJoystick(L, 1);
+    CheckPfn(L, JoystickIsGamepad, 3, 3, 0);
+    lua_pushboolean(L, glfw.JoystickIsGamepad(jid));
+    return 1;
+    }
+
+static int UpdateGamepadMappings(lua_State *L)
+    {
+    int rc;
+    const char *s = luaL_checkstring(L, 1);
+    CheckPfn(L, UpdateGamepadMappings, 3, 3, 0);
+    rc = glfw.UpdateGamepadMappings(s);
+    lua_pushboolean(L, rc);
+    return 1;
+    }
+
+static int GetGamepadName(lua_State *L)
+    {
+    const char* name;
+    int jid = CheckJoystick(L, 1);
+    CheckPfn(L, GetGamepadName, 3, 3, 0);
+    name = glfw.GetGamepadName(jid);
+    if(!name) return 0;
+    lua_pushstring(L, name);
+    return 1;
+    }
+
+static int GetGamepadState(lua_State *L)
+    {
+    GLFWgamepadstate state;
+    int rc;
+    int jid = CheckJoystick(L, 1);
+    CheckPfn(L, GetGamepadState, 3, 3, 0);
+    rc = glfw.GetGamepadState(jid, &state);
+    if(!rc) return 0;
+    pushgamepadbuttons(L, &state);
+    pushgamepadaxes(L, &state);
+    return 2;
+    }
 
 /*------------------------------------------------------------------------------*
  | Clipboard                                                                    |
@@ -327,6 +368,10 @@ static const struct luaL_Reg Functions[] =
         { "get_joystick_axes", GetJoystickAxes },
         { "get_joystick_buttons", GetJoystickButtons },
         { "get_joystick_name", GetJoystickName },
+        { "joystick_is_gamepad", JoystickIsGamepad },
+        { "update_gamepad_mappings", UpdateGamepadMappings },
+        { "get_gamepad_name", GetGamepadName },
+        { "get_gamepad_state", GetGamepadState },
         { "set_clipboard_string", SetClipboardString },
         { "get_clipboard_string", GetClipboardString },
         { "get_time", GetTime },

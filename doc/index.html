@@ -785,20 +785,25 @@ p.tableblock.header { color: #6d6e71; }
 </li>
 <li><a href="#_bindings">Bindings</a>
 <ul class="sectlevel2">
-<li><a href="#_context_handling">Context handling</a></li>
+<li><a href="#_context">Context</a></li>
 <li><a href="#_initialization_version_and_errors">Initialization, version and errors</a></li>
-<li><a href="#_input_handling">Input handling</a>
+<li><a href="#_input">Input</a>
 <ul class="sectlevel3">
+<li><a href="#_keyboard">Keyboard</a></li>
+<li><a href="#_mouse_cursor">Mouse/Cursor</a></li>
+<li><a href="#_joystick_gamepad">Joystick/Gamepad</a></li>
+<li><a href="#_clipboard">Clipboard</a></li>
+<li><a href="#_time">Time</a></li>
 <li><a href="#_input_callbacks">Input callbacks</a></li>
 </ul>
 </li>
-<li><a href="#_monitor_handling">Monitor handling</a>
+<li><a href="#_monitor">Monitor</a>
 <ul class="sectlevel3">
 <li><a href="#_monitor_callbacks">Monitor callbacks</a></li>
 </ul>
 </li>
 <li><a href="#_native_access">Native access</a></li>
-<li><a href="#_window_handling">Window handling</a>
+<li><a href="#_window">Window</a>
 <ul class="sectlevel3">
 <li><a href="#_window_callbacks">Window callbacks</a></li>
 </ul>
@@ -903,9 +908,9 @@ Lua libraries for graphics and audio programming.</p>
 <p>Functions tagged with <em>NONGLFW</em> are MoonGLFW additions that do not map directly to GLFW functions.</p>
 </div>
 <div class="sect2">
-<h3 id="_context_handling">Context handling</h3>
+<h3 id="_context">Context</h3>
 <div class="paragraph">
-<p><span class="small">Rfr: <a href="http://www.glfw.org/docs/latest/group__context.html">Context handling</a>.</span></p>
+<p><span class="small">Rfr: <a href="http://www.glfw.org/docs/latest/group__context.html">Context</a>.</span></p>
 </div>
 <div id="make_context_current" class="ulist">
 <ul>
@@ -990,9 +995,9 @@ If <em>func</em> is <em>nil</em>, unregisters the current error callback (if any
 </div>
 </div>
 <div class="sect2">
-<h3 id="_input_handling">Input handling</h3>
+<h3 id="_input">Input</h3>
 <div class="paragraph">
-<p><span class="small">Rfr: <a href="http://www.glfw.org/docs/latest/group__input.html">Input handling</a>.</span></p>
+<p><span class="small">Rfr: <a href="http://www.glfw.org/docs/latest/group__input.html">Input</a>.</span></p>
 </div>
 <div id="set_input_mode" class="ulist">
 <ul>
@@ -1006,7 +1011,8 @@ If <em>func</em> is <em>nil</em>, unregisters the current error callback (if any
 </li>
 </ul>
 </div>
-<hr>
+<div class="sect3">
+<h4 id="_keyboard">Keyboard</h4>
 <div id="get_key" class="ulist">
 <ul>
 <li>
@@ -1023,7 +1029,9 @@ If <em>func</em> is <em>nil</em>, unregisters the current error callback (if any
 </li>
 </ul>
 </div>
-<hr>
+</div>
+<div class="sect3">
+<h4 id="_mouse_cursor">Mouse/Cursor</h4>
 <div id="get_mouse_button" class="ulist">
 <ul>
 <li>
@@ -1042,7 +1050,6 @@ If <em>func</em> is <em>nil</em>, unregisters the current error callback (if any
 </li>
 </ul>
 </div>
-<hr>
 <div id="create_cursor" class="ulist">
 <ul>
 <li>
@@ -1068,7 +1075,9 @@ Both functions return a <em>cursor</em> handle to the newly created cursor.</spa
 </li>
 </ul>
 </div>
-<hr>
+</div>
+<div class="sect3">
+<h4 id="_joystick_gamepad">Joystick/Gamepad</h4>
 <div id="joystick_present" class="ulist">
 <ul>
 <li>
@@ -1099,7 +1108,39 @@ Both functions return a <em>cursor</em> handle to the newly created cursor.</spa
 </li>
 </ul>
 </div>
-<hr>
+<div id="joystick_is_gamepad" class="ulist">
+<ul>
+<li>
+<p><em>boolean</em> = <strong>joystick_is_gamepad</strong>(<em>jid</em>)</p>
+</li>
+</ul>
+</div>
+<div id="get_gamepad_name" class="ulist">
+<ul>
+<li>
+<p><em>name</em> = <strong>get_gamepad_name</strong>(<em>jid</em>)<br>
+<span class="small">Returns <em>nil</em> on error.</span></p>
+</li>
+</ul>
+</div>
+<div id="get_gamepad_state" class="ulist">
+<ul>
+<li>
+<p><em><a href="#gamepadbuttons">buttons</a>, <a href="#gamepadaxes">axes</a></em> = <strong>get_gamepad_state</strong>(<em>jid</em>)<br>
+<span class="small">Returns <em>nil</em> on error.</span></p>
+</li>
+</ul>
+</div>
+<div id="update_gamepad_mappings" class="ulist">
+<ul>
+<li>
+<p><em>boolean</em> = <strong>update_gamepad_mappings</strong>(<em>string</em>)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_clipboard">Clipboard</h4>
 <div id="set_clipboard_string" class="ulist">
 <ul>
 <li>
@@ -1108,7 +1149,9 @@ Both functions return a <em>cursor</em> handle to the newly created cursor.</spa
 </li>
 </ul>
 </div>
-<hr>
+</div>
+<div class="sect3">
+<h4 id="_time">Time</h4>
 <div id="set_time" class="ulist">
 <ul>
 <li>
@@ -1129,7 +1172,6 @@ Both functions return a <em>cursor</em> handle to the newly created cursor.</spa
 </li>
 </ul>
 </div>
-<hr>
 <div class="paragraph">
 <p>The following <em>NONGLFW</em> time utilities are added for consistency
 with the time utilities that can be found in other libraries of the
@@ -1162,10 +1204,11 @@ previously obtained with the <a href="#now">now</a>(&nbsp;) function.</span></p>
 </li>
 </ul>
 </div>
+</div>
 <div class="sect3">
 <h4 id="_input_callbacks">Input callbacks</h4>
 <div class="paragraph">
-<p><span class="small">Rfr: <a href="http://www.glfw.org/docs/latest/group__input.html">Input handling</a>.</span></p>
+<p><span class="small">Rfr: <a href="http://www.glfw.org/docs/latest/group__input.html">Input</a>.</span></p>
 </div>
 <div class="paragraph">
 <p>All the following functions, when invoked with <em>func=nil</em>, unregister the corresponding current callback.</p>
@@ -1261,9 +1304,9 @@ and <em>ypos</em> are numbers.</span></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_monitor_handling">Monitor handling</h3>
+<h3 id="_monitor">Monitor</h3>
 <div class="paragraph">
-<p><span class="small">Rfr: <a href="http://www.glfw.org/docs/latest/group__monitor.html">Monitor handling</a>.</span></p>
+<p><span class="small">Rfr: <a href="http://www.glfw.org/docs/latest/group__monitor.html">Monitor</a>.</span></p>
 </div>
 <div id="get_monitors" class="ulist">
 <ul>
@@ -1327,7 +1370,7 @@ and <em>ypos</em> are numbers.</span></p>
 <div class="sect3">
 <h4 id="_monitor_callbacks">Monitor callbacks</h4>
 <div class="paragraph">
-<p><span class="small">Rfr: <a href="http://www.glfw.org/docs/latest/group__monitor.html">Monitor handling</a>.</span></p>
+<p><span class="small">Rfr: <a href="http://www.glfw.org/docs/latest/group__monitor.html">Monitor</a>.</span></p>
 </div>
 <div id="set_monitor_callback" class="ulist">
 <ul>
@@ -1392,9 +1435,9 @@ Returns <em>nil</em> if the GL context can not be retrieved.<br>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_window_handling">Window handling</h3>
+<h3 id="_window">Window</h3>
 <div class="paragraph">
-<p><span class="small">Rfr: <a href="http://www.glfw.org/docs/latest/group__window.html">Window handling</a>.</span></p>
+<p><span class="small">Rfr: <a href="http://www.glfw.org/docs/latest/group__window.html">Window</a>.</span></p>
 </div>
 <div id="default_window_hints" class="ulist">
 <ul>
@@ -1588,7 +1631,7 @@ Other images (up to 32 total) can be added in the optional part in the same way.
 <div class="sect3">
 <h4 id="_window_callbacks">Window callbacks</h4>
 <div class="paragraph">
-<p><span class="small">Rfr: <a href="http://www.glfw.org/docs/latest/group__window.html">Window handling</a>.</span></p>
+<p><span class="small">Rfr: <a href="http://www.glfw.org/docs/latest/group__window.html">Window</a>.</span></p>
 </div>
 <div class="paragraph">
 <p>All the following functions, when invoked with <em>func=nil</em>, unregister the corresponding current callback.</p>

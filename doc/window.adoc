@@ -1,7 +1,7 @@
 
-=== Window handling
+=== Window
 
-[small]#Rfr: link:http://www.glfw.org/docs/latest/group__window.html[Window handling].#
+[small]#Rfr: link:http://www.glfw.org/docs/latest/group__window.html[Window].#
 
 [[default_window_hints]]
 * *default_window_hints*( )
@@ -98,7 +98,7 @@ _width_, _height_ = *get_window_size*(_window_)
 
 ==== Window callbacks
 
-[small]#Rfr: link:http://www.glfw.org/docs/latest/group__window.html[Window handling].#
+[small]#Rfr: link:http://www.glfw.org/docs/latest/group__window.html[Window].#
 
 All the following functions, when invoked with _func=nil_, unregister the corresponding current callback.
 

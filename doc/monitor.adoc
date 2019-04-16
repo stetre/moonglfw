@@ -1,7 +1,7 @@
 
-=== Monitor handling
+=== Monitor
 
-[small]#Rfr: link:http://www.glfw.org/docs/latest/group__monitor.html[Monitor handling].#
+[small]#Rfr: link:http://www.glfw.org/docs/latest/group__monitor.html[Monitor].#
 
 [[get_monitors]]
 * _monitor~1~_, _monitor~2~_, _..._ = *get_monitors*( )
@@ -32,7 +32,7 @@ _red_, _green_, _blue_ = *get_gamma_ramp*(_monitor_) +
 
 ==== Monitor callbacks
 
-[small]#Rfr: link:http://www.glfw.org/docs/latest/group__monitor.html[Monitor handling].#
+[small]#Rfr: link:http://www.glfw.org/docs/latest/group__monitor.html[Monitor].#
 
 [[set_monitor_callback]]
 * *set_monitor_callback*(_monitor_, [_func_]) +

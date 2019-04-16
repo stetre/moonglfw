@@ -1,7 +1,7 @@
 
-=== Context handling
+=== Context
 
-[small]#Rfr: link:http://www.glfw.org/docs/latest/group__context.html[Context handling].#
+[small]#Rfr: link:http://www.glfw.org/docs/latest/group__context.html[Context].#
 
 [[make_context_current]]
 * *make_context_current*(_window_)

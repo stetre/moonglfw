@@ -1,7 +1,7 @@
 
-=== Input handling
+=== Input
 
-[small]#Rfr: link:http://www.glfw.org/docs/latest/group__input.html[Input handling].#
+[small]#Rfr: link:http://www.glfw.org/docs/latest/group__input.html[Input].#
 
 [[set_input_mode]]
 * *set_input_mode*(_window_, _mode_, _value_) +
@@ -11,7 +11,7 @@ _value_: one of the following, depending on _mode_: +
 pass:[-] if _mode_ is '_sticky keys_' or '_sticky mouse buttons_': _value_ = boolean. +
 pass:[-] if _mode_ is '_cursor_': _value_ = '_normal_' | '_hidden_' | '_disabled_'.#
 
-'''
+==== Keyboard
 
 [[get_key]]
 * _state_ = *get_key*(_window_, <<enums_key, _key_>>) +
@@ -21,19 +21,18 @@ pass:[-] if _mode_ is '_cursor_': _value_ = '_normal_' | '_hidden_' | '_disabled
 * _name_ = *get_key_name*(<<enums_key, _key_>> | _scancode_) +
 [small]#See <<set_key_callback, set_key_callback>>(&nbsp;).#
 
-'''
+==== Mouse/Cursor
+
 [[get_mouse_button]]
 * _state_ = *get_mouse_button*(_window_, _button_) +
 [small]#_button_: '_left_' | '_middle_' | '_right_' | '_button 4_' | .. | '_button 8_'. +
 _state_: '_press_' | '_release_'.#
-
 
 [[set_cursor_pos]]
 * *set_cursor_pos*(_window_, _xpos_, _ypos_) +
 _xpos_, _ypos_ = *get_cursor_pos*(_window_) +
 [small]#_xpos_, _ypos_: numbers.#
 
-'''
 [[create_cursor]]
 * _cursor_ = *create_cursor*(_width_, _height_, _pixels_, _xhot_, _yhot_) +
 _cursor_ = *create_cursor*(_shape_) +
@@ -47,7 +46,8 @@ Both functions return a _cursor_ handle to the newly created cursor.#
 [[set_cursor]]
 * *set_cursor*(_window_, _cursor_)
 
-'''
+==== Joystick/Gamepad
+
 [[joystick_present]]
 * _boolean_ = *joystick_present*(_jid_) +
 [small]#_jid_: integer (1..16).# +
@@ -62,13 +62,28 @@ Both functions return a _cursor_ handle to the newly created cursor.#
 [[get_joystick_name]]
 * _name_ = *get_joystick_name*(_jid_)
 
-'''
+[[joystick_is_gamepad]]
+* _boolean_ = *joystick_is_gamepad*(_jid_)
+
+[[get_gamepad_name]]
+* _name_ = *get_gamepad_name*(_jid_) +
+[small]#Returns _nil_ on error.#
+
+[[get_gamepad_state]]
+* _<<gamepadbuttons, buttons>>, <<gamepadaxes, axes>>_ = *get_gamepad_state*(_jid_) +
+[small]#Returns _nil_ on error.#
+
+[[update_gamepad_mappings]]
+* _boolean_ = *update_gamepad_mappings*(_string_)
+
+==== Clipboard
 
 [[set_clipboard_string]]
 * *set_clipboard_string*(_window_, _string_) +
 _string_ = *get_clipboard_string*(_window_)
 
-'''
+==== Time
+
 [[set_time]]
 * *set_time*(_time_) +
 _time_ = *get_time*(_time_)
@@ -79,8 +94,6 @@ _time_ = *get_time*(_time_)
 * _tics_ = *get_timer_value*( ) +
 _seconds_ = *get_timer_seconds*( ) _NONGLFW_ +
 [small]#_seconds_ = _tics * 1/hz_.#
-
-'''
 
 The following _NONGLFW_ time utilities are added for consistency
 with the time utilities that can be found in other libraries of the
@@ -103,7 +116,7 @@ previously obtained with the <<now, now>>(&nbsp;) function.#
 
 ==== Input callbacks
 
-[small]#Rfr: link:http://www.glfw.org/docs/latest/group__input.html[Input handling].#
+[small]#Rfr: link:http://www.glfw.org/docs/latest/group__input.html[Input].#
 
 All the following functions, when invoked with _func=nil_, unregister the corresponding current callback.
 
