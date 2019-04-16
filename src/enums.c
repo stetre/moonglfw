@@ -476,6 +476,8 @@ void moonglfw_open_enums(lua_State *L)
     ADD(OPENGL_PROFILE, "opengl profile");
     ADD(ICONIFIED, "iconified");
     ADD(CONTEXT_REVISION, "context revision");
+    ADD(X11_CLASS_NAME, "x11 class name");
+    ADD(X11_INSTANCE_NAME, "x11 instance name");
 
     domain = DOMAIN_API;
     ADD(NO_API, "no api");

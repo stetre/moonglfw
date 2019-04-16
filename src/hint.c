@@ -65,6 +65,13 @@ static int Integer(lua_State *L, int target)
     return 0;
     }
 
+static int String(lua_State *L, int target)
+    {
+    const char* hint = luaL_checkstring(L, 2);
+    CheckPfn(L, WindowHintString, 3, 3, 0);
+    glfw.WindowHintString(target, hint);
+    return 0;
+    }
 
 #define ENUM(L, target, checkfunc) do { \
     int hint = checkfunc((L), 2);       \
@@ -107,6 +114,8 @@ static int WindowHint(lua_State *L)
         case GLFW_OPENGL_FORWARD_COMPAT:
         case GLFW_OPENGL_DEBUG_CONTEXT: return Boolean(L, target);
         case GLFW_OPENGL_PROFILE: ENUM(L, target, checkprofile);
+        case GLFW_X11_CLASS_NAME:
+        case GLFW_X11_INSTANCE_NAME: return String(L, target);
         default:
             return luaL_error(L, "invalid target '%s'", lua_tostring(L, 1));
         }

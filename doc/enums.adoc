@@ -35,6 +35,8 @@ The following list shows the admitted _hint_ values for each _target_ (_target_:
 '_opengl forward compat_': boolean +
 '_opengl debug context_': boolean +
 '_opengl profile_': '_any_' | '_core_' | '_compat_' +
+'_x11 class name_': string +
+'_x11 instance name_': string +
 (Rfr: link:http://www.glfw.org/docs/latest/window.html#window_hints[Window creation hints]).#
 
 [[enums_key]]
