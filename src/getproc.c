@@ -181,6 +181,31 @@ static int Init(lua_State *L)
     OPT(WaitEventsTimeout);
     OPT(SetJoystickCallback);
     OPT(MaximizeWindow);
+    // GLFW ver 3.3.0:
+    OPT(InitHint);
+    OPT(GetError);
+    OPT(GetMonitorWorkarea);
+    OPT(GetMonitorContentScale);
+    OPT(SetMonitorUserPointer);
+    OPT(GetMonitorUserPointer);
+    OPT(WindowHintString);
+    OPT(GetWindowContentScale);
+    OPT(GetWindowOpacity);
+    OPT(SetWindowOpacity);
+    OPT(RequestWindowAttention);
+    OPT(SetWindowAttrib);
+    OPT(SetWindowMaximizeCallback);
+    OPT(SetWindowContentScaleCallback);
+    OPT(RawMouseMotionSupported);
+    OPT(GetKeyScancode);
+    OPT(GetJoystickHats);
+    OPT(GetJoystickGUID);
+    OPT(SetJoystickUserPointer);
+    OPT(GetJoystickUserPointer);
+    OPT(JoystickIsGamepad);
+    OPT(UpdateGamepadMappings);
+    OPT(GetGamepadName);
+    OPT(GetGamepadState);
 //#ifdef VULKAN requires GLFW version >= 3.20
     OPT(GetProcAddress);
     OPT(VulkanSupported);
@@ -212,6 +237,12 @@ static int Init(lua_State *L)
     OPT(GetEGLDisplay);
     OPT(GetEGLContext);
     OPT(GetEGLSurface);
+    // GLFW ver 3.3.0:
+    OPT(SetX11SelectionString);
+    OPT(GetX11SelectionString);
+    OPT(GetOSMesaColorBuffer);
+    OPT(GetOSMesaDepthBuffer);
+    OPT(GetOSMesaContext);
 #undef GET
 #undef OPT
     return 0;

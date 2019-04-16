@@ -140,6 +140,32 @@ typedef struct {
     PFN_glfwSwapBuffers SwapBuffers;
     PFN_glfwSwapInterval SwapInterval;
     PFN_glfwExtensionSupported ExtensionSupported;
+    // GLFW 3.3
+    PFN_glfwInitHint InitHint;
+    PFN_glfwGetError GetError;
+    PFN_glfwGetMonitorWorkarea GetMonitorWorkarea;
+    PFN_glfwGetMonitorContentScale GetMonitorContentScale;
+    PFN_glfwSetMonitorUserPointer SetMonitorUserPointer;
+    PFN_glfwGetMonitorUserPointer GetMonitorUserPointer;
+    PFN_glfwWindowHintString WindowHintString;
+    PFN_glfwGetWindowContentScale GetWindowContentScale;
+    PFN_glfwGetWindowOpacity GetWindowOpacity;
+    PFN_glfwSetWindowOpacity SetWindowOpacity;
+    PFN_glfwRequestWindowAttention RequestWindowAttention;
+    PFN_glfwSetWindowAttrib SetWindowAttrib;
+    PFN_glfwSetWindowMaximizeCallback SetWindowMaximizeCallback;
+    PFN_glfwSetWindowContentScaleCallback SetWindowContentScaleCallback;
+    PFN_glfwRawMouseMotionSupported RawMouseMotionSupported;
+    PFN_glfwGetKeyScancode GetKeyScancode;
+    PFN_glfwGetJoystickHats GetJoystickHats;
+    PFN_glfwGetJoystickGUID GetJoystickGUID;
+    PFN_glfwSetJoystickUserPointer SetJoystickUserPointer;
+    PFN_glfwGetJoystickUserPointer GetJoystickUserPointer;
+    PFN_glfwJoystickIsGamepad JoystickIsGamepad;
+    PFN_glfwUpdateGamepadMappings UpdateGamepadMappings;
+    PFN_glfwGetGamepadName GetGamepadName;
+    PFN_glfwGetGamepadState GetGamepadState;
+
 //#ifdef VULKAN
     PFN_glfwGetProcAddress GetProcAddress;
     PFN_glfwVulkanSupported VulkanSupported;
@@ -171,6 +197,12 @@ typedef struct {
     PFN_glfwGetEGLDisplay GetEGLDisplay;
     PFN_glfwGetEGLContext GetEGLContext;
     PFN_glfwGetEGLSurface GetEGLSurface;
+    // GLFW 3.3
+    PFN_glfwSetX11SelectionString SetX11SelectionString;
+    PFN_glfwGetX11SelectionString GetX11SelectionString;
+    PFN_glfwGetOSMesaColorBuffer GetOSMesaColorBuffer;
+    PFN_glfwGetOSMesaDepthBuffer GetOSMesaDepthBuffer;
+    PFN_glfwGetOSMesaContext GetOSMesaContext;
 } moonglfw_dt_t;
 
 #define glfw moonglfw_glfw

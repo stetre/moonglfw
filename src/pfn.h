@@ -125,7 +125,31 @@ typedef GLFWvkproc (*PFN_glfwGetInstanceProcAddress)(VkInstance instance, const 
 typedef int (*PFN_glfwGetPhysicalDevicePresentationSupport)(VkInstance instance, VkPhysicalDevice device, uint32_t queuefamily);
 typedef VkResult (*PFN_glfwCreateWindowSurface)(VkInstance instance, GLFWwindow* window, const VkAllocationCallbacks* allocator, VkSurfaceKHR* surface);
 //#endif
-
+// GLFW 3.3
+typedef void (*PFN_glfwInitHint)(int hint, int value);
+typedef int (*PFN_glfwGetError)(const char** description);
+typedef void (*PFN_glfwGetMonitorWorkarea)(GLFWmonitor* monitor, int* xpos, int* ypos, int* width, int* height);
+typedef void (*PFN_glfwGetMonitorContentScale)(GLFWmonitor* monitor, float* xscale, float* yscale);
+typedef void (*PFN_glfwSetMonitorUserPointer)(GLFWmonitor* monitor, void* pointer);
+typedef void* (*PFN_glfwGetMonitorUserPointer)(GLFWmonitor* monitor);
+typedef void (*PFN_glfwWindowHintString)(int hint, const char* value);
+typedef void (*PFN_glfwGetWindowContentScale)(GLFWwindow* window, float* xscale, float* yscale);
+typedef float (*PFN_glfwGetWindowOpacity)(GLFWwindow* window);
+typedef void (*PFN_glfwSetWindowOpacity)(GLFWwindow* window, float opacity);
+typedef void (*PFN_glfwRequestWindowAttention)(GLFWwindow* window);
+typedef void (*PFN_glfwSetWindowAttrib)(GLFWwindow* window, int attrib, int value);
+typedef GLFWwindowmaximizefun (*PFN_glfwSetWindowMaximizeCallback)(GLFWwindow* window, GLFWwindowmaximizefun cbfun);
+typedef GLFWwindowcontentscalefun (*PFN_glfwSetWindowContentScaleCallback)(GLFWwindow* window, GLFWwindowcontentscalefun cbfun);
+typedef int (*PFN_glfwRawMouseMotionSupported)(void);
+typedef int (*PFN_glfwGetKeyScancode)(int key);
+typedef const unsigned char* (*PFN_glfwGetJoystickHats)(int jid, int* count);
+typedef const char* (*PFN_glfwGetJoystickGUID)(int jid);
+typedef void (*PFN_glfwSetJoystickUserPointer)(int jid, void* pointer);
+typedef void* (*PFN_glfwGetJoystickUserPointer)(int jid);
+typedef int (*PFN_glfwJoystickIsGamepad)(int jid);
+typedef int (*PFN_glfwUpdateGamepadMappings)(const char* string);
+typedef const char* (*PFN_glfwGetGamepadName)(int jid);
+typedef int (*PFN_glfwGetGamepadState)(int jid, GLFWgamepadstate* state);
 
 /* Typedefs for glfw2native.h functions (to avoid including native headers)
  */
@@ -151,5 +175,11 @@ typedef void* /* MirSurface* */ (*PFN_glfwGetMirWindow)(GLFWwindow* window);
 typedef void* /* EGLDisplay */ (*PFN_glfwGetEGLDisplay)(void);
 typedef void* /* EGLContext */ (*PFN_glfwGetEGLContext)(GLFWwindow* window);
 typedef void* /* EGLSurface */ (*PFN_glfwGetEGLSurface)(GLFWwindow* window);
+// GLFW 3.3
+typedef void (*PFN_glfwSetX11SelectionString)(const char* string);
+typedef const char* (*PFN_glfwGetX11SelectionString)(void);
+typedef int (*PFN_glfwGetOSMesaColorBuffer)(GLFWwindow* window, int* width, int* height, int* format, void** buffer);
+typedef int (*PFN_glfwGetOSMesaDepthBuffer)(GLFWwindow* window, int* width, int* height, int* bytesPerValue, void** buffer);
+typedef void* /* OSMesaContext */ (*PFN_glfwGetOSMesaContext)(GLFWwindow* window);
 
 #endif /* pfnDEFINED */
