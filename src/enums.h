@@ -55,6 +55,8 @@ void enums_freelist(lua_State *L, uint32_t *list);
 #define DOMAIN_INPUT_MODE           8
 #define DOMAIN_CURSOR_MODE          9
 #define DOMAIN_CURSOR_SHAPE         10
+#define DOMAIN_GAMEPAD_BUTTON       11
+#define DOMAIN_GAMEPAD_AXIS         12
 
 #define testaction(L, arg, err) (uint32_t)enums_test((L), DOMAIN_ACTION, (arg), (err))
 #define checkaction(L, arg) (uint32_t)enums_check((L), DOMAIN_ACTION, (arg))
@@ -110,6 +112,16 @@ void enums_freelist(lua_State *L, uint32_t *list);
 #define checkcursorshape(L, arg) (uint32_t)enums_check((L), DOMAIN_CURSOR_SHAPE, (arg))
 #define pushcursorshape(L, val) enums_push((L), DOMAIN_CURSOR_SHAPE, (uint32_t)(val))
 #define valuescursorshape(L) enums_values((L), DOMAIN_CURSOR_SHAPE)
+
+#define testgamepadbutton(L, arg, err) (uint32_t)enums_test((L), DOMAIN_GAMEPAD_BUTTON, (arg), (err))
+#define checkgamepadbutton(L, arg) (uint32_t)enums_check((L), DOMAIN_GAMEPAD_BUTTON, (arg))
+#define pushgamepadbutton(L, val) enums_push((L), DOMAIN_GAMEPAD_BUTTON, (uint32_t)(val))
+#define valuesgamepadbutton(L) enums_values((L), DOMAIN_GAMEPAD_BUTTON)
+
+#define testgamepadaxis(L, arg, err) (uint32_t)enums_test((L), DOMAIN_GAMEPAD_AXIS, (arg), (err))
+#define checkgamepadaxis(L, arg) (uint32_t)enums_check((L), DOMAIN_GAMEPAD_AXIS, (arg))
+#define pushgamepadaxis(L, val) enums_push((L), DOMAIN_GAMEPAD_AXIS, (uint32_t)(val))
+#define valuesgamepadaxis(L) enums_values((L), DOMAIN_GAMEPAD_AXIS)
 
 #if 0 /* scaffolding 6yy */
 #define testxxx(L, arg, err) (uint32_t)enums_test((L), DOMAIN_XXX, (arg), (err))

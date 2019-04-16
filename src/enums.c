@@ -284,6 +284,8 @@ static int Enum(lua_State *L)
     CASE(inputmode);
     CASE(cursormode);
     CASE(cursorshape);
+    CASE(gamepadbutton);
+    CASE(gamepadaxis);
 #undef CASE
     return 0;
     }
@@ -512,6 +514,31 @@ void moonglfw_open_enums(lua_State *L)
     ADD(HAND_CURSOR, "hand");
     ADD(HRESIZE_CURSOR, "hresize");
     ADD(VRESIZE_CURSOR, "vresize");
+
+    domain = DOMAIN_GAMEPAD_BUTTON;
+    ADD(GAMEPAD_BUTTON_A, "a"); /* cross */
+    ADD(GAMEPAD_BUTTON_B, "b"); /* circle */
+    ADD(GAMEPAD_BUTTON_X, "x"); /* square */
+    ADD(GAMEPAD_BUTTON_Y, "y"); /* triangle */
+    ADD(GAMEPAD_BUTTON_LEFT_BUMPER, "left bumper");
+    ADD(GAMEPAD_BUTTON_RIGHT_BUMPER, "right bumper");
+    ADD(GAMEPAD_BUTTON_BACK, "back");
+    ADD(GAMEPAD_BUTTON_START, "start");
+    ADD(GAMEPAD_BUTTON_GUIDE, "guide");
+    ADD(GAMEPAD_BUTTON_LEFT_THUMB, "left thumb");
+    ADD(GAMEPAD_BUTTON_RIGHT_THUMB, "right thumb");
+    ADD(GAMEPAD_BUTTON_DPAD_UP, "dpad up");
+    ADD(GAMEPAD_BUTTON_DPAD_RIGHT, "dpad right");
+    ADD(GAMEPAD_BUTTON_DPAD_DOWN, "dpad down");
+    ADD(GAMEPAD_BUTTON_DPAD_LEFT, "dpad left");
+
+    domain = DOMAIN_GAMEPAD_AXIS;
+    ADD(GAMEPAD_AXIS_LEFT_X, "left x");
+    ADD(GAMEPAD_AXIS_LEFT_Y, "left y");
+    ADD(GAMEPAD_AXIS_RIGHT_X, "right x");
+    ADD(GAMEPAD_AXIS_RIGHT_Y, "right y");
+    ADD(GAMEPAD_AXIS_LEFT_TRIGGER, "left trigger");
+    ADD(GAMEPAD_AXIS_RIGHT_TRIGGER, "right trigger");
 
 #undef ADD
     }
