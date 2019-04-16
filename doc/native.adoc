@@ -12,7 +12,9 @@ _lightuserdata_ = *get_win32_window*(_window_)
 * _lightuserdata_ = *get_x11_display*( ) +
 _integer_ = *get_x11_adapter*(_monitor_) +
 _integer_ = *get_x11_monitor*(_monitor_) +
-_integer_ = *get_x11_window*(_window_)
+_integer_ = *get_x11_window*(_window_) +
+_string_ = *get_x11_selection_string*( ) +
+*set_x11_selection_string*(_string_ )
 
 * _lightuserdata_ = *get_glx_context*(_window_) +
 _integer_ = *get_glx_window*(_window_)

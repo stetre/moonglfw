@@ -25,6 +25,8 @@ print("get_x11_display", pcall(glfw.get_x11_display))
 print("get_x11_adapter", pcall(glfw.get_x11_adapter, monitor))
 print("get_x11_monitor", pcall(glfw.get_x11_monitor, monitor))
 print("get_x11_window", pcall(glfw.get_x11_window, window))
+--print("get_x11_selection_string", pcall(glfw.get_x11_selection_string))
+--print("set_x11_selection_string", pcall(glfw.set_x11_selection_string, ??))
 
 print("GLX supported:", glfw.NATIVE_GLX)
 print("get_glx_context", pcall(glfw.get_glx_context, window))
