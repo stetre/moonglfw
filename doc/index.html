@@ -1460,7 +1460,7 @@ If <em>func=nil</em>, unregisters the current callback (if any).</span></p>
 <em>lightuserdata</em> = <strong>get_wayland_window</strong>(<em>window</em>)</p>
 </li>
 <li>
-<p><em>lightuserdata</em> = <strong>get_mir_display</strong>( )<br>
+<p><em>lightuserdata</em> = <strong>get_mir_display</strong>( ) <em>DEPRECATED</em><br>
 <em>integer</em> = <strong>get_mir_monitor</strong>(<em>monitor</em>)<br>
 <em>lightuserdata</em> = <strong>get_mir_window</strong>(<em>window</em>)</p>
 </li>
@@ -1470,9 +1470,16 @@ If <em>func=nil</em>, unregisters the current callback (if any).</span></p>
 <em>lightuserdata</em> = <strong>get_egl_surface</strong>(<em>window</em>)</p>
 </li>
 <li>
+<p><em>lightuserdata</em> = <strong>get_osmesa_context</strong>(<em>window</em>)<br>
+<em>width</em>, <em>height</em>, <em>format</em>, <em>buffer</em> = <strong>get_osmesa_color_buffer</strong>(<em>window</em>)<br>
+<em>width</em>, <em>height</em>, <em>bytespervalue</em>, <em>buffer</em> = <strong>get_osmesa_depth_buffer</strong>(<em>window</em>)<br>
+<span class="small"><em>width</em>, <em>height</em>, <em>format</em>, <em>bytespervalue</em>: integer,<br>
+<em>buffer</em>: lightuserdata.</span></p>
+</li>
+<li>
 <p><em>context</em>, <em>system</em> = <strong>get_context</strong>(<em>window</em>) <em>NONGLFW</em><br>
 <span class="small">Returns the GL context (lightuserdata) associated with <em>window</em>, followed by
-a string denoting the system ('<em>wgl</em>', '<em>glx</em>', or '<em>egl</em>').<br>
+a string denoting the system ('<em>wgl</em>', '<em>glx</em>', '<em>egl</em>', or '<em>osmesa</em>').<br>
 Returns <em>nil</em> if the GL context can not be retrieved.<br>
 (This function can be used instead of <em>get_xxx_context(&nbsp;)</em> when <em>xxx</em> is unknown to the application).</span></p>
 </li>

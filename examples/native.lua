@@ -35,7 +35,7 @@ print("get_wayland_display", pcall(glfw.get_wayland_display))
 print("get_wayland_monitor", pcall(glfw.get_wayland_monitor, monitor))
 print("get_wayland_window", pcall(glfw.get_wayland_window, window))
 
-print("MIR supported:", glfw.NATIVE_MIR)
+print("MIR supported:", glfw.NATIVE_MIR, "(DEPRECATED)")
 print("get_mir_display", pcall(glfw.get_mir_display))
 print("get_mir_monitor", pcall(glfw.get_mir_monitor, monitor))
 print("get_mir_window", pcall(glfw.get_mir_window, window))
@@ -44,4 +44,10 @@ print("EGL supported:", glfw.NATIVE_EGL)
 print("get_egl_display", pcall(glfw.get_egl_display))
 print("get_egl_context", pcall(glfw.get_egl_context, window))
 print("get_egl_surface", pcall(glfw.get_egl_surface, window))
+
+print("OSMESA supported:", glfw.NATIVE_OSMESA)
+print("get_osmesa_context", pcall(glfw.get_osmesa_context, window))
+--@@ print("get_osmesa_color_buffer", pcall(glfw.get_osmesa_color_buffer, window))
+--@@ print("get_osmesa_depth_buffer", pcall(glfw.get_osmesa_depth_buffer, window))
+
 

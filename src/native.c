@@ -124,6 +124,9 @@ static int GetX11Window(lua_State *L)
     return 1;
     }
 
+//@@ void glfwSetX11SelectionString(const char* string);
+//@@ const char* glfwGetX11SelectionString(void);
+
 //void* /* GLXContext */ glfwGetGLXContext(GLFWwindow* window);
 static int GetGLXContext(lua_State *L)
     {
@@ -253,6 +256,49 @@ static int GetEGLSurface(lua_State *L)
     return 1;
     }
 
+/* int glfwGetOSMesaColorBuffer(GLFWwindow* window, int* width, int* height, int* format, void** buffer); */
+static int GetOSMesaColorBuffer(lua_State *L) //@@ needs debug
+    {
+    int rc, width, height, format;
+    void* buffer;
+    win_t *win = checkwindow(L, 1);
+    CheckNativePfn(L, GetOSMesaColorBuffer);
+    rc = glfw.GetOSMesaColorBuffer(win->window, &width, &height, &format, &buffer);
+    if(!rc) return 0;
+    lua_pushinteger(L, width);
+    lua_pushinteger(L, height);
+    lua_pushinteger(L, format);
+    lua_pushlightuserdata(L, buffer);
+    return 4;
+    }
+
+/* int glfwGetOSMesaDepthBuffer(GLFWwindow* window, int* width, int* height, int* bytesPerValue, void** buffer); */
+static int GetOSMesaDepthBuffer(lua_State *L) //@@ needs debug
+    {
+    int rc, width, height, bytespervalue;
+    void* buffer;
+    win_t *win = checkwindow(L, 1);
+    CheckNativePfn(L, GetOSMesaDepthBuffer);
+    rc = glfw.GetOSMesaDepthBuffer(win->window, &width, &height, &bytespervalue, &buffer);
+    if(!rc) return 0;
+    lua_pushinteger(L, width);
+    lua_pushinteger(L, height);
+    lua_pushinteger(L, bytespervalue);
+    lua_pushlightuserdata(L, buffer);
+    return 4;
+    }
+
+//void* /* OSMesaContext */ glfwGetOSMesaContext(GLFWwindow* window);
+static int GetOSMesaContext(lua_State *L)
+    {
+    void *what;
+    win_t *win = checkwindow(L, 1);
+    CheckNativePfn(L, GetOSMesaContext);
+    what = glfw.GetOSMesaContext(win->window);
+    if(!what) return 0;
+    lua_pushlightuserdata(L, what);
+    return 1;
+    }
 
 static int GetContext(lua_State *L)
     {
@@ -289,9 +335,20 @@ static int GetContext(lua_State *L)
             }
         }
 
+    if(!what && glfw.GetOSMesaContext)
+        {
+        what = glfw.GetOSMesaContext(win->window);
+        if(what)
+            {
+            lua_pushlightuserdata(L, what);
+            lua_pushstring(L, "osmesa");
+            }
+        }
+
     if(!what) return 0;
     return 2;
     }
+
 
 /*------------------------------------------------------------------------------*
  | Registration                                                                 |
@@ -312,12 +369,15 @@ static const struct luaL_Reg Functions[] =
         { "get_wayland_display", GetWaylandDisplay },
         { "get_wayland_monitor", GetWaylandMonitor },
         { "get_wayland_window", GetWaylandWindow },
-        { "get_mir_display", GetMirDisplay },
-        { "get_mir_monitor", GetMirMonitor },
-        { "get_mir_window", GetMirWindow },
+        { "get_mir_display", GetMirDisplay }, // DEPRECATED
+        { "get_mir_monitor", GetMirMonitor }, // DEPRECATED
+        { "get_mir_window", GetMirWindow }, // DEPRECATED
         { "get_egl_display", GetEGLDisplay },
         { "get_egl_context", GetEGLContext },
         { "get_egl_surface", GetEGLSurface },
+        { "get_osmesa_color_buffer", GetOSMesaColorBuffer },
+        { "get_osmesa_depth_buffer",GetOSMesaDepthBuffer  },
+        { "get_osmesa_context", GetOSMesaContext },
         { "get_context", GetContext },
         { NULL, NULL } /* sentinel */
     };
@@ -337,7 +397,8 @@ void moonglfw_open_native(lua_State *L)
     SetNative(X11, glfw.GetX11Display && glfw.GetX11Adapter && glfw.GetX11Monitor && glfw.GetX11Window);
     SetNative(GLX, glfw.GetGLXContext && glfw.GetGLXWindow);
     SetNative(WAYLAND, glfw.GetWaylandDisplay && glfw.GetWaylandMonitor && glfw.GetWaylandWindow);
-    SetNative(MIR, glfw.GetMirDisplay && glfw.GetMirMonitor && glfw.GetMirWindow);
+    SetNative(MIR, glfw.GetMirDisplay && glfw.GetMirMonitor && glfw.GetMirWindow); // DEPRECATED
     SetNative(EGL, glfw.GetEGLDisplay && glfw.GetEGLContext && glfw.GetEGLSurface);
+    SetNative(OSMESA, glfw.GetOSMesaColorBuffer && glfw.GetOSMesaDepthBuffer && glfw.GetOSMesaContext);
     }
 

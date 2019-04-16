@@ -21,7 +21,7 @@ _integer_ = *get_glx_window*(_window_)
 _lightuserdata_ = *get_wayland_monitor*(_monitor_) +
 _lightuserdata_ = *get_wayland_window*(_window_)
 
-* _lightuserdata_ = *get_mir_display*( ) +
+* _lightuserdata_ = *get_mir_display*( ) _DEPRECATED_ +
 _integer_ = *get_mir_monitor*(_monitor_) +
 _lightuserdata_ = *get_mir_window*(_window_)
 
@@ -29,9 +29,15 @@ _lightuserdata_ = *get_mir_window*(_window_)
 _lightuserdata_ = *get_egl_context*(_window_) +
 _lightuserdata_ = *get_egl_surface*(_window_)
 
+* _lightuserdata_ = *get_osmesa_context*(_window_) +
+_width_, _height_, _format_, _buffer_ = *get_osmesa_color_buffer*(_window_) +
+_width_, _height_, _bytespervalue_, _buffer_ = *get_osmesa_depth_buffer*(_window_) +
+[small]#_width_, _height_, _format_, _bytespervalue_: integer, +
+_buffer_: lightuserdata.#
+
 * _context_, _system_ = *get_context*(_window_) _NONGLFW_ +
 [small]#Returns the GL context (lightuserdata) associated with _window_, followed by
-a string denoting the system ('_wgl_', '_glx_', or '_egl_'). +
+a string denoting the system ('_wgl_', '_glx_', '_egl_', or '_osmesa_'). +
 Returns _nil_ if the GL context can not be retrieved. +
 (This function can be used instead of _get_xxx_context(&nbsp;)_ when _xxx_ is unknown to the application).#
 
