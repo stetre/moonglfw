@@ -124,8 +124,25 @@ static int GetX11Window(lua_State *L)
     return 1;
     }
 
-//@@ void glfwSetX11SelectionString(const char* string);
-//@@ const char* glfwGetX11SelectionString(void);
+/* void glfwSetX11SelectionString(const char* string); */
+static int SetX11SelectionString(lua_State *L)
+    {
+    const char *s = luaL_checkstring(L, 1);
+    CheckNativePfn(L, SetX11SelectionString);
+    glfw.SetX11SelectionString(s);
+    return 0;
+    }
+
+/* const char* glfwGetX11SelectionString(void); */
+static int GetX11SelectionString(lua_State *L)
+    {
+    const char *s;
+    CheckNativePfn(L, GetX11SelectionString);
+    s = glfw.GetX11SelectionString();
+    if(!s) return 0;
+    lua_pushstring(L, s);
+    return 1;
+    }
 
 //void* /* GLXContext */ glfwGetGLXContext(GLFWwindow* window);
 static int GetGLXContext(lua_State *L)
@@ -364,6 +381,8 @@ static const struct luaL_Reg Functions[] =
         { "get_x11_adapter", GetX11Adapter },
         { "get_x11_monitor", GetX11Monitor },
         { "get_x11_window", GetX11Window },
+        { "set_x11_selection_string", SetX11SelectionString },
+        { "get_x11_selection_string", GetX11SelectionString },
         { "get_glx_context", GetGLXContext },
         { "get_glx_window", GetGLXWindow },
         { "get_wayland_display", GetWaylandDisplay },
@@ -376,7 +395,7 @@ static const struct luaL_Reg Functions[] =
         { "get_egl_context", GetEGLContext },
         { "get_egl_surface", GetEGLSurface },
         { "get_osmesa_color_buffer", GetOSMesaColorBuffer },
-        { "get_osmesa_depth_buffer",GetOSMesaDepthBuffer  },
+        { "get_osmesa_depth_buffer",GetOSMesaDepthBuffer },
         { "get_osmesa_context", GetOSMesaContext },
         { "get_context", GetContext },
         { NULL, NULL } /* sentinel */
