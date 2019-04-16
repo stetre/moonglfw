@@ -55,8 +55,9 @@ void enums_freelist(lua_State *L, int *list);
 #define DOMAIN_INPUT_MODE           8
 #define DOMAIN_CURSOR_MODE          9
 #define DOMAIN_CURSOR_SHAPE         10
-#define DOMAIN_GAMEPAD_BUTTON       11
-#define DOMAIN_GAMEPAD_AXIS         12
+#define DOMAIN_CONTEXT_CREATION_API 11
+//#define DOMAIN_GAMEPAD_BUTTON       12
+//#define DOMAIN_GAMEPAD_AXIS         13
 
 #define testaction(L, arg, err) (int)enums_test((L), DOMAIN_ACTION, (arg), (err))
 #define checkaction(L, arg) (int)enums_check((L), DOMAIN_ACTION, (arg))
@@ -112,6 +113,11 @@ void enums_freelist(lua_State *L, int *list);
 #define checkcursorshape(L, arg) (int)enums_check((L), DOMAIN_CURSOR_SHAPE, (arg))
 #define pushcursorshape(L, val) enums_push((L), DOMAIN_CURSOR_SHAPE, (int)(val))
 #define valuescursorshape(L) enums_values((L), DOMAIN_CURSOR_SHAPE)
+
+#define testcontextcreationapi(L, arg, err) (int)enums_test((L), DOMAIN_CONTEXT_CREATION_API, (arg), (err))
+#define checkcontextcreationapi(L, arg) (int)enums_check((L), DOMAIN_CONTEXT_CREATION_API, (arg))
+#define pushcontextcreationapi(L, val) enums_push((L), DOMAIN_CONTEXT_CREATION_API, (int)(val))
+#define valuescontextcreationapi(L) enums_values((L), DOMAIN_CONTEXT_CREATION_API)
 
 #if 0
 #define testgamepadbutton(L, arg, err) (int)enums_test((L), DOMAIN_GAMEPAD_BUTTON, (arg), (err))

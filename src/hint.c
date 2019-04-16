@@ -113,7 +113,7 @@ static int WindowHint(lua_State *L)
         case GLFW_SRGB_CAPABLE:
         case GLFW_DOUBLEBUFFER: return Boolean(L, target);
         case GLFW_CLIENT_API: ENUM(L, target, checkapi);
-//@@    case GLFW_CONTEXT_CREATION_API:
+        case GLFW_CONTEXT_CREATION_API: ENUM(L, target, checkcontextcreationapi);
         case GLFW_CONTEXT_VERSION_MAJOR:
         case GLFW_CONTEXT_VERSION_MINOR: return Integer(L, target);
         case GLFW_CONTEXT_ROBUSTNESS: ENUM(L, target, checkrobustness);
@@ -185,7 +185,7 @@ static int GetWindowAttrib(lua_State *L)
         case GLFW_SCALE_TO_MONITOR:
             return GetBoolean(L, win->window, attrib);
         case GLFW_CLIENT_API: GET_ENUM(L, win->window, attrib, pushapi);
-//@@    case GLFW_CONTEXT_CREATION_API:
+        case GLFW_CONTEXT_CREATION_API: GET_ENUM(L, win->window, attrib, pushcontextcreationapi);
         case GLFW_CONTEXT_VERSION_MAJOR:
         case GLFW_CONTEXT_VERSION_MINOR:
         case GLFW_CONTEXT_REVISION:

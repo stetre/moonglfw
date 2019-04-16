@@ -284,6 +284,7 @@ static int Enum(lua_State *L)
     CASE(inputmode);
     CASE(cursormode);
     CASE(cursorshape);
+    CASE(contextcreationapi);
 //  CASE(gamepadbutton);
 //  CASE(gamepadaxis);
 #undef CASE
@@ -473,7 +474,7 @@ void moonglfw_open_enums(lua_State *L)
     ADD(SRGB_CAPABLE, "srgb capable");
     ADD(DOUBLEBUFFER, "doublebuffer");
     ADD(CLIENT_API, "client api");
-    ADD(CONTEXT_CREATION_API, "context creation api"); //@@
+    ADD(CONTEXT_CREATION_API, "context creation api");
     ADD(CONTEXT_VERSION_MAJOR, "context version major");
     ADD(CONTEXT_VERSION_MINOR, "context version minor");
     ADD(CONTEXT_ROBUSTNESS, "context robustness");
@@ -525,6 +526,11 @@ void moonglfw_open_enums(lua_State *L)
     ADD(HAND_CURSOR, "hand");
     ADD(HRESIZE_CURSOR, "hresize");
     ADD(VRESIZE_CURSOR, "vresize");
+
+    domain = DOMAIN_CONTEXT_CREATION_API;
+    ADD(NATIVE_CONTEXT_API, "native");
+    ADD(EGL_CONTEXT_API, "egl");
+    ADD(OSMESA_CONTEXT_API, "osmesa");
 
 #if 0
     domain = DOMAIN_GAMEPAD_BUTTON;

@@ -34,6 +34,7 @@ The following list shows the admitted _hint_ values for each _target_ (_target_:
 '_srgb capable_': boolean +
 '_doublebuffer_': boolean +
 '_client api_': '_no api_' | '_opengl_' | '_opengl es_' +
+'_context creation api_': '_native_' | '_egl_' | '_osmesa_' +
 '_context version major_': integer | '_don't care_' +
 '_context version minor_': integer | '_don't care_' +
 '_context robustness_': '_no robustness_' | '_no reset notification_' | '_lose context on reset_' +
