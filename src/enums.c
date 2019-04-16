@@ -450,6 +450,12 @@ void moonglfw_open_enums(lua_State *L)
     ADD(FOCUSED, "focused");
     ADD(AUTO_ICONIFY, "auto iconify");
     ADD(FLOATING, "floating");
+    ADD(MAXIMIZED, "maximized");
+    ADD(CENTER_CURSOR, "center cursor");
+    ADD(TRANSPARENT_FRAMEBUFFER, "transparent framebuffer");
+    ADD(HOVERED, "hovered");
+    ADD(FOCUS_ON_SHOW, "focus on show");
+    ADD(SCALE_TO_MONITOR, "scale to monitor");
     ADD(RED_BITS, "red bits");
     ADD(GREEN_BITS, "green bits");
     ADD(BLUE_BITS, "blue bits");
@@ -467,6 +473,7 @@ void moonglfw_open_enums(lua_State *L)
     ADD(SRGB_CAPABLE, "srgb capable");
     ADD(DOUBLEBUFFER, "doublebuffer");
     ADD(CLIENT_API, "client api");
+    ADD(CONTEXT_CREATION_API, "context creation api"); //@@
     ADD(CONTEXT_VERSION_MAJOR, "context version major");
     ADD(CONTEXT_VERSION_MINOR, "context version minor");
     ADD(CONTEXT_ROBUSTNESS, "context robustness");

@@ -89,7 +89,13 @@ static int WindowHint(lua_State *L)
         case GLFW_DECORATED:
         case GLFW_FOCUSED:
         case GLFW_AUTO_ICONIFY:
-        case GLFW_FLOATING: return Boolean(L, target);
+        case GLFW_FLOATING:
+        case GLFW_MAXIMIZED:
+        case GLFW_CENTER_CURSOR:
+        case GLFW_TRANSPARENT_FRAMEBUFFER:
+        case GLFW_HOVERED:
+        case GLFW_FOCUS_ON_SHOW:
+        case GLFW_SCALE_TO_MONITOR: return Boolean(L, target);
         case GLFW_RED_BITS:
         case GLFW_GREEN_BITS:
         case GLFW_BLUE_BITS:
@@ -107,6 +113,7 @@ static int WindowHint(lua_State *L)
         case GLFW_SRGB_CAPABLE:
         case GLFW_DOUBLEBUFFER: return Boolean(L, target);
         case GLFW_CLIENT_API: ENUM(L, target, checkapi);
+//@@    case GLFW_CONTEXT_CREATION_API:
         case GLFW_CONTEXT_VERSION_MAJOR:
         case GLFW_CONTEXT_VERSION_MINOR: return Integer(L, target);
         case GLFW_CONTEXT_ROBUSTNESS: ENUM(L, target, checkrobustness);
@@ -170,8 +177,15 @@ static int GetWindowAttrib(lua_State *L)
         case GLFW_RESIZABLE:
         case GLFW_DECORATED:
         case GLFW_FLOATING:
+        case GLFW_MAXIMIZED:
+        case GLFW_CENTER_CURSOR:
+        case GLFW_TRANSPARENT_FRAMEBUFFER:
+        case GLFW_HOVERED:
+        case GLFW_FOCUS_ON_SHOW:
+        case GLFW_SCALE_TO_MONITOR:
             return GetBoolean(L, win->window, attrib);
         case GLFW_CLIENT_API: GET_ENUM(L, win->window, attrib, pushapi);
+//@@    case GLFW_CONTEXT_CREATION_API:
         case GLFW_CONTEXT_VERSION_MAJOR:
         case GLFW_CONTEXT_VERSION_MINOR:
         case GLFW_CONTEXT_REVISION:
