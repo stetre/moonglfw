@@ -1529,6 +1529,13 @@ Returns <em>nil</em> if the GL context can not be retrieved.<br>
 </li>
 </ul>
 </div>
+<div id="request_window_attention" class="ulist">
+<ul>
+<li>
+<p><strong>request_window_attention</strong>(<em>window</em>)<br></p>
+</li>
+</ul>
+</div>
 <div id="window_should_close" class="ulist">
 <ul>
 <li>
@@ -1610,7 +1617,7 @@ Other images (up to 32 total) can be added in the optional part in the same way.
 <ul>
 <li>
 <p><strong>iconify_window</strong>(<em>window</em>)<br>
-<strong>restore_window</strong>(<em>window</em>)
+<strong>restore_window</strong>(<em>window</em>)<br>
 <strong>maximize_window</strong>(<em>window</em>)</p>
 </li>
 </ul>
@@ -1636,6 +1643,21 @@ Other images (up to 32 total) can be added in the optional part in the same way.
 <p><em>value</em> = <strong>get_window_attrib</strong>(<em>window</em>, <em>attrib</em>)<br>
 <strong>set_window_attrib</strong>(<em>window</em>, <em>attrib</em>, <em>value</em>)<br>
 <span class="small"><em>attrib</em>, <em>value</em>: see <em>target</em> and <em>hint</em> for the <a href="#window_hint">window_hint</a>( ) function.</span></p>
+</li>
+</ul>
+</div>
+<div id="get_window_content_scale" class="ulist">
+<ul>
+<li>
+<p><em>xscale</em>, <em>yscale</em> = <strong>get_window_content_scale</strong>(<em>window</em>)</p>
+</li>
+</ul>
+</div>
+<div id="get_window_opacity" class="ulist">
+<ul>
+<li>
+<p><strong>set_window_opacity_</strong>(<em>window</em>, <em>opacity</em>)<br>
+<em>opacity</em> = <strong>get_window_opacity_</strong>(<em>window</em>)</p>
 </li>
 </ul>
 </div>

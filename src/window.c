@@ -301,6 +301,41 @@ static int GetWindowMonitor(lua_State *L)
     return 1;
     }
 
+static int GetWindowContentScale(lua_State *L)
+    {
+    float xscale, yscale;
+    win_t *win = checkwindow(L, 1);
+    CheckPfn(L, GetWindowContentScale, 3, 3, 0);
+    glfw.GetWindowContentScale(win->window, &xscale, &yscale);
+    lua_pushnumber(L, xscale);
+    lua_pushnumber(L, yscale);
+    return 2;
+    }
+
+static int GetWindowOpacity(lua_State *L)
+    {
+    win_t *win = checkwindow(L, 1);
+    CheckPfn(L, GetWindowOpacity, 3, 3, 0);
+    lua_pushnumber(L, glfw.GetWindowOpacity(win->window));
+    return 1;
+    }
+
+static int SetWindowOpacity(lua_State *L)
+    {
+    win_t *win = checkwindow(L, 1);
+    float opacity = luaL_checknumber(L, 2);
+    CheckPfn(L, SetWindowOpacity, 3, 3, 0);
+    glfw.SetWindowOpacity(win->window, opacity);
+    return 0;
+    }
+
+static int RequestWindowAttention(lua_State *L)
+    {
+    win_t *win = checkwindow(L, 1);
+    CheckPfn(L, RequestWindowAttention, 3, 3, 0);
+    glfw.RequestWindowAttention(win->window);
+    return 0;
+    }
 
 /*------------------------------------------------------------------------------*
  | Registration                                                                 |
@@ -335,6 +370,10 @@ static const struct luaL_Reg Functions[] =
         { "show_window", ShowWindow },
         { "hide_window", HideWindow },
         { "get_window_monitor", GetWindowMonitor },
+        { "get_window_content_scale", GetWindowContentScale },
+        { "get_window_opacity", GetWindowOpacity },
+        { "set_window_opacity", SetWindowOpacity },
+        { "request_window_attention", RequestWindowAttention },
         { NULL, NULL } /* sentinel */
     };
 

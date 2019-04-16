@@ -24,6 +24,9 @@
 [[focus_window]]
 * *focus_window*(_window_)
 
+[[request_window_attention]]
+* *request_window_attention*(_window_) +
+
 [[window_should_close]]
 * *set_window_should_close*(_window_, _boolean_) +
 _boolean_ = *window_should_close*(_window_)
@@ -58,15 +61,12 @@ _width_, _height_ = *get_window_size*(_window_)
 [[get_framebuffer_size]]
 * _width_, _height_ = *get_framebuffer_size*(_window_)
 
-
 [[get_window_frame_size]]
 * _left_, _top_, _right_, _bottom_ = *get_window_frame_size*(_window_)
 
-
-
 [[iconify_window]]
 * *iconify_window*(_window_) +
-*restore_window*(_window_)
+*restore_window*(_window_) +
 *maximize_window*(_window_)
 
 [[show_window]]
@@ -76,11 +76,17 @@ _width_, _height_ = *get_window_size*(_window_)
 [[get_window_monitor]]
 * _monitor_ = *get_window_monitor*(_window_)
 
-
 [[get_window_attrib]]
 * _value_ = *get_window_attrib*(_window_, _attrib_) +
 *set_window_attrib*(_window_, _attrib_, _value_) +
 [small]#_attrib_, _value_: see _target_ and _hint_ for the <<window_hint, window_hint>>( ) function.#
+
+[[get_window_content_scale]]
+* _xscale_, _yscale_ = *get_window_content_scale*(_window_)
+
+[[get_window_opacity]]
+* *set_window_opacity_*(_window_, _opacity_) +
+_opacity_ = *get_window_opacity_*(_window_)
 
 [[poll_events]]
 * *poll_events*( )
