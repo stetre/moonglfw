@@ -175,6 +175,32 @@ static int SetGammaRamp(lua_State *L)
     return 0;
     }
 
+static int GetMonitorWorkarea(lua_State *L)
+    {
+    int xpos, ypos, width, height;
+    mon_t *mon = checkmonitor(L, 1);
+    CheckPfn(L, GetMonitorWorkarea, 3, 3, 0);
+    glfw.GetMonitorWorkarea(mon->monitor, &xpos, &ypos, &width, &height);
+    lua_pushinteger(L, xpos);
+    lua_pushinteger(L, ypos);
+    lua_pushinteger(L, width);
+    lua_pushinteger(L, height);
+    return 4;
+    }
+
+static int GetMonitorContentScale(lua_State *L)
+    {
+    float xscale, yscale;
+    mon_t *mon = checkmonitor(L, 1);
+    CheckPfn(L, GetMonitorContentScale, 3, 3, 0);
+    glfw.GetMonitorContentScale(mon->monitor, &xscale, &yscale);
+    lua_pushnumber(L, xscale);
+    lua_pushnumber(L, yscale);
+    return 2;
+    }
+
+//@@NO: GLFWAPI void glfwSetMonitorUserPointer(GLFWmonitor* monitor, void* pointer);
+//@@NO: GLFWAPI void* glfwGetMonitorUserPointer(GLFWmonitor* monitor);
 /*------------------------------------------------------------------------------*
  | Registration                                                                 |
  *------------------------------------------------------------------------------*/
@@ -191,6 +217,8 @@ static const struct luaL_Reg Functions[] =
         { "set_gamma", SetGamma },
         { "get_gamma_ramp", GetGammaRamp },
         { "set_gamma_ramp", SetGammaRamp },
+        { "get_monitor_workarea", GetMonitorWorkarea },
+        { "get_monitor_content_scale", GetMonitorContentScale },
         { NULL, NULL } /* sentinel */
     };
 

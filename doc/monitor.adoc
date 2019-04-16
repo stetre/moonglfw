@@ -30,6 +30,12 @@ _videomode~1~_, _videomode~2~_, _..._ = *get_video_modes*(_monitor_)
 _red_, _green_, _blue_ = *get_gamma_ramp*(_monitor_) +
 [small]#_red_, _green_ and _blue_: equally sized arrays (tables) of integers.#
 
+[[get_monitor_workarea]]
+* _xpos_, _ypos_, _width_, _height_ = *get_monitor_workarea*(_monitor_)
+
+[[get_monitor_content_scale]]
+* _xscale_, _yscale_ = *get_monitor_content_scale*(_monitor_)
+
 ==== Monitor callbacks
 
 [small]#Rfr: link:http://www.glfw.org/docs/latest/group__monitor.html[Monitor].#

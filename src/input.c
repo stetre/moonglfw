@@ -329,6 +329,9 @@ static int GetGamepadState(lua_State *L)
     return 2;
     }
 
+//@@NO: void glfwSetJoystickUserPointer(int jid, void* pointer);
+//@@NO: void* glfwGetJoystickUserPointer(int jid);
+
 /*------------------------------------------------------------------------------*
  | Clipboard                                                                    |
  *------------------------------------------------------------------------------*/
