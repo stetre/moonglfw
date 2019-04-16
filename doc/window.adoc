@@ -77,8 +77,9 @@ _width_, _height_ = *get_window_size*(_window_)
 * _monitor_ = *get_window_monitor*(_window_)
 
 
-[[get_window_attribute]]
-* _value_ = *get_window_attribute*(_window_, _attrib_) +
+[[get_window_attrib]]
+* _value_ = *get_window_attrib*(_window_, _attrib_) +
+*set_window_attrib*(_window_, _attrib_, _value_) +
 [small]#_attrib_, _value_: see _target_ and _hint_ for the <<window_hint, window_hint>>( ) function.#
 
 [[poll_events]]

@@ -205,6 +205,39 @@ static int GetWindowAttrib(lua_State *L)
 #undef GET_ENUM
 
 /*------------------------------------------------------------------------------*
+ | Set window attributes                                                        |
+ *------------------------------------------------------------------------------*/
+
+static int SetBoolean(lua_State *L, GLFWwindow* window, int attrib)
+    {
+    int value = checkboolean(L, 3);
+    CheckPfn(L, SetWindowAttrib, 3, 3, 0);
+    glfw.SetWindowAttrib(window, attrib, value);
+    return 0;
+    }
+
+static int SetWindowAttrib(lua_State *L)
+    {
+    win_t *win = checkwindow(L, 1);
+    int attrib = checktarget(L, 2);
+    switch(attrib)
+        {
+        case GLFW_RESIZABLE:
+        case GLFW_DECORATED:
+        case GLFW_FLOATING:
+        case GLFW_AUTO_ICONIFY:
+        case GLFW_FOCUS_ON_SHOW:
+            return SetBoolean(L, win->window, attrib);
+        default:
+            return luaL_error(L, "invalid attribute '%s'", lua_tostring(L, 2));
+        }
+    return 0;
+    }
+
+#undef GET_ENUM
+
+
+/*------------------------------------------------------------------------------*
  | Registration                                                                 |
  *------------------------------------------------------------------------------*/
 
@@ -214,6 +247,7 @@ static const struct luaL_Reg Functions[] =
         { "window_hint", WindowHint },
         { "version_hint", VersionHint }, 
         { "get_window_attrib", GetWindowAttrib },
+        { "set_window_attrib", SetWindowAttrib },
         { NULL, NULL } /* sentinel */
     };
 
