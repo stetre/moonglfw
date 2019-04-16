@@ -40,7 +40,10 @@ static int GetInputMode(lua_State *L)
         {
         case GLFW_CURSOR:   pushcursormode(L, val); return 1;
         case GLFW_STICKY_KEYS:
-        case GLFW_STICKY_MOUSE_BUTTONS: lua_pushboolean(L, val); return 1;
+        case GLFW_STICKY_MOUSE_BUTTONS:
+        case GLFW_LOCK_KEY_MODS:
+        case GLFW_RAW_MOUSE_MOTION:
+                            lua_pushboolean(L, val); return 1;
         default:
             return unexpected(L);
         }
@@ -56,7 +59,10 @@ static int SetInputMode(lua_State *L)
         {
         case GLFW_CURSOR:   value = checkcursormode(L, 3); break;
         case GLFW_STICKY_KEYS:
-        case GLFW_STICKY_MOUSE_BUTTONS: value = checkboolean(L, 3); break;
+        case GLFW_STICKY_MOUSE_BUTTONS:
+        case GLFW_LOCK_KEY_MODS:
+        case GLFW_RAW_MOUSE_MOTION:
+                            value = checkboolean(L, 3); break;
         default:
             return unexpected(L);
         }

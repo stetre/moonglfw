@@ -501,6 +501,8 @@ void moonglfw_open_enums(lua_State *L)
     ADD(CURSOR, "cursor");
     ADD(STICKY_KEYS, "sticky keys");
     ADD(STICKY_MOUSE_BUTTONS, "sticky mouse buttons");
+    ADD(LOCK_KEY_MODS, "lock key mods");
+    ADD(RAW_MOUSE_MOTION, "raw mouse motion");
 
     domain = DOMAIN_CURSOR_MODE;
     ADD(CURSOR_NORMAL, "normal");
