@@ -806,7 +806,8 @@ p.tableblock.header { color: #6d6e71; }
 <li><a href="#_vulkan_support">Vulkan support</a></li>
 </ul>
 </li>
-<li><a href="#_enums_and_structs">Enums and structs</a></li>
+<li><a href="#_enums">Enums</a></li>
+<li><a href="#_structs">Structs</a></li>
 </ul>
 </div>
 </div>
@@ -1712,7 +1713,7 @@ parameters to its functions actually are what they are meant to be, and has no m
 </div>
 </div>
 <div class="sect1">
-<h2 id="_enums_and_structs">Enums and structs</h2>
+<h2 id="_enums">Enums</h2>
 <div class="sectionbody">
 <div id="enums_window_hint" class="ulist">
 <ul>
@@ -1763,21 +1764,47 @@ Values: '<em>unknown</em>', '<em>space</em>', '<em>apostrophe</em>', '<em>comma<
 </li>
 </ul>
 </div>
-<div id="enums_gamepad_axis" class="ulist">
+</div>
+</div>
+<div class="sect1">
+<h2 id="_structs">Structs</h2>
+<div class="sectionbody">
+<div id="gamepadaxes" class="ulist">
 <ul>
 <li>
-<p><span class="small"><strong>gamepad axis</strong>: '<em>xxx</em>' for GLFW_GAMEPAD_AXIS_XXX (e.g. '<em>left x</em>' for GLFW_GAMEPAD_AXIS_LEFT_X).<br>
-Values: '<em>left x</em>', '<em>left y</em>', '<em>right x</em>', '<em>right y</em>', '<em>left trigger</em>', '<em>right trigger</em>'.<br>
-(Rfr: <a href="http://www.glfw.org/docs/latest/group__gamepad__axes.html">gamepad axes</a>)</span></p>
+<p><span class="small"><strong>gamepadaxes</strong> = {<br>
+<em>left_x</em>: float (-1.0..1.0),<br>
+<em>left_y</em>: float (-1.0..1.0),<br>
+<em>right_x</em>: float (-1.0..1.0),<br>
+<em>right_y</em>: float (-1.0..1.0),<br>
+<em>left_trigger</em>: float (-1.0..1.0),<br>
+<em>right_trigger</em>: float (-1.0..1.0),<br>
+} (rfr: <a href="https://www.glfw.org/docs/latest/structGLFWgamepadstate.html">GLFWgamepadstate</a>,
+<a href="http://www.glfw.org/docs/latest/group__gamepad__axes.html">gamepad axes</a>).</span></p>
 </li>
 </ul>
 </div>
-<div id="enums_gamepad_button" class="ulist">
+<div id="gamepadbuttons" class="ulist">
 <ul>
 <li>
-<p><span class="small"><strong>gamepad button</strong>: '<em>xxx</em>' for GLFW_GAMEPAD_BUTTON_XXX (e.g. '<em>a</em>' for GLFW_GAMEPAD_BUTTON_A).<br>
-Values: '<em>a</em>' <em>(cross)</em>, '<em>b</em>' <em>(circle)</em>, '<em>x</em>' <em>(square)</em>, '<em>y</em>' <em>(triangle)</em>, '<em>left bumper</em>', '<em>right bumper</em>', '<em>back</em>', '<em>start</em>', '<em>guide</em>', '<em>left thumb</em>', '<em>right thumb</em>', '<em>dpad up</em>', '<em>dpad right</em>', '<em>dpad down</em>', '<em>dpad left</em>'.<br>
-(Rfr: <a href="http://www.glfw.org/docs/latest/group__gamepad__buttons.html">gamepad buttons</a>)</span></p>
+<p><span class="small"><strong>gamepadbuttons</strong> = {<br>
+<em>a</em>: '<em>press</em>' | '<em>release</em>',<br>
+<em>b</em>: '<em>press</em>' | '<em>release</em>',<br>
+<em>x</em>: '<em>press</em>' | '<em>release</em>',<br>
+<em>y</em>: '<em>press</em>' | '<em>release</em>',<br>
+<em>left_bumper</em>: '<em>press</em>' | '<em>release</em>',<br>
+<em>right_bumper</em>: '<em>press</em>' | '<em>release</em>',<br>
+<em>back</em>: '<em>press</em>' | '<em>release</em>',<br>
+<em>start</em>: '<em>press</em>' | '<em>release</em>',<br>
+<em>guide</em>: '<em>press</em>' | '<em>release</em>',<br>
+<em>left_thumb</em>: '<em>press</em>' | '<em>release</em>',<br>
+<em>right_thumb</em>: '<em>press</em>' | '<em>release</em>',<br>
+<em>dpad_up</em>: '<em>press</em>' | '<em>release</em>',<br>
+<em>dpad_right</em>: '<em>press</em>' | '<em>release</em>',<br>
+<em>dpad_down</em>: '<em>press</em>' | '<em>release</em>',<br>
+<em>dpad_left</em>: '<em>press</em>' | '<em>release</em>',<br>
+} (rfr: <a href="https://www.glfw.org/docs/latest/structGLFWgamepadstate.html">GLFWgamepadstate buttons</a>,
+<a href="http://www.glfw.org/docs/latest/group__gamepad__buttons.html">gamepad buttons</a>).</span></p>
 </li>
 </ul>
 </div>

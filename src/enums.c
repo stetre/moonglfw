@@ -284,8 +284,8 @@ static int Enum(lua_State *L)
     CASE(inputmode);
     CASE(cursormode);
     CASE(cursorshape);
-    CASE(gamepadbutton);
-    CASE(gamepadaxis);
+//  CASE(gamepadbutton);
+//  CASE(gamepadaxis);
 #undef CASE
     return 0;
     }
@@ -515,6 +515,7 @@ void moonglfw_open_enums(lua_State *L)
     ADD(HRESIZE_CURSOR, "hresize");
     ADD(VRESIZE_CURSOR, "vresize");
 
+#if 0
     domain = DOMAIN_GAMEPAD_BUTTON;
     ADD(GAMEPAD_BUTTON_A, "a"); /* cross */
     ADD(GAMEPAD_BUTTON_B, "b"); /* circle */
@@ -539,6 +540,7 @@ void moonglfw_open_enums(lua_State *L)
     ADD(GAMEPAD_AXIS_RIGHT_Y, "right y");
     ADD(GAMEPAD_AXIS_LEFT_TRIGGER, "left trigger");
     ADD(GAMEPAD_AXIS_RIGHT_TRIGGER, "right trigger");
+#endif
 
 #undef ADD
     }

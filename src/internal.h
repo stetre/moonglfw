@@ -99,6 +99,10 @@ int pushvidmode(lua_State *L, const GLFWvidmode *mode);
 int pushgammaramp(lua_State *L, const GLFWgammaramp *ramp);
 #define checkgammaramp moonglfw_checkgammaramp
 int checkgammaramp(lua_State *L, int arg, GLFWgammaramp *ramp);
+#define pushgamepadbuttons moonglfw_pushgamepadbuttons
+int pushgamepadbuttons(lua_State *L, const GLFWgamepadstate *state);
+#define pushgamepadaxes moonglfw_pushgamepadaxes
+int pushgamepadaxes(lua_State *L, const GLFWgamepadstate *state);
 
 /* id.c */
 #define id_new moonglfw_id_new

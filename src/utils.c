@@ -199,10 +199,52 @@ cur_t *checkcursor(lua_State *L, int arg)
     return cur;
     }
 
+int pushgamepadbuttons(lua_State *L, const GLFWgamepadstate *state)
+    {
+    lua_newtable(L);
+#define Setfield(x, name) do {  \
+    lua_pushstring(L, state->buttons[GLFW_GAMEPAD_BUTTON_##x]==GLFW_PRESS ? "press" : "release"); \
+    lua_setfield(L, -2, name);  \
+} while(0)
+    Setfield(A, "a");
+    Setfield(A, "a");
+    Setfield(B, "b");
+    Setfield(X, "x");
+    Setfield(Y, "y");
+    Setfield(LEFT_BUMPER, "left_bumper");
+    Setfield(RIGHT_BUMPER, "right_bumper");
+    Setfield(BACK, "back");
+    Setfield(START, "start");
+    Setfield(GUIDE, "guide");
+    Setfield(LEFT_THUMB, "left_thumb");
+    Setfield(RIGHT_THUMB, "right_thumb");
+    Setfield(DPAD_UP, "dpad_up");
+    Setfield(DPAD_RIGHT, "dpad_right");
+    Setfield(DPAD_DOWN, "dpad_down");
+    Setfield(DPAD_LEFT, "dpad_left");
+#undef Setfield
+    return 1;
+    }
+
+int pushgamepadaxes(lua_State *L, const GLFWgamepadstate *state)
+    {
+    lua_newtable(L);
+#define Setfield(x, name) do {  \
+    lua_pushnumber(L, state->axes[GLFW_GAMEPAD_AXIS_##x]); \
+    lua_setfield(L, -2, name);  \
+} while(0)
+    Setfield(LEFT_X, "left_x");
+    Setfield(LEFT_Y, "left_y");
+    Setfield(RIGHT_X, "right_x");
+    Setfield(RIGHT_Y, "right_y");
+    Setfield(LEFT_TRIGGER, "left_trigger");
+    Setfield(RIGHT_TRIGGER, "right_trigger");
+#undef Setfield
+    return 1;
+    }
 
 int pushvidmode(lua_State *L, const GLFWvidmode *mode)
     {
-
     int table;
     lua_newtable(L);
     table = lua_gettop(L);
@@ -215,7 +257,7 @@ int pushvidmode(lua_State *L, const GLFWvidmode *mode)
     Setfield(blueBits,"blue_bits");
     Setfield(refreshRate,"refresh_rate");
 #undef Setfield
-    return 1;   
+    return 1;
     }
 
 int pushgammaramp(lua_State *L, const GLFWgammaramp *ramp)
@@ -235,7 +277,7 @@ int pushgammaramp(lua_State *L, const GLFWgammaramp *ramp)
     Setfield(green,"green");
     Setfield(blue,"blue");
 #undef Setfield
-    return 3;   
+    return 3;
     }
 
 int checkgammaramp(lua_State *L, int arg, GLFWgammaramp *ramp)
