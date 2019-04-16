@@ -35,8 +35,8 @@
 struct rec_s {
     RB_ENTRY(rec_s) CodeEntry;
     RB_ENTRY(rec_s) StringEntry;
-    uint32_t domain;
-    uint32_t code;  /* (domain, code) = search key in code tree */
+    int domain;
+    int code;  /* (domain, code) = search key in code tree */
     char     *str;  /* (domain, str) = search key in string tree */
 };
 
@@ -63,13 +63,13 @@ static RB_HEAD(StringTree, rec_s) StringHead = RB_INITIALIZER(&StringHead);
 RB_PROTOTYPE_STATIC(StringTree, rec_s, StringEntry, cmp_str) 
 RB_GENERATE_STATIC(StringTree, rec_s, StringEntry, cmp_str) 
  
-static rec_t *code_remove(rec_t *rec) 
+static rec_t *code_remove(rec_t *rec)
     { return RB_REMOVE(CodeTree, &CodeHead, rec); }
-static rec_t *code_insert(rec_t *rec) 
+static rec_t *code_insert(rec_t *rec)
     { return RB_INSERT(CodeTree, &CodeHead, rec); }
-static rec_t *code_search(uint32_t domain, uint32_t code) 
+static rec_t *code_search(int domain, int code)
     { rec_t tmp; tmp.domain = domain; tmp.code = code; return RB_FIND(CodeTree, &CodeHead, &tmp); }
-static rec_t *code_first(uint32_t domain, uint32_t code) 
+static rec_t *code_first(int domain, int code)
     { rec_t tmp; tmp.domain = domain; tmp.code = code; return RB_NFIND(CodeTree, &CodeHead, &tmp); }
 static rec_t *code_next(rec_t *rec)
     { return RB_NEXT(CodeTree, &CodeHead, rec); }
@@ -84,14 +84,14 @@ static rec_t *code_root(void)
     { return RB_ROOT(&CodeHead); }
 #endif
  
-static rec_t *str_remove(rec_t *rec) 
+static rec_t *str_remove(rec_t *rec)
     { return RB_REMOVE(StringTree, &StringHead, rec); }
-static rec_t *str_insert(rec_t *rec) 
+static rec_t *str_insert(rec_t *rec)
     { return RB_INSERT(StringTree, &StringHead, rec); }
-static rec_t *str_search(uint32_t domain, const char* str) 
+static rec_t *str_search(int domain, const char* str)
     { rec_t tmp; tmp.domain = domain; tmp.str = (char*)str; return RB_FIND(StringTree, &StringHead, &tmp); }
 #if 0
-static rec_t *str_first(uint32_t domain, const char* str ) 
+static rec_t *str_first(int domain, const char* str )
     { rec_t tmp; tmp.domain = domain; tmp.str = str; return RB_NFIND(StringTree, &StringHead, &tmp); }
 static rec_t *str_next(rec_t *rec)
     { return RB_NEXT(StringTree, &StringHead, rec); }
@@ -106,7 +106,7 @@ static rec_t *str_root(void)
 #endif
 
 
-static int enums_new(lua_State *L, uint32_t domain, uint32_t code, const char *str)
+static int enums_new(lua_State *L, int domain, int code, const char *str)
     {
     rec_t *rec;
     if((rec = (rec_t*)Malloc(L, sizeof(rec_t))) == NULL) 
@@ -145,7 +145,7 @@ void enums_free_all(lua_State *L)
     }
 
 #if 0
-uint32_t enums_code(uint32_t domain, const char *str, int* found)
+int enums_code(int domain, const char *str, int* found)
     {
     rec_t *rec = str_search(domain, str);
     if(!rec)
@@ -154,7 +154,7 @@ uint32_t enums_code(uint32_t domain, const char *str, int* found)
     return rec->code;
     }
 
-const char* enums_string(uint32_t domain, uint32_t code)
+const char* enums_string(int domain, int code)
     {
     rec_t *rec = code_search(domain, code);
     if(!rec)
@@ -165,7 +165,7 @@ const char* enums_string(uint32_t domain, uint32_t code)
 #endif
 
 
-uint32_t enums_test(lua_State *L, uint32_t domain, int arg, int *err)
+int enums_test(lua_State *L, int domain, int arg, int *err)
     {
     rec_t *rec;
     const char *s = luaL_optstring(L, arg, NULL);
@@ -181,7 +181,7 @@ uint32_t enums_test(lua_State *L, uint32_t domain, int arg, int *err)
     return rec->code;
     }
 
-uint32_t enums_check(lua_State *L, uint32_t domain, int arg)
+int enums_check(lua_State *L, int domain, int arg)
     {
     rec_t *rec;
     const char *s = luaL_checkstring(L, arg);
@@ -193,7 +193,7 @@ uint32_t enums_check(lua_State *L, uint32_t domain, int arg)
     return rec->code;
     }
 
-int enums_push(lua_State *L, uint32_t domain, uint32_t code)
+int enums_push(lua_State *L, int domain, int code)
     {
     rec_t *rec = code_search(domain, code);
 
@@ -204,7 +204,7 @@ int enums_push(lua_State *L, uint32_t domain, uint32_t code)
     return 1;
     }
 
-int enums_values(lua_State *L, uint32_t domain)
+int enums_values(lua_State *L, int domain)
     {
     int i;
     rec_t *rec;
@@ -226,10 +226,10 @@ int enums_values(lua_State *L, uint32_t domain)
     }
 
 
-uint32_t* enums_checklist(lua_State *L, uint32_t domain, int arg, uint32_t *count, int *err)
+int* enums_checklist(lua_State *L, int domain, int arg, int *count, int *err)
     {
-    uint32_t* list;
-    uint32_t i;
+    int* list;
+    int i;
 
     *count = 0;
     *err = 0;
@@ -242,7 +242,7 @@ uint32_t* enums_checklist(lua_State *L, uint32_t domain, int arg, uint32_t *coun
     if(*count == 0)
         { *err = ERR_NOTPRESENT; return NULL; }
 
-    list = (uint32_t*)MallocNoErr(L, sizeof(uint32_t) * (*count));
+    list = (int*)MallocNoErr(L, sizeof(int) * (*count));
     if(!list)
         { *count = 0; *err = ERR_MEMORY; return NULL; }
 
@@ -257,7 +257,7 @@ uint32_t* enums_checklist(lua_State *L, uint32_t domain, int arg, uint32_t *coun
     return list;
     }
 
-void enums_freelist(lua_State *L, uint32_t *list)
+void enums_freelist(lua_State *L, int *list)
     {
     if(!list)
         return;
@@ -299,7 +299,7 @@ static const struct luaL_Reg Functions[] =
 
 void moonglfw_open_enums(lua_State *L)
     {
-    uint32_t domain;
+    int domain;
 
     luaL_setfuncs(L, Functions, 0);
 

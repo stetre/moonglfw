@@ -30,17 +30,17 @@
 #define enums_free_all moonglfw_enums_free_all
 void enums_free_all(lua_State *L);
 #define enums_test moonglfw_enums_test
-uint32_t enums_test(lua_State *L, uint32_t domain, int arg, int *err);
+int enums_test(lua_State *L, int domain, int arg, int *err);
 #define enums_check moonglfw_enums_check
-uint32_t enums_check(lua_State *L, uint32_t domain, int arg);
+int enums_check(lua_State *L, int domain, int arg);
 #define enums_push moonglfw_enums_push
-int enums_push(lua_State *L, uint32_t domain, uint32_t code);
+int enums_push(lua_State *L, int domain, int code);
 #define enums_values moonglfw_enums_values
-int enums_values(lua_State *L, uint32_t domain);
+int enums_values(lua_State *L, int domain);
 #define enums_checklist moonglfw_enums_checklist
-uint32_t* enums_checklist(lua_State *L, uint32_t domain, int arg, uint32_t *count, int *err);
+int* enums_checklist(lua_State *L, int domain, int arg, int *count, int *err);
 #define enums_freelist moonglfw_enums_freelist
-void enums_freelist(lua_State *L, uint32_t *list);
+void enums_freelist(lua_State *L, int *list);
 
 
 /* Enum domains */
@@ -58,77 +58,77 @@ void enums_freelist(lua_State *L, uint32_t *list);
 #define DOMAIN_GAMEPAD_BUTTON       11
 #define DOMAIN_GAMEPAD_AXIS         12
 
-#define testaction(L, arg, err) (uint32_t)enums_test((L), DOMAIN_ACTION, (arg), (err))
-#define checkaction(L, arg) (uint32_t)enums_check((L), DOMAIN_ACTION, (arg))
-#define pushaction(L, val) enums_push((L), DOMAIN_ACTION, (uint32_t)(val))
+#define testaction(L, arg, err) (int)enums_test((L), DOMAIN_ACTION, (arg), (err))
+#define checkaction(L, arg) (int)enums_check((L), DOMAIN_ACTION, (arg))
+#define pushaction(L, val) enums_push((L), DOMAIN_ACTION, (int)(val))
 #define valuesaction(L) enums_values((L), DOMAIN_ACTION)
 
-#define testbutton(L, arg, err) (uint32_t)enums_test((L), DOMAIN_BUTTON, (arg), (err))
-#define checkbutton(L, arg) (uint32_t)enums_check((L), DOMAIN_BUTTON, (arg))
-#define pushbutton(L, val) enums_push((L), DOMAIN_BUTTON, (uint32_t)(val))
+#define testbutton(L, arg, err) (int)enums_test((L), DOMAIN_BUTTON, (arg), (err))
+#define checkbutton(L, arg) (int)enums_check((L), DOMAIN_BUTTON, (arg))
+#define pushbutton(L, val) enums_push((L), DOMAIN_BUTTON, (int)(val))
 #define valuesbutton(L) enums_values((L), DOMAIN_BUTTON)
 
-#define testkey(L, arg, err) (uint32_t)enums_test((L), DOMAIN_KEY, (arg), (err))
-#define checkkey(L, arg) (uint32_t)enums_check((L), DOMAIN_KEY, (arg))
-#define pushkey(L, val) enums_push((L), DOMAIN_KEY, (uint32_t)(val))
+#define testkey(L, arg, err) (int)enums_test((L), DOMAIN_KEY, (arg), (err))
+#define checkkey(L, arg) (int)enums_check((L), DOMAIN_KEY, (arg))
+#define pushkey(L, val) enums_push((L), DOMAIN_KEY, (int)(val))
 #define valueskey(L) enums_values((L), DOMAIN_KEY)
 
-#define testtarget(L, arg, err) (uint32_t)enums_test((L), DOMAIN_TARGET, (arg), (err))
-#define checktarget(L, arg) (uint32_t)enums_check((L), DOMAIN_TARGET, (arg))
-#define pushtarget(L, val) enums_push((L), DOMAIN_TARGET, (uint32_t)(val))
+#define testtarget(L, arg, err) (int)enums_test((L), DOMAIN_TARGET, (arg), (err))
+#define checktarget(L, arg) (int)enums_check((L), DOMAIN_TARGET, (arg))
+#define pushtarget(L, val) enums_push((L), DOMAIN_TARGET, (int)(val))
 #define valuestarget(L) enums_values((L), DOMAIN_TARGET)
 
-#define testapi(L, arg, err) (uint32_t)enums_test((L), DOMAIN_API, (arg), (err))
-#define checkapi(L, arg) (uint32_t)enums_check((L), DOMAIN_API, (arg))
-#define pushapi(L, val) enums_push((L), DOMAIN_API, (uint32_t)(val))
+#define testapi(L, arg, err) (int)enums_test((L), DOMAIN_API, (arg), (err))
+#define checkapi(L, arg) (int)enums_check((L), DOMAIN_API, (arg))
+#define pushapi(L, val) enums_push((L), DOMAIN_API, (int)(val))
 #define valuesapi(L) enums_values((L), DOMAIN_API)
 
-#define testrobustness(L, arg, err) (uint32_t)enums_test((L), DOMAIN_ROBUSTNESS, (arg), (err))
-#define checkrobustness(L, arg) (uint32_t)enums_check((L), DOMAIN_ROBUSTNESS, (arg))
-#define pushrobustness(L, val) enums_push((L), DOMAIN_ROBUSTNESS, (uint32_t)(val))
+#define testrobustness(L, arg, err) (int)enums_test((L), DOMAIN_ROBUSTNESS, (arg), (err))
+#define checkrobustness(L, arg) (int)enums_check((L), DOMAIN_ROBUSTNESS, (arg))
+#define pushrobustness(L, val) enums_push((L), DOMAIN_ROBUSTNESS, (int)(val))
 #define valuesrobustness(L) enums_values((L), DOMAIN_ROBUSTNESS)
 
-#define testreleasebehavior(L, arg, err) (uint32_t)enums_test((L), DOMAIN_RELEASE_BEHAVIOR, (arg), (err))
-#define checkreleasebehavior(L, arg) (uint32_t)enums_check((L), DOMAIN_RELEASE_BEHAVIOR, (arg))
-#define pushreleasebehavior(L, val) enums_push((L), DOMAIN_RELEASE_BEHAVIOR, (uint32_t)(val))
+#define testreleasebehavior(L, arg, err) (int)enums_test((L), DOMAIN_RELEASE_BEHAVIOR, (arg), (err))
+#define checkreleasebehavior(L, arg) (int)enums_check((L), DOMAIN_RELEASE_BEHAVIOR, (arg))
+#define pushreleasebehavior(L, val) enums_push((L), DOMAIN_RELEASE_BEHAVIOR, (int)(val))
 #define valuesreleasebehavior(L) enums_values((L), DOMAIN_RELEASE_BEHAVIOR)
 
-#define testprofile(L, arg, err) (uint32_t)enums_test((L), DOMAIN_PROFILE, (arg), (err))
-#define checkprofile(L, arg) (uint32_t)enums_check((L), DOMAIN_PROFILE, (arg))
-#define pushprofile(L, val) enums_push((L), DOMAIN_PROFILE, (uint32_t)(val))
+#define testprofile(L, arg, err) (int)enums_test((L), DOMAIN_PROFILE, (arg), (err))
+#define checkprofile(L, arg) (int)enums_check((L), DOMAIN_PROFILE, (arg))
+#define pushprofile(L, val) enums_push((L), DOMAIN_PROFILE, (int)(val))
 #define valuesprofile(L) enums_values((L), DOMAIN_PROFILE)
 
-#define testinputmode(L, arg, err) (uint32_t)enums_test((L), DOMAIN_INPUT_MODE, (arg), (err))
-#define checkinputmode(L, arg) (uint32_t)enums_check((L), DOMAIN_INPUT_MODE, (arg))
-#define pushinputmode(L, val) enums_push((L), DOMAIN_INPUT_MODE, (uint32_t)(val))
+#define testinputmode(L, arg, err) (int)enums_test((L), DOMAIN_INPUT_MODE, (arg), (err))
+#define checkinputmode(L, arg) (int)enums_check((L), DOMAIN_INPUT_MODE, (arg))
+#define pushinputmode(L, val) enums_push((L), DOMAIN_INPUT_MODE, (int)(val))
 #define valuesinputmode(L) enums_values((L), DOMAIN_INPUT_MODE)
 
-#define testcursormode(L, arg, err) (uint32_t)enums_test((L), DOMAIN_CURSOR_MODE, (arg), (err))
-#define checkcursormode(L, arg) (uint32_t)enums_check((L), DOMAIN_CURSOR_MODE, (arg))
-#define pushcursormode(L, val) enums_push((L), DOMAIN_CURSOR_MODE, (uint32_t)(val))
+#define testcursormode(L, arg, err) (int)enums_test((L), DOMAIN_CURSOR_MODE, (arg), (err))
+#define checkcursormode(L, arg) (int)enums_check((L), DOMAIN_CURSOR_MODE, (arg))
+#define pushcursormode(L, val) enums_push((L), DOMAIN_CURSOR_MODE, (int)(val))
 #define valuescursormode(L) enums_values((L), DOMAIN_CURSOR_MODE)
 
-#define testcursorshape(L, arg, err) (uint32_t)enums_test((L), DOMAIN_CURSOR_SHAPE, (arg), (err))
-#define checkcursorshape(L, arg) (uint32_t)enums_check((L), DOMAIN_CURSOR_SHAPE, (arg))
-#define pushcursorshape(L, val) enums_push((L), DOMAIN_CURSOR_SHAPE, (uint32_t)(val))
+#define testcursorshape(L, arg, err) (int)enums_test((L), DOMAIN_CURSOR_SHAPE, (arg), (err))
+#define checkcursorshape(L, arg) (int)enums_check((L), DOMAIN_CURSOR_SHAPE, (arg))
+#define pushcursorshape(L, val) enums_push((L), DOMAIN_CURSOR_SHAPE, (int)(val))
 #define valuescursorshape(L) enums_values((L), DOMAIN_CURSOR_SHAPE)
 
 #if 0
-#define testgamepadbutton(L, arg, err) (uint32_t)enums_test((L), DOMAIN_GAMEPAD_BUTTON, (arg), (err))
-#define checkgamepadbutton(L, arg) (uint32_t)enums_check((L), DOMAIN_GAMEPAD_BUTTON, (arg))
-#define pushgamepadbutton(L, val) enums_push((L), DOMAIN_GAMEPAD_BUTTON, (uint32_t)(val))
+#define testgamepadbutton(L, arg, err) (int)enums_test((L), DOMAIN_GAMEPAD_BUTTON, (arg), (err))
+#define checkgamepadbutton(L, arg) (int)enums_check((L), DOMAIN_GAMEPAD_BUTTON, (arg))
+#define pushgamepadbutton(L, val) enums_push((L), DOMAIN_GAMEPAD_BUTTON, (int)(val))
 #define valuesgamepadbutton(L) enums_values((L), DOMAIN_GAMEPAD_BUTTON)
 
-#define testgamepadaxis(L, arg, err) (uint32_t)enums_test((L), DOMAIN_GAMEPAD_AXIS, (arg), (err))
-#define checkgamepadaxis(L, arg) (uint32_t)enums_check((L), DOMAIN_GAMEPAD_AXIS, (arg))
-#define pushgamepadaxis(L, val) enums_push((L), DOMAIN_GAMEPAD_AXIS, (uint32_t)(val))
+#define testgamepadaxis(L, arg, err) (int)enums_test((L), DOMAIN_GAMEPAD_AXIS, (arg), (err))
+#define checkgamepadaxis(L, arg) (int)enums_check((L), DOMAIN_GAMEPAD_AXIS, (arg))
+#define pushgamepadaxis(L, val) enums_push((L), DOMAIN_GAMEPAD_AXIS, (int)(val))
 #define valuesgamepadaxis(L) enums_values((L), DOMAIN_GAMEPAD_AXIS)
 #endif
 
 #if 0 /* scaffolding 6yy */
-#define testxxx(L, arg, err) (uint32_t)enums_test((L), DOMAIN_XXX, (arg), (err))
-#define checkxxx(L, arg) (uint32_t)enums_check((L), DOMAIN_XXX, (arg))
-#define pushxxx(L, val) enums_push((L), DOMAIN_XXX, (uint32_t)(val))
+#define testxxx(L, arg, err) (int)enums_test((L), DOMAIN_XXX, (arg), (err))
+#define checkxxx(L, arg) (int)enums_check((L), DOMAIN_XXX, (arg))
+#define pushxxx(L, val) enums_push((L), DOMAIN_XXX, (int)(val))
 #define valuesxxx(L) enums_values((L), DOMAIN_XXX)
     CASE(xxx);
 
