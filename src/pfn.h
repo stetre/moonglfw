@@ -101,10 +101,10 @@ typedef GLFWcursorposfun (*PFN_glfwSetCursorPosCallback)(GLFWwindow* window, GLF
 typedef GLFWcursorenterfun (*PFN_glfwSetCursorEnterCallback)(GLFWwindow* window, GLFWcursorenterfun cbfun);
 typedef GLFWscrollfun (*PFN_glfwSetScrollCallback)(GLFWwindow* window, GLFWscrollfun cbfun);
 typedef GLFWdropfun (*PFN_glfwSetDropCallback)(GLFWwindow* window, GLFWdropfun cbfun);
-typedef int (*PFN_glfwJoystickPresent)(int joy);
-typedef const float* (*PFN_glfwGetJoystickAxes)(int joy, int* count);
-typedef const unsigned char* (*PFN_glfwGetJoystickButtons)(int joy, int* count);
-typedef const char* (*PFN_glfwGetJoystickName)(int joy);
+typedef int (*PFN_glfwJoystickPresent)(int jid);
+typedef const float* (*PFN_glfwGetJoystickAxes)(int jid, int* count);
+typedef const unsigned char* (*PFN_glfwGetJoystickButtons)(int jid, int* count);
+typedef const char* (*PFN_glfwGetJoystickName)(int jid);
 typedef GLFWjoystickfun (*PFN_glfwSetJoystickCallback)(GLFWjoystickfun cbfun);
 typedef void (*PFN_glfwSetClipboardString)(GLFWwindow* window, const char* string);
 typedef const char* (*PFN_glfwGetClipboardString)(GLFWwindow* window);

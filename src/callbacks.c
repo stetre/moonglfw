@@ -91,23 +91,23 @@ static void MonitorCallback(GLFWmonitor *monitor, int event)
     }
 
 
-static void joystickCallback(int joy, int event)
+static void joystickCallback(int jid, int event)
     {
-    (void)joy;
+    (void)jid;
     (void)event;
     }
 
-//typedef void (* GLFWjoystickfun)(int joy, int event);
+//typedef void (* GLFWjoystickfun)(int jid, int event);
 //GLFWjoystickfun glfw.SetJoystickCallback(GLFWjoystickfun cbfun);
 static int Joystick = LUA_NOREF;
-static void JoystickCallback(int joy, int event)
+static void JoystickCallback(int jid, int event)
     {
     BEGIN(Joystick);
-    PushJoystick(L, joy);
+    PushJoystick(L, jid);
     lua_pushstring(L, event==GLFW_CONNECTED ? "connected" : "disconnected");
     EXEC(2);
    /* always call the default callback: */
-    joystickCallback(joy, event);
+    joystickCallback(jid, event);
     }
 
 

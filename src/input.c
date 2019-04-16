@@ -199,8 +199,8 @@ static int SetCursor(lua_State *L)
 
 static int JoystickPresent(lua_State *L)
     {
-    int joy = CheckJoystick(L, 1);
-    int val = glfw.JoystickPresent(joy);
+    int jid = CheckJoystick(L, 1);
+    int val = glfw.JoystickPresent(jid);
     lua_pushboolean(L, val);
     return 1;
     }
@@ -208,8 +208,8 @@ static int JoystickPresent(lua_State *L)
 static int GetJoystickAxes(lua_State *L)
     {
     int i, count;
-    int joy = CheckJoystick(L, 1);
-    const float *axis = glfw.GetJoystickAxes(joy, &count);
+    int jid = CheckJoystick(L, 1);
+    const float *axis = glfw.GetJoystickAxes(jid, &count);
     if(!axis)
         return 0;
     luaL_checkstack(L, count, NULL);
@@ -221,8 +221,8 @@ static int GetJoystickAxes(lua_State *L)
 static int GetJoystickButtons(lua_State *L)
     {
     int i, count;
-    int joy = CheckJoystick(L, 1);
-    const unsigned char *state = glfw.GetJoystickButtons(joy, &count);
+    int jid = CheckJoystick(L, 1);
+    const unsigned char *state = glfw.GetJoystickButtons(jid, &count);
     if(!state)
         return 0;
     luaL_checkstack(L, count, NULL);
@@ -233,8 +233,8 @@ static int GetJoystickButtons(lua_State *L)
 
 static int GetJoystickName(lua_State *L)
     {
-    int joy = CheckJoystick(L, 1);
-    const char *name = glfw.GetJoystickName(joy);
+    int jid = CheckJoystick(L, 1);
+    const char *name = glfw.GetJoystickName(jid);
     lua_pushstring(L, name ? name : "???");
     return 1;
     }

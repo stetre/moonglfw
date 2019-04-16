@@ -185,7 +185,7 @@ void moonglfw_open_vulkan(lua_State *L);
 void moonglfw_open_native(lua_State *L);
 
 #define CheckJoystick(L, arg) luaL_checkinteger((L), (arg)) - 1 /* 1,2, ..., 16 */
-#define PushJoystick(L, joy) lua_pushinteger((L), (joy) + 1)
+#define PushJoystick(L, jid) lua_pushinteger((L), (jid) + 1)
 
 /* Internal error codes */
 #define ERR_NOTPRESENT       1
