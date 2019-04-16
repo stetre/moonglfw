@@ -309,6 +309,7 @@ int checkgammaramp(lua_State *L, int arg, GLFWgammaramp *ramp)
  *------------------------------------------------------------------------------*/
 
 #if defined(LINUX)
+#include <unistd.h> /* for usleep */
 
 #if 0
 static double tstosec(const struct timespec *ts)
