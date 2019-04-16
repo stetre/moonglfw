@@ -276,6 +276,17 @@ static int GetJoystickName(lua_State *L)
     return 1;
     }
 
+static int GetJoystickGUID(lua_State *L)
+    {
+    int jid = CheckJoystick(L, 1);
+    const char *guid;
+    CheckPfn(L, GetJoystickGUID, 3, 3, 0);
+    guid = glfw.GetJoystickGUID(jid);
+    if(!guid) return 0;
+    lua_pushstring(L, guid);
+    return 1;
+    }
+
 static int JoystickIsGamepad(lua_State *L)
     {
     int jid = CheckJoystick(L, 1);
@@ -408,6 +419,7 @@ static const struct luaL_Reg Functions[] =
         { "get_joystick_buttons", GetJoystickButtons },
         { "get_joystick_hats", GetJoystickHats },
         { "get_joystick_name", GetJoystickName },
+        { "get_joystick_guid", GetJoystickGUID },
         { "joystick_is_gamepad", JoystickIsGamepad },
         { "update_gamepad_mappings", UpdateGamepadMappings },
         { "get_gamepad_name", GetGamepadName },

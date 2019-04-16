@@ -73,6 +73,10 @@ Note: Joystick hats are included if GLFW version &lt; 3.3.0 is being used
 [[get_joystick_name]]
 * _name_ = *get_joystick_name*(_jid_)
 
+[[get_joystick_guid]]
+* _guid_ = *get_joystick_guid*(_jid_) +
+[small]#guid: string or _nil_.#
+
 [[joystick_is_gamepad]]
 * _boolean_ = *joystick_is_gamepad*(_jid_)
 
