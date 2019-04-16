@@ -24,6 +24,9 @@ pass:[-] otherwise: _value_ = boolean.#
 * _name_ = *get_key_name*(<<enums_key, _key_>> | _scancode_) +
 [small]#See <<set_key_callback, set_key_callback>>(&nbsp;).#
 
+[[get_key_scancode]]
+* _scancode_ = *get_key_scancode*(<<enums_key, _key_>>)
+
 ==== Mouse/Cursor
 
 [[get_mouse_button]]

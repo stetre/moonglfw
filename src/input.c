@@ -113,6 +113,14 @@ static int GetKeyName(lua_State *L)
     return 1;
     }
 
+static int GetKeyScancode(lua_State *L)
+    {
+    int key = checkkey(L, 1);
+    CheckPfn(L, GetKeyScancode, 3, 3, 0);
+    lua_pushinteger(L, glfw.GetKeyScancode(key));
+    return 1;
+    }
+
 /*------------------------------------------------------------------------------*
  | Mouse                                                                        |
  *------------------------------------------------------------------------------*/
@@ -373,6 +381,7 @@ static const struct luaL_Reg Functions[] =
         { "raw_mouse_motion_supported", RawMouseMotionSupported },
         { "get_key", GetKey },
         { "get_key_name", GetKeyName },
+        { "get_key_scancode", GetKeyScancode },
         { "get_mouse_button", GetMouseButton },
         { "get_cursor_pos", GetCursorPos },
         { "set_cursor_pos", SetCursorPos },
