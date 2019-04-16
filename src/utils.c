@@ -260,6 +260,20 @@ int pushvidmode(lua_State *L, const GLFWvidmode *mode)
     return 1;
     }
 
+int pushhat(lua_State *L, unsigned int hat)
+    {
+    lua_newtable(L);
+#define Setfield(name, val) do { lua_pushboolean(L, val); lua_setfield(L, -2, name); } while(0)
+    Setfield("centered", hat == GLFW_HAT_CENTERED);
+    Setfield("up", hat & GLFW_HAT_UP);
+    Setfield("right", hat & GLFW_HAT_RIGHT);
+    Setfield("down", hat & GLFW_HAT_DOWN);
+    Setfield("left", hat & GLFW_HAT_LEFT);
+#undef Setfield
+    return 1;
+    }
+
+
 int pushgammaramp(lua_State *L, const GLFWgammaramp *ramp)
     {
     unsigned int i;

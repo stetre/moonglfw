@@ -26,7 +26,7 @@
 #include "internal.h"
 
 #define MAKE_VERSION(major, minor, rev) (((major) << 22) | ((minor) << 12) | (rev))
-static int Version ;
+static int Version;
 
 int checkminversion(int major, int minor, int rev)
 /* Checks that libglfw.so Version is at least major.minor.ver */
@@ -150,6 +150,9 @@ int luaopen_moonglfw(lua_State *L)
     moonglfw_open_getproc(L);
     AddVersions(L);
 
+    /* Do not include hats in glfwGetJoystickButtons() if version >= 3.3.0 */
+    if(checkminversion(3, 3, 0))
+        glfw.InitHint(GLFW_JOYSTICK_HAT_BUTTONS, GLFW_FALSE);
 
     if(glfw.Init() != GL_TRUE)
         return luaL_error(L, "glfwInit() failed");

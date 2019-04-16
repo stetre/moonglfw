@@ -1,0 +1,53 @@
+
+== Structs
+
+[[gamepadaxes]]
+* [small]#*gamepadaxes* = { +
+_left_x_: float (-1.0..1.0), +
+_left_y_: float (-1.0..1.0), +
+_right_x_: float (-1.0..1.0), +
+_right_y_: float (-1.0..1.0), +
+_left_trigger_: float (-1.0..1.0), +
+_right_trigger_: float (-1.0..1.0), +
+} (rfr: link:++https://www.glfw.org/docs/latest/structGLFWgamepadstate.html++[GLFWgamepadstate],
+link:++http://www.glfw.org/docs/latest/group__gamepad__axes.html++[gamepad axes]).#
+
+[[gamepadbuttons]]
+* [small]#*gamepadbuttons* = { +
+_a_: '_press_' | '_release_', +
+_b_: '_press_' | '_release_', +
+_x_: '_press_' | '_release_', +
+_y_: '_press_' | '_release_', +
+_left_bumper_: '_press_' | '_release_', +
+_right_bumper_: '_press_' | '_release_', +
+_back_: '_press_' | '_release_', +
+_start_: '_press_' | '_release_', +
+_guide_: '_press_' | '_release_', +
+_left_thumb_: '_press_' | '_release_', +
+_right_thumb_: '_press_' | '_release_', +
+_dpad_up_: '_press_' | '_release_', +
+_dpad_right_: '_press_' | '_release_', +
+_dpad_down_: '_press_' | '_release_', +
+_dpad_left_: '_press_' | '_release_', +
+} (rfr: link:++https://www.glfw.org/docs/latest/structGLFWgamepadstate.html++[GLFWgamepadstate buttons],
+link:++http://www.glfw.org/docs/latest/group__gamepad__buttons.html++[gamepad buttons]).#
+
+[[joystickhat]]
+* [small]#*joystickhat* = { +
+_centered_: boolean, +
+_up_: boolean, +
+_right_: boolean, +
+_down_: boolean, +
+_left_: boolean, +
+} (rfr: link:++https://www.glfw.org/docs/latest/input_guide.html#joystick_hat++[Joystic hat states]).#
+
+[[videomode]]
+* [small]#*videomode* = { +
+_width_: integer, +
+_height_: integer, +
+_red_bits_: integer, +
+_blue_bits_: integer, +
+_green_bits_: integer, +
+_refresh_rate_: integer, +
+} (rfr: link:http://www.glfw.org/docs/latest/group__monitor.html[Monitor handling]).#
+

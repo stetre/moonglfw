@@ -63,7 +63,12 @@ Both functions return a _cursor_ handle to the newly created cursor.#
 
 [[get_joystick_buttons]]
 * _state~1~_, _..._ = *get_joystick_buttons*(_jid_) +
-[small]#_state_: '_press_' | '_release_'.#
+[small]#_state_: '_press_' | '_release_'. +
+Note: Joystick hats are included if GLFW version &lt; 3.3.0 is being used
+(see: link:https://www.glfw.org/docs/latest/intro_guide.html#GLFW_JOYSTICK_HAT_BUTTONS[GLFW_JOYSTICK_HAT_BUTTONS]).#
+
+[[get_joystick_hats]]
+* _<<joystickhat, hats~1~>>_, _..._  = *get_joystick_hats*(_jid_)
 
 [[get_joystick_name]]
 * _name_ = *get_joystick_name*(_jid_)

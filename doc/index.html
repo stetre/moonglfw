@@ -1111,7 +1111,16 @@ Both functions return a <em>cursor</em> handle to the newly created cursor.</spa
 <ul>
 <li>
 <p><em>state<sub>1</sub></em>, <em>&#8230;&#8203;</em> = <strong>get_joystick_buttons</strong>(<em>jid</em>)<br>
-<span class="small"><em>state</em>: '<em>press</em>' | '<em>release</em>'.</span></p>
+<span class="small"><em>state</em>: '<em>press</em>' | '<em>release</em>'.<br>
+Note: Joystick hats are included if GLFW version &lt; 3.3.0 is being used
+(see: <a href="https://www.glfw.org/docs/latest/intro_guide.html#GLFW_JOYSTICK_HAT_BUTTONS">GLFW_JOYSTICK_HAT_BUTTONS</a>).</span></p>
+</li>
+</ul>
+</div>
+<div id="get_joystick_hats" class="ulist">
+<ul>
+<li>
+<p><em><a href="#joystickhat">hats<sub>1</sub></a></em>, <em>&#8230;&#8203;</em>  = <strong>get_joystick_hats</strong>(<em>jid</em>)</p>
 </li>
 </ul>
 </div>
@@ -1865,6 +1874,19 @@ Values: '<em>unknown</em>', '<em>space</em>', '<em>apostrophe</em>', '<em>comma<
 </li>
 </ul>
 </div>
+<div id="joystickhat" class="ulist">
+<ul>
+<li>
+<p><span class="small"><strong>joystickhat</strong> = {<br>
+<em>centered</em>: boolean,<br>
+<em>up</em>: boolean,<br>
+<em>right</em>: boolean,<br>
+<em>down</em>: boolean,<br>
+<em>left</em>: boolean,<br>
+} (rfr: <a href="https://www.glfw.org/docs/latest/input_guide.html#joystick_hat">Joystic hat states</a>).</span></p>
+</li>
+</ul>
+</div>
 <div id="videomode" class="ulist">
 <ul>
 <li>
@@ -1891,7 +1913,7 @@ Values: '<em>unknown</em>', '<em>space</em>', '<em>apostrophe</em>', '<em>comma<
 <div id="footer">
 <div id="footer-text">
 Version 0.10<br>
-Last updated 2017-08-19 20:01:17 CEST
+Last updated 2019-04-16 11:25:44 CEST
 </div>
 </div>
 </body>

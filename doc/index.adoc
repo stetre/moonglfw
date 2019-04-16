@@ -16,4 +16,5 @@ include::preface.adoc[]
 
 include::bindings.adoc[]
 include::enums.adoc[]
+include::structs.adoc[]
 

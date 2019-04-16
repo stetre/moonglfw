@@ -254,6 +254,20 @@ static int GetJoystickButtons(lua_State *L)
     return count;
     }
 
+static int GetJoystickHats(lua_State *L)
+    {
+    int i, count;
+    int jid = CheckJoystick(L, 1);
+    CheckPfn(L, GetJoystickHats, 3, 3, 0);
+    const unsigned char *hat = glfw.GetJoystickHats(jid, &count);
+    if(!hat)
+        return 0;
+    luaL_checkstack(L, count, NULL);
+    for(i=0; i< count; i++)
+        pushhat(L, hat[i]);
+    return count;
+    }
+
 static int GetJoystickName(lua_State *L)
     {
     int jid = CheckJoystick(L, 1);
@@ -392,6 +406,7 @@ static const struct luaL_Reg Functions[] =
         { "joystick_present", JoystickPresent },
         { "get_joystick_axes", GetJoystickAxes },
         { "get_joystick_buttons", GetJoystickButtons },
+        { "get_joystick_hats", GetJoystickHats },
         { "get_joystick_name", GetJoystickName },
         { "joystick_is_gamepad", JoystickIsGamepad },
         { "update_gamepad_mappings", UpdateGamepadMappings },
