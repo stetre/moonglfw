@@ -59,6 +59,8 @@ struct moonglfw_win_s {
     int WindowRefresh;
     int WindowFocus;
     int WindowIconify;
+    int WindowMaximize;
+    int WindowContentScale;
     int FramebufferSize;
     int Key;
     int Char;

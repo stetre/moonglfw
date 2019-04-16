@@ -133,6 +133,14 @@ All the following functions, when invoked with _func=nil_, unregister the corres
 * *set_window_iconify_callback*(_window_, [_func_]) +
 [small]#The _func_ callback is executed as *_func(window, iconified)_*, where _iconified_ is a boolean.#
 
+[[set_window_maximize_callback]]
+* *set_window_maximize_callback*(_window_, [_func_]) +
+[small]#The _func_ callback is executed as *_func(window, maximized)_*, where _maximized_ is a boolean.#
+
+[[set_window_content_scale_callback]]
+* *set_window_content_scale_callback*(_window_, [_func_]) +
+[small]#The _func_ callback is executed as *_func(window, xscale, yscale)_*, where _xscale_ and _yscale_ are floats.#
+
 [[set_framebuffer_size_callback]]
 * *set_framebuffer_size_callback*(_window_, [_func_]) +
 [small]#The _func_ callback is executed as *_func(window, width, height)_*.#

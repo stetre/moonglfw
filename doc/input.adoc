@@ -37,7 +37,7 @@ _state_: '_press_' | '_release_'.#
 [[set_cursor_pos]]
 * *set_cursor_pos*(_window_, _xpos_, _ypos_) +
 _xpos_, _ypos_ = *get_cursor_pos*(_window_) +
-[small]#_xpos_, _ypos_: numbers.#
+[small]#_xpos_, _ypos_: float.#
 
 [[create_cursor]]
 * _cursor_ = *create_cursor*(_width_, _height_, _pixels_, _xhot_, _yhot_) +
@@ -164,7 +164,7 @@ _shift_, _control_, _alt_, _super_: boolean (modifiers).#
 [[set_cursor_pos_callback]]
 * *set_cursor_pos_callback*(_window_, [_func_]) +
 [small]#The _func_ callback is executed as *_func(window, xpos, ypos)_*, where _xpos_
-and _ypos_ are numbers.#
+and _ypos_ are floats.#
 
 [[set_cursor_enter_callback]]
 * *set_cursor_enter_callback*(_window_, [_func_]) +
@@ -174,7 +174,7 @@ _entered_ is a boolean.#
 [[set_scroll_callback]]
 * *set_scroll_callback*(_window_, [_func_]) +
 [small]#The _func_ callback is executed as *_func(window, xoffset, yoffset)_*, where 
-_xoffset_ and _yoffset_ are numbers.#
+_xoffset_ and _yoffset_ are floats.#
 
 [[set_drop_callback]]
 * *set_drop_callback*(_window_, [_func_]) +

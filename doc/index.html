@@ -987,7 +987,7 @@ and thus not exposed to the script code.</p>
 <ul>
 <li>
 <p><strong>set_error_callback</strong>([<em>func</em>])<br>
-<span class="small">The <em>func</em> callback is executed as <strong><em>func(ec, descr)</em></strong> where <em>ec</em> (a number) is the
+<span class="small">The <em>func</em> callback is executed as <strong><em>func(ec, descr)</em></strong> where <em>ec</em> (an integer) is the
 error code and <em>descr</em> (a string) is the description of the occurred error.<br>
 If <em>func</em> is <em>nil</em>, unregisters the current error callback (if any).</span></p>
 </li>
@@ -1060,7 +1060,7 @@ If <em>func</em> is <em>nil</em>, unregisters the current error callback (if any
 <li>
 <p><strong>set_cursor_pos</strong>(<em>window</em>, <em>xpos</em>, <em>ypos</em>)<br>
 <em>xpos</em>, <em>ypos</em> = <strong>get_cursor_pos</strong>(<em>window</em>)<br>
-<span class="small"><em>xpos</em>, <em>ypos</em>: numbers.</span></p>
+<span class="small"><em>xpos</em>, <em>ypos</em>: float.</span></p>
 </li>
 </ul>
 </div>
@@ -1291,7 +1291,7 @@ previously obtained with the <a href="#now">now</a>(&nbsp;) function.</span></p>
 <li>
 <p><strong>set_cursor_pos_callback</strong>(<em>window</em>, [<em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as <strong><em>func(window, xpos, ypos)</em></strong>, where <em>xpos</em>
-and <em>ypos</em> are numbers.</span></p>
+and <em>ypos</em> are floats.</span></p>
 </li>
 </ul>
 </div>
@@ -1309,7 +1309,7 @@ and <em>ypos</em> are numbers.</span></p>
 <li>
 <p><strong>set_scroll_callback</strong>(<em>window</em>, [<em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as <strong><em>func(window, xoffset, yoffset)</em></strong>, where
-<em>xoffset</em> and <em>yoffset</em> are numbers.</span></p>
+<em>xoffset</em> and <em>yoffset</em> are floats.</span></p>
 </li>
 </ul>
 </div>
@@ -1749,6 +1749,22 @@ Other images (up to 32 total) can be added in the optional part in the same way.
 <li>
 <p><strong>set_window_iconify_callback</strong>(<em>window</em>, [<em>func</em>])<br>
 <span class="small">The <em>func</em> callback is executed as <strong><em>func(window, iconified)</em></strong>, where <em>iconified</em> is a boolean.</span></p>
+</li>
+</ul>
+</div>
+<div id="set_window_maximize_callback" class="ulist">
+<ul>
+<li>
+<p><strong>set_window_maximize_callback</strong>(<em>window</em>, [<em>func</em>])<br>
+<span class="small">The <em>func</em> callback is executed as <strong><em>func(window, maximized)</em></strong>, where <em>maximized</em> is a boolean.</span></p>
+</li>
+</ul>
+</div>
+<div id="set_window_content_scale_callback" class="ulist">
+<ul>
+<li>
+<p><strong>set_window_content_scale_callback</strong>(<em>window</em>, [<em>func</em>])<br>
+<span class="small">The <em>func</em> callback is executed as <strong><em>func(window, xscale, yscale)</em></strong>, where <em>xscale</em> and <em>yscale</em> are floats.</span></p>
 </li>
 </ul>
 </div>

@@ -76,6 +76,8 @@ win_t *win_new(void)
     win->WindowRefresh = LUA_NOREF;
     win->WindowFocus = LUA_NOREF;
     win->WindowIconify = LUA_NOREF;
+    win->WindowMaximize = LUA_NOREF;
+    win->WindowContentScale = LUA_NOREF;
     win->FramebufferSize = LUA_NOREF;
     win->Key = LUA_NOREF;
     win->Char = LUA_NOREF;
@@ -100,6 +102,8 @@ void win_free(win_t* win)
         CALLBACK_UNREF(win->WindowRefresh);
         CALLBACK_UNREF(win->WindowFocus);
         CALLBACK_UNREF(win->WindowIconify);
+        CALLBACK_UNREF(win->WindowMaximize);
+        CALLBACK_UNREF(win->WindowContentScale);
         CALLBACK_UNREF(win->FramebufferSize);
         CALLBACK_UNREF(win->Key);
         CALLBACK_UNREF(win->Char);

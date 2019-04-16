@@ -208,6 +208,20 @@ static void WindowIconifyCallback(GLFWwindow *window, int iconified)
     EXEC(1);
     }
 
+static void WindowMaximizeCallback(GLFWwindow *window, int maximized)
+    {
+    BEGIN(WindowMaximize);
+    lua_pushboolean(L, maximized);
+    EXEC(1);
+    }
+
+static void WindowContentScaleCallback(GLFWwindow *window, float xscale, float yscale)
+    {
+    BEGIN(WindowContentScale);
+    lua_pushnumber(L, xscale);
+    lua_pushnumber(L, yscale);
+    EXEC(2);
+    }
 
 static void FramebufferSizeCallback(GLFWwindow *window, int width, int height)
     {
@@ -345,6 +359,8 @@ REGISTER_FUNC(WindowClose)
 REGISTER_FUNC(WindowRefresh)
 REGISTER_FUNC(WindowFocus)
 REGISTER_FUNC(WindowIconify)
+REGISTER_FUNC(WindowMaximize)
+REGISTER_FUNC(WindowContentScale)
 REGISTER_FUNC(FramebufferSize)
 REGISTER_FUNC(Key)
 REGISTER_FUNC(Char)
@@ -372,6 +388,8 @@ static const struct luaL_Reg Functions[] =
         { "set_window_refresh_callback", SetWindowRefreshCallback },
         { "set_window_focus_callback", SetWindowFocusCallback },
         { "set_window_iconify_callback", SetWindowIconifyCallback },
+        { "set_window_maximize_callback", SetWindowMaximizeCallback },
+        { "set_window_content_scale_callback", SetWindowContentScaleCallback },
         { "set_framebuffer_size_callback", SetFramebufferSizeCallback },
         { "set_key_callback", SetKeyCallback },
         { "set_char_callback", SetCharCallback },

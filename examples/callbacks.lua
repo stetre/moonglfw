@@ -15,6 +15,8 @@ glfw.set_window_close_callback(w, function(...) print("WindowClose", table.unpac
 glfw.set_window_refresh_callback(w, function(...) print("WindowRefresh", table.unpack({...})) end)
 glfw.set_window_focus_callback(w, function(...) print("WindowFocus", table.unpack({...})) end)
 glfw.set_window_iconify_callback(w, function(...) print("WindowIconify", table.unpack({...})) end)
+glfw.set_window_maximize_callback(w, function(...) print("WindowMaximize", table.unpack({...})) end)
+glfw.set_window_content_scale_callback(w, function(...) print("WindowContentScale", table.unpack({...})) end)
 glfw.set_framebuffer_size_callback(w, function(...) print("FramebufferSize", table.unpack({...})) end)
 glfw.set_key_callback(w, function(...) print("Key", table.unpack({...})) end)
 glfw.set_char_callback(w, function(...) print("Char", table.unpack({...})) end)
