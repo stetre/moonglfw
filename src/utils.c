@@ -120,38 +120,6 @@ void *optlightuserdata(lua_State *L, int arg)
     return checklightuserdata(L, arg);
     }
 
-
-int checkoption_hint(lua_State *L, int arg, const char *def, const char *const lst[])
-/* Variant of luaL_checkoption(), with an added hint in the error message */
-    {
-    const char *hint = NULL;
-    const char *name = (def) ? luaL_optstring(L, arg, def) : luaL_checkstring(L, arg);
-    int i;
-    for (i=0; lst[i]; i++)
-        if (strcmp(lst[i], name) == 0)  return i;
-
-    if(lua_checkstack(L, i*2))
-        {
-        for(i=0; lst[i]; i++)
-            {
-            lua_pushfstring(L, "'%s'", lst[i]);
-            lua_pushstring(L, "|");
-            }
-        i = i*2;
-        if(i>0)
-            {
-            lua_pop(L, 1); /* the last separator */
-            lua_concat(L, i-1);
-            hint = lua_tostring(L, -1); 
-            }
-        }
-    if(hint)
-        return luaL_argerror(L, arg, lua_pushfstring(L, 
-                    "invalid option '%s', valid options are: %s", name, hint));
-    return luaL_argerror(L, arg, lua_pushfstring(L, "invalid option '%s'", name));
-    }
-
-
 GLboolean checkboolean(lua_State *L, int arg)
     {
     if(!lua_isboolean(L, arg))

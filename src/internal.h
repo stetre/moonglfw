@@ -79,8 +79,6 @@ void sleeep(double seconds);
 void *checklightuserdata(lua_State *L, int arg);
 #define optlightuserdata moonglfw_optlightuserdata
 void *optlightuserdata(lua_State *L, int arg);
-#define checkoption_hint moonglfw_checkoption_hint 
-int checkoption_hint(lua_State *L, int arg, const char *def, const char *const lst[]);
 #define checkboolean moonglfw_checkboolean
 GLboolean checkboolean(lua_State *L, int arg);
 #define testwindow moonglfw_testwindow
@@ -232,7 +230,6 @@ static int func(lua_State *L)               \
 
 #if defined(DEBUG)
 
-#define checkoption checkoption_hint
 #define DBG printf
 
 #define TR() do {                                           \
@@ -246,7 +243,6 @@ static int func(lua_State *L)               \
 
 #else 
 
-#define checkoption luaL_checkoption
 #define DBG noprintf
 #define TR()
 #define BK()
