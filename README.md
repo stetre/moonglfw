@@ -4,7 +4,7 @@ MoonGLFW is a Lua binding library for [GLFW](http://www.glfw.org/).
 
 It runs on GNU/Linux and on Windows (MSYS2/MinGW) and requires 
 [Lua](http://www.lua.org/) (>=5.3)
-and [GLFW](http://www.glfw.org/download.html) (>=3.1).
+and [GLFW](http://www.glfw.org/download.html) (>=3.1, supports 3.3).
 
 MoonGLFW is part of the [MoonLibs](https://github.com/stetre/moonlibs) collection
 of Lua libraries for graphics and audio programming.
