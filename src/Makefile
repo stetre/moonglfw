@@ -1,3 +1,14 @@
+# On MacOS use the command shell : "make MACOS=1;sudo make MACOS=1 install"
+
+ifdef MINGW_PREFIX
+MINGW=1
+else
+ifdef MACOS
+MACOS=1
+else
+LINUX=1
+endif
+endif
 
 ifdef MINGW_PREFIX
 MINGW=1
@@ -5,13 +16,30 @@ else
 LINUX=1
 endif
 
+ifdef MACOS
+DLL_EXT=dylib
+endif
+
+ifdef LINUX
+DLL_EXT=so
+endif
+
+ifdef MINGW
+DLL_EXT=dll
+endif
+
 # Lua version
 LUAVER?=5.3
 
 # Base install directory
+ifdef MACOS
+PREFIX?=/usr/local
+endif
+
 ifdef LINUX
 PREFIX?=/usr/local
 endif
+
 ifdef MINGW
 PREFIX?=$(MINGW_PREFIX)
 endif
@@ -47,11 +75,23 @@ INCDIR = -I/usr/include/lua$(LUAVER)
 #LIBDIR = -L/usr/lib
 #LIBS = -lglfw
 endif
+
 ifdef MINGW
 COPT	+= -DMINGW
 #LIBS = -lglfw3 -llua
 LIBS = -llua
 endif
+
+ifdef MACOS
+COPT    += -fpic
+COPT    += -DMACOS
+INCDIR = -I$(PREFIX)/include/lua$(LUAVER)
+#INCDIR = -I/usr/include -I/usr/include/lua$(LUAVER) -I$(PREFIX)/include/lua$(LUAVER)
+LIBDIR = -L/usr/lib -L$(PREFIX)/lib
+LIBS = -llua$(LUAVER)
+#LIBS = -lGLEW  -lm -llua$(LUAVER)
+endif
+
 
 ifdef DEBUG
 COPT	+= -DDEBUG
@@ -74,7 +114,7 @@ where:
 	@echo $(S_DIR)
 
 clean:
-	@-rm -f *.so *.dll *.o *.err *.map *.S *~ *.log
+	@-rm -f *.so *.dll *.o *.err *.map *.S *~ *.log *.dylib
 	@-rm -f $(Tgt).symbols
 
 install:
@@ -85,7 +125,7 @@ install:
 	@-cp -fpv $(Tgt).h $(H_DIR)
 	@-cp -fpvr ../$(Tgt) $(L_DIR)
 ifdef LINUX
-	@-cp -fpv $(Tgt).so $(C_DIR)
+	@-cp -fpv $(Tgt).$(DLL_EXT) $(C_DIR)
 endif
 ifdef MINGW
 	@-cp -fpv $(Tgt).dll $(C_DIR)
@@ -93,18 +133,21 @@ endif
 
 uninstall:
 	@-rm -f $(H_DIR)/$(Tgt).h
-	@-rm -f $(C_DIR)/$(Tgt).so
+	@-rm -f $(C_DIR)/$(Tgt).$(DLL_EXT)
 	@-rm -fr $(L_DIR)/$(Tgt)
 	@-rm -f $(C_DIR)/$(Tgt).dll
 
 build:	clean $(Tgt) 
 
 symbols: build
-	@objdump -T $(Tgt).so > $(Tgt).symbols
+	@objdump -T $(Tgt).$(DLL_EXT) > $(Tgt).symbols
 
 $(Tgt):		$(Objs)
+ifdef MACOS
+	@-$(CC) -shared -o $(Tgt).$(DLL_EXT) $(Objs) $(LIBDIR) $(LIBS)
+endif
 ifdef LINUX
-	@-$(CC) -shared -o $(Tgt).so $(Objs) $(LIBDIR) $(LIBS)
+	@-$(CC) -shared -o $(Tgt).$(DLLEXT) $(Objs) $(LIBDIR) $(LIBS)
 endif
 ifdef MINGW
 	@-$(CC) -shared -o $(Tgt).dll $(Objs) $(LIBDIR) $(LIBS)
