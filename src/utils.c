@@ -332,7 +332,7 @@ int checkgammaramp(lua_State *L, int arg, GLFWgammaramp *ramp)
  | Time utilities                                                               |
  *------------------------------------------------------------------------------*/
 
-#if defined(LINUX)
+#if defined(LINUX) || defined(MACOS)
 #include <unistd.h> /* for usleep */
 
 #if 0

@@ -10,12 +10,6 @@ LINUX=1
 endif
 endif
 
-ifdef MINGW_PREFIX
-MINGW=1
-else
-LINUX=1
-endif
-
 ifdef MACOS
 DLL_EXT=dylib
 endif
