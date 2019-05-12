@@ -36,7 +36,6 @@ moonglfw_dt_t glfw;   /* dispatch table */
 #include <dlfcn.h>
 #define LIBNAME "libglfw.dylib"
 static void *Handle = NULL;
-
 #elif defined(LINUX)
 #include <dlfcn.h>
 #define LIBNAME "libglfw.so"
