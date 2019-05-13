@@ -2,7 +2,7 @@
 
 MoonGLFW is a Lua binding library for [GLFW](http://www.glfw.org/).
 
-It runs on GNU/Linux and on Windows (MSYS2/MinGW) and requires 
+It runs on GNU/Linux, MacOS, and on Windows (MSYS2/MinGW) and requires 
 [Lua](http://www.lua.org/) (>=5.3)
 and [GLFW](http://www.glfw.org/download.html) (>=3.1, supports 3.3).
 
@@ -21,7 +21,7 @@ MIT/X11 license (same as Lua). See [LICENSE](./LICENSE).
 
 See the [Reference Manual](https://stetre.github.io/moonglfw/doc/index.html).
 
-#### Getting and installing on Linux and Windows/MinGW
+#### Getting and installing
 
 Setup the build environment as described [here](https://github.com/stetre/moonlibs), then:
 
@@ -29,44 +29,13 @@ Setup the build environment as described [here](https://github.com/stetre/moonli
 $ git clone https://github.com/stetre/moonglfw
 $ cd moonglfw
 moonglfw$ make
-moonglfw$ make install # or 'sudo make install' (Ubuntu)
+moonglfw$ make install # or 'sudo make install' (Ubuntu and MacOS)
 ```
 
 NOTE: Vulkan support requires GLFW version >= 3.2, and the Vulkan loader (libvulkan.so)
 to be in the linker's search path at runtime
 (see [MoonVulkan](https://github.com/stetre/moonvulkan#getting-and-installing)'s installation 
 instructions for more details).
-
------------
-
-#### Getting and installing on MacOS
-Clone moonglfw from the Git repository
-```sh
-$ git clone https://github.com/stetre/moonglfw
-```
-If MacOS says that _The Git command requires the command line developer tools_, click _Install_ and Agree to the License Agrement.
-
-Install Homebrew
-```sh
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-```
-
-Install lua & glew libraries
-```sh
-brew install lua@5.3
-brew install luarocks
-brew install glfw
-brew install glew
-```
-
-Make the moonglfw library
-```sh
-$ cd moonglfw
-moonglfw$ make
-moonglfw$ sudo make install
-```
------------
-
 
 #### Example
 
