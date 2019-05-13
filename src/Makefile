@@ -148,7 +148,7 @@ ifdef MACOS
 	@-$(CC) -shared -o $(Tgt).$(DLL_EXT) $(Objs) $(LIBDIR) $(LIBS)
 endif
 ifdef LINUX
-	@-$(CC) -shared -o $(Tgt).$(DLLEXT) $(Objs) $(LIBDIR) $(LIBS)
+	@-$(CC) -shared -o $(Tgt).$(DLL_EXT) $(Objs) $(LIBDIR) $(LIBS)
 endif
 ifdef MINGW
 	@-$(CC) -shared -o $(Tgt).dll $(Objs) $(LIBDIR) $(LIBS)
