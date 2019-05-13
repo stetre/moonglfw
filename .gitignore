@@ -5,7 +5,9 @@
 *.dll
 *.o
 *.swp
+*.symbols
 core.*
 local/
 tutorials/
 src/TODO
+src/DIFF
