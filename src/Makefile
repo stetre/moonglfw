@@ -136,6 +136,7 @@ uninstall:
 	@-rm -fr $(L_DIR)/$(Tgt)
 	@-rm -f $(C_DIR)/$(Tgt).dll
 	@-rm -f $(C_DIR)/$(Tgt).so
+	@-rm -f $(S_DIR)/lib$(Tgt).$(DLL_EXT)
 
 build:	clean $(Tgt) 
 
