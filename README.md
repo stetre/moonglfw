@@ -75,7 +75,7 @@ Make the moonglfw library
 ```sh
 $ cd moonglfw
 moonglfw$ make MACOS=1
-moonglfw$ make MACOS=1 install
+moonglfw$ sudo make MACOS=1 install
 ```
 -----------
 
