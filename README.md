@@ -37,6 +37,49 @@ to be in the linker's search path at runtime
 (see [MoonVulkan](https://github.com/stetre/moonvulkan#getting-and-installing)'s installation 
 instructions for more details).
 
+
+-----------
+## Getting and installing on Linux and Windows/MinGW
+
+Setup the build environment as described [here](https://github.com/stetre/moonlibs), then:
+
+```sh
+$ git clone https://github.com/stetre/moonglfw
+$ cd moonglfw
+moonglfw$ make
+moonglfw$ make install # or 'sudo make install' (Ubuntu)
+```
+-----------
+
+## Getting and installing on MacOS
+Clone moonglfw from the Git repository
+```sh
+$ git clone https://github.com/stetre/moonglfw
+```
+If MacOS says that _The Git command requires the command line developer tools_, click _Install_ and Agree to the License Agrement.
+
+Install Homebrew
+```sh
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+
+Install lua & glew libraries
+```sh
+brew install lua@5.3
+brew install luarocks
+brew install glfw
+brew install glew
+```
+
+Make the moonglfw library
+```sh
+$ cd moonglfw
+moonglfw$ make MACOS=1
+moonglfw$ sudo make MACOS=1 install
+```
+-----------
+
+
 #### Example
 
 ```lua

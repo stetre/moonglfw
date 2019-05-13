@@ -40,6 +40,10 @@ static int CreateWindow(lua_State *L)
     if(!win)
         return luaL_error(L, "cannot create window");
     
+#ifdef MACOS
+     glfw.WindowHint(GLFW_OPENGL_FORWARD_COMPAT,GLFW_TRUE); 
+     glfw.WindowHint(GLFW_OPENGL_PROFILE,GLFW_OPENGL_CORE_PROFILE); 
+#endif
     win->window = glfw.CreateWindow(width, height, title, monitor, share);
     if(win->window == NULL)
         {
