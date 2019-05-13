@@ -3,11 +3,12 @@
 ifdef MINGW_PREFIX
 MINGW=1
 else
-ifdef MACOS
-MACOS=1
-else
-LINUX=1
-endif
+ OS=$(shell uname)
+ ifeq ($(OS),Darwin)
+ MACOSX=1
+ else
+ LINUX=1
+ endif
 endif
 
 ifdef MACOS
