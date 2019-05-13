@@ -5,7 +5,7 @@ MINGW=1
 else
  OS=$(shell uname)
  ifeq ($(OS),Darwin)
- MACOSX=1
+ MACOS=1
  else
  LINUX=1
  endif
