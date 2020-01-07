@@ -125,6 +125,7 @@ ifdef MACOS
 endif
 ifdef LINUX
 	@-cp -fpv $(Tgt).$(DLL_EXT) $(C_DIR)
+	@-ln -fsv $(C_DIR)/$(Tgt).$(DLL_EXT) $(S_DIR)/lib$(Tgt).$(DLL_EXT)
 endif
 ifdef MINGW
 	@-cp -fpv $(Tgt).dll $(C_DIR)
