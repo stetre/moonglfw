@@ -155,7 +155,12 @@ int luaopen_moonglfw(lua_State *L)
         glfw.InitHint(GLFW_JOYSTICK_HAT_BUTTONS, GLFW_FALSE);
 
     if(glfw.Init() != GL_TRUE)
+        {
+        const char *descr;
+        glfw.GetError(&descr);
+        if(descr) return luaL_error(L, descr);
         return luaL_error(L, "glfwInit() failed");
+        }
     atexit(AtExit);
     glfw.SetErrorCallback(errorCallback);
 
