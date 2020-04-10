@@ -33,6 +33,7 @@
 #include <lua.h>
 #include "lualib.h"
 #include "lauxlib.h"
+#include "compat-5.3.h"
 #include "include/vulkan.h"
 #include "include/glfw3.h"
 
