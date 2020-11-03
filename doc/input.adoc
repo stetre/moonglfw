@@ -101,7 +101,7 @@ _string_ = *get_clipboard_string*(_window_)
 
 [[set_time]]
 * *set_time*(_time_) +
-_time_ = *get_time*(_time_)
+_time_ = *get_time*( )
 
 [[get_timer_frequency]]
 [[get_timer_value]]
