@@ -65,7 +65,7 @@ COPT 	+= -DLUAVER=$(LUAVER)
 ifdef LINUX
 COPT    += -fpic
 COPT	+= -DLINUX
-INCDIR = -I/usr/include/lua$(LUAVER)
+INCDIR = `pkg-config --cflags --libs lua$(LUAVER)`
 #INCDIR = -I/usr/include
 #LIBDIR = -L/usr/lib
 #LIBS = -lglfw
