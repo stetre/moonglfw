@@ -66,9 +66,8 @@ ifdef LINUX
 COPT    += -fpic
 COPT	+= -DLINUX
 INCDIR = -I/usr/include/lua$(LUAVER)
-#INCDIR = -I/usr/include
-#LIBDIR = -L/usr/lib
-#LIBS = -lglfw
+#LIBDIR = -L/usr/lib/lua$(LUAVER)
+#LIBS = /usr/lib/liblua-$(LUAVER).so.0 -lm
 endif
 
 ifdef MINGW
