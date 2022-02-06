@@ -23,7 +23,11 @@ DLL_EXT=dll
 endif
 
 # Lua version
-LUAVER?=5.3
+LUAVER?=$(shell lua -e 'print(string.match(_VERSION, "%d+%.%d+") or "5.3")')
+ifeq ($(LUAVER),)
+# lua-interpreter not found
+LUAVER=5.3
+endif
 
 # Base install directory
 ifdef MACOS
