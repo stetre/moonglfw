@@ -32,7 +32,8 @@
 _boolean_ = *window_should_close*(_window_)
 
 [[set_window_title]]
-* *set_window_title*(_window_, _title_)
+* *set_window_title*(_window_, _title_) +
+_title_ = *get_window_title*(_window_)
 
 [[set_window_icon]]
 * *set_window_icon*(_window_, _width_, _height_, _pixels_, [_width~2~_, _height~2~_, _pixels~2~_, _..._]) +

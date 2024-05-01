@@ -210,6 +210,8 @@ static int Init(lua_State *L)
     OPT(UpdateGamepadMappings);
     OPT(GetGamepadName);
     OPT(GetGamepadState);
+    // GLFW ver 3.4.0:
+    OPT(GetWindowTitle);
 //#ifdef VULKAN requires GLFW version >= 3.20
     OPT(GetProcAddress);
     OPT(VulkanSupported);

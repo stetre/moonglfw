@@ -196,6 +196,16 @@ static int SetWindowTitle(lua_State *L)
     return 0;
     }
 
+static int GetWindowTitle(lua_State *L)
+    {
+    const char *title;
+    win_t *win = checkwindow(L, 1);
+    CheckPfn(L, GetWindowTitle, 3, 4, 0);
+    title = glfw.GetWindowTitle(win->window);
+    lua_pushstring(L, title);
+    return 1;
+    }
+
 static int GetWindowPos(lua_State *L)
     {
     int xpos, ypos;
@@ -362,6 +372,7 @@ static const struct luaL_Reg Functions[] =
         { "window_should_close", WindowShouldClose },
         { "set_window_should_close", SetWindowShouldClose },
         { "set_window_title", SetWindowTitle },
+        { "get_window_title", GetWindowTitle },
         { "get_window_pos", GetWindowPos },
         { "set_window_pos", SetWindowPos },
         { "get_window_size", GetWindowSize },

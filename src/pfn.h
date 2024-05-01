@@ -150,6 +150,7 @@ typedef int (*PFN_glfwJoystickIsGamepad)(int jid);
 typedef int (*PFN_glfwUpdateGamepadMappings)(const char* string);
 typedef const char* (*PFN_glfwGetGamepadName)(int jid);
 typedef int (*PFN_glfwGetGamepadState)(int jid, GLFWgamepadstate* state);
+typedef const char* (*PFN_glfwGetWindowTitle)(GLFWwindow* window);
 
 /* Typedefs for glfw2native.h functions (to avoid including native headers)
  */
