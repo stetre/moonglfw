@@ -43,7 +43,7 @@ _xpos_, _ypos_ = *get_cursor_pos*(_window_) +
 * _cursor_ = *create_cursor*(_width_, _height_, _pixels_, _xhot_, _yhot_) +
 _cursor_ = *create_cursor*(_shape_) +
 [small]#_width_, _height_ (integers) and _pixels_ (binary string) specify the image. +
-_shape_: '_arrow_' | '_ibeam_' | '_crosshair_' | '_hand_' | '_hresize_' | '_vresize_'. +
+_shape_: '_arrow_' | '_ibeam_' | '_crosshair_' | '_hand_' | '_hresize_' | '_vresize_' | '_resize nwse_' | '_resize nesw_' | '_resize all_' | '_not allowed_'. +
 Both functions return a _cursor_ handle to the newly created cursor.#
 
 [[destroy_cursor]]

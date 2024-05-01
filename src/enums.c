@@ -524,9 +524,13 @@ void moonglfw_open_enums(lua_State *L)
     ADD(ARROW_CURSOR, "arrow");
     ADD(IBEAM_CURSOR, "ibeam");
     ADD(CROSSHAIR_CURSOR, "crosshair");
-    ADD(HAND_CURSOR, "hand");
-    ADD(HRESIZE_CURSOR, "hresize");
-    ADD(VRESIZE_CURSOR, "vresize");
+    ADD(HAND_CURSOR, "hand");       // pointing hand
+    ADD(HRESIZE_CURSOR, "hresize"); // resize ew
+    ADD(VRESIZE_CURSOR, "vresize"); // resize ns
+    ADD(RESIZE_NWSE_CURSOR, "resize nwse");
+    ADD(RESIZE_NESW_CURSOR, "resize nesw");
+    ADD(RESIZE_ALL_CURSOR, "resize all");
+    ADD(NOT_ALLOWED_CURSOR, "not allowed");
 
     domain = DOMAIN_CONTEXT_CREATION_API;
     ADD(NATIVE_CONTEXT_API, "native");
