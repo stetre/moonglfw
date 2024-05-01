@@ -518,6 +518,7 @@ void moonglfw_open_enums(lua_State *L)
     ADD(CURSOR_NORMAL, "normal");
     ADD(CURSOR_HIDDEN, "hidden");
     ADD(CURSOR_DISABLED, "disabled");
+    ADD(CURSOR_CAPTURED, "captured");
 
     domain = DOMAIN_CURSOR_SHAPE;
     ADD(ARROW_CURSOR, "arrow");

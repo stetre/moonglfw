@@ -8,7 +8,7 @@
 _value_ = *get_input_mode*(_window_, _mode_) +
 [small]#_mode_: '_cursor_' | '_sticky keys_' | '_sticky mouse buttons_' | '_lock key mods_' | '_raw mouse motion_'. +
 _value_: one of the following, depending on _mode_: +
-pass:[-] if _mode_ is '_cursor_': _value_ = '_normal_' | '_hidden_' | '_disabled_'. +
+pass:[-] if _mode_ is '_cursor_': _value_ = '_normal_' | '_hidden_' | '_disabled_' | '_captured_'. +
 pass:[-] otherwise: _value_ = boolean.#
 
 [[raw_mouse_motion_supported]]
