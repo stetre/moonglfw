@@ -27,6 +27,7 @@
 
 #define MAKE_VERSION(major, minor, rev) (((major) << 22) | ((minor) << 12) | (rev))
 static int Version;
+static int Initialized = 0;
 
 int checkminversion(int major, int minor, int rev)
 /* Checks that libglfw.so Version is at least major.minor.ver */
@@ -87,7 +88,8 @@ static void AtExit(void)
         mon_free_all();
         win_free_all();
         id_free_all();
-        glfw.Terminate();
+        if(Initialized)
+            { glfw.Terminate(); Initialized = 0; }
         enums_free_all(moonglfw_L);
         moonglfw_atexit_getproc();
         moonglfw_L = NULL;
@@ -122,6 +124,62 @@ static int Sleep(lua_State *L)
     return 0;
     }
 
+/*------------------------------------------------------------------------------*
+ | Re-initialization (needed only to set init hints)                            |
+ *------------------------------------------------------------------------------*/
+
+static int Init(lua_State *L)
+    {
+    if(Initialized) return 0;
+    if(glfw.Init() != GL_TRUE)
+        {
+        const char *descr;
+        glfw.GetError(&descr);
+        if(descr) return luaL_error(L, descr);
+        return luaL_error(L, "glfwInit() failed");
+        }
+    glfw.SetErrorCallback(errorCallback);
+    Initialized = 1;
+    return 0;
+    }
+
+static int Boolean(lua_State *L, int hint)
+    {
+    int value = checkboolean(L, 2);
+    glfw.InitHint(hint, value);
+    return 0;
+    }
+
+
+#define ENUM(L, hint, checkfunc) do {       \
+    int value = checkfunc((L), 2);          \
+    glfw.InitHint((hint), value);           \
+    return 0;                               \
+} while(0)
+
+
+static int InitHint(lua_State *L)
+    {
+    int hint;
+    if(Initialized)
+        { glfw.Terminate(); Initialized = 0; }
+    CheckPfn(L, InitHint, 3, 3, 0);
+    hint = checkinithint(L, 1);
+    switch(hint)
+        {
+        case GLFW_JOYSTICK_HAT_BUTTONS:
+        case GLFW_COCOA_CHDIR_RESOURCES:
+        case GLFW_COCOA_MENUBAR:
+        case GLFW_X11_XCB_VULKAN_SURFACE: return Boolean(L, hint);
+        case GLFW_ANGLE_PLATFORM_TYPE: ENUM(L, hint, checkangleplatformtype);
+        case GLFW_PLATFORM: ENUM(L, hint, checkplatform);
+        case GLFW_WAYLAND_LIBDECOR: ENUM(L, hint, checkwaylandlibdecor);
+        default:
+            return luaL_error(L, "invalid init hint '%s'", lua_tostring(L, 1));
+        }
+    return 0;
+    }
+#undef ENUM
 
 /*------------------------------------------------------------------------------*
  | Registration                                                                 |
@@ -129,6 +187,8 @@ static int Sleep(lua_State *L)
 
 static const struct luaL_Reg Functions[] = 
     {
+        { "init", Init },
+        { "init_hint", InitHint },
         { "get_version", GetVersion },
         { "get_version_string", GetVersionString },
         { "now", Now },
@@ -154,15 +214,8 @@ int luaopen_moonglfw(lua_State *L)
     if(checkminversion(3, 3, 0))
         glfw.InitHint(GLFW_JOYSTICK_HAT_BUTTONS, GLFW_FALSE);
 
-    if(glfw.Init() != GL_TRUE)
-        {
-        const char *descr;
-        glfw.GetError(&descr);
-        if(descr) return luaL_error(L, descr);
-        return luaL_error(L, "glfwInit() failed");
-        }
+    Init(L);
     atexit(AtExit);
-    glfw.SetErrorCallback(errorCallback);
 
     /* add glfw functions: */
     luaL_setfuncs(L, Functions, 0);

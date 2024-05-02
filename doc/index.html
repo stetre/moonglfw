@@ -954,11 +954,15 @@ Lua libraries for graphics and audio programming.</p>
 <p><span class="small">Rfr: <a href="http://www.glfw.org/docs/latest/group__init.html">Initialization, version and errors</a>.</span></p>
 </div>
 <div class="paragraph">
-<p>The <strong>glfwInit</strong>( ) and <strong>glfwTerminate</strong>( ) functions are handled internally by MoonGLFW
-and thus not exposed to the script code.</p>
+<p>MoonGLFW automatically calls <strong>glfwInit</strong>( ) when it is loaded, and <strong>glfwTerminate</strong>( ) at exit.</p>
 </div>
-<div class="ulist">
+<div id="init_hint" class="ulist">
 <ul>
+<li>
+<p><strong>init_hint</strong>(<a href="#enums_init_hint"><em>hint</em></a>, <em>value</em>)<br>
+<strong>init</strong>( )<br>
+<span class="small">Use these functions only if you need to set some <a href="#enums_init_hint">init hints</a>, which are to be set before initialization of GLFW. If GLFW has already been initialized, calling <em>init_hint(&nbsp;)</em> automatically terminates it. After having set the desired hints, call <em>init(&nbsp;)</em> to finilize the initialization.</span></p>
+</li>
 <li>
 <p>The <strong>glfw</strong> table contains the following version fields:<br></p>
 <div class="ulist">
@@ -1857,6 +1861,23 @@ parameters to its functions actually are what they are meant to be, and has no m
 <div class="sect1">
 <h2 id="_enums">Enums</h2>
 <div class="sectionbody">
+<div id="enums_init_hint" class="ulist">
+<ul>
+<li>
+<p><span class="small"><strong>Init hints</strong><br>
+<em>hint</em>: '<em>platform</em>' for GLFW_PLATFORM, '<em>angle platform type</em>' for GLFW_ANGLE_PLATFORM_TYPE, etc.<br>
+The following list shows the admitted values for each <em>hint</em> type (<em>hint</em>: values):<br>
+'<em>platform</em>': '<em>any</em>' | '<em>null</em>' | '<em>win32</em>' | '<em>cocoa</em>' | '<em>wayland</em>' | '<em>x11</em>'<br>
+'<em>angle platform type</em>': '<em>none</em>' | '<em>opengl</em>' | '<em>opengles</em>' | '<em>d3d9</em>' | '<em>d3d11</em>' | '<em>vulkan</em>' | '<em>metal</em>'<br>
+'<em>joystick hat buttons</em>': boolean<br>
+'<em>wayland libdecor</em>': '<em>prefer</em>' | '<em>disable</em>'<br>
+'<em>x11 xcb vulkan surface</em>': boolean<br>
+'<em>cocoa chdir resources</em>': boolean<br>
+'<em>cocoa menubar</em>': boolean<br>
+(Rfr: <a href="https://www.glfw.org/docs/latest/intro_guide.html#init_hints">Init hints</a>).</span></p>
+</li>
+</ul>
+</div>
 <div id="enums_window_hint" class="ulist">
 <ul>
 <li>

@@ -9,6 +9,11 @@ local glfw = require('moonglfw')
 local gl = require('moongl')         -- OpenGL bindings
 local glmath = require('moonglmath') -- graphics math library
 
+--[[
+glfw.init_hint('joystick hat buttons', true)
+glfw.init() -- if init_hint is not used, this is not needed
+--]]
+
 local vertex_shader_text = [[
 uniform mat4 MVP;
 attribute vec3 vCol;

@@ -1,6 +1,19 @@
 
 == Enums
 
+[[enums_init_hint]]
+* [small]#*Init hints* +
+_hint_: '_platform_' for GLFW_PLATFORM, '_angle platform type_' for GLFW_ANGLE_PLATFORM_TYPE, etc. +
+The following list shows the admitted values for each _hint_ type (_hint_: values): +
+'_platform_': '_any_' | '_null_' | '_win32_' | '_cocoa_' | '_wayland_' | '_x11_' +
+'_angle platform type_': '_none_' | '_opengl_' | '_opengles_' | '_d3d9_' | '_d3d11_' | '_vulkan_' | '_metal_' +
+'_joystick hat buttons_': boolean +
+'_wayland libdecor_': '_prefer_' | '_disable_' +
+'_x11 xcb vulkan surface_': boolean +
+'_cocoa chdir resources_': boolean +
+'_cocoa menubar_': boolean +
+(Rfr: link:https://www.glfw.org/docs/latest/intro_guide.html#init_hints[Init hints]).#
+
 [[enums_window_hint]]
 * [small]#*Window creation hints* +
 _target_: '_resizable_' for GLFW_RESIZABLE, '_opengl api_' for GLFW_OPENGL_API, etc. +

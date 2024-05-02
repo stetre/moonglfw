@@ -3,8 +3,12 @@
 
 [small]#Rfr: link:http://www.glfw.org/docs/latest/group__init.html[Initialization, version and errors].#
 
-The *glfwInit*( ) and *glfwTerminate*( ) functions are handled internally by MoonGLFW
-and thus not exposed to the script code.
+MoonGLFW automatically calls *glfwInit*( ) when it is loaded, and *glfwTerminate*( ) at exit.
+
+[[init_hint]]
+* *init_hint*(<<enums_init_hint, _hint_>>, _value_) +
+*init*( ) +
+[small]#Use these functions only if you need to set some <<enums_init_hint, init hints>>, which are to be set before initialization of GLFW. If GLFW has already been initialized, calling _init_hint(&nbsp;)_ automatically terminates it. After having set the desired hints, call _init(&nbsp;)_ to finilize the initialization.#
 
 * The *glfw* table contains the following version fields: +
 ** *_VERSION*: a string describing the MoonGLFW version, and +
@@ -15,7 +19,6 @@ and thus not exposed to the script code.
 
 [[get_version_string]]
 * _string_= *get_version_string*( )
-
 
 [[set_error_callback]]
 * *set_error_callback*([_func_]) +

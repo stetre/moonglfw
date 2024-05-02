@@ -287,6 +287,10 @@ static int Enum(lua_State *L)
     CASE(contextcreationapi);
 //  CASE(gamepadbutton);
 //  CASE(gamepadaxis);
+    CASE(inithint);
+    CASE(platform);
+    CASE(waylandlibdecor);
+    CASE(angleplatformtype);
 #undef CASE
     return 0;
     }
@@ -573,6 +577,35 @@ void moonglfw_open_enums(lua_State *L)
     ADD(GAMEPAD_AXIS_RIGHT_TRIGGER, "right trigger");
 #endif
 
+    domain = DOMAIN_INIT_HINT;
+    ADD(ANGLE_PLATFORM_TYPE, "angle platform type");
+    ADD(PLATFORM, "platform");
+    ADD(JOYSTICK_HAT_BUTTONS, "joystick hat buttons");
+    ADD(COCOA_CHDIR_RESOURCES, "cocoa chdir resources");
+    ADD(COCOA_MENUBAR, "cocoa menubar");
+    ADD(WAYLAND_LIBDECOR, "wayland libdecor");
+    ADD(X11_XCB_VULKAN_SURFACE, "x11 xcb vulkan surface");
+
+    domain = DOMAIN_PLATFORM;
+    ADD(ANY_PLATFORM, "any");
+    ADD(PLATFORM_WIN32, "win32");
+    ADD(PLATFORM_COCOA, "cocoa");
+    ADD(PLATFORM_WAYLAND, "wayland");
+    ADD(PLATFORM_X11, "x11");
+    ADD(PLATFORM_NULL, "null");
+
+    domain = DOMAIN_WAYLAND_LIBDECOR;
+    ADD(WAYLAND_PREFER_LIBDECOR, "prefer");
+    ADD(WAYLAND_DISABLE_LIBDECOR, "disable");
+
+    domain = DOMAIN_ANGLE_PLATFORM_TYPE;
+    ADD(ANGLE_PLATFORM_TYPE_NONE, "none");
+    ADD(ANGLE_PLATFORM_TYPE_OPENGL, "opengl");
+    ADD(ANGLE_PLATFORM_TYPE_OPENGLES, "opengles");
+    ADD(ANGLE_PLATFORM_TYPE_D3D9, "d3d9");
+    ADD(ANGLE_PLATFORM_TYPE_D3D11, "d2d11");
+    ADD(ANGLE_PLATFORM_TYPE_VULKAN, "vulkan");
+    ADD(ANGLE_PLATFORM_TYPE_METAL, "metal");
 #undef ADD
     }
 

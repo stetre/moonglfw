@@ -58,6 +58,10 @@ void enums_freelist(lua_State *L, int *list);
 #define DOMAIN_CONTEXT_CREATION_API 11
 //#define DOMAIN_GAMEPAD_BUTTON       12
 //#define DOMAIN_GAMEPAD_AXIS         13
+#define DOMAIN_INIT_HINT            14
+#define DOMAIN_PLATFORM             15
+#define DOMAIN_WAYLAND_LIBDECOR     16
+#define DOMAIN_ANGLE_PLATFORM_TYPE  17
 
 #define testaction(L, arg, err) (int)enums_test((L), DOMAIN_ACTION, (arg), (err))
 #define checkaction(L, arg) (int)enums_check((L), DOMAIN_ACTION, (arg))
@@ -130,6 +134,26 @@ void enums_freelist(lua_State *L, int *list);
 #define pushgamepadaxis(L, val) enums_push((L), DOMAIN_GAMEPAD_AXIS, (int)(val))
 #define valuesgamepadaxis(L) enums_values((L), DOMAIN_GAMEPAD_AXIS)
 #endif
+
+#define testinithint(L, arg, err) (int)enums_test((L), DOMAIN_INIT_HINT, (arg), (err))
+#define checkinithint(L, arg) (int)enums_check((L), DOMAIN_INIT_HINT, (arg))
+#define pushinithint(L, val) enums_push((L), DOMAIN_INIT_HINT, (int)(val))
+#define valuesinithint(L) enums_values((L), DOMAIN_INIT_HINT)
+
+#define testplatform(L, arg, err) (int)enums_test((L), DOMAIN_PLATFORM, (arg), (err))
+#define checkplatform(L, arg) (int)enums_check((L), DOMAIN_PLATFORM, (arg))
+#define pushplatform(L, val) enums_push((L), DOMAIN_PLATFORM, (int)(val))
+#define valuesplatform(L) enums_values((L), DOMAIN_PLATFORM)
+
+#define testwaylandlibdecor(L, arg, err) (int)enums_test((L), DOMAIN_WAYLAND_LIBDECOR, (arg), (err))
+#define checkwaylandlibdecor(L, arg) (int)enums_check((L), DOMAIN_WAYLAND_LIBDECOR, (arg))
+#define pushwaylandlibdecor(L, val) enums_push((L), DOMAIN_WAYLAND_LIBDECOR, (int)(val))
+#define valueswaylandlibdecor(L) enums_values((L), DOMAIN_WAYLAND_LIBDECOR)
+
+#define testangleplatformtype(L, arg, err) (int)enums_test((L), DOMAIN_ANGLE_PLATFORM_TYPE, (arg), (err))
+#define checkangleplatformtype(L, arg) (int)enums_check((L), DOMAIN_ANGLE_PLATFORM_TYPE, (arg))
+#define pushangleplatformtype(L, val) enums_push((L), DOMAIN_ANGLE_PLATFORM_TYPE, (int)(val))
+#define valuesangleplatformtype(L) enums_values((L), DOMAIN_ANGLE_PLATFORM_TYPE)
 
 #if 0 /* scaffolding 6yy */
 #define testxxx(L, arg, err) (int)enums_test((L), DOMAIN_XXX, (arg), (err))
