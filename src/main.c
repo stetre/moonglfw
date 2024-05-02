@@ -181,6 +181,25 @@ static int InitHint(lua_State *L)
     }
 #undef ENUM
 
+static int GetPlatform(lua_State *L)
+    {
+    int platform;
+    CheckPfn(L, GetPlatform, 3, 4, 0);
+    platform = glfw.GetPlatform();
+    pushplatform(L, platform);
+    return 1;
+    }
+
+
+static int PlatformSupported(lua_State *L)
+    {
+    int platform;
+    CheckPfn(L, PlatformSupported, 3, 4, 0);
+    platform = checkplatform(L, 1);
+    lua_pushboolean(L, glfw.PlatformSupported(platform));
+    return 1;
+    }
+
 /*------------------------------------------------------------------------------*
  | Registration                                                                 |
  *------------------------------------------------------------------------------*/
@@ -189,6 +208,8 @@ static const struct luaL_Reg Functions[] =
     {
         { "init", Init },
         { "init_hint", InitHint },
+        { "get_platform", GetPlatform },
+        { "platform_supported", PlatformSupported },
         { "get_version", GetVersion },
         { "get_version_string", GetVersionString },
         { "now", Now },

@@ -150,7 +150,10 @@ typedef int (*PFN_glfwJoystickIsGamepad)(int jid);
 typedef int (*PFN_glfwUpdateGamepadMappings)(const char* string);
 typedef const char* (*PFN_glfwGetGamepadName)(int jid);
 typedef int (*PFN_glfwGetGamepadState)(int jid, GLFWgamepadstate* state);
+// GLFW 3.4
 typedef const char* (*PFN_glfwGetWindowTitle)(GLFWwindow* window);
+typedef int (*PFN_glfwGetPlatform)(void);
+typedef int (*PFN_glfwPlatformSupported)(int platform);
 
 /* Typedefs for glfw2native.h functions (to avoid including native headers)
  */
@@ -182,5 +185,7 @@ typedef const char* (*PFN_glfwGetX11SelectionString)(void);
 typedef int (*PFN_glfwGetOSMesaColorBuffer)(GLFWwindow* window, int* width, int* height, int* format, void** buffer);
 typedef int (*PFN_glfwGetOSMesaDepthBuffer)(GLFWwindow* window, int* width, int* height, int* bytesPerValue, void** buffer);
 typedef void* /* OSMesaContext */ (*PFN_glfwGetOSMesaContext)(GLFWwindow* window);
+// GLFW 3.4
+//typedef id glfwGetCocoaView(GLFWwindow* window);
 
 #endif /* pfnDEFINED */

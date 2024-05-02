@@ -20,6 +20,11 @@ MoonGLFW automatically calls *glfwInit*( ) when it is loaded, and *glfwTerminate
 [[get_version_string]]
 * _string_= *get_version_string*( )
 
+[[get_platform]]
+* _platform_ = *get_platform*( ) +
+_boolean_ = *platform_supported*(_platform_) +
+[small]#'_platform_': '_null_' | '_win32_' | '_cocoa_' | '_wayland_' | '_x11_'.#
+
 [[set_error_callback]]
 * *set_error_callback*([_func_]) +
 [small]#The _func_ callback is executed as *_func(ec, descr)_* where _ec_ (an integer) is the

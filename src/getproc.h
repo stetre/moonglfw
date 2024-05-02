@@ -166,6 +166,8 @@ typedef struct {
     PFN_glfwGetGamepadName GetGamepadName;
     PFN_glfwGetGamepadState GetGamepadState;
     PFN_glfwGetWindowTitle GetWindowTitle;
+    PFN_glfwGetPlatform GetPlatform;
+    PFN_glfwPlatformSupported PlatformSupported;
 
 //#ifdef VULKAN
     PFN_glfwGetProcAddress GetProcAddress;
