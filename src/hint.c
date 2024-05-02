@@ -65,6 +65,23 @@ static int Integer(lua_State *L, int target)
     return 0;
     }
 
+static int Position(lua_State *L, int target)
+    {
+    int hint = GLFW_ANY_POSITION;
+    const char *s;
+    if(lua_type(L, 2) == LUA_TSTRING)
+        {
+        s = lua_tostring(L, 2);
+        if(strncmp(s, "any", strlen(s)) != 0)
+            return luaL_argerror(L, 2, "expected integer or \"any\"");
+        }
+    else
+        hint = luaL_checkinteger(L, 2);
+    glfw.WindowHint( target, hint);
+    return 0;
+    }
+
+
 static int String(lua_State *L, int target)
     {
     const char* hint = luaL_checkstring(L, 2);
@@ -95,7 +112,13 @@ static int WindowHint(lua_State *L)
         case GLFW_TRANSPARENT_FRAMEBUFFER:
         case GLFW_HOVERED:
         case GLFW_FOCUS_ON_SHOW:
-        case GLFW_SCALE_TO_MONITOR: return Boolean(L, target);
+        case GLFW_SCALE_TO_MONITOR:
+        case GLFW_MOUSE_PASSTHROUGH:
+        case GLFW_SCALE_FRAMEBUFFER:
+        case GLFW_WIN32_KEYBOARD_MENU:
+        case GLFW_WIN32_SHOWDEFAULT:
+        case GLFW_COCOA_GRAPHICS_SWITCHING:
+                    return Boolean(L, target);
         case GLFW_RED_BITS:
         case GLFW_GREEN_BITS:
         case GLFW_BLUE_BITS:
@@ -109,6 +132,9 @@ static int WindowHint(lua_State *L)
         case GLFW_AUX_BUFFERS:
         case GLFW_SAMPLES:
         case GLFW_REFRESH_RATE: return Integer(L, target);
+        case GLFW_POSITION_X:
+        case GLFW_POSITION_Y:
+                                    return Position(L, target);
         case GLFW_STEREO:
         case GLFW_SRGB_CAPABLE:
         case GLFW_DOUBLEBUFFER: return Boolean(L, target);
@@ -122,7 +148,10 @@ static int WindowHint(lua_State *L)
         case GLFW_OPENGL_DEBUG_CONTEXT: return Boolean(L, target);
         case GLFW_OPENGL_PROFILE: ENUM(L, target, checkprofile);
         case GLFW_X11_CLASS_NAME:
-        case GLFW_X11_INSTANCE_NAME: return String(L, target);
+        case GLFW_X11_INSTANCE_NAME: 
+        case GLFW_WAYLAND_APP_ID:
+        case GLFW_COCOA_FRAME_NAME:
+                                  return String(L, target);
         default:
             return luaL_error(L, "invalid target '%s'", lua_tostring(L, 1));
         }
@@ -183,6 +212,11 @@ static int GetWindowAttrib(lua_State *L)
         case GLFW_HOVERED:
         case GLFW_FOCUS_ON_SHOW:
         case GLFW_SCALE_TO_MONITOR:
+        case GLFW_MOUSE_PASSTHROUGH:
+        case GLFW_SCALE_FRAMEBUFFER:
+        case GLFW_WIN32_KEYBOARD_MENU:
+        case GLFW_WIN32_SHOWDEFAULT:
+        case GLFW_COCOA_GRAPHICS_SWITCHING:
             return GetBoolean(L, win->window, attrib);
         case GLFW_CLIENT_API: GET_ENUM(L, win->window, attrib, pushapi);
         case GLFW_CONTEXT_CREATION_API: GET_ENUM(L, win->window, attrib, pushcontextcreationapi);
@@ -227,6 +261,7 @@ static int SetWindowAttrib(lua_State *L)
         case GLFW_FLOATING:
         case GLFW_AUTO_ICONIFY:
         case GLFW_FOCUS_ON_SHOW:
+        case GLFW_MOUSE_PASSTHROUGH:
             return SetBoolean(L, win->window, attrib);
         default:
             return luaL_error(L, "invalid attribute '%s'", lua_tostring(L, 2));

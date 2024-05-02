@@ -17,6 +17,10 @@ The following list shows the admitted _hint_ values for each _target_ (_target_:
 '_hovered_': boolean +
 '_focus on show_': boolean +
 '_scale to monitor_': boolean +
+'_mouse passthrough_': boolean +
+'_scale framebuffer_': boolean +
+'_position x_': integer | '_any_' +
+'_position y_': integer | '_any_' +
 '_red bits_': integer | '_don't care_' +
 '_green bits_': integer | '_don't care_' +
 '_blue bits_': integer | '_don't care_' +
@@ -44,6 +48,11 @@ The following list shows the admitted _hint_ values for each _target_ (_target_:
 '_opengl profile_': '_any_' | '_core_' | '_compat_' +
 '_x11 class name_': string +
 '_x11 instance name_': string +
+'_wayland app id_': string +
+'_win32 keyboard menu_': boolean +
+'_win32 showdefault_': boolean +
+'_cocoa frame name_': string +
+'_cocoa graphics switching_': boolean +
 (Rfr: link:http://www.glfw.org/docs/latest/window.html#window_hints[Window creation hints]).#
 
 [[enums_key]]

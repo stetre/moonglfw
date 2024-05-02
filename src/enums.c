@@ -486,6 +486,15 @@ void moonglfw_open_enums(lua_State *L)
     ADD(CONTEXT_REVISION, "context revision");
     ADD(X11_CLASS_NAME, "x11 class name");
     ADD(X11_INSTANCE_NAME, "x11 instance name");
+    ADD(MOUSE_PASSTHROUGH, "mouse passthrough");
+    ADD(POSITION_X, "position x");
+    ADD(POSITION_Y, "position y");
+    ADD(SCALE_FRAMEBUFFER, "scale framebuffer");
+    ADD(WIN32_KEYBOARD_MENU, "win32 keyboard menu");
+    ADD(WIN32_SHOWDEFAULT, "win32 showdefault");
+    ADD(WAYLAND_APP_ID, "wayland app id");
+    ADD(COCOA_FRAME_NAME, "cocoa frame name");
+    ADD(COCOA_GRAPHICS_SWITCHING, "cocoa graphics switching");
 
     domain = DOMAIN_API;
     ADD(NO_API, "no api");
