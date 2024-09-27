@@ -58,14 +58,19 @@ static int CreateWindow(lua_State *L)
     return 1;
     }
 
-static int DestroyWindow(lua_State *L)
+int window_destroy(win_t *win)
     {
-    win_t *win = checkwindow(L, 1);
     glfw.DestroyWindow(win->window);
     win_free(win);
     return 0;
     }
 
+static int DestroyWindow(lua_State *L)
+    {
+    win_t *win = checkwindow(L, 1);
+    window_destroy(win);
+    return 0;
+    }
 
 static int FocusWindow(lua_State *L)
     {

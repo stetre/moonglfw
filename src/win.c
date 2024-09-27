@@ -123,7 +123,7 @@ void win_free_all(void)
     {
     win_t *win;
     while((win = win_first(0)))
-        win_free(win);
+        window_destroy(win);
     }
 
 win_t* win_check(lua_State *L, int arg)

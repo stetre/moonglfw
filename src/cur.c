@@ -86,7 +86,7 @@ void cur_free_all(void)
     {
     cur_t *cur;
     while((cur = cur_first(0)))
-        cur_free(cur);
+        input_destroy_cursor(cur);
     }
 
 cur_t* cur_check(lua_State *L, int arg)

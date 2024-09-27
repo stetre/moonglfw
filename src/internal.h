@@ -171,6 +171,12 @@ int monitorAdd(lua_State *L, GLFWmonitor *monitor);
 void monitorCallback(GLFWmonitor *monitor, int event);
 
 
+#define input_destroy_cursor moonglfw_input_destroy_cursor
+int input_destroy_cursor(cur_t *cur);
+#define window_destroy moonglfw_window_destroy
+int window_destroy(win_t *win);
+
+
 /* main.c */
 #define checkminversion moonglfw_checkminversion
 int checkminversion(int major, int minor, int rev);

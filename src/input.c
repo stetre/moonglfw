@@ -199,11 +199,17 @@ static int CreateStandardCursor(lua_State *L)
     return 1;
     }
 
+int input_destroy_cursor(cur_t *cur)
+    {
+    glfw.DestroyCursor(cur->cursor);
+    cur_free(cur);
+    return 0;
+    }
+
 static int DestroyCursor(lua_State *L)
     {
     cur_t *cur = checkcursor(L, 1);
-    glfw.DestroyCursor(cur->cursor);
-    cur_free(cur);
+    input_destroy_cursor(cur);
     return 0;
     }
 
