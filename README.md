@@ -59,6 +59,8 @@ glfw.set_cursor_pos_callback(window, my_callback)
 while not glfw.window_should_close(window) do
    glfw.poll_events()
 end
+
+glfw.destroy_window(window)
 ```
 
 The script can be executed at the shell prompt with the standard Lua interpreter:
